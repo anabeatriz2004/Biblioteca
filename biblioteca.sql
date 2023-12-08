@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS biblioteca;
 CREATE DATABASE biblioteca;
 USE biblioteca;
-
+kkkk
 CREATE TABLE utilizador 
 	(id_utilizador INT PRIMARY KEY,
     nome VARCHAR(50),

@@ -1,7 +1,6 @@
 import java.sql.*;
 
 public class Bibliotecario {
-
     int id_bibliotecario;
     String nome;
     String email;

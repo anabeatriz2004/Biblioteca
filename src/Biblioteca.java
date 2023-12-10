@@ -1,24 +1,35 @@
 //import java.sql.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Biblioteca {
-    public static void main(String[] args) throws SQLException {
+    /**
+     * @param args
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         // cria scanner para interagir
         //Scanner scan = new Scanner(System.in);
 
         try {
-            // Estabelece a conexão com o banco de dados
-            Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/biblioteca", "root", "sua_senha");
+            // URL de conexão JDBC
+            String url = "jdbc:mysql://127.0.0.1:3306/biblioteca";
+            String utilizador = "root";
+            String senha = "";  // Senha vazia, pois você mencionou que não tem senha
+
+            // Estabelecer a conexão
+            Connection conexao = DriverManager.getConnection(url, utilizador, senha);
+
+            // Criando um objetos de cada classe que já façam a conexao com a base de dados
+            Bibliotecario bibliotecario = new Bibliotecario(conexao);
+            Emprestimo emprestimo = new Emprestimo(conexao);
+            Utilizador utilizador = new Utilizador(conexao);
 
             // Criando um objeto Livro
             Livro livroComDados = new Livro(2, "1234567890123", "Java for Beginners", "John Doe", "Tech Publishing", 2022, "Programming", true);
             //Livro livroSemDados = new Livro();
 
-            // Criando um objeto Bibliotecario
-            Bibliotecario bibliotecario = new Bibliotecario();
 
             // variavel que indica quem é
             /*String ub;

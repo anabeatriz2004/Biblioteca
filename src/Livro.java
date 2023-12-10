@@ -25,12 +25,12 @@ public class Livro {
     }
 
     // Métodos getter e setter para cada atributo
-    public int getID_Livro() {
-        return idLivro;
+    public int getID_livro() {
+        return id_livro;
     }
 
-    public void setID_Livro(int idLivro) {
-        this.idLivro = idLivro;
+    public void setID_livro(int id_livro) {
+        this.id_livro = id_livro;
     }
 
     public String getISBN() {

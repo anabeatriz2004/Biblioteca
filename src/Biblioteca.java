@@ -41,12 +41,18 @@ public class Biblioteca {
             ub = scan.nextLine();
 
             if ("u".equalsIgnoreCase(ub)) { // confirma se é utilizador
-                // Consulta dados dos livros
+                // Consulta dados de um determinado livro
+                utilizador.consultarLivro(1);
+
+                // Consulta dados de todos os livros
                 utilizador.consultarTodosLivros();
 
             } else if ("b".equalsIgnoreCase(ub)) { // confirma se é bibliotecario
                 // Consulta dados dos livros
                 bibliotecario.consultarTodosLivros();
+
+                // Consulta dados de um determinado livro
+                bibliotecario.consultarLivro(1);
 
                 // Inserindo o livro no banco de dados
                 bibliotecario.inserirLivro(livroComDados);
@@ -63,6 +69,5 @@ public class Biblioteca {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -58,6 +58,42 @@ public class Bibliotecario {
         this.data_contratacao = data_contratacao;
     }
     
+    // Método para consultar um livro pelo ID na base de dados
+    public void consultarLivro(int idLivro) {
+        try {
+            // Define a consulta SQL para selecionar um livro com base no ID
+            String sql = "SELECT * FROM livro WHERE id_livro = ?";
+
+            // Cria o objeto PreparedStatement
+            try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+                // Define o parâmetro da consulta com base no ID fornecido
+                pstmt.setInt(1, idLivro);
+
+                // Executa a consulta
+                ResultSet resultado = pstmt.executeQuery();
+
+                // Processa os resultados
+                while (resultado.next()) {
+                    // Recupera os dados do livro
+                    String isbn = resultado.getString("ISBN");
+                    String titulo = resultado.getString("titulo");
+                    String autor = resultado.getString("autor");
+                    String editora = resultado.getString("editora");
+                    int anoPubli = resultado.getInt("ano_publi");
+                    String genero = resultado.getString("genero");
+                    boolean disponibilidade = resultado.getBoolean("disponibilidade");
+
+                    // Faça o que deseja com os dados, por exemplo, imprimir na tela
+                    System.out.println("ID: " + idLivro + ", ISBN: " + isbn + ", Título: " + titulo +
+                            ", Autor: " + autor + ", Editora: " + editora + ", Ano de Publicação: " + anoPubli +
+                            ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Método para consultar todos os livros na base de dados
     public void consultarTodosLivros() {
@@ -88,9 +124,6 @@ public class Bibliotecario {
                             ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade);
                 }
             }
-
-            // Fecha a conexão com o banco de dados
-            conexao.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,15 +156,10 @@ public class Bibliotecario {
                 pstmt.executeUpdate();
             }
 
-            // Fecha a conexão com o banco de dados
-            conexao.close();
 
             System.out.println("Livro inserido com sucesso!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-    // Outros métodos podem ser adicionados conforme necessário
 }
-

@@ -8,5 +8,7 @@ public class Utilizador {
     Date data_nascimento;
     String morada;
 
+
+
     public void Utilizador () {}
 }

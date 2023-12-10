@@ -7,6 +7,46 @@ public class Bibliotecario {
     int telefone;
     Date data_contratacao;
 
+    public int getId_bibliotecario() {
+        return id_bibliotecario;
+    }
+
+    public void setId_bibliotecario(int id_bibliotecario) {
+        this.id_bibliotecario = id_bibliotecario;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(int telefone) {
+        this.telefone = telefone;
+    }
+
+    public Date getData_contratacao() {
+        return data_contratacao;
+    }
+
+    public void setData_contratacao(Date data_contratacao) {
+        this.data_contratacao = data_contratacao;
+    }
+
     // Informações do banco de dados
     private static final String URL = "jdbc:mysql://localhost:3306/sua_biblioteca";
     private static final String USUARIO = "seu_usuario";

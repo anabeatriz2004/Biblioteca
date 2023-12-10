@@ -18,6 +18,47 @@ public class Bibliotecario {
         this.conexao = conexao;
     }
 
+    public int getId_bibliotecario() {
+        return id_bibliotecario;
+    }
+
+    public void setId_bibliotecario(int id_bibliotecario) {
+        this.id_bibliotecario = id_bibliotecario;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(int telefone) {
+        this.telefone = telefone;
+    }
+
+    public Date getData_contratacao() {
+        return data_contratacao;
+    }
+
+    public void setData_contratacao(Date data_contratacao) {
+        this.data_contratacao = data_contratacao;
+    }
+    
+
     // Método para consultar todos os livros na base de dados
     public void consultarTodosLivros() {
         try {

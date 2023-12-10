@@ -17,21 +17,22 @@ public class Bibliotecario {
         try {
             // Estabelece a conexão com o banco de dados
             //Connection conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
-            Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/biblioteca.sql", "root", null);
+            Connection conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
 
             // Define a consulta SQL para inserir um novo livro
-            String sql = "INSERT INTO livro (ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO livro (id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             // Cria o objeto PreparedStatement para evitar SQL Injection
             try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
                 // Define os parâmetros da consulta com base no livro fornecido
-                pstmt.setString(1, livro.getISBN());
-                pstmt.setString(2, livro.getTitulo());
-                pstmt.setString(3, livro.getAutor());
-                pstmt.setString(4, livro.getEditora());
-                pstmt.setInt(5, livro.getAnoPubli());
-                pstmt.setString(6, livro.getGenero());
-                pstmt.setBoolean(7, livro.isDisponibilidade());
+                pstmt.setLong(1, livro.getID_Livro());
+                pstmt.setString(2, livro.getISBN());
+                pstmt.setString(3, livro.getTitulo());
+                pstmt.setString(4, livro.getAutor());
+                pstmt.setString(5, livro.getEditora());
+                pstmt.setInt(6, livro.getAnoPubli());
+                pstmt.setString(7, livro.getGenero());
+                pstmt.setBoolean(8, livro.isDisponibilidade());
 
                 // Executa a consulta
                 pstmt.executeUpdate();

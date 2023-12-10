@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class Livro {
-    private int idLivro;
+    private int id_livro;
     private String ISBN;
     private String titulo;
     private String autor;
@@ -13,7 +13,8 @@ public class Livro {
     public Livro () {}
 
     // Construtor
-    public Livro(String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade) {
+    public Livro(int id_livro, String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade) {
+        this.id_livro = id_livro;
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
@@ -24,11 +25,11 @@ public class Livro {
     }
 
     // Métodos getter e setter para cada atributo
-    public int getIdLivro() {
+    public int getID_Livro() {
         return idLivro;
     }
 
-    public void setIdLivro(int idLivro) {
+    public void setID_Livro(int idLivro) {
         this.idLivro = idLivro;
     }
 

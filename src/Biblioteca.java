@@ -9,9 +9,12 @@ public class Biblioteca {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
+    
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         // cria scanner para interagir
         Scanner scan = new Scanner(System.in);
+
+        Connection conexao = null;
 
         try {
             // URL de conexão JDBC
@@ -20,7 +23,7 @@ public class Biblioteca {
             String password = "";  // Senha vazia, pois não  existe senha
 
             // Estabelecer a conexão
-            Connection conexao = DriverManager.getConnection(url, user, password);
+            conexao = DriverManager.getConnection(url, user, password);
 
             // Criando um objetos de cada classe que já façam a conexao com a base de dados
             Bibliotecario bibliotecario = new Bibliotecario(conexao);

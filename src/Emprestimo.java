@@ -1,7 +1,5 @@
 import java.sql.*;
 
-package biblioteca.biblioteca;
-
 public class Emprestimo {
     int id_emprestimo;
     int id_livro;

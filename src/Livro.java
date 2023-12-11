@@ -1,7 +1,5 @@
 import java.sql.*;
 
-package biblioteca.biblioteca;
-
 public class Livro {
     private int id_livro;
     private String ISBN;

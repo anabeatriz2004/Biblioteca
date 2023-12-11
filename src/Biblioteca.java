@@ -1,9 +1,7 @@
 import java.sql.*;
 import java.util.*;
 
-package biblioteca.biblioteca;
-
-public class Biblioteca_vo {
+public class Biblioteca {
     /**
      * @param args
      * @throws SQLException
@@ -27,7 +25,7 @@ public class Biblioteca_vo {
 
             // Criando um objetos de cada classe que já façam a conexao com a base de dados
             Bibliotecario bibliotecario = new Bibliotecario(conexao);
-            //Emprestimo emprestimo = new Emprestimo(conexao);
+            Emprestimo emprestimo = new Emprestimo(conexao);
             Utilizador utilizador = new Utilizador(conexao);
 
             // Criando um objeto Livro

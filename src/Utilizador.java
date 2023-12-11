@@ -1,7 +1,5 @@
 import java.sql.*;
 
-package biblioteca.biblioteca;
-
 public class Utilizador {
     int id_utilizador;
     String nome;

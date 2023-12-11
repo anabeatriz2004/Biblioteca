@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ficha_XV_v2" />
+        <module name="biblioteca" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ficha_XV_v2" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>

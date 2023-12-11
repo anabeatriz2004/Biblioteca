@@ -24,16 +24,6 @@ public class Livro {
         this.disponibilidade = disponibilidade;
     }
 
-    private Connection conexao;
-
-    // construtor sem dados
-    public void Livro () {}
-
-    // conecta-se a partir do construtor
-    public Livro(Connection conexao) {
-        this.conexao = conexao;
-    }
-
     // Métodos getter e setter para cada atributo
     public int getID_livro() {
         return id_livro;

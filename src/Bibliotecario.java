@@ -11,7 +11,7 @@ public class Bibliotecario {
     private Connection conexao;
 
     // construtor sem dados
-    public void Bibliotecario () {}
+    //public void Bibliotecario () {}
 
     // conecta-se a partir do construtor
     public Bibliotecario(Connection conexao) {

@@ -11,7 +11,7 @@ public class Utilizador {
     private Connection conexao;
 
     // construtor sem dados
-    public void Utilizador () {}
+    //public void Utilizador () {}
 
     // conecta-se a partir do construtor
     public Utilizador(Connection conexao) {

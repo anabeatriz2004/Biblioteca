@@ -1,5 +1,3 @@
-//import java.sql.*;
-
 import java.sql.*;
 import java.util.*;
 
@@ -27,7 +25,7 @@ public class Biblioteca {
 
             // Criando um objetos de cada classe que já façam a conexao com a base de dados
             Bibliotecario bibliotecario = new Bibliotecario(conexao);
-            Emprestimo emprestimo = new Emprestimo(conexao);
+            //Emprestimo emprestimo = new Emprestimo(conexao);
             Utilizador utilizador = new Utilizador(conexao);
 
             // Criando um objeto Livro
@@ -66,6 +64,9 @@ public class Biblioteca {
             // Inserindo o livro no banco de dados
             bibliotecario.inserirLivro(livroComDados);
         
+        // Fecha o scanner
+        scan.close();
+
         // Fecha a conexão com o banco de dados
         conexao.close();
         

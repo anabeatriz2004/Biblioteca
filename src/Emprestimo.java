@@ -11,7 +11,7 @@ public class Emprestimo {
     private Connection conexao;
 
     // construtor sem dados
-    public void Emprestimo () {}
+    //public void Emprestimo () {}
 
     // conecta-se a partir do construtor
     public Emprestimo(Connection conexao) {

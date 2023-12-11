@@ -5,17 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc1649de-18f7-46b4-88ea-0ab43cd7c4af" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/biblioteca/biblioteca/Biblioteca.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/biblioteca/biblioteca/Bibliotecario.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/biblioteca/biblioteca/Emprestimo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/biblioteca/biblioteca/Livro.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/biblioteca/biblioteca/Utilizador.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Biblioteca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Biblioteca.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />

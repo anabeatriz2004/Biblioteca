@@ -18,7 +18,8 @@ public class Biblioteca {
 
         boolean continua = true;
         String ub; // variavel que indica quem é
-        Livro livroComDados;
+
+        Menu menu = new Menu();
         Bibliotecario bibliotecario;
         Emprestimo emprestimo;
         Utilizador utilizador;
@@ -37,35 +38,16 @@ public class Biblioteca {
             emprestimo = new Emprestimo(conexao);
             utilizador = new Utilizador(conexao);
 
-            // Criando um objeto Livro
-            livroComDados = new Livro(2, "1234567890123", "Java for Beginners", "John Doe", "Tech Publishing", 2022, "Programming", true);
-            //Livro livroSemDados = new Livro();
-
             System.out.println("Diga quem é");
-            System.out.println("Escreva 'u', se for utilizado");
+            System.out.println("Escreva 'u', se for utilizadoR");
             System.out.println("Escreva 'b', se for bibliotecario");
             ub = scan.nextLine();
 
             if ("u".equalsIgnoreCase(ub)) { // confirma se é utilizador
-                /* while (continua) {
-                    //System
-                }*/
-
-                // Consulta dados de um determinado livro
-                utilizador.consultarLivro(1);
-
-                // Consulta dados de todos os livros
-                utilizador.consultarTodosLivros();
+                menu.percorrerMenuUtilizador();
 
             } else if ("b".equalsIgnoreCase(ub)) { // confirma se é bibliotecario
-                // Consulta dados dos livros
-                bibliotecario.consultarTodosLivros();
-
-                // Consulta dados de um determinado livro
-                bibliotecario.consultarLivro(1);
-
-                // Inserindo o livro no banco de dados
-                bibliotecario.inserirLivro(livroComDados);
+                menu.percorrerMenuBibliotecario();
             } else {
                 System.out.println("Por favor, escreva um dado válido");
             }

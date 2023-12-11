@@ -3,7 +3,6 @@ package org.example;
 import java.sql.*;
 
 public class Bibliotecario {
-
     int id_bibliotecario;
     String nome;
     String email;
@@ -13,7 +12,7 @@ public class Bibliotecario {
     private Connection conexao;
 
     // construtor sem dados
-    //public void Bibliotecario () {}
+    public void Bibliotecario () {}
 
     // conecta-se a partir do construtor
     public Bibliotecario(Connection conexao) {

@@ -7,6 +7,10 @@
     <list default="true" id="cc1649de-18f7-46b4-88ea-0ab43cd7c4af" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Biblioteca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Biblioteca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Bibliotecario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Bibliotecario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Emprestimo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Emprestimo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Utilizador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Utilizador.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

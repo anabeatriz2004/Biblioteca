@@ -14,10 +14,9 @@ public class Menu {
     int op;
 
     public static void exibirMenuUtilizador() {
-        System.out.println("----- Menu -----");
-        System.out.println("1. Opção 1");
-        System.out.println("2. Opção 2");
-        System.out.println("3. Opção 3");
+        System.out.println("Menu (sendo utilizador");
+        System.out.println("1. Consultar dados de um determinado livro");
+        System.out.println("2. Consultar dados de todos os livros");
         System.out.println("4. Sair");
         System.out.println("-----------------");
     }
@@ -25,8 +24,14 @@ public class Menu {
     public void percorrerMenuUtilizador() {
         do {
             exibirMenuUtilizador();
-            System.out.print("op uma opção: ");
-            op = scanner.nextInt();
+            try {
+                System.out.print("op uma opção: ");
+                op = scanner.nextInt();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Entrada inválida. Por favor, insira um número inteiro.");
+                scanner.nextLine(); // Limpa o buffer do scanner
+                op = 0; // Atribui um valor padrão para evitar loop infinito
+            }
 
             switch (op) {
                 case 1:
@@ -47,17 +52,23 @@ public class Menu {
 
     static void exibirMenuBibliotecario() {
         System.out.println("Menu (sendo bibliotecario):");
-        System.out.println("1. Opção 1");
-        System.out.println("2. Opção 2");
-        System.out.println("3. Opção 3");
+        System.out.println("1. Consultar dados de um determinado livro");
+        System.out.println("2. Consultar dados de todos os livros");
+        System.out.println("3. Inserir Livro");
         System.out.println("4. Sair");
     }
 
     public void percorrerMenuBibliotecario() {
         do {
             exibirMenuBibliotecario();
-            System.out.print("op uma opção: ");
-            op = scanner.nextInt();
+            try {
+                System.out.print("op uma opção: ");
+                op = scanner.nextInt();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Entrada inválida. Por favor, insira um número inteiro.");
+                scanner.nextLine(); // Limpa o buffer do scanner
+                op = 0; // Atribui um valor padrão para evitar loop infinito
+            }
 
             switch (op) {
                 case 1:

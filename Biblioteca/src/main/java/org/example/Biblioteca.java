@@ -1,18 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
-package biblioteca.biblioteca;
+package org.example;
 
 import java.sql.*;
 import java.util.*;
 
-/**
- *
- * @author ASUS
- */
 public class Biblioteca {
-
     /**
      * @param args
      * @throws SQLException
@@ -25,9 +16,16 @@ public class Biblioteca {
 
         Connection conexao = null;
 
+        boolean continua = true;
+        String ub; // variavel que indica quem é
+        Livro livroComDados;
+        Bibliotecario bibliotecario;
+        Emprestimo emprestimo;
+        Utilizador utilizador;
+
         try {
             // URL de conexão JDBC
-            String url = "jdbc:mysql://localhost/beatriz?";
+            String url = "jdbc:mysql://localhost/biblioteca";
             String user = "ana_beatriz";
             String password = "RandomGirl2.0";
 
@@ -35,16 +33,13 @@ public class Biblioteca {
             conexao = DriverManager.getConnection(url, user, password);
 
             // Criando um objetos de cada classe que já façam a conexao com a base de dados
-            Bibliotecario bibliotecario = new Bibliotecario(conexao);
-            Emprestimo emprestimo = new Emprestimo(conexao);
-            Utilizador utilizador = new Utilizador(conexao);
+            bibliotecario = new Bibliotecario(conexao);
+            emprestimo = new Emprestimo(conexao);
+            utilizador = new Utilizador(conexao);
 
             // Criando um objeto Livro
-            Livro livroComDados = new Livro(2, "1234567890123", "Java for Beginners", "John Doe", "Tech Publishing", 2022, "Programming", true);
+            livroComDados = new Livro(2, "1234567890123", "Java for Beginners", "John Doe", "Tech Publishing", 2022, "Programming", true);
             //Livro livroSemDados = new Livro();
-
-            // variavel que indica quem é
-            String ub;
 
             System.out.println("Diga quem é");
             System.out.println("Escreva 'u', se for utilizado");
@@ -52,6 +47,10 @@ public class Biblioteca {
             ub = scan.nextLine();
 
             if ("u".equalsIgnoreCase(ub)) { // confirma se é utilizador
+                /* while (continua) {
+                    //System
+                }*/
+
                 // Consulta dados de um determinado livro
                 utilizador.consultarLivro(1);
 
@@ -70,9 +69,6 @@ public class Biblioteca {
             } else {
                 System.out.println("Por favor, escreva um dado válido");
             }
-
-            // Inserindo o livro no banco de dados
-            bibliotecario.inserirLivro(livroComDados);
         
         // Fecha o scanner
         scan.close();

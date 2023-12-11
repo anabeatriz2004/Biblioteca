@@ -1,4 +1,4 @@
-package biblioteca.biblioteca;
+package org.example;
 
 import java.sql.*;
 

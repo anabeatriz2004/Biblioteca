@@ -1,5 +1,7 @@
 import java.sql.*;
 
+package biblioteca.biblioteca;
+
 public class Bibliotecario {
 
     int id_bibliotecario;

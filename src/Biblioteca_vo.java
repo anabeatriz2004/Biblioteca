@@ -1,7 +1,9 @@
 import java.sql.*;
 import java.util.*;
 
-public class Biblioteca {
+package biblioteca.biblioteca;
+
+public class Biblioteca_vo {
     /**
      * @param args
      * @throws SQLException

@@ -55,7 +55,8 @@ public class Menu {
         System.out.println("1. Consultar dados de um determinado livro");
         System.out.println("2. Consultar dados de todos os livros");
         System.out.println("3. Inserir Livro");
-        System.out.println("4. Sair");
+        System.out.println("4. Eliminar Livro");
+        System.out.println("5. Sair");
     }
 
     public void percorrerMenuBibliotecario() {
@@ -80,9 +81,12 @@ public class Menu {
                     bibliotecario.consultarLivro(1);
                     break;
                 case 3:
-
                     // Inserindo o livro no banco de dados
                     bibliotecario.inserirLivro(livroComDados);
+                    break;
+                case 4:
+                    // Inserindo o livro no banco de dados
+                    bibliotecario.eliminarLivro(1);
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");

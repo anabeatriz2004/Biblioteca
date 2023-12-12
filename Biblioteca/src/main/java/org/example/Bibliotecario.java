@@ -164,7 +164,7 @@ public class Bibliotecario {
         }
     }
 
-    private void excluirLivro(int idLivro) {
+    public void eliminarLivro(int idLivro) {
         try {
             // Consulta SQL para excluir o livro com base no ID
             String sql = "DELETE FROM livro WHERE id_livro = ?";

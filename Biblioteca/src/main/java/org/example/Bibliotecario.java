@@ -163,4 +163,30 @@ public class Bibliotecario {
             e.printStackTrace();
         }
     }
+
+    private void excluirLivro(int idLivro) {
+        try {
+            // Consulta SQL para excluir o livro com base no ID
+            String sql = "DELETE FROM livro WHERE id_livro = ?";
+
+            // Cria um PreparedStatement para a consulta SQL
+            try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+                // Define o ID do livro a ser excluído no lugar do ponto de interrogação
+                pstmt.setInt(1, idLivro);
+
+                // Executa a atualização (operação de exclusão)
+                int linhasAfetadas = pstmt.executeUpdate();
+
+                // Verifica se a exclusão foi bem-sucedida
+                if (linhasAfetadas > 0) {
+                    System.out.println("Livro excluído com sucesso!");
+                } else {
+                    System.out.println("Nenhum livro encontrado com o ID fornecido.");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

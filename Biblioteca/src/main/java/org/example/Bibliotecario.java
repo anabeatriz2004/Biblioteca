@@ -164,6 +164,70 @@ public class Bibliotecario {
         }
     }
 
+    private void alterarLivro(Livro livro) {
+        // ID do livro que você deseja alterar
+        int idLivroParaAlterar = 1;
+
+        // novos atributos para poder alterar valores
+        String novo_ISBN = "";
+        String novo_titulo = "";
+        String novo_autor = "";
+        String novo_editora = "";
+        int novo_anoPubli = 0;
+        String novo_genero = "";
+        boolean novo_disponibilidade = true;
+
+
+        // Novos dados para o livro
+        Livro novoLivro = new Livro();
+        novoLivro.setID_livro(idLivroParaAlterar);
+        novoLivro.setISBN(novo_ISBN);
+        novoLivro.setTitulo(novo_titulo);
+        novoLivro.setAutor(novo_autor);
+        novoLivro.setEditora(novo_editora);
+        novoLivro.setAnoPubli(novo_anoPubli);
+        novoLivro.setGenero(novo_genero);
+        novoLivro.setDisponibilidade(novo_disponibilidade);
+
+        //
+
+        // Chama o método para alterar os dados do livro
+        alterarLivro(novoLivro);
+
+        try {
+            // Consulta SQL para atualizar os dados do livro com base no ID
+            String sql = "UPDATE livro SET ISBN=?, titulo=?, autor=?, editora=?, anoPubli=?, genero=?, disponibilidade=? WHERE id_livro=?";
+
+            // Cria um PreparedStatement para a consulta SQL
+            try (PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
+                // Define os novos dados do livro nos lugares dos pontos de interrogação
+                preparedStatement.setString(1, livro.getISBN());
+                preparedStatement.setString(2, livro.getTitulo());
+                preparedStatement.setString(3, livro.getAutor());
+                preparedStatement.setString(4, livro.getEditora());
+                preparedStatement.setInt(5, livro.getAnoPubli());
+                preparedStatement.setString(6, livro.getGenero());
+                preparedStatement.setBoolean(7, livro.isDisponibilidade());
+                preparedStatement.setInt(8, livro.getID_livro());
+
+                // Executa a atualização (operação de alteração)
+                int linhasAfetadas = preparedStatement.executeUpdate();
+
+                // Verifica se a alteração foi bem-sucedida
+                if (linhasAfetadas > 0) {
+                    System.out.println("Livro alterado com sucesso!");
+                } else {
+                    System.out.println("Nenhum livro encontrado com o ID fornecido.");
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void eliminarLivro(int idLivro) {
         try {
             // Consulta SQL para excluir o livro com base no ID

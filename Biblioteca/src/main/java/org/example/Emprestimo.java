@@ -1,5 +1,6 @@
 package org.example;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -9,7 +10,17 @@ public class Emprestimo {
     private Utilizador utilizador;
     private Bibliotecario bibliotecario;
     private LocalDate dataEmprestimo,dataDevolvido,dataDevolucao;
-    private Database conexao; // Adicionando a instância da conexão
+    //private Database conexao; // Adicionando a instância da conexão
+
+    private Connection conexao;
+
+    // construtor sem dados
+    public void Bibliotecario () {}
+
+    // conecta-se a partir do construtor
+    public Emprestimo (Connection conexao) {
+        this.conexao = conexao;
+    }
 
     Emprestimo(Livro id_livro, Utilizador id_utilizador, Bibliotecario id_bibliotecario, Database conexao) {
         this.livro = id_livro;

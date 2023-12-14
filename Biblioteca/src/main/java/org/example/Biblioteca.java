@@ -47,12 +47,12 @@ public class Biblioteca {
                     System.out.println("Por favor, escreva um dado válido");
                 }
             }
-        // Fecha o scanner
-        scan.close();
+            // Fecha o scanner
+            scan.close();
 
-        // Fecha a conexão com o banco de dados
-        conexao.close();
-        
+            // Fecha a conexão com o banco de dados
+            conexao.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

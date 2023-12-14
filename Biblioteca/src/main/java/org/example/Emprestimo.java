@@ -1,70 +1,87 @@
-package org.example;
-
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class Emprestimo {
-    int id_emprestimo;
-    int id_livro;
-    int id_utilizador;
-    int id_bibliotecario;
-    Date data_emprestimo;
-    Date data_devolucao;
+    private Livro livro;
+    private Utilizador utilizador;
+    private Bibliotecario bibliotecario;
+    private LocalDate dataEmprestimo,dataDevolvido,dataDevolucao;
+    private Database conexao; // Adicionando a instância da conexão
 
-    private Connection conexao;
-
-    // construtor sem dados
-    public void Emprestimo () {}
-
-    // conecta-se a partir do construtor
-    public Emprestimo(Connection conexao) {
-        this.conexao = conexao;
+    Emprestimo(Livro id_livro, Utilizador id_utilizador, Bibliotecario id_bibliotecario, Database conexao) {
+        this.livro = id_livro;
+        this.utilizador = id_utilizador;
+        this.bibliotecario = id_bibliotecario;
+        this.conexao = conexao; // Recebendo a conexão como parâmetro
     }
 
-    public int getId_emprestimo() {
-        return id_emprestimo;
+    public void devolverLivro() {
+        if (dataEmprestimo == null) {
+            System.out.println("Este livro ainda não foi emprestado.");
+            return;
+        }
+
+        dataDevolvido = LocalDate.now();
+        atualizarNoBanco();
+       }
+
+    private void atualizarNoBanco() {
+        try {
+            conexao.conectar(); // Conectando ao banco usando a instância de ConexaoMySQL
+
+            String sql = "UPDATE emprestimos SET data_devolvido = ? WHERE livro_id = ? AND utilizador_id = ?";
+            PreparedStatement preparedStatement = conexao.getConexao().prepareStatement(sql);
+            preparedStatement.setTimestamp(1, java.sql.Timestamp.valueOf(dataDevolvido.atStartOfDay()));
+            preparedStatement.setInt(2, livro.getID());
+            preparedStatement.setInt(3, utilizador.getID());
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+            conexao.desconectar(); // Desconectando após a operação
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void setId_emprestimo(int id_emprestimo) {
-        this.id_emprestimo = id_emprestimo;
-    }
+    public void emprestarLivro() {
+        try {
+            conexao.conectar(); // Conectando ao banco usando a instância de ConexaoMySQL
+            dataEmprestimo = LocalDate.now();
+            dataDevolucao = LocalDate.now().plusDays(15);
+            String sql = "INSERT INTO emprestimo (id_livro, id_utilizador, id_bibliotecario, data_emprestimo, data_devolucao) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = conexao.getConexao().prepareStatement(sql);
+            preparedStatement.setInt(1, livro.getID());
+            preparedStatement.setInt(2, utilizador.getID());
+            preparedStatement.setInt(3, bibliotecario.getID());
+            preparedStatement.setTimestamp(4, java.sql.Timestamp.valueOf(dataEmprestimo.atStartOfDay()));
+            preparedStatement.setTimestamp(5, java.sql.Timestamp.valueOf(dataDevolucao.atStartOfDay()));
 
-    public int getId_livro() {
-        return id_livro;
-    }
+            preparedStatement.executeUpdate();
 
-    public void setId_livro(int id_livro) {
-        this.id_livro = id_livro;
+            preparedStatement.close();
+            conexao.desconectar(); // Desconectando após a operação
+            atualizar_estado_livro(false); //Atualiza a disponibilidade do livro
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+    public void atualizar_estado_livro(boolean disponibilidade) {
+        try {
+            conexao.conectar(); // Conectando ao banco usando a instância de Database
 
-    public int getId_utilizador() {
-        return id_utilizador;
-    }
+            String sql = "UPDATE livro SET disponibilidade = ? WHERE id_livro = ?";
+            PreparedStatement preparedStatement = conexao.getConexao().prepareStatement(sql);
+            preparedStatement.setBoolean(1, disponibilidade);
+            preparedStatement.setInt(2, livro.getID());
 
-    public void setId_utilizador(int id_utilizador) {
-        this.id_utilizador = id_utilizador;
-    }
+            preparedStatement.executeUpdate();
 
-    public int getId_bibliotecario() {
-        return id_bibliotecario;
-    }
-
-    public void setId_bibliotecario(int id_bibliotecario) {
-        this.id_bibliotecario = id_bibliotecario;
-    }
-
-    public Date getData_emprestimo() {
-        return data_emprestimo;
-    }
-
-    public void setData_emprestimo(Date data_emprestimo) {
-        this.data_emprestimo = data_emprestimo;
-    }
-
-    public Date getData_devolucao() {
-        return data_devolucao;
-    }
-
-    public void setData_devolucao(Date data_devolucao) {
-        this.data_devolucao = data_devolucao;
+            preparedStatement.close();
+            conexao.desconectar(); // Desconectando após a operação
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -39,7 +39,6 @@ public class Menu {
                     utilizador.consultarLivro(1);
                     break;
                 case 2:
-
                     // Consulta dados de todos os livros
                     utilizador.consultarTodosLivros();
                     break;

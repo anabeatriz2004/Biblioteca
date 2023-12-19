@@ -22,10 +22,10 @@ public class Emprestimo {
         this.conexao = conexao;
     }
 
-    Emprestimo(Livro id_livro, Utilizador id_utilizador, Bibliotecario id_bibliotecario) {
-        this.livro = id_livro;
-        this.utilizador = id_utilizador;
-        this.bibliotecario = id_bibliotecario;
+    Emprestimo(Livro livro, Utilizador utilizador, Bibliotecario bibliotecario) {
+        this.livro = livro;
+        this.utilizador = utilizador;
+        this.bibliotecario = bibliotecario;
     }
 
     public void devolverLivro() {

@@ -32,21 +32,58 @@ public class Biblioteca {
             utilizador = new Utilizador(conexao);
 
             System.out.println("Diga quem é");
-            System.out.println("Escreva 'u', se for utilizadorb");
+            System.out.println("Escreva 'u', se for utilizador");
             System.out.println("Escreva 'b', se for bibliotecario");
             System.out.println("Escreva sair, se pretender sair");
             ub = scan.nextLine();
 
-            while (ub.equals("sair")) {
-                if ("u".equalsIgnoreCase(ub)) { // confirma se é utilizador
-                    menu.percorrerMenuUtilizador();
+            String email = "usuario@exemplo.com";
+            String senhaInformada = "senha123";
 
-                } else if ("b".equalsIgnoreCase(ub)) { // confirma se é bibliotecario
-                    menu.percorrerMenuBibliotecario();
-                } else {
-                    System.out.println("Por favor, escreva um dado válido");
+            try {
+                Statement stmt = conexao.createStatement();
+
+                ResultSet rs = stmt.executeQuery("SELECT * FROM utilizador WHERE email = '" + email + "'");
+
+
+                while (!(ub.equals("sair"))) {
+                    if ("u".equalsIgnoreCase(ub)) { // confirma se é utilizador
+
+                        if (rs.next()) {
+                            String senhaBanco = rs.getString("password");
+
+                            if (senhaBanco.equals(senhaInformada)) {
+                                System.out.println("Usuário logado com sucesso!");
+                                menu.percorrerMenuUtilizador();
+                            } else {
+                                System.out.println("Senha incorreta!");
+                            }
+                        } else {
+                            System.out.println("Usuário não encontrado. Inscreva-se!");
+                        }
+
+                    } else if ("b".equalsIgnoreCase(ub)) {
+                        if (rs.next()) {
+                            String senhaBanco = rs.getString("password");
+
+                            if (senhaBanco.equals(senhaInformada)) {
+                                System.out.println("Usuário logado com sucesso!");
+                            } else {
+                                System.out.println("Senha incorreta!");
+                            }
+                        } else {
+                            System.out.println("Usuário não encontrado. Inscreva-se!");
+                        }// confirma se é bibliotecario
+                        menu.percorrerMenuBibliotecario();
+                    } else {
+                        System.out.println("Por favor, escreva um dado válido");
+                    }
                 }
+
+            } catch (SQLException e) {
+                System.out.println("Erro ao conectar ao banco de dados: " + e.getMessage());
             }
+
             // Fecha o scanner
             scan.close();
 
@@ -55,6 +92,7 @@ public class Biblioteca {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Erro ao conectar ao banco de dados: " + e.getMessage());
         }
     }
 }

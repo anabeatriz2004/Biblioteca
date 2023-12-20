@@ -1,3 +1,5 @@
+package org.example;
+
 import org.example.Database;
 
 import javax.swing.*;
@@ -22,6 +24,7 @@ public class Emprestimo {
         this.id_bibliotecario = id_bibliotecario;
         this.conexao = conexao; // Recebendo a conexão como parâmetro
     }
+
 
      /*  private boolean verificar_emprestimo() throws SQLException {
            boolean emprestado = false;

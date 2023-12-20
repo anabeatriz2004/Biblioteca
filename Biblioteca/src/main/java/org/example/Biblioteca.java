@@ -19,9 +19,14 @@ public class Biblioteca {
 
         try {
             // URL de conexão JDBC
-            String url = "jdbc:mysql://localhost/biblioteca";
-            String user = "ana_beatriz";
-            String password = "RandomGirl2.0";
+            //String url = "jdbc:mysql://localhost/biblioteca";
+            //String user = "ana_beatriz";
+            //String password = "RandomGirl2.0";
+
+            // URL de conexão JDBC
+            String url = "estga-dev.ua.pt/PTDA_BD_005";
+            String user = "PTDA_005";
+            String password = "Zh#pos539";
 
             // Estabelecer a conexão
             conexao = DriverManager.getConnection(url, user, password);

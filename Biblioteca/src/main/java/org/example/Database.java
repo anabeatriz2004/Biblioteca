@@ -6,9 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Database {
-    private static final String URL = "jdbc:mysql://seu_host:porta/seu_banco";
-    private static final String USUARIO = "seu_usuario";
-    private static final String SENHA = "sua_senha";
+    //private static final String URL = "jdbc:mysql://seu_host:porta/seu_banco";
+    //private static final String USUARIO = "seu_usuario";
+    //private static final String SENHA = "sua_senha";
+
+    private static final String url = "estga-dev.ua.pt/PTDA_BD_005";
+    private static final String user = "PTDA_005";
+    private static final String password = "Zh#pos539";
 
     private Connection conexao = null;
 
@@ -23,7 +27,7 @@ public class Database {
     public void conectar() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
+            conexao = DriverManager.getConnection(url, utilizador, senha);
             System.out.println("Conexão bem-sucedida.");
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());

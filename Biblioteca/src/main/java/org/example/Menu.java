@@ -3,9 +3,9 @@ package org.example;
 import java.util.Scanner;
 
 public class Menu {
-    Scanner scanner = new Scanner(System.in);
+    Scanner scan = new Scanner(System.in);
 
-    Utilizador utilizador;
+    Utilizador utilizador = new Utilizador();
     Bibliotecario bibliotecario;
 
     // Criando um objeto Livro
@@ -14,7 +14,7 @@ public class Menu {
     int op;
 
     public static void exibirMenuUtilizador() {
-        System.out.println("Menu (sendo utilizador");
+        System.out.println("Menu (sendo utilizador):");
         System.out.println("1. Consultar dados de um determinado livro");
         System.out.println("2. Consultar dados de todos os livros");
         System.out.println("4. Sair");
@@ -26,10 +26,10 @@ public class Menu {
             exibirMenuUtilizador();
             try {
                 System.out.print("op uma opção: ");
-                op = scanner.nextInt();
+                op = scan.nextInt();
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Entrada inválida. Por favor, insira um número inteiro.");
-                scanner.nextLine(); // Limpa o buffer do scanner
+                scan.nextLine(); // Limpa o buffer do scan
                 op = 0; // Atribui um valor padrão para evitar loop infinito
             }
 
@@ -45,8 +45,7 @@ public class Menu {
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
-            }scanner.close();
-
+            }
         } while (op != 4);
     }
 
@@ -64,10 +63,10 @@ public class Menu {
             exibirMenuBibliotecario();
             try {
                 System.out.print("op uma opção: ");
-                op = scanner.nextInt();
+                op = scan.nextInt();
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Entrada inválida. Por favor, insira um número inteiro.");
-                scanner.nextLine(); // Limpa o buffer do scanner
+                scan.nextLine(); // Limpa o buffer do scan
                 op = 0; // Atribui um valor padrão para evitar loop infinito
             }
 
@@ -91,7 +90,8 @@ public class Menu {
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
-            scanner.close();
+
+            //scan.close();
         } while (op != 4);
     }
 }

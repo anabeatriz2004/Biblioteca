@@ -10,7 +10,9 @@ public class Utilizador {
     Date data_nascimento;
     String morada;
 
-    private Database conexao;
+    private Database conexao = new Database(); // Instanciar a classe Database
+
+    Menu menu = new Menu();
 
     // construtor sem dados
     public void Utilizador () {}
@@ -48,6 +50,8 @@ public class Utilizador {
                 }
             }
 
+            menu.percorrerMenuUtilizador();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -84,10 +88,6 @@ public class Utilizador {
                             ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade);
                 }
             }
-
-            // Fecha a conexão com o banco de dados
-            conexao.desconectar();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -18,6 +18,9 @@ public class Emprestimo {
     private int atraso;
     private Database conexao = null;
 
+    //private Connection conexao;
+    Database db = new Database();
+
     Emprestimo(int id_livro, int id_utilizador, int id_bibliotecario, Database conexao) {
         this.id_livro = id_livro;
         this.id_utilizador = id_utilizador;

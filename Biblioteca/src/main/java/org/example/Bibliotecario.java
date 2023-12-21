@@ -10,14 +10,10 @@ public class Bibliotecario {
     Date data_contratacao;
 
     private Connection conexao;
+    Database db = new Database();
 
     // construtor sem dados
     public void Bibliotecario () {}
-
-    // conecta-se a partir do construtor
-    public Bibliotecario(Connection conexao) {
-        this.conexao = conexao;
-    }
 
     public int getId_bibliotecario() {
         return id_bibliotecario;

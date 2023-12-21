@@ -14,6 +14,7 @@ public class Biblioteca {
 
         Database db = new Database();
         VerificarLogin vl = new VerificarLogin();
+        Menu menu = new Menu();
 
         // conecta há base de dados
         db.conectar();
@@ -35,8 +36,10 @@ public class Biblioteca {
         while (!(ub.equals("sair"))) {
             if ("u".equalsIgnoreCase(ub)) { // confirma se é utilizador
                 vl.verificarLoginUtilizador(email, password);
+                //menu.percorrerMenuUtilizador();
             } else if ("b".equalsIgnoreCase(ub)) { // confirma se é bibliotecario
                 vl.verificarLoginBibliotecario(email, password);
+                //menu.percorrerMenuBibliotecario();
             } else {
                 System.out.println("Por favor, escreva um dado válido");
             }

@@ -10,22 +10,20 @@ public class Utilizador {
     Date data_nascimento;
     String morada;
 
-    private Connection conexao;
-    Database db = new Database();
+    private Database conexao;
 
     // construtor sem dados
     public void Utilizador () {}
 
     // Método para consultar um livro pelo ID na base de dados
     public void consultarLivro(int idLivro) {
-        conexao = db.getConexao();
 
         try {
             // Define a consulta SQL para selecionar um livro com base no ID
             String sql = "SELECT * FROM livro WHERE id_livro = ?";
 
             // Cria o objeto PreparedStatement
-            try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+            try (PreparedStatement pstmt = conexao.getConexao().prepareStatement(sql)) {
                 // Define o parâmetro da consulta com base no ID fornecido
                 pstmt.setInt(1, idLivro);
 
@@ -57,12 +55,14 @@ public class Utilizador {
 
     // Método para consultar todos os livros na base de dados
     public void consultarTodosLivros() {
+        conexao.conectar(); // Conectando ao banco usando a instância de ConexaoMySQL
+
         try {
             // Define a consulta SQL para selecionar todos os livros
             String sql = "SELECT * FROM livro";
 
             // Cria o objeto PreparedStatement
-            try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+            try (PreparedStatement pstmt = conexao.getConexao().prepareStatement(sql)) {
                 // Executa a consulta
                 ResultSet resultado = pstmt.executeQuery();
 
@@ -86,7 +86,7 @@ public class Utilizador {
             }
 
             // Fecha a conexão com o banco de dados
-            conexao.close();
+            conexao.desconectar();
 
         } catch (SQLException e) {
             e.printStackTrace();

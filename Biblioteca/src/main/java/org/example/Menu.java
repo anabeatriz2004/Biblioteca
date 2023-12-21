@@ -29,7 +29,7 @@ public class Menu {
         System.out.println("Menu (sendo utilizador):");
         System.out.println("1. Consultar dados de um determinado livro");
         System.out.println("2. Consultar dados de todos os livros");
-        System.out.println("4. Sair");
+        System.out.println("3. Sair");
         System.out.println("-------------------------------------------------");
     }
 
@@ -63,7 +63,7 @@ public class Menu {
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
-        } while (op != 4);
+        } while (op != 3);
     }
 
     static void exibirMenuBibliotecario() {

@@ -6,7 +6,7 @@ public class Biblioteca {
     // cria scanner para interagir
     static Scanner scan = new Scanner(System.in);
 
-    /*public void EncerrarPrograma {
+    /*public void EncerrarPrograma() {
         System.out.println("O programa está prestes a encerrar.");
 
         // Fechar o programa com status de saída 0 (sem erros)

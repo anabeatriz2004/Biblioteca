@@ -81,7 +81,7 @@ public class VerificarLogin {
                         String pass = resultSet.getString("senha");
                         if (pass.equals(password)) {
                             // Senha correta, login bem-sucedido
-                            menu.percorrerMenuUtilizador();
+                            menu.percorrerMenuBibliotecario();
                             entradaValida = true;
                             return "O bibliotecario logou com sucesso";
                         } else {

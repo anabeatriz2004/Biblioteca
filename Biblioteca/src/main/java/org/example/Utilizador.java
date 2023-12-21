@@ -12,8 +12,6 @@ public class Utilizador {
 
     private Database conexao = new Database(); // Instanciar a classe Database
 
-    //Menu menu = new Menu();
-
     // Método para consultar um livro pelo ID na base de dados
     public void consultarLivro(int idLivro) {
 
@@ -40,14 +38,13 @@ public class Utilizador {
                     String genero = resultado.getString("genero");
                     boolean disponibilidade = resultado.getBoolean("disponibilidade");
 
+                    System.out.println("Todos os livros listados:");
                     // Faça o que deseja com os dados, por exemplo, imprimir na tela
                     System.out.println("ID: " + idLivro + ", ISBN: " + isbn + ", Título: " + titulo +
                             ", Autor: " + autor + ", Editora: " + editora + ", Ano de Publicação: " + anoPubli +
-                            ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade);
+                            ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade + "\n");
                 }
             }
-
-            //menu.percorrerMenuUtilizador();
 
         } catch (SQLException e) {
             e.printStackTrace();

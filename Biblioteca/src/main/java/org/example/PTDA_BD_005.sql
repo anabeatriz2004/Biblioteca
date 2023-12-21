@@ -1,11 +1,12 @@
-DROP DATABASE IF EXISTS biblioteca;
-CREATE DATABASE biblioteca;
-USE biblioteca;
+DROP DATABASE IF EXISTS PTDA_BD_005;
+CREATE DATABASE PTDA_BD_005;
+USE PTDA_BD_005;
 
 CREATE TABLE utilizador 
 	(id_utilizador INT PRIMARY KEY,
     nome VARCHAR(50),
     email VARCHAR(50),
+	senha Varchar(25), 
     telefone INT,
     data_nascimento DATE,
     morada VARCHAR(50));
@@ -14,6 +15,7 @@ CREATE TABLE bibliotecario
 	(id_bibliotecario INT PRIMARY KEY,
     nome VARCHAR(50),
     email VARCHAR(50),
+	senha Varchar(25), 
     telefone INT,
     data_contratacao DATE);
     
@@ -40,13 +42,14 @@ CREATE TABLE emprestimo (
     
     
 INSERT INTO utilizador
-	(id_utilizador, nome, email, telefone, data_nascimento, morada)
-    VALUES (1, 'Maria Gonçalves', 'maria_gonc@gmail.com', 915654783, '2006-1-29', null),
-(2, 'João Ribeiro', 'joao_rib@gmail.com', 915657438, '2000-1-29', null);
+	(id_utilizador, nome, email, senha, telefone, data_nascimento, morada)
+    VALUES (1, 'Maria Gonçalves', 'maria_gonc@gmail.com', '123456', 915654783, '2006-1-29', null),
+    (2, 'João Ribeiro', 'joao_rib@gmail.com', '123456', 915657438, '2000-1-29', null),
+    (3, 'maria', 'maria@gmail.com', '123456', 9123456789, '2004-01-01', null);
     
 INSERT INTO bibliotecario 
-	(id_bibliotecario, nome, email, telefone, data_contratacao)
-    VALUES (1, 'Marta Rosado', 'marta_rosado@gmail.com', 925484678, '2017-1-29');
+	(id_bibliotecario, nome, email, senha, telefone, data_contratacao)
+    VALUES (1, 'Marta Rosado', 'marta_rosado@gmail.com', '123456', 925484678, '2017-1-29');
     
 INSERT INTO livro 
 	(id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade)

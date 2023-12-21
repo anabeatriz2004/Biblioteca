@@ -15,11 +15,6 @@ public class Utilizador {
     // construtor sem dados
     public void Utilizador () {}
 
-    // conecta-se a partir do construtor
-    public Utilizador(Connection conexao) {
-        this.conexao = conexao;
-    }
-
     // Método para consultar um livro pelo ID na base de dados
     public void consultarLivro(int idLivro) {
         try {

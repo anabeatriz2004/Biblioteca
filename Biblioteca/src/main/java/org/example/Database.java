@@ -10,7 +10,7 @@ public class Database {
     //private static final String USUARIO = "seu_usuario";
     //private static final String SENHA = "sua_senha";
 
-    private static final String url = "estga-dev.ua.pt/PTDA_BD_005";
+    private static final String url = "jdbc:mysql://estga-dev.ua.pt/PTDA_BD_005";
     private static final String user = "PTDA_005";
     private static final String password = "Zh#pos539";
 

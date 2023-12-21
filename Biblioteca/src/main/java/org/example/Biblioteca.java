@@ -17,15 +17,14 @@ public class Biblioteca {
         db.conectar();
 
         System.out.println("Diga quem é");
-        System.out.println("Escreva 'u', se for utilizadorb");
+        System.out.println("Escreva 'u', se for utilizador");
         System.out.println("Escreva 'b', se for bibliotecario");
         System.out.println("Escreva sair, se pretender sair");
         ub = scan.nextLine();
 
-        while (ub.equals("sair")) {
+        while (!(ub.equals("sair"))) {
             if ("u".equalsIgnoreCase(ub)) { // confirma se é utilizador
                 menu.percorrerMenuUtilizador();
-
             } else if ("b".equalsIgnoreCase(ub)) { // confirma se é bibliotecario
                 menu.percorrerMenuBibliotecario();
             } else {

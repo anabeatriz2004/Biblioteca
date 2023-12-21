@@ -31,6 +31,7 @@ public class Database {
             System.out.println("Conexão bem-sucedida.");
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

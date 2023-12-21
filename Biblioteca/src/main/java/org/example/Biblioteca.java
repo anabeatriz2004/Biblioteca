@@ -39,7 +39,7 @@ public class Biblioteca {
                 //menu.percorrerMenuUtilizador();
             } else if ("b".equalsIgnoreCase(ub)) { // confirma se é bibliotecario
                 vl.verificarLoginBibliotecario(email, password);
-                //menu.percorrerMenuBibliotecario();
+                //umenu.percorrerMenuBibliotecario();
             } else {
                 System.out.println("Por favor, escreva um dado válido");
             }

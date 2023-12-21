@@ -4,15 +4,12 @@ import java.sql.*;
 
 public class VerificarLogin {
     private Connection conexao;
-
     Database db = new Database();
-
-    conexao = db.getConexao();
-
     Menu menu = new Menu();
 
-    // Método para verificar o login
+    // Método para verificar o login do utilizador
     public String verificarLoginUtilizador(String email, String password) {
+        conexao = db.getConexao();
 
         try {
             // Define a consulta SQL para selecionar um livro com base no ID
@@ -51,8 +48,10 @@ public class VerificarLogin {
         }
     }
 
-    // Método para verificar o login
+    // Método para verificar o login do bibliotecario
     public String verificarLoginBibliotecario(String email, String password) {
+        conexao = db.getConexao();
+
         try {
             // Define a consulta SQL para selecionar um livro com base no ID
             String sql = "SELECT * FROM bibliotecario WHERE email = ?";

@@ -11,12 +11,15 @@ public class Utilizador {
     String morada;
 
     private Connection conexao;
+    Database db = new Database();
 
     // construtor sem dados
     public void Utilizador () {}
 
     // Método para consultar um livro pelo ID na base de dados
     public void consultarLivro(int idLivro) {
+        conexao = db.getConexao();
+
         try {
             // Define a consulta SQL para selecionar um livro com base no ID
             String sql = "SELECT * FROM livro WHERE id_livro = ?";

@@ -49,7 +49,7 @@ INSERT INTO utilizador
     
 INSERT INTO bibliotecario 
 	(id_bibliotecario, nome, email, senha, telefone, data_contratacao)
-    VALUES (1, 'Marta Rosado', 'marta_rosado@gmail.com', '123456', 925484678, '2017-1-29');
+    VALUES (1, 'Marta Rosado', 'marta_rosado@gmail.com', 'Admin2017', 925484678, '2017-1-29');
     
 INSERT INTO livro 
 	(id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade)

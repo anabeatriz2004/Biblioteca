@@ -9,8 +9,7 @@ public class Bibliotecario {
     int telefone;
     Date data_contratacao;
 
-    private Connection conexao;
-    Database db = new Database();
+    private final Database conexao = new Database(); // Instanciar a classe Database
 
     // construtor sem dados
     public void Bibliotecario () {}
@@ -62,7 +61,7 @@ public class Bibliotecario {
             String sql = "SELECT * FROM livro WHERE id_livro = ?";
 
             // Cria o objeto PreparedStatement
-            try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+            try (PreparedStatement pstmt = conexao.getConexao().prepareStatement(sql)) {
                 // Define o parâmetro da consulta com base no ID fornecido
                 pstmt.setInt(1, idLivro);
 
@@ -99,7 +98,7 @@ public class Bibliotecario {
             String sql = "SELECT * FROM livro";
 
             // Cria o objeto PreparedStatement
-            try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+            try (PreparedStatement pstmt = conexao.getConexao().prepareStatement(sql)) {
                 // Executa a consulta
                 ResultSet resultado = pstmt.executeQuery();
 
@@ -138,7 +137,7 @@ public class Bibliotecario {
             String sql = "INSERT INTO livro (id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             // Cria o objeto PreparedStatement para evitar SQL Injection
-            try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+            try (PreparedStatement pstmt = conexao.getConexao().prepareStatement(sql)) {
                 // Define os parâmetros da consulta com base no livro fornecido
                 pstmt.setLong(1, livro.getID_livro());
                 pstmt.setString(2, livro.getISBN());
@@ -195,7 +194,7 @@ public class Bibliotecario {
             String sql = "UPDATE livro SET ISBN=?, titulo=?, autor=?, editora=?, anoPubli=?, genero=?, disponibilidade=? WHERE id_livro=?";
 
             // Cria um PreparedStatement para a consulta SQL
-            try (PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
+            try (PreparedStatement preparedStatement = conexao.getConexao().prepareStatement(sql)) {
                 // Define os novos dados do livro nos lugares dos pontos de interrogação
                 preparedStatement.setString(1, livro.getISBN());
                 preparedStatement.setString(2, livro.getTitulo());
@@ -230,7 +229,7 @@ public class Bibliotecario {
             String sql = "DELETE FROM livro WHERE id_livro = ?";
 
             // Cria um PreparedStatement para a consulta SQL
-            try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+            try (PreparedStatement pstmt = conexao.getConexao().prepareStatement(sql)) {
                 // Define o ID do livro a ser excluído no lugar do ponto de interrogação
                 pstmt.setInt(1, idLivro);
 

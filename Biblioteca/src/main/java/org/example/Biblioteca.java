@@ -1,14 +1,12 @@
 package org.example;
 
-import java.sql.*;
 import java.util.*;
 
 public class Biblioteca {
-    //private static Database conexao = new Database();
     // cria scanner para interagir
     static Scanner scan = new Scanner(System.in);
 
-    /*public void EncerrarPrograma() {
+    /*public void EncerrarPrograma {
         System.out.println("O programa está prestes a encerrar.");
 
         // Fechar o programa com status de saída 0 (sem erros)
@@ -20,7 +18,7 @@ public class Biblioteca {
         System.out.println("Esta mensagem não será exibida.");
     }*/
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) {
 
         String ub; // variavel que indica quem é
         String email;
@@ -37,22 +35,23 @@ public class Biblioteca {
         ub = scan.nextLine();
 
         // inserir os dados para logar
-        /*System.out.println("Insira os dados para efetuar o login");
+        System.out.println("Insira os dados para efetuar o login");
         System.out.println("Escreva o seu email:");
         email = scan.nextLine();
         System.out.println("Escreva a sua password:");
-        password = scan.nextLine();*/
+        password = scan.nextLine();
 
         while (!(ub.equals("sair"))) {
             if ("u".equalsIgnoreCase(ub)) { // confirma se é utilizador
-                //vl.verificarLoginUtilizador(email, password);
-                menu.percorrerMenuUtilizador();
+                vl.verificarLoginUtilizador(email, password);
+                //menu.percorrerMenuUtilizador();
             } else if ("b".equalsIgnoreCase(ub)) { // confirma se é bibliotecario
-                //vl.verificarLoginBibliotecario(email, password);
-                menu.percorrerMenuBibliotecario();
+                vl.verificarLoginBibliotecario(email, password);
+                //menu.percorrerMenuBibliotecario();
             } else {
                 System.out.println("Por favor, escreva um dado válido");
             }
+            scan.close();
         }
     }
 }

@@ -1,17 +1,21 @@
 package org.example;
 
 import java.sql.*;
+import java.util.Scanner;
 
 public class VerificarLogin {
     // private Database conexao;
     private Database conexao = new Database(); // Instanciar a classe Database
     Menu menu = new Menu();
 
+    static Scanner scan = new Scanner(System.in);
     boolean entradaValida = false;
+
+    public void VerificarLogin() {}
 
     // Método para verificar o login do utilizador
     public String verificarLoginUtilizador(String email, String password) {
-        conexao.getConexao();
+        //conexao.getConexao();
 
         try {
             // Define a consulta SQL para selecionar um livro com base no ID
@@ -29,9 +33,8 @@ public class VerificarLogin {
                     // Verifica se o email foi encontrado
                     if (resultSet.next()) {
                         // Email encontrado, verifica a senha
-                        String senhaDoBanco = resultSet.getString("password");
-
-                        if (senhaDoBanco.equals(password)) {
+                        String pass = resultSet.getString("senha");
+                        if (pass.equals(password)) {
                             // Senha correta, login bem-sucedido
                             menu.percorrerMenuUtilizador();
                             entradaValida = true;
@@ -57,7 +60,7 @@ public class VerificarLogin {
 
     // Método para verificar o login do bibliotecario
     public String verificarLoginBibliotecario(String email, String password) {
-        conexao.conectar(); // Conectando ao banco usando a instância de ConexaoMySQL
+        //conexao.getConexao();
 
         try {
             // Define a consulta SQL para selecionar um livro com base no ID
@@ -71,28 +74,32 @@ public class VerificarLogin {
                 // Executa a consulta
                 ResultSet resultSet = pstmt.executeQuery();
 
-                // Verifica se o email foi encontrado
-                if (resultSet.next()) {
-                    // Email encontrado, verifica a senha
-                    String senhaDoBanco = resultSet.getString("password");
-
-                    if (senhaDoBanco.equals(password)) {
-                        // Senha correta, login bem-sucedido
-                        menu.percorrerMenuBibliotecario();
-                        return "O utilizador logou com sucesso";
+                while (!entradaValida) {
+                    // Verifica se o email foi encontrado
+                    if (resultSet.next()) {
+                        // Email encontrado, verifica a senha
+                        String pass = resultSet.getString("senha");
+                        if (pass.equals(password)) {
+                            // Senha correta, login bem-sucedido
+                            menu.percorrerMenuUtilizador();
+                            entradaValida = true;
+                            return "O bibliotecario logou com sucesso";
+                        } else {
+                            // Senha incorreta, pede para tentar novamente
+                            entradaValida = false;
+                            return "Password incorreta, por favor, tente novamente";
+                        }
                     } else {
-                        // Senha incorreta, pede para tentar novamente
-                        return "Password incorreta, por favor, tente novamente";
+                        // Email não encontrado
+                        entradaValida = false;
+                        return "Bibliotecario não encontrado";
                     }
-                } else {
-                    // Email não encontrado
-                    return "Utilizador não encontrado";
                 }
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
             return "Erro ao conectar ao banco de dados";
         }
+        return "";
     }
 }

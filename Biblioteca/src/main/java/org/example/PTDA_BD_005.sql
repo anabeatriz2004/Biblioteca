@@ -45,7 +45,7 @@ INSERT INTO utilizador
 	(id_utilizador, nome, email, senha, telefone, data_nascimento, morada)
     VALUES (1, 'Maria Gonçalves', 'maria_gonc@gmail.com', '123456', 915654783, '2006-1-29', null),
     (2, 'João Ribeiro', 'joao_rib@gmail.com', '123456', 915657438, '2000-1-29', null),
-    (3, 'maria', 'maria@gmail.com', '123456', 9123456789, '2004-01-01', null);
+    (3, 'maria', 'maria@gmail.com', '123456', 912345678, '2004-01-01', null);
     
 INSERT INTO bibliotecario 
 	(id_bibliotecario, nome, email, senha, telefone, data_contratacao)
@@ -54,7 +54,8 @@ INSERT INTO bibliotecario
 INSERT INTO livro 
 	(id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade)
     VALUES (1, '9789720049575', 'Os Maias', 'Eça de Queirós', 'Porto Editora', 2017, 'romance', true),
-    (2, '9789722100007', 'Uma Aventura na Cidade', 'Ana Maria Magalhães', 'Caminho', 1998, 'infantojuvenil, aventura, mistério', true);
+    (2, '9789722100007', 'Uma Aventura na Cidade', 'Ana Maria Magalhães', 'Caminho', 1998, 'infantojuvenil, aventura, mistério', true),
+    (3, '1234567890123', 'Java for Beginners', 'Tech Duo', 'Tech Publishing', 2022, 'Programming', true);
     
 INSERT INTO emprestimo 
 	(id_emprestimo, id_livro, id_utilizador, id_bibliotecario, data_emprestimo, data_devolucao)

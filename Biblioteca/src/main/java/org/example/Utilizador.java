@@ -12,10 +12,7 @@ public class Utilizador {
 
     private Database conexao = new Database(); // Instanciar a classe Database
 
-    Menu menu = new Menu();
-
-    // construtor sem dados
-    public void Utilizador () {}
+    //Menu menu = new Menu();
 
     // Método para consultar um livro pelo ID na base de dados
     public void consultarLivro(int idLivro) {
@@ -50,7 +47,7 @@ public class Utilizador {
                 }
             }
 
-            menu.percorrerMenuUtilizador();
+            //menu.percorrerMenuUtilizador();
 
         } catch (SQLException e) {
             e.printStackTrace();

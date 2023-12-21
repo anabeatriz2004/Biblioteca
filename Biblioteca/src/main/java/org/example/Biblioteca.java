@@ -4,11 +4,11 @@ import java.sql.*;
 import java.util.*;
 
 public class Biblioteca {
-    private static Database conexao = new Database();
+    //private static Database conexao = new Database();
     // cria scanner para interagir
     static Scanner scan = new Scanner(System.in);
 
-    public void EncerrarPrograma {
+    /*public void EncerrarPrograma() {
         System.out.println("O programa está prestes a encerrar.");
 
         // Fechar o programa com status de saída 0 (sem erros)
@@ -18,7 +18,7 @@ public class Biblioteca {
 
         // O código abaixo não será executado, pois o programa já foi encerrado
         System.out.println("Esta mensagem não será exibida.");
-    }
+    }*/
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 

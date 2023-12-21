@@ -59,7 +59,7 @@ public class Utilizador {
 
     // Método para consultar todos os livros na base de dados
     public void consultarTodosLivros() {
-        conexao.conectar(); // Conectando ao banco usando a instância de ConexaoMySQL
+        conexao.getConexao(); // Conectando ao banco usando a instância de ConexaoMySQL
 
         try {
             // Define a consulta SQL para selecionar todos os livros

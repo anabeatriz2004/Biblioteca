@@ -88,4 +88,5 @@ public class Biblioteca extends JFrame {
 
         // Fechar o scanner
         scan.close();
+    }
 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Biblioteca Aplicacao.iml" filepath="$PROJECT_DIR$/Biblioteca Aplicacao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Biblioteca Desktop.iml" filepath="$PROJECT_DIR$/Biblioteca Desktop.iml" />
     </modules>
   </component>
 </project>

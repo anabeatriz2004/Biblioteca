@@ -31,6 +31,7 @@
       <root url="jar://$PROJECT_DIR$/lib/groovy-typecheckers-4.0.14.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/groovy-xml-4.0.14.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/groovy-4.0.14.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../../../mysql-connector-j-8.2.0" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
@@ -63,6 +64,17 @@
       <root url="jar://$PROJECT_DIR$/lib/groovy-toml-4.0.14-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/groovy-testng-4.0.14-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/groovy-xml-4.0.14-sources.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../../../mysql-connector-j-8.2.0/src/build/java" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../../../mysql-connector-j-8.2.0/src/demo/java" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../../../mysql-connector-j-8.2.0/src/generated/java" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../../../mysql-connector-j-8.2.0/src/legacy/java" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../../../mysql-connector-j-8.2.0/src/main/core-api/java" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../../../mysql-connector-j-8.2.0/src/main/core-impl/java" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../../../mysql-connector-j-8.2.0/src/main/protocol-impl/java" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../../../mysql-connector-j-8.2.0/src/main/user-api/java" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../../../mysql-connector-j-8.2.0/src/main/user-impl/java" />
+      <root url="file://$PROJECT_DIR$/../../../../../../../../../../../mysql-connector-j-8.2.0/src/test/java" />
     </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../../../../../../../../mysql-connector-j-8.2.0" recursive="false" />
   </library>
 </component>

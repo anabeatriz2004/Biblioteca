@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 public class Biblioteca extends JFrame {
     private JLabel biblioteca;
-    private JPanel PaginaInicial;
-    private JButton login;
+    private JPanel PaginaInicialPanel;
+    private JButton loginBotao;
 
     public Biblioteca() {
-        setContentPane(PaginaInicial);
+        setContentPane(PaginaInicialPanel);
         // nome da aplicação
         setTitle("Biblioteca");
         // quando se feche a aplicção o programa termina
@@ -25,7 +25,7 @@ public class Biblioteca extends JFrame {
         setVisible(true);
 
         // Botão Login
-        login.addActionListener(new ActionListener() {
+        loginBotao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(Biblioteca.this, "Hello World");

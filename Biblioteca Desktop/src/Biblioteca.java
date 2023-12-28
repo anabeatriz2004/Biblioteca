@@ -40,6 +40,7 @@ public class Biblioteca extends JFrame {
 
     public static void main(String[] args) {
         new Biblioteca();
+        new Login();
 
         String ub; // variavel que indica quem é
         String email;

@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.util.Scanner;
 
 public class Login extends JFrame {
     private JPanel LoginPanel;
@@ -14,6 +13,7 @@ public class Login extends JFrame {
     private JTextField EmailTextField;
     private JPasswordField PasswordField;
     private JButton LogarBotao;
+    private JLabel ErrorLabel;
 
     private Database conexao = new Database(); // Instanciar a classe Database
 
@@ -21,6 +21,9 @@ public class Login extends JFrame {
     Bibliotecario b = new Bibliotecario();
 
     boolean entradaValida = false;
+
+    String senhaIncorreta = "Senha incorreta. Por favor, tente novamente";
+    String UserNotFound = "Utilizador não encontrado. Por favor, tente novamente";
 
     public Login() {
         // vai buscar o painel do login
@@ -47,6 +50,7 @@ public class Login extends JFrame {
                 // a senha fica com o valor de PasswordField
                 String senha = String.valueOf(PasswordField.getPassword());
 
+                //  verifica o login
                 verificarLogin(email, senha);
             }
         });
@@ -83,10 +87,10 @@ public class Login extends JFrame {
                         entradaValida = true;
                         return;
                     } else {
-                        // Senha incorreta para utilizador
+                        // Senha incorreta
                         entradaValida = false;
-                        System.out.println("Senha incorreta para utilizador, por favor, tente novamente");
-                        return;
+                        System.out.println(senhaIncorreta);
+                        JOptionPane.showMessageDialog(Login.this, senhaIncorreta);
                     }
                 }
 
@@ -104,14 +108,10 @@ public class Login extends JFrame {
                     } else {
                         // Senha incorreta para bibliotecario
                         entradaValida = false;
-                        System.out.println("Senha incorreta para bibliotecario, por favor, tente novamente");
-                        return;
+                        System.out.println(senhaIncorreta);
+                        JOptionPane.showMessageDialog(Login.this, senhaIncorreta );
                     }
                 }
-
-                // Email não encontrado em ambas as tabelas
-                entradaValida = false;
-                System.out.println("Utilizador ou bibliotecario não encontrado");
             }
         } catch (SQLException e) {
             e.printStackTrace();

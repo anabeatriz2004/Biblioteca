@@ -15,7 +15,7 @@ public class Biblioteca extends JFrame {
     private JPanel PaginaInicialPanel;
     private JButton loginBotao;
     private JTable tabela;
-    private DefaultTableModel table;
+    private final DefaultTableModel table;
 
     Login l = new Login();
 
@@ -35,28 +35,6 @@ public class Biblioteca extends JFrame {
         // para vizualizar
         setVisible(true);
 
-        // Inicializa o modelo da tabela
-        tabela = new JTable();
-        tabela.addColumn("ID");
-        tabela.addColumn("ISBN");
-        tabela.addColumn("Título");
-        tabela.addColumn("Autor");
-        tabela.addColumn("Editora");
-        tabela.addColumn("Ano de Publicação");
-        tabela.addColumn("Gênero");
-        tabela.addColumn("Disponibilidade");
-
-        // Inicializa a tabela com o modelo
-        tabela = new JTable(table);
-
-        // Adiciona a tabela a um JScrollPane para permitir rolagem
-        JScrollPane scrollPane = new JScrollPane(table);
-        // Adiciona o JScrollPane ao JFrame
-        add(scrollPane);
-
-        // chama o método para vizualizar o tabela com os dados de todos os livros
-        consultarTodosLivros();
-
         // Botão Login
         loginBotao.addActionListener(new ActionListener() {
             @Override
@@ -66,10 +44,37 @@ public class Biblioteca extends JFrame {
                 l.setVisible(true); // ver tela login
             }
         });
+
+        // Inicializa o modelo da tabela
+        table = new DefaultTableModel();
+        table.addColumn("ID");
+        table.addColumn("ISBN");
+        table.addColumn("Título");
+        table.addColumn("Autor");
+        table.addColumn("Editora");
+        table.addColumn("Ano de Publicação");
+        table.addColumn("Gênero");
+        table.addColumn("Disponibilidade");
+
+        // Inicializa a tabela com o modelo
+        tabela = new JTable(table);
+
+        // chama o método para vizualizar o tabela com os dados de todos os livros
+        // consultarTodosLivros();
+
+        try {
+            // Adiciona a tabela a um JScrollPane para permitir rolagem
+            JScrollPane scrollPane = new JScrollPane(tabela);
+
+            // Adiciona o JScrollPane ao JFrame
+            add(scrollPane);
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 
     // Método para consultar todos os livros na base de dados
-    public void consultarTodosLivros() {
+    /*public void consultarTodosLivros() {
         try {
             // Define a consulta SQL para selecionar todos os livros
             String sql = "SELECT * FROM livro";
@@ -98,16 +103,26 @@ public class Biblioteca extends JFrame {
                 }
 
                 while (resultado.next()) {
+                    // Recupera os dados do livro
+                    long idLivro = resultado.getLong("id_livro");
+                    String isbn = resultado.getString("ISBN");
+                    String titulo = resultado.getString("titulo");
+                    String autor = resultado.getString("autor");
+                    String editora = resultado.getString("editora");
+                    int anoPubli = resultado.getInt("ano_publi");
+                    String genero = resultado.getString("genero");
+                    boolean disponibilidade = resultado.getBoolean("disponibilidade");
+
                     // Adiciona uma nova linha à tabela para cada livro encontrado
-                    tabela.addRow(new Object[]{
-                            resultado.getLong("id_livro"),
-                            resultado.getString("ISBN"),
-                            resultado.getString("titulo"),
-                            resultado.getString("autor"),
-                            resultado.getString("editora"),
-                            resultado.getInt("ano_publi"),
-                            resultado.getString("genero"),
-                            resultado.getBoolean("disponibilidade")
+                    table.addRow(new Object[]{
+                            idLivro,
+                            isbn,
+                            titulo,
+                            autor,
+                            editora,
+                            anoPubli,
+                            genero,
+                            disponibilidade
                     });
                 }
             }
@@ -115,11 +130,10 @@ public class Biblioteca extends JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public static void main(String[] args) {
-
         // inicia a aplicação
-        new Biblioteca();
+        SwingUtilities.invokeLater(Biblioteca::new);
     }
 }

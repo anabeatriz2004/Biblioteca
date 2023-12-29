@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -13,10 +15,10 @@ public class Login extends JFrame {
     private JPasswordField PasswordField;
     private JButton LogarBotao;
 
-    // private Database conexao;
     private Database conexao = new Database(); // Instanciar a classe Database
 
-    Menu menu = new Menu();
+    Utilizador u = new Utilizador();
+    Bibliotecario b = new Bibliotecario();
 
     boolean entradaValida = false;
 
@@ -27,41 +29,55 @@ public class Login extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         // Obtém a resolução da tela
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        //define tamanho da aplicação
+        // definir tamanho da aplicação
         setSize(screenSize);
-        // para exibir no centro da tela
+        // exibir no centro da tela
         setLocationRelativeTo(null);
-        // para vizualizar
-        setVisible(true);
+        // visualizar a tela
+        setVisible(false);
+
+        // Botão para entrar na aplicação
+        LogarBotao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // o email fica com o valor de EmailTextField
+                String email = EmailTextField.getText();
+                // a senha fica com o valor de PasswordField
+                String senha = String.valueOf(PasswordField.getPassword());
+
+                verificarLogin(email, senha);
+            }
+        });
     }
 
-    public void verificarLogin(String email, String password) {
+    public void verificarLogin(String email, String senha) {
         try {
             // Define a consulta SQL para selecionar um utilizador com base no email
-            String usuarioSql = "SELECT * FROM utilizador WHERE email = ?";
+            String UtilizadorSql = "SELECT * FROM utilizador WHERE email = ?";
             // Define a consulta SQL para selecionar um bibliotecario com base no email
             String bibliotecarioSql = "SELECT * FROM bibliotecario WHERE email = ?";
 
             // Cria os objetos PreparedStatement para utilizador e bibliotecario
-            try (PreparedStatement pstmtUsuario = conexao.getConexao().prepareStatement(usuarioSql);
+            try (PreparedStatement pstmtUtilizador = conexao.getConexao().prepareStatement(UtilizadorSql);
                  PreparedStatement pstmtBibliotecario = conexao.getConexao().prepareStatement(bibliotecarioSql)) {
 
                 // Define o parâmetro da consulta com base no email fornecido
-                pstmtUsuario.setString(1, email);
+                pstmtUtilizador.setString(1, email);
                 pstmtBibliotecario.setString(1, email);
 
                 // Executa as consultas
-                ResultSet resultSetUsuario = pstmtUsuario.executeQuery();
+                ResultSet resultSetUtilizador = pstmtUtilizador.executeQuery();
                 ResultSet resultSetBibliotecario = pstmtBibliotecario.executeQuery();
 
                 // Verifica se o email foi encontrado na tabela de utilizador
-                if (resultSetUsuario.next()) {
+                if (resultSetUtilizador.next()) {
                     // Email encontrado, verifica a senha
-                    String senhaUsuario = resultSetUsuario.getString("senha");
-                    if (senhaUsuario.equals(password)) {
+                    String senhaUtilizador = resultSetUtilizador.getString("senha");
+                    if (senhaUtilizador.equals(senha)) {
                         // Senha correta, login bem-sucedido como utilizador
                         System.out.println("Entrou como utilizador");
-                        //menu.percorrerMenuUtilizador();
+                        this.dispose(); // para de se ver a tela de login
+                        u.setVisible(true); // ver tela de utilizador
                         entradaValida = true;
                         return;
                     } else {
@@ -76,10 +92,11 @@ public class Login extends JFrame {
                 if (resultSetBibliotecario.next()) {
                     // Email encontrado, verifica a senha
                     String senhaBibliotecario = resultSetBibliotecario.getString("senha");
-                    if (senhaBibliotecario.equals(password)) {
+                    if (senhaBibliotecario.equals(senha)) {
                         // Senha correta, login bem-sucedido como bibliotecario
                         System.out.println("Entrou como bibliotecario");
-                        //menu.percorrerMenuBibliotecario();
+                        this.dispose(); // para de se ver a tela de login
+                        b.setVisible(true); // ver tela de bibliotecario
                         entradaValida = true;
                         return;
                     } else {

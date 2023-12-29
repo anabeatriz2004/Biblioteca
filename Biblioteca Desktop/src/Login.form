@@ -66,8 +66,8 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-16777216"/>
-          <foreground color="-1"/>
+          <background color="-1"/>
+          <foreground color="-16777216"/>
         </properties>
       </component>
       <component id="e94f3" class="javax.swing.JButton" binding="LogarBotao">
@@ -85,8 +85,8 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-16777216"/>
-          <foreground color="-1"/>
+          <background color="-1"/>
+          <foreground color="-16777216"/>
         </properties>
       </component>
     </children>

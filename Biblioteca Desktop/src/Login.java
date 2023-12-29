@@ -38,7 +38,7 @@ public class Login extends JFrame {
         // visualizar a tela
         setVisible(false);
 
-        // Botão para entrar na aplicação
+        // Botão para verificar o login
         LogarBotao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

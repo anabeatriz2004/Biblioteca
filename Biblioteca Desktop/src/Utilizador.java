@@ -7,6 +7,8 @@ public class Utilizador extends JFrame {
     private JLabel UtilizadorLabel;
 
     public Utilizador() {
+        // vai buscar o painel do utilizador
+        setContentPane(UtilizadorPanel);
         // nome da aplicação
         setTitle("Biblioteca - Utilizador");
         // quando se feche a aplicção o programa termina

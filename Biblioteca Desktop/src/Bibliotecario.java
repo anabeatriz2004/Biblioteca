@@ -7,6 +7,8 @@ public class Bibliotecario extends JFrame {
     private JPanel BibliotecarioPanel;
 
     public Bibliotecario() {
+        // vai buscar o painel do bibliotecario
+        setContentPane(BibliotecarioPanel);
         // nome da aplicação
         setTitle("Biblioteca - Bibliotecario");
         // quando se feche a aplicção o programa termina

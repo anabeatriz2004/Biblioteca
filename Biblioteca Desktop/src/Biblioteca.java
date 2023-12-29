@@ -12,6 +12,7 @@ public class Biblioteca extends JFrame {
     Login l = new Login();
 
     public Biblioteca() {
+        // vai buscar o painel Principal
         setContentPane(PaginaInicialPanel);
         // nome da aplicação
         setTitle("Biblioteca");

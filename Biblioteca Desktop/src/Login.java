@@ -23,6 +23,8 @@ public class Login extends JFrame {
     boolean entradaValida = false;
 
     public Login() {
+        // vai buscar o painel do login
+        setContentPane(LoginPanel);
         // nome da aplicação
         setTitle("Biblioteca - Login");
         // quando se feche a aplicção o programa termina

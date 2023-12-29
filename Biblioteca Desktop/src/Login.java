@@ -61,7 +61,7 @@ public class Login extends JFrame {
                     if (senhaUsuario.equals(password)) {
                         // Senha correta, login bem-sucedido como utilizador
                         System.out.println("Entrou como utilizador");
-                        menu.percorrerMenuUtilizador();
+                        //menu.percorrerMenuUtilizador();
                         entradaValida = true;
                         return;
                     } else {
@@ -79,7 +79,7 @@ public class Login extends JFrame {
                     if (senhaBibliotecario.equals(password)) {
                         // Senha correta, login bem-sucedido como bibliotecario
                         System.out.println("Entrou como bibliotecario");
-                        menu.percorrerMenuBibliotecario();
+                        //menu.percorrerMenuBibliotecario();
                         entradaValida = true;
                         return;
                     } else {

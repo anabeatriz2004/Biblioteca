@@ -11,7 +11,7 @@ public class Biblioteca extends JFrame {
     private JLabel biblioteca;
     private JPanel PaginaInicialPanel;
     private JButton loginBotao;
-    private JTable jTable;
+    private JPanel TabelaPanel;
     private DefaultTableModel tableModel;
 
     Login l = new Login();

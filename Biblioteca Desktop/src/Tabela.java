@@ -49,31 +49,30 @@ public class Tabela extends JFrame {
     private void loadData() {
         try {
             // Armazene os dados em um ArrayList
-            // ArrayList<Livro> dataList = new ArrayList<>();
             ArrayList<Livro> todosOsLivros = new ArrayList<>();
 
-            // vai buscar os dados de todos os livros
+            // Vai buscar os dados de todos os livros
             todosOsLivros = l.consultarTodosLivros();
 
-            // Converta o ArrayList para um array bidimensional
-            Object[][] dadosArray = new Object[todosOsLivros.size()][];
-
-            // percorrey o array e adicionar os valores
-            for (int i = 0; i < todosOsLivros.size(); i++) {
-                dadosArray[i] = new Livro[]{todosOsLivros.get(i)};
-            }
-
             // Adicione os dados ao modelo da tabela
-            for (Object[] row : dadosArray) {
-                model.addRow(row);
+            for (Livro livro : todosOsLivros) {
+                model.addRow(new Object[]{
+                        livro.getID_livro(),
+                        livro.getISBN(),
+                        livro.getTitulo(),
+                        livro.getAutor(),
+                        livro.getEditora(),
+                        livro.getAnoPubli(),
+                        livro.getGenero(),
+                        livro.isDisponibilidade()
+                });
             }
-
-            System.out.println(Arrays.deepToString(dadosArray)); // verificar se gardou os dados corretamente
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     public static void main(String[] args) {
         // Inicie a aplicação

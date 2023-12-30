@@ -159,6 +159,7 @@ public class Bibliotecario {
         }
     }
 
+    // método para alterar dados de um livro
     private void alterarLivro(Livro livro) {
         // ID do livro que você deseja alterar
         int idLivroParaAlterar = 1;
@@ -183,11 +184,6 @@ public class Bibliotecario {
         novoLivro.setAnoPubli(novo_anoPubli);
         novoLivro.setGenero(novo_genero);
         novoLivro.setDisponibilidade(novo_disponibilidade);
-
-        //
-
-        // Chama o método para alterar os dados do livro
-        alterarLivro(novoLivro);
 
         try {
             // Consulta SQL para atualizar os dados do livro com base no ID

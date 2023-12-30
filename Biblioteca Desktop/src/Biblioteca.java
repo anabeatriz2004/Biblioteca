@@ -3,9 +3,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Biblioteca extends JFrame {
 
@@ -14,10 +11,13 @@ public class Biblioteca extends JFrame {
     private JLabel biblioteca;
     private JPanel PaginaInicialPanel;
     private JButton loginBotao;
-    private JTable tabela;
-    private final DefaultTableModel table;
+    private JTable jTable;
+    private DefaultTableModel tableModel;
 
     Login l = new Login();
+    private String nome;
+    private int idade;
+    private String cidade;
 
     public Biblioteca() {
         // vai buscar o painel Principal
@@ -45,24 +45,7 @@ public class Biblioteca extends JFrame {
             }
         });
 
-        // Inicializa o modelo da tabela
-        table = new DefaultTableModel();
-        table.addColumn("ID");
-        table.addColumn("ISBN");
-        table.addColumn("Título");
-        table.addColumn("Autor");
-        table.addColumn("Editora");
-        table.addColumn("Ano de Publicação");
-        table.addColumn("Gênero");
-        table.addColumn("Disponibilidade");
-
-        // Inicializa a tabela com o modelo
-        tabela = new JTable(table);
-
-        // chama o método para vizualizar o tabela com os dados de todos os livros
-        // consultarTodosLivros();
-
-        try {
+        /*try {
             // Adiciona a tabela a um JScrollPane para permitir rolagem
             JScrollPane scrollPane = new JScrollPane(tabela);
 
@@ -70,7 +53,41 @@ public class Biblioteca extends JFrame {
             add(scrollPane);
         } catch (Exception e) {
             e.getMessage();
-        }
+        }*/
+
+        ExemploJTable();
+    }
+
+    // Método para adicionar uma linha à tabela
+    private void adicionarLinha(String nome, int idade, String cidade) {
+        Object[] rowData = {nome, idade, cidade};
+        tableModel.addRow(rowData);
+    }
+
+    public void ExemploJTable() {
+
+        // Criação do modelo da tabela
+        tableModel = new DefaultTableModel();
+
+        // Adiciona colunas ao modelo
+        tableModel.addColumn("Nome");
+        tableModel.addColumn("Idade");
+        tableModel.addColumn("Cidade");
+
+        // Criação da tabela com o modelo
+        //jTable = new JTable(tableModel);
+        jTable = new JTable(tableModel);
+
+        // Adiciona a tabela a um JScrollPane (para permitir rolar a tabela)
+        //JScrollPane jScrollPane = new JScrollPane(jTable);
+        //getContentPane().add(jScrollPane);
+
+        // Adiciona algumas linhas de exemplo
+        adicionarLinha("Alice", 25, "Cidade A");
+        adicionarLinha("Bob", 30, "Cidade B");
+
+        // Exibe o JFrame
+        setVisible(true);
     }
 
     // Método para consultar todos os livros na base de dados

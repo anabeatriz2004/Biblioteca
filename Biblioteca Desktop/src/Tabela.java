@@ -4,8 +4,11 @@ import javax.swing.table.DefaultTableModel;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Tabela extends JFrame {
+
+    Livro l = new Livro();
     private JTable tabela;
     private DefaultTableModel model;
 
@@ -15,7 +18,7 @@ public class Tabela extends JFrame {
 
         // Crie o modelo da tabela
         model = new DefaultTableModel();
-        model.setColumnIdentifiers(new String[]{"Contas", "Montante"});
+        model.setColumnIdentifiers(new String[]{"id_livro", "ISBN", "titulo", "autor", "editora", "ano de publicação", "gênero", "disponibilidade"});
 
         // Crie a tabela com o modelo
         tabela = new JTable(model);
@@ -42,38 +45,30 @@ public class Tabela extends JFrame {
         setVisible(true);
     }
 
+    // Método para carregar todos os métodos na tabela
     private void loadData() {
         try {
-            // Obtenha o caminho do arquivo
-            String path = FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
-            // Leia o arquivo com dados
-            BufferedReader br = new BufferedReader(new FileReader(path + "/tabela.txt"));
-
             // Armazene os dados em um ArrayList
-            ArrayList<Object[]> dataList = new ArrayList<>();
+            // ArrayList<Livro> dataList = new ArrayList<>();
+            ArrayList<Livro> todosOsLivros = new ArrayList<>();
 
-            // Leia cada linha do buffer
-            String linha;
-            while ((linha = br.readLine()) != null) {
-                // Separe os dados por vírgula
-                String[] dados = linha.split(",");
-                // Adicione os dados ao ArrayList
-                dataList.add(dados);
-            }
-
-            // Feche o buffer
-            br.close();
+            // vai buscar os dados de todos os livros
+            todosOsLivros = l.consultarTodosLivros();
 
             // Converta o ArrayList para um array bidimensional
-            Object[][] dadosArray = new Object[dataList.size()][];
-            for (int i = 0; i < dataList.size(); i++) {
-                dadosArray[i] = dataList.get(i);
+            Object[][] dadosArray = new Object[todosOsLivros.size()][];
+
+            // percorrey o array e adicionar os valores
+            for (int i = 0; i < todosOsLivros.size(); i++) {
+                dadosArray[i] = new Livro[]{todosOsLivros.get(i)};
             }
 
             // Adicione os dados ao modelo da tabela
             for (Object[] row : dadosArray) {
                 model.addRow(row);
             }
+
+            System.out.println(Arrays.deepToString(dadosArray)); // verificar se gardou os dados corretamente
 
         } catch (Exception e) {
             e.printStackTrace();

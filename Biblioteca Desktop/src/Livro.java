@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.*;
 
 public class Livro {
     private int id_livro;
@@ -92,6 +93,21 @@ public class Livro {
         this.disponibilidade = disponibilidade;
     }
 
+    // Método toString sobrescrito
+    @Override
+    public String toString() {
+        return "Livro {" +
+                "idLivro=" + id_livro +
+                ", isbn='" + ISBN + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", editora='" + editora + '\'' +
+                ", anoPubli=" + anoPubli +
+                ", genero='" + genero + '\'' +
+                ", disponibilidade=" + disponibilidade +
+                "}\n";
+    }
+
     // Método para consultar um livro pelo ID na base de dados
     public void consultarLivro(int idLivro) {
         try {
@@ -130,7 +146,9 @@ public class Livro {
     }
 
     // Método para consultar todos os livros na base de dados
-    public void consultarTodosLivros() {
+    public ArrayList<Livro>  consultarTodosLivros() {
+        ArrayList<Livro> todosOsLivros = new ArrayList<>();
+
         try {
             // Define a consulta SQL para selecionar todos os livros
             String sql = "SELECT * FROM livro";
@@ -143,7 +161,7 @@ public class Livro {
                 // Processa os resultados
                 while (resultado.next()) {
                     // Recupera os dados do livro
-                    long idLivro = resultado.getLong("id_livro");
+                    int idLivro = resultado.getInt("id_livro");
                     String isbn = resultado.getString("ISBN");
                     String titulo = resultado.getString("titulo");
                     String autor = resultado.getString("autor");
@@ -153,14 +171,24 @@ public class Livro {
                     boolean disponibilidade = resultado.getBoolean("disponibilidade");
 
                     // Faça o que deseja com os dados, por exemplo, imprimir na tela
-                    System.out.println("ID: " + idLivro + ", ISBN: " + isbn + ", Título: " + titulo +
+                    /*System.out.println("ID: " + idLivro + ", ISBN: " + isbn + ", Título: " + titulo +
                             ", Autor: " + autor + ", Editora: " + editora + ", Ano de Publicação: " + anoPubli +
-                            ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade);
+                            ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade);*/
+
+                    // Cria uma instância da classe Livro
+                    Livro livro = new Livro(idLivro, isbn, titulo, autor, editora, anoPubli, genero, disponibilidade);
+                    //System.out.println(livro.toString()); // verificar se gardou os dados corretamente
+
+                    // Adiciona o livro à lista
+                    todosOsLivros.add(livro);
                 }
+                //System.out.println(todosOsLivros.toString()); // verificar se gardou os dados corretamente
+                return todosOsLivros;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
     }
 

@@ -1,90 +1,87 @@
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
-import java.awt.*;
-import java.io.*;
-import java.util.*;
+import javax.swing.table.DefaultTableModel;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
 
-public class Tabela extends JFrame{
-    JFrame frame; //jf
-    private JPanel TabelaPanel;
-    private JTable tabela; //jt
-    JScrollPane scrollPane; //js
-    String[] coluna; // col
-    Object[][] dados; // data
+public class Tabela extends JFrame {
+    private JTable tabela;
+    private DefaultTableModel model;
 
-    Tabela () {
-        // titulo
-        frame = new JFrame("Tabela Demo");
-        // definir a matriz da tabela, definindo o nome das colunas
-        coluna = new String[]{"Contas", "Montante"};
-        // definir o array
-        dados = getData();
-        // criar a tabela, passando os dados e o nome das colunas
-        tabela = new JTable(dados, coluna);
-        // adicionar o scroll da tabela
-        scrollPane = new JScrollPane(tabela);
-        // adicionar há frame
-        frame.add(scrollPane);
-        // definir o modo de fechamento
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        // definir o tamanho certo da frame
-        frame.pack();
-        // para exibir no centro da tela
+    Tabela() {
+        // Defina o título
+        super("Tabela Demo");
+
+        // Crie o modelo da tabela
+        model = new DefaultTableModel();
+        model.setColumnIdentifiers(new String[]{"Contas", "Montante"});
+
+        // Crie a tabela com o modelo
+        tabela = new JTable(model);
+
+        // Adicione a tabela a um JScrollPane
+        JScrollPane scrollPane = new JScrollPane(tabela);
+
+        // Adicione o JScrollPane à frame
+        add(scrollPane);
+
+        // Defina o modo de fechamento
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        // Defina o tamanho certo da frame
+        pack();
+
+        // Para exibir no centro da tela
         setLocationRelativeTo(null);
-        // para vizualizar
+
+        // Carregue os dados na tabela
+        loadData();
+
+        // Para visualizar
         setVisible(true);
     }
 
-    Object[][] getData() {
+    private void loadData() {
         try {
-            // vai buscar o caminho do ficheiro
+            // Obtenha o caminho do arquivo
             String path = FileSystemView.getFileSystemView().getDefaultDirectory().getPath();
-            // ler arquivo com dados
+            // Leia o arquivo com dados
             BufferedReader br = new BufferedReader(new FileReader(path + "/tabela.txt"));
-            // armazena os dados num array
-            ArrayList <String> array = new ArrayList();
-            // para ler cada linha do buffer
-            String texto = "";
 
-            // loop para a leitura de arquivo
-            // usar o readLine() para ler linha a linha
-            // se caso a linha não for nula, continua a fazer o loop
-            while ((texto = br.readLine()) != null)  {
-                // adicionar cada string ao nosso array
-                array.add(texto);
-                // para saber se lê corretamente
-                System.out.println(texto);
+            // Armazene os dados em um ArrayList
+            ArrayList<Object[]> dataList = new ArrayList<>();
+
+            // Leia cada linha do buffer
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                // Separe os dados por vírgula
+                String[] dados = linha.split(",");
+                // Adicione os dados ao ArrayList
+                dataList.add(dados);
             }
 
-            //saber o tamanho dos dados a partir da quantidade de vírgulas no ficheiro
-            int n = array.get(0).split(",").length;
-
-            //definir o tamanho do array
-            Object[][] dados = new Object[array.size()][n];
-
-            // loop para preencher o array
-            for (int i = 0; i < array.size(); i++) {
-                // preenche o array e separa os por vírgula
-                dados[i] = array.get(i).split(",");
-            }
-
-            //fechar o buffer
+            // Feche o buffer
             br.close();
 
-            // confirmar se dados, tem valores guardados
-            System.out.println(Arrays.deepToString(dados));
-            // returnar o array
-            return dados;
+            // Converta o ArrayList para um array bidimensional
+            Object[][] dadosArray = new Object[dataList.size()][];
+            for (int i = 0; i < dataList.size(); i++) {
+                dadosArray[i] = dataList.get(i);
+            }
+
+            // Adicione os dados ao modelo da tabela
+            for (Object[] row : dadosArray) {
+                model.addRow(row);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
     }
 
-
     public static void main(String[] args) {
-        // inicia a aplicação
+        // Inicie a aplicação
         new Tabela();
     }
 }

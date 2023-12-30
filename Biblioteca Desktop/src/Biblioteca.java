@@ -9,6 +9,7 @@ public class Biblioteca extends JFrame {
     private final Database conexao = new Database(); // Instanciar a classe Database
 
     private JLabel biblioteca;
+    static JFrame BibliotecaFrame;
     private JPanel PaginaInicialPanel;
     private JButton loginBotao;
     private JPanel TabelaPanel;
@@ -30,6 +31,7 @@ public class Biblioteca extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         //define tamanho da aplicação
         setSize(screenSize);
+        System.out.println(screenSize);
         // para exibir no centro da tela
         setLocationRelativeTo(null);
         // para vizualizar

@@ -1,12 +1,9 @@
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Database {
-    //private static final String URL = "jdbc:mysql://seu_host:porta/seu_banco";
-    //private static final String USUARIO = "seu_usuario";
-    //private static final String SENHA = "sua_senha";
+public class Database extends JFrame{
 
     private static final String url = "jdbc:mysql://estga-dev.ua.pt/PTDA_BD_005";
     private static final String user = "PTDA_005";
@@ -29,7 +26,10 @@ public class Database {
             System.out.println("Conexão bem-sucedida.");
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
+            JOptionPane.showMessageDialog(Biblioteca.BibliotecaFrame, "Erro ao conectar há base de dados", "Erro", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
+            System.out.println("Encerrando o programa...");
+            System.exit(0);
         }
     }
 

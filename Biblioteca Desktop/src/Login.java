@@ -13,7 +13,6 @@ public class Login extends JFrame {
     private JTextField EmailTextField;
     private JPasswordField PasswordField;
     private JButton LogarBotao;
-    private JLabel ErrorLabel;
 
     private Database conexao = new Database(); // Instanciar a classe Database
 

@@ -195,10 +195,6 @@ public class Livro {
     // código para inserir livros na base de dados
     public void inserirLivro(Livro livro) {
         try {
-            // Estabelece a conexão com o banco de dados
-            //Connection conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
-            //Connection conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
-
             // Define a consulta SQL para inserir um novo livro
             String sql = "INSERT INTO livro (id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade) VALUES (?, ?, ?, ?, ?, ?, ?)";
 

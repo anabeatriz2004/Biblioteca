@@ -1,10 +1,6 @@
 import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Tabela extends JFrame {
 
@@ -49,7 +45,7 @@ public class Tabela extends JFrame {
     private void loadData() {
         try {
             // Armazene os dados em um ArrayList
-            ArrayList<Livro> todosOsLivros = new ArrayList<>();
+            ArrayList<Livro> todosOsLivros;
 
             // Vai buscar os dados de todos os livros
             todosOsLivros = l.consultarTodosLivros();

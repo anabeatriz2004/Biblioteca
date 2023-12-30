@@ -6,13 +6,14 @@ import java.sql.*;
 
 public class Login extends JFrame {
     private JPanel LoginPanel;
+    private JLabel biblioteca;
     private JLabel LoginLabel;
     private JLabel emailLabel;
     private JLabel PasswordLabel;
     private JTextField EmailTextField;
     private JPasswordField PasswordField;
     private JButton LogarBotao;
-    private JLabel pretoLabel1;
+    private JLabel ErrorLabel;
 
     private Database conexao = new Database(); // Instanciar a classe Database
 
@@ -40,13 +41,17 @@ public class Login extends JFrame {
         // visualizar a tela
         setVisible(false);
 
-        LoginPanel.setBackground(Color.RED);  // Exemplo de configuração do fundo
-
         // Botão para verificar o login
         LogarBotao.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // o email fica com o valor de EmailTextField
+                String email = EmailTextField.getText();
+                // a senha fica com o valor de PasswordField
+                String senha = String.valueOf(PasswordField.getPassword());
 
+                //  verifica o login
+                verificarLogin(email, senha);
             }
         });
     }
@@ -112,9 +117,5 @@ public class Login extends JFrame {
             e.printStackTrace();
             System.out.println("Erro ao conectar ao banco de dados");
         }
-    }
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
     }
 }

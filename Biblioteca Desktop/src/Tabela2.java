@@ -11,39 +11,37 @@ public class Tabela2 extends JFrame {
     private JPanel panel1;
 
     Tabela2() {
-        // Defina o título
-        super("Tabela Demo");
-
-        //
-        panel1.setLayout(new FlowLayout());
-
-        // Criando um rótulo (label)
-        JLabel rotulo = new JLabel("Texto de Exemplo");
-
-        // Definindo a cor de fundo para preto e a cor de texto para branco
-        panel1.setBackground(Color.BLACK);
-        rotulo.setForeground(Color.WHITE);
-
-        // Adicionando o rótulo ao panel1
-        panel1.add(rotulo);
+        // vai buscar o painel Principal
+        setContentPane(panel1);
+        // nome da aplicação
+        setTitle("Tabela");
+        // quando se feche a aplicção o programa termina
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        // Obtém a resolução da tela
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        //define tamanho da aplicação
+        setSize(screenSize);
+        // para exibir no centro da tela
+        setLocationRelativeTo(null);
+        // para vizualizar
+        setVisible(true);
 
         // nome das colunas
         String[] colunas = {"id_livro", "ISBN", "titulo", "autor", "editora", "ano de publicação", "gênero", "disponibilidade"};
 
+        // Carregue os dados na tabela
+        String[][] linhas = loadData();
 
         // Crie o modelo da tabela
-        DefaultTableModel tabelaModelo = (new DefaultTableModel(objetos, colunas){
+        DefaultTableModel tabelaModelo = (new DefaultTableModel(linhas, colunas) {
             @Override
-            public boolean isCellEditable(int row, int column){
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         });
 
-        // identifica o nome das colunas
-        tabelaModelo.setColumnIdentifiers(colunas);
-
-        // indica que as colunas estão a 0
-        tabelaModelo.setRowCount(0);
+        // diz que a JTable é baseada DefaultTableModel
+        tabela.setModel(tabelaModelo);
 
         // Adicione a tabela a um JScrollPane
         JScrollPane scrollPane = new JScrollPane(tabela);
@@ -51,17 +49,8 @@ public class Tabela2 extends JFrame {
         // Adicione o JScrollPane à frame
         add(scrollPane);
 
-        // Defina o modo de fechamento
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        // Defina o tamanho certo da frame
-        pack();
-
         // Para exibir no centro da tela
         setLocationRelativeTo(null);
-
-        // Carregue os dados na tabela
-        loadData();
 
         // Para visualizar
         setVisible(true);
@@ -73,32 +62,34 @@ public class Tabela2 extends JFrame {
             // Armazene os dados em um ArrayList
             ArrayList<Livro> todosOsLivros = l.consultarTodosLivros();
 
-            // Adicione os dados ao modelo da tabela
-            for (Livro livro : todosOsLivros) {
-                tabelaModelo.addRow(new Object[]{
-                        livro.getID_livro(),
+            // Crie uma matriz para armazenar os dados
+            String[][] dados = new String[todosOsLivros.size()][8]; // Assumindo que existem 8 colunas
+
+            // Adicione os dados à matriz
+            for (int i = 0; i < todosOsLivros.size(); i++) {
+                Livro livro = todosOsLivros.get(i);
+                dados[i] = new String[]{
+                        String.valueOf(livro.getID_livro()),
                         livro.getISBN(),
                         livro.getTitulo(),
                         livro.getAutor(),
                         livro.getEditora(),
-                        livro.getAnoPubli(),
+                        String.valueOf(livro.getAnoPubli()),
                         livro.getGenero(),
-                        livro.isDisponibilidade()
-                });
+                        String.valueOf(livro.isDisponibilidade())
+                };
             }
 
-            /*// define o tamanho dos dados de acordo com o tamanho de todos os livros existentes na base de dados
-            Object[] dados = new Object[todosOsLivros.size()];
-
-            // Adicione os dados ao modelo da tabela para os novos objetos
-            for (int i = 0; i < dados.length; i++) {
-                tabelaModelo.addRow(new Object[]{dados[i]});
-            }*/
+            // Retorne a matriz de dados
+            return dados;
 
         } catch (Exception e) {
+            // Trate a exceção conforme necessário
             e.printStackTrace();
+            return null; // Ou lançar uma exceção, dependendo do seu requisito
         }
     }
+
 
 
     public static void main(String[] args) {

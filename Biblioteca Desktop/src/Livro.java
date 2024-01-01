@@ -177,12 +177,10 @@ public class Livro {
 
                     // Cria uma instância da classe Livro
                     Livro livro = new Livro(idLivro, isbn, titulo, autor, editora, anoPubli, genero, disponibilidade);
-                    //System.out.println(livro.toString()); // verificar se gardou os dados corretamente
 
                     // Adiciona o livro à lista
                     todosOsLivros.add(livro);
                 }
-                //System.out.println(todosOsLivros.toString()); // verificar se gardou os dados corretamente
                 return todosOsLivros;
             }
 

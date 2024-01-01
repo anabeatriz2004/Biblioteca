@@ -31,7 +31,6 @@ public class Biblioteca extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         //define tamanho da aplicação
         setSize(screenSize);
-        System.out.println(screenSize);
         // para exibir no centro da tela
         setLocationRelativeTo(null);
         // para vizualizar

@@ -67,16 +67,16 @@ public class Tabela extends JFrame {
 
             // Adicione os dados à matriz
             for (int i = 0; i < todosOsLivros.size(); i++) {
-                Livro livro = todosOsLivros.get(i);
+                l = todosOsLivros.get(i);
                 dados[i] = new String[]{
-                        String.valueOf(livro.getID_livro()),
-                        livro.getISBN(),
-                        livro.getTitulo(),
-                        livro.getAutor(),
-                        livro.getEditora(),
-                        String.valueOf(livro.getAnoPubli()),
-                        livro.getGenero(),
-                        String.valueOf(livro.isDisponibilidade())
+                        String.valueOf(l.getID_livro()),
+                        l.getISBN(),
+                        l.getTitulo(),
+                        l.getAutor(),
+                        l.getEditora(),
+                        String.valueOf(l.getAnoPubli()),
+                        l.getGenero(),
+                        String.valueOf(l.isDisponibilidade())
                 };
             }
 

@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.sql.*;
 import java.util.*;
 
@@ -14,6 +16,17 @@ public class Livro {
     private final Database conexao = new Database();
 
     public Livro () {}
+
+    // Construtor
+    public Livro(String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade) {
+        this.ISBN = ISBN;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.editora = editora;
+        this.anoPubli = anoPubli;
+        this.genero = genero;
+        this.disponibilidade = disponibilidade;
+    }
 
     // Construtor
     public Livro(int id_livro, String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade) {
@@ -96,16 +109,15 @@ public class Livro {
     // Método toString sobrescrito
     @Override
     public String toString() {
-        return "Livro {" +
-                "idLivro=" + id_livro +
-                ", isbn='" + ISBN + '\'' +
-                ", titulo='" + titulo + '\'' +
-                ", autor='" + autor + '\'' +
-                ", editora='" + editora + '\'' +
-                ", anoPubli=" + anoPubli +
-                ", genero='" + genero + '\'' +
-                ", disponibilidade=" + disponibilidade +
-                "}\n";
+        return "Livro: " +
+                "ISBN: '" + ISBN +
+                "\n Título='" + titulo +
+                "\n Autor: " + autor +
+                "\n Editora: " + editora +
+                "\n Ano de Publicação" + anoPubli +
+                "\n Gênero: " + genero +
+                "\n Disponibilidade: " + disponibilidade +
+                "\n";
     }
 
     // Método para consultar um livro pelo ID na base de dados

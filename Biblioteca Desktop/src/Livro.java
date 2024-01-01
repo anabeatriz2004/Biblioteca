@@ -12,13 +12,14 @@ public class Livro {
     private int anoPubli;
     private String genero;
     private boolean disponibilidade;
+    private String descricao;
 
     private final Database conexao = new Database();
 
     public Livro () {}
 
     // Construtor
-    public Livro(String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade) {
+    public Livro(String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
@@ -26,10 +27,11 @@ public class Livro {
         this.anoPubli = anoPubli;
         this.genero = genero;
         this.disponibilidade = disponibilidade;
+        this.descricao = descricao;
     }
 
     // Construtor
-    public Livro(int id_livro, String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade) {
+    public Livro(int id_livro, String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
         this.id_livro = id_livro;
         this.ISBN = ISBN;
         this.titulo = titulo;
@@ -38,89 +40,82 @@ public class Livro {
         this.anoPubli = anoPubli;
         this.genero = genero;
         this.disponibilidade = disponibilidade;
+        this.descricao = descricao;
     }
 
     // Métodos getter e setter para cada atributo
     public int getID_livro() {
         return id_livro;
     }
-
     public void setID_livro(int id_livro) {
         this.id_livro = id_livro;
     }
-
     public String getISBN() {
         return ISBN;
     }
-
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
-
     public String getTitulo() {
         return titulo;
     }
-
     public void setTitulo(String titulo) {
 
         this.titulo = titulo;
     }
-
     public String getAutor() {
         return autor;
     }
-
     public void setAutor(String autor) {
         this.autor = autor;
     }
-
     public String getEditora() {
         return editora;
     }
-
     public void setEditora(String editora) {
         this.editora = editora;
     }
-
     public int getAnoPubli() {
         return anoPubli;
     }
-
     public void setAnoPubli(int anoPubli) {
         this.anoPubli = anoPubli;
     }
-
     public String getGenero() {
         return genero;
     }
-
     public void setGenero(String genero) {
         this.genero = genero;
     }
-
     public boolean isDisponibilidade() {
         return disponibilidade;
     }
-
     public void setDisponibilidade(boolean disponibilidade) {
         this.disponibilidade = disponibilidade;
+    }
+    public String getDescricao() {
+        return descricao;
+    }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     // Método toString sobrescrito
     @Override
     public String toString() {
         return "Livro: " +
-                "ISBN: '" + ISBN +
-                "\n Título='" + titulo +
+                "ISBN: " + ISBN +
+                "\n Título: " + titulo +
                 "\n Autor: " + autor +
                 "\n Editora: " + editora +
-                "\n Ano de Publicação" + anoPubli +
+                "\n Ano de Publicação: " + anoPubli +
                 "\n Gênero: " + genero +
                 "\n Disponibilidade: " + disponibilidade +
+                "\n Descrição: " + descricao +
                 "\n";
     }
 
-    // Método para consultar um livro pelo ID na base de dados
+    /** Método para consultar um livro pelo ID na base de dados */
     public void consultarLivro(int idLivro) {
         try {
             // Define a consulta SQL para selecionar um livro com base no ID
@@ -144,11 +139,13 @@ public class Livro {
                     int anoPubli = resultado.getInt("ano_publi");
                     String genero = resultado.getString("genero");
                     boolean disponibilidade = resultado.getBoolean("disponibilidade");
+                    String descricao = resultado.getString("descricao");
 
                     // Faça o que deseja com os dados, por exemplo, imprimir na tela
                     System.out.println("ID: " + idLivro + ", ISBN: " + isbn + ", Título: " + titulo +
                             ", Autor: " + autor + ", Editora: " + editora + ", Ano de Publicação: " + anoPubli +
-                            ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade);
+                            ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade + ", Descricao" +
+                            descricao);
                 }
             }
 
@@ -157,7 +154,7 @@ public class Livro {
         }
     }
 
-    // Método para consultar todos os livros na base de dados
+    /** Método para consultar todos os livros na base de dados */
     public ArrayList<Livro>  consultarTodosLivros() {
         ArrayList<Livro> todosOsLivros = new ArrayList<>();
 
@@ -181,6 +178,7 @@ public class Livro {
                     int anoPubli = resultado.getInt("ano_publi");
                     String genero = resultado.getString("genero");
                     boolean disponibilidade = resultado.getBoolean("disponibilidade");
+                    String descricao = resultado.getString("descricao");
 
                     // Faça o que deseja com os dados, por exemplo, imprimir na tela
                     /*System.out.println("ID: " + idLivro + ", ISBN: " + isbn + ", Título: " + titulo +
@@ -188,7 +186,7 @@ public class Livro {
                             ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade);*/
 
                     // Cria uma instância da classe Livro
-                    Livro livro = new Livro(idLivro, isbn, titulo, autor, editora, anoPubli, genero, disponibilidade);
+                    Livro livro = new Livro(idLivro, isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
 
                     // Adiciona o livro à lista
                     todosOsLivros.add(livro);
@@ -202,11 +200,11 @@ public class Livro {
         }
     }
 
-    // código para inserir livros na base de dados
+    /** código para inserir livros na base de dados */
     public void inserirLivro(Livro livro) {
         try {
             // Define a consulta SQL para inserir um novo livro
-            String sql = "INSERT INTO livro (id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO livro (id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             // Cria o objeto PreparedStatement para evitar SQL Injection
             try (PreparedStatement pstmt = conexao.getConexao().prepareStatement(sql)) {
@@ -219,6 +217,7 @@ public class Livro {
                 pstmt.setInt(6, livro.getAnoPubli());
                 pstmt.setString(7, livro.getGenero());
                 pstmt.setBoolean(8, livro.isDisponibilidade());
+                pstmt.setString(9, livro.getDescricao());
 
                 // Executa a consulta
                 pstmt.executeUpdate();
@@ -231,7 +230,7 @@ public class Livro {
         }
     }
 
-    // método para alterar dados de um livro
+    /** método para alterar dados de um livro*/
     private void alterarLivro(Livro livro) {
         // ID do livro que você deseja alterar
         int idLivroParaAlterar = 1;
@@ -244,6 +243,7 @@ public class Livro {
         int novo_anoPubli = 0;
         String novo_genero = "";
         boolean novo_disponibilidade = true;
+        String novo_descricao = "";
 
 
         // Novos dados para o livro
@@ -256,25 +256,27 @@ public class Livro {
         novoLivro.setAnoPubli(novo_anoPubli);
         novoLivro.setGenero(novo_genero);
         novoLivro.setDisponibilidade(novo_disponibilidade);
+        novoLivro.setDescricao(novo_descricao);
 
         try {
             // Consulta SQL para atualizar os dados do livro com base no ID
-            String sql = "UPDATE livro SET ISBN=?, titulo=?, autor=?, editora=?, anoPubli=?, genero=?, disponibilidade=? WHERE id_livro=?";
+            String sql = "UPDATE livro SET ISBN=?, titulo=?, autor=?, editora=?, anoPubli=?, genero=?, disponibilidade=?, descricao=? WHERE id_livro=?";
 
             // Cria um PreparedStatement para a consulta SQL
-            try (PreparedStatement preparedStatement = conexao.getConexao().prepareStatement(sql)) {
+            try (PreparedStatement  pstmt = conexao.getConexao().prepareStatement(sql)) {
                 // Define os novos dados do livro nos lugares dos pontos de interrogação
-                preparedStatement.setString(1, livro.getISBN());
-                preparedStatement.setString(2, livro.getTitulo());
-                preparedStatement.setString(3, livro.getAutor());
-                preparedStatement.setString(4, livro.getEditora());
-                preparedStatement.setInt(5, livro.getAnoPubli());
-                preparedStatement.setString(6, livro.getGenero());
-                preparedStatement.setBoolean(7, livro.isDisponibilidade());
-                preparedStatement.setInt(8, livro.getID_livro());
+                 pstmt.setString(1, livro.getISBN());
+                 pstmt.setString(2, livro.getTitulo());
+                 pstmt.setString(3, livro.getAutor());
+                 pstmt.setString(4, livro.getEditora());
+                 pstmt.setInt(5, livro.getAnoPubli());
+                 pstmt.setString(6, livro.getGenero());
+                 pstmt.setBoolean(7, livro.isDisponibilidade());
+                 pstmt.setString(8, livro.getDescricao());
+                 pstmt.setInt(9, livro.getID_livro());
 
                 // Executa a atualização (operação de alteração)
-                int linhasAfetadas = preparedStatement.executeUpdate();
+                int linhasAfetadas =  pstmt.executeUpdate();
 
                 // Verifica se a alteração foi bem-sucedida
                 if (linhasAfetadas > 0) {
@@ -291,6 +293,7 @@ public class Livro {
         }
     }
 
+    /** método para eliminar livro da base de dados */
     public void eliminarLivro(int idLivro) {
         try {
             // Consulta SQL para excluir o livro com base no ID

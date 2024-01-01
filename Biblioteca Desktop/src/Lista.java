@@ -16,9 +16,13 @@ public class Lista {
     JButton alterarDadosButton = new JButton("Alterar Dados");
     JButton adicionarLivroButton = new JButton("Adicionar Livro");
 
-    public Lista() {}
+    public Lista() {ListaGenerica();}
 
     /** Método para mostrar a lista que é exibida ao arrancar o programa */
+    public void ListaGenerica() {
+        lista.setModel(listaModelo);
+
+        ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
         for (int i = 0; i < todosOsLivros.size(); i++) {
             Livro livro = todosOsLivros.get(i);
             listaModelo.addElement(livro);
@@ -46,7 +50,8 @@ public class Lista {
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(splitPane);
-        frame.pack();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setSize(screenSize);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
@@ -84,7 +89,8 @@ public class Lista {
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(splitPane);
-        frame.pack();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setSize(screenSize);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
@@ -126,7 +132,8 @@ public class Lista {
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(splitPane);
-        frame.pack();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setSize(screenSize);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
@@ -141,7 +148,8 @@ public class Lista {
                 "\nEditora: " + livro.getEditora() +
                 "\nAno de Publicação: " + livro.getAnoPubli() +
                 "\nGênero: " + livro.getGenero() +
-                "\nDisponibilidade: " + livro.isDisponibilidade());
+                "\nDisponibilidade: " + livro.isDisponibilidade() +
+                "\nDescrição: " + livro.getDescricao());
 
         // Adiciona o botão "Alterar Dados" ao painel direito
         painel.removeAll();
@@ -173,6 +181,6 @@ public class Lista {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(Lista::new);
+        new Lista();
     }
 }

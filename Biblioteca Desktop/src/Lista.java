@@ -109,7 +109,19 @@ public class Lista {
     public void ListaBibliotecario() {
         lista.setModel(listaModelo);
 
-        refreshLivroBaseDados();
+        ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
+        for (int i = 0; i < todosOsLivros.size(); i++) {
+            Livro livro = todosOsLivros.get(i);
+            listaModelo.addElement(livro);
+        }
+
+        lista.setCellRenderer(new LivroRenderer());
+
+        lista.getSelectionModel().addListSelectionListener(e -> {
+            Livro livro = lista.getSelectedValue();
+            exibirDetalhesLivroBibliotecario(livro);
+            // refreshLivroBaseDados();
+        });
 
         // Adiciona um ouvinte de ação para o botão "Alterar Dados"
         // NÃO FUNCIONA
@@ -267,13 +279,24 @@ public class Lista {
 
 
     private void refreshLivroBaseDados() {
-        listaModelo.clear();
-        lista.clearSelection();
+        // Obtém a lista atual de elementos do DefaultListModel
+        ArrayList<Livro> elementosAtuais = new ArrayList<>();
 
+        for (int i = 0; i < listaModelo.getSize(); i++) {
+            elementosAtuais.add(listaModelo.getElementAt(i));
+        }
+
+        // Limpa o DefaultListModel
+        listaModelo.clear();
+
+        // Obtém a lista atual de todos os livros na base de dados
         ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
 
+        // Adiciona à listaModelo apenas os elementos que não foram removidos
         for (Livro livro : todosOsLivros) {
-            listaModelo.addElement(livro);
+            if (elementosAtuais.contains(livro)) {
+                listaModelo.addElement(livro);
+            }
         }
 
         lista.setCellRenderer(new LivroRenderer());
@@ -283,6 +306,7 @@ public class Lista {
             exibirDetalhesLivroBibliotecario(livro);
         });
     }
+
 
 
     class LivroRenderer extends DefaultListCellRenderer {

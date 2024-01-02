@@ -277,7 +277,6 @@ public class Lista {
         }
     }
 
-
     private void refreshLivroBaseDados() {
         // Obtém a lista atual de elementos do DefaultListModel
         ArrayList<Livro> elementosAtuais = new ArrayList<>();
@@ -306,8 +305,6 @@ public class Lista {
             exibirDetalhesLivroBibliotecario(livro);
         });
     }
-
-
 
     class LivroRenderer extends DefaultListCellRenderer {
         @Override

@@ -13,10 +13,12 @@ public class Lista {
     JPanel painel = new JPanel();
     JSplitPane splitPane = new JSplitPane();
 
-    JButton alterarDadosButton = new JButton("Alterar Dados");
     JButton adicionarLivroButton = new JButton("Adicionar Livro");
+    JButton alterarLivroButton = new JButton("Alterar Dados do Livro");
+    JButton eliminarLivroButton = new JButton("Eliminar Livro");
 
-    public Lista() {ListaGenerica();}
+
+    public Lista() { ListaBibliotecario();}
 
     /** Método para mostrar a lista que é exibida ao arrancar o programa */
     public void ListaGenerica() {
@@ -35,14 +37,7 @@ public class Lista {
             exibirDetalhesLivro(livro);
         });
 
-        // Adiciona um ouvinte de ação para o botão "Alterar Dados"
-        alterarDadosButton.addActionListener(e -> alterarDadosLivro());
-
-        // Adiciona um ouvinte de ação para o botão "Adicionar Livro"
-        adicionarLivroButton.addActionListener(e -> adicionarLivro());
-
         JPanel leftPanel = new JPanel(new BorderLayout());
-        leftPanel.add(adicionarLivroButton, BorderLayout.NORTH);
         leftPanel.add(new JScrollPane(lista), BorderLayout.CENTER);
 
         splitPane.setLeftComponent(leftPanel);
@@ -75,7 +70,7 @@ public class Lista {
         });
 
         // Adiciona um ouvinte de ação para o botão "Alterar Dados"
-        alterarDadosButton.addActionListener(e -> alterarDadosLivro());
+        alterarLivroButton.addActionListener(e -> alterarDadosLivro());
 
         // Adiciona um ouvinte de ação para o botão "Adicionar Livro"
         adicionarLivroButton.addActionListener(e -> adicionarLivro());
@@ -112,16 +107,23 @@ public class Lista {
 
         lista.getSelectionModel().addListSelectionListener(e -> {
             Livro livro = lista.getSelectedValue();
-            exibirDetalhesLivro(livro);
+            exibirDetalhesLivroBibliotecario(livro);
         });
 
         // Adiciona um ouvinte de ação para o botão "Alterar Dados"
         // NÃO FUNCIONA
-        alterarDadosButton.addActionListener(e -> alterarDadosLivro());
+        alterarLivroButton.addActionListener(e -> alterarDadosLivro());
 
         // Adiciona um ouvinte de ação para o botão "Adicionar Livro"
-        adicionarLivroButton.addActionListener(e -> adicionarLivro());
         // NÃO FUNCIONA
+        adicionarLivroButton.addActionListener(e -> adicionarLivro());
+
+        // Adiciona um ouvinte de ação para o botão "Alterar Dados"
+        // NÃO FUNCIONA
+        eliminarLivroButton.addActionListener(e -> eliminarLivro());
+
+        eliminarLivroButton.setBackground(Color.RED);
+        eliminarLivroButton.setForeground(Color.WHITE);
 
         JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.add(adicionarLivroButton, BorderLayout.NORTH);
@@ -140,7 +142,7 @@ public class Lista {
 
     /** Método para mostrar a mostrar todos os dethalhes na lista,
      * pode ser usado or três mêtodos:
-     * ListaGenerica(), ListaUtilizador(), ListaBibliotecario() */
+     * ListaGenerica(), ListaUtilizador()*/
     private void exibirDetalhesLivro(Livro livro) {
         textArea.setText("ISBN: " + livro.getISBN() +
                 "\nTitulo: " + livro.getTitulo() +
@@ -154,10 +156,37 @@ public class Lista {
         // Adiciona o botão "Alterar Dados" ao painel direito
         painel.removeAll();
         painel.setLayout(new BorderLayout());
-        painel.add(alterarDadosButton, BorderLayout.NORTH);
         painel.add(new JScrollPane(textArea), BorderLayout.CENTER);
         painel.revalidate();
         painel.repaint();
+    }
+
+    /** Método para mostrar a mostrar todos os dethalhes na lista,
+     * só pode ser usado pelo mêtodos:
+     * ListaBibliotecaria() */
+    private void exibirDetalhesLivroBibliotecario(Livro livro) {
+        textArea.setText("ISBN: " + livro.getISBN() +
+                "\nTitulo: " + livro.getTitulo() +
+                "\nAutor: " + livro.getAutor() +
+                "\nEditora: " + livro.getEditora() +
+                "\nAno de Publicação: " + livro.getAnoPubli() +
+                "\nGênero: " + livro.getGenero() +
+                "\nDisponibilidade: " + livro.isDisponibilidade() +
+                "\nDescrição: " + livro.getDescricao());
+
+        // Adiciona o botão "Alterar Dados" ao painel direito
+        painel.removeAll();
+        painel.setLayout(new BorderLayout());
+        painel.add(alterarLivroButton, BorderLayout.NORTH);
+        painel.add(eliminarLivroButton, BorderLayout.EAST);
+        painel.add(new JScrollPane(textArea), BorderLayout.CENTER);
+        painel.revalidate();
+        painel.repaint();
+    }
+
+    private void adicionarLivro() {
+        // Lógica para adicionar um novo livro (pode ser um novo JFrame, JOptionPane, etc.)
+        JOptionPane.showMessageDialog(frame, "Implemente a lógica para adicionar um novo livro.");
     }
 
     private void alterarDadosLivro() {
@@ -165,9 +194,9 @@ public class Lista {
         JOptionPane.showMessageDialog(frame, "Implemente a lógica para alterar os dados do livro.");
     }
 
-    private void adicionarLivro() {
+    private void eliminarLivro() {
         // Lógica para adicionar um novo livro (pode ser um novo JFrame, JOptionPane, etc.)
-        JOptionPane.showMessageDialog(frame, "Implemente a lógica para adicionar um novo livro.");
+        JOptionPane.showMessageDialog(frame, "Implemente a lógica para eliminar o livro.");
     }
 
     class LivroRenderer extends DefaultListCellRenderer {

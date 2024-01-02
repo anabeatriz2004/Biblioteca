@@ -271,6 +271,7 @@ public class Lista {
         lista.clearSelection();
 
         ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
+
         for (Livro livro : todosOsLivros) {
             listaModelo.addElement(livro);
         }

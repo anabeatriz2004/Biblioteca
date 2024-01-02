@@ -310,6 +310,7 @@ public class Livro {
                 // Verifica se a exclusão foi bem-sucedida
                 if (linhasAfetadas > 0) {
                     System.out.println("Livro, com id: " + idLivro +  " excluído com sucesso!");
+                    //consultarTodosLivros();
                     // JOptionPane.showMessageDialog(frame, "Livro eliminado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     System.out.println("Nenhum livro encontrado com o ID fornecido.");

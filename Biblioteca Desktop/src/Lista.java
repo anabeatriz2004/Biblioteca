@@ -216,24 +216,29 @@ public class Lista {
      * ListaBibliotecaria()
      */
     private void exibirDetalhesLivroBibliotecario(Livro livro) {
-        textArea.setText("ID" + livro.getID_livro() +
-                "\nISBN: " + livro.getISBN() +
-                "\nTitulo: " + livro.getTitulo() +
-                "\nAutor: " + livro.getAutor() +
-                "\nEditora: " + livro.getEditora() +
-                "\nAno de Publicação: " + livro.getAnoPubli() +
-                "\nGênero: " + livro.getGenero() +
-                "\nDisponibilidade: " + livro.isDisponibilidade() +
-                "\nDescrição: " + livro.getDescricao());
+        try {
+            textArea.setText("ID" + livro.getID_livro() +
+                    "\nISBN: " + livro.getISBN() +
+                    "\nTitulo: " + livro.getTitulo() +
+                    "\nAutor: " + livro.getAutor() +
+                    "\nEditora: " + livro.getEditora() +
+                    "\nAno de Publicação: " + livro.getAnoPubli() +
+                    "\nGênero: " + livro.getGenero() +
+                    "\nDisponibilidade: " + livro.isDisponibilidade() +
+                    "\nDescrição: " + livro.getDescricao());
 
-        // Adiciona o botão "Alterar Dados" ao painel direito
-        painel.removeAll();
-        painel.setLayout(new BorderLayout());
-        painel.add(alterarLivroButton, BorderLayout.NORTH);
-        painel.add(eliminarLivroButton, BorderLayout.EAST);
-        painel.add(new JScrollPane(textArea), BorderLayout.CENTER);
-        painel.revalidate();
-        painel.repaint();
+            // Adiciona o botão "Alterar Dados" ao painel direito
+            painel.removeAll();
+            painel.setLayout(new BorderLayout());
+            painel.add(alterarLivroButton, BorderLayout.NORTH);
+            painel.add(eliminarLivroButton, BorderLayout.EAST);
+            painel.add(new JScrollPane(textArea), BorderLayout.CENTER);
+            painel.revalidate();
+            painel.repaint();
+        } catch (NullPointerException e) {
+            e.fillInStackTrace();
+            //System.out.println("erroooooooooooooooooooooooooouuuuuuuuuuuuuuuuuuu");
+        }
     }
 
     private void adicionarLivro() {
@@ -272,42 +277,34 @@ public class Lista {
             }
         } else {
             // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
-            JOptionPane.showMessageDialog(frame, "Por favor, selecione um livro para eliminar.",
+            JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
+                            "\nPor favor, selecione um livro para eliminar.",
                     "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
 
-
     private void refreshLivroBaseDados() {
-        // Obtém a lista atual de elementos do DefaultListModel
-        ArrayList<Livro> elementosAtuais = new ArrayList<>();
-
-        for (int i = 0; i < listaModelo.getSize(); i++) {
-            elementosAtuais.add(listaModelo.getElementAt(i));
-        }
-
-        // Limpa o DefaultListModel
         listaModelo.clear();
 
-        // Obtém a lista atual de todos os livros na base de dados
         ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
-
-        // Adiciona à listaModelo apenas os elementos que não foram removidos
-        for (Livro livro : todosOsLivros) {
-            if (elementosAtuais.contains(livro)) {
-                listaModelo.addElement(livro);
-            }
+        for (int i = 0; i < todosOsLivros.size(); i++) {
+            Livro livroAtual = todosOsLivros.get(i);
+            listaModelo.addElement(livroAtual);
+            //id_LivroSelecionado = i + 1;
         }
 
         lista.setCellRenderer(new LivroRenderer());
 
-        lista.getSelectionModel().addListSelectionListener(e -> {
-            Livro livro = lista.getSelectedValue();
-            exibirDetalhesLivroBibliotecario(livro);
-        });
+        try {
+            lista.getSelectionModel().addListSelectionListener(e -> {
+                Livro livroSelecionado = lista.getSelectedValue();
+                exibirDetalhesLivroBibliotecario(livroSelecionado);
+            });
+        } catch (NullPointerException e) {
+            System.out.println("erroooooooooooooooooooooooooouuuuuuuuuuuuuuuuuuu");
+            e.fillInStackTrace();
+        }
     }
-
-
 
     class LivroRenderer extends DefaultListCellRenderer {
         @Override

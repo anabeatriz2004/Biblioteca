@@ -9,7 +9,7 @@ public class Biblioteca extends JFrame {
     private final Database conexao = new Database(); // Instanciar a classe Database
 
     private JLabel biblioteca;
-    static JFrame BibliotecaFrame;
+    static JFrame frame;
     private JPanel PaginaInicialPanel;
     private JButton loginBotao;
     private JPanel TabelaPanel;

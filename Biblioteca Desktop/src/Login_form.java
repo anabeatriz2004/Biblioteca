@@ -1,11 +1,11 @@
 import javax.swing.*;
+import javax.swing.text.PasswordView;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class Login_form {
-    JFrame frame = new JFrame("Login");
-    public final JLabel biblioLabel = new JLabel("Biblioteca");
+    JFrame frame = new JFrame("Formulário de Login");
     public final JLabel loginLabel = new JLabel("Login");
     public final JLabel emailLabel = new JLabel("Email: ");
     public final JLabel passwordLabel = new JLabel("Password: ");
@@ -23,35 +23,52 @@ public class Login_form {
     String senhaIncorreta = "Senha incorreta. Por favor, tente novamente";
 
     public Login_form() {
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        System.out.println(screenSize);
         frame.setSize(screenSize);
-        frame.setLocationRelativeTo(null);
+        frame.getContentPane().setBackground(Color.BLACK);
+        frame.getColorModel();
 
-        biblioLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-        biblioLabel.setSize(200, 75);
-        biblioLabel.setLocation(580, 175);
-        frame.add(biblioLabel);
-
-        loginLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        loginLabel.setSize(50, 25);
-        loginLabel.setLocation(100, 500);
+        loginLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        loginLabel.setSize(100, 20);
+        loginLabel.setLocation(700, 150);
+        loginLabel.setForeground(Color.WHITE);
         frame.add(loginLabel);
 
+        emailLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        emailLabel.setSize(100, 20);
+        emailLabel.setLocation(600, 200);
+        emailLabel.setForeground(Color.WHITE);
         frame.add(emailLabel);
 
+        emailTextField.setFont(new Font("Arial", Font.PLAIN, 15));
+        emailTextField.setSize(190, 20);
+        emailTextField.setLocation(675, 200);
         frame.add(emailTextField);
 
+        passwordLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        passwordLabel.setSize(100, 20);
+        passwordLabel.setLocation(575, 250);
+        passwordLabel.setForeground(Color.WHITE);
         frame.add(passwordLabel);
 
+        passwordField.setFont(new Font("Arial", Font.PLAIN, 15));
+        passwordField.setSize(190, 20);
+        passwordField.setLocation(675, 250);
         frame.add(passwordField);
 
         logarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
-        logarBotao.setSize(100, 20);
-        logarBotao.setLocation(270, 450);
+        logarBotao.setSize(100, 30); // Ajustei a altura
+        logarBotao.setLocation(650, 300); // Ajustei a posição
         logarBotao.addActionListener(clicarBotaoLogin());
+        logarBotao.setForeground(Color.WHITE);
+        logarBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        logarBotao.setBackground(new Color(30, 30, 30));
         frame.add(logarBotao);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setVisible(true);
     }
 
     private ActionListener clicarBotaoLogin() {

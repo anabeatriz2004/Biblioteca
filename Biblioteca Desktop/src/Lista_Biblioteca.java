@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import static groovy.console.ui.text.FindReplaceUtility.dispose;
@@ -21,7 +20,6 @@ public class Lista_Biblioteca {
     // componentes
     JLabel nome = new JLabel("Bem-vindo há biblioteca! :)");
     JButton loginButton = new JButton("Iniciar Sessão");
-    JSeparator separador = new JSeparator();
 
     public Lista_Biblioteca() {
         lista();
@@ -32,8 +30,6 @@ public class Lista_Biblioteca {
      */
     public void lista() {
         // Adiciona a JLabel nome à esquerda no topo
-        //JPanel nomePanel = new JPanel(new BorderLayout());
-        //nomePanel.add(nome, BorderLayout.WEST);
         painelInicio.add(nome, BorderLayout.WEST);
 
         // Adiciona o LoginButton à direita no topo

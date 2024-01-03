@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.*;
 
 public class Login {
@@ -65,7 +68,7 @@ public class Login {
         logarBotao.setBackground(new Color(30, 30, 30));
         frame.add(logarBotao);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addWindowListener(fecharPrograma());
         frame.setResizable(false);
         frame.setVisible(true);
     }
@@ -135,6 +138,23 @@ public class Login {
     public void exibirFrame() {
         // Define a frame como visível
         frame.setVisible(true);
+    }
+
+    private WindowListener fecharPrograma() {
+        // Cria um WindowListener
+        WindowListener windowListener = new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Chama o método para desconectar do banco de dados
+                conexao.desconectar();
+
+                // Fecha a aplicação
+                System.exit(0);
+            }
+        };
+
+        // Retorna o WindowListener
+        return windowListener;
     }
 
     public static void main(String[] args) {

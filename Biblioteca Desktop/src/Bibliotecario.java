@@ -1,10 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Bibliotecario {
+    private final Database conexao = new Database();
 
     Livro livro = new Livro();
 
@@ -77,7 +77,7 @@ public class Bibliotecario {
         splitPane.setLeftComponent(leftPanel);
         splitPane.setRightComponent(painel);
 
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.addWindowListener(fecharPrograma());
         frame.add(splitPane);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);
@@ -190,6 +190,23 @@ public class Bibliotecario {
             System.out.println("erroooooooooooooooooooooooooouuuuuuuuuuuuuuuuuuu");
             e.fillInStackTrace();
         }
+    }
+
+    private WindowListener fecharPrograma() {
+        // Cria um WindowListener
+        WindowListener windowListener = new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Chama o método para desconectar do banco de dados
+                conexao.desconectar();
+
+                // Fecha a aplicação
+                System.exit(0);
+            }
+        };
+
+        // Retorna o WindowListener
+        return windowListener;
     }
 
     class LivroRenderer extends DefaultListCellRenderer {

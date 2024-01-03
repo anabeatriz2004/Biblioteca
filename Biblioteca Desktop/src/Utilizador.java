@@ -1,13 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
-import static groovy.console.ui.text.FindReplaceUtility.dispose;
-
 public class Utilizador {
+    private final Database conexao = new Database();
 
     Livro livro = new Livro();
-    Login login = new Login();
 
     JFrame frame = new JFrame("Biblioteca");
     JList<Livro> lista = new JList<>();
@@ -64,7 +65,7 @@ public class Utilizador {
         splitPane.setLeftComponent(leftPanel);
         splitPane.setRightComponent(painel);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addWindowListener(fecharPrograma());
         frame.add(splitPane, BorderLayout.CENTER); // Adiciona ao centro para ocupar o restante da página
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);
@@ -107,6 +108,21 @@ public class Utilizador {
     public void exibirFrame() {
         // Define a frame como visível
         frame.setVisible(true);
+    } private WindowListener fecharPrograma() {
+        // Cria um WindowListener
+        WindowListener windowListener = new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Chama o método para desconectar do banco de dados
+                conexao.desconectar();
+
+                // Fecha a aplicação
+                System.exit(0);
+            }
+        };
+
+        // Retorna o WindowListener
+        return windowListener;
     }
 
     public static void main(String[] args) {

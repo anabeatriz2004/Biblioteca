@@ -1,10 +1,14 @@
+import com.sun.java.accessibility.util.AWTEventMonitor;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 import static groovy.console.ui.text.FindReplaceUtility.dispose;
 
 public class Biblioteca {
+    private final Database conexao = new Database();
 
     Livro livro = new Livro();
     Login login = new Login();
@@ -53,7 +57,7 @@ public class Biblioteca {
             listaModelo.addElement(livro);
         }
 
-        lista.setCellRenderer(new Biblioteca.LivroRenderer());
+        //lista.setCellRenderer(new Biblioteca.LivroRenderer());
 
         lista.getSelectionModel().addListSelectionListener(e -> {
             Livro livro = lista.getSelectedValue();
@@ -66,13 +70,33 @@ public class Biblioteca {
         splitPane.setLeftComponent(leftPanel);
         splitPane.setRightComponent(painel);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Adiciona um ouvinte de evento para o fechamento da janela
+        frame.addWindowListener(fecharPrograma());
+
         frame.add(splitPane, BorderLayout.CENTER); // Adiciona ao centro para ocupar o restante da página
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
+    private WindowListener fecharPrograma() {
+        // Cria um WindowListener
+        WindowListener windowListener = new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Chama o método para desconectar do banco de dados
+                conexao.desconectar();
+
+                // Fecha a aplicação
+                System.exit(0);
+            }
+        };
+
+        // Retorna o WindowListener
+        return windowListener;
+    }
+
 
     /**
      * Método para mostrar a mostrar todos os detalhes na lista,
@@ -96,6 +120,11 @@ public class Biblioteca {
         painel.repaint();
     }
 
+    public void exibirFrame() {
+        // Define a frame como visível
+        frame.setVisible(true);
+    }
+
     class LivroRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -104,11 +133,6 @@ public class Biblioteca {
             setText(livro.getTitulo());
             return this;
         }
-    }
-
-    public void exibirFrame() {
-        // Define a frame como visível
-        frame.setVisible(true);
     }
 
     public static void main(String[] args) {

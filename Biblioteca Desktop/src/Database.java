@@ -1,9 +1,7 @@
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class Database extends JFrame{
+public class Database extends JFrame {
 
     private static final String url = "jdbc:mysql://estga-dev.ua.pt/PTDA_BD_005";
     private static final String user = "PTDA_005";
@@ -25,12 +23,12 @@ public class Database extends JFrame{
             conexao = DriverManager.getConnection(url, user, password);
             System.out.println("Conexão bem-sucedida.");
         } catch (ClassNotFoundException | SQLException e) {
+            e.getMessage();
             System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
             JOptionPane.showMessageDialog(new JFrame(),
                     "Erro ao conectar há base de dados",
                     "Erro",
                     JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
             System.out.println("Encerrando o programa...");
             System.exit(0);
         }
@@ -41,9 +39,10 @@ public class Database extends JFrame{
             if (conexao != null && !conexao.isClosed()) {
                 conexao.close();
                 System.out.println("Conexão encerrada.");
+                JOptionPane.showMessageDialog(new JFrame(), "Conexão encerrada");
             }
         } catch (SQLException e) {
-            System.err.println("Erro ao fechar a conexão: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 }

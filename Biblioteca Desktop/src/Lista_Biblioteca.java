@@ -39,11 +39,12 @@ public class Lista_Biblioteca {
         // Adiciona o LoginButton à direita no topo
         painelInicio.add(loginButton, BorderLayout.EAST);
 
-        // NÃO FUNCIONA
+        // mostra a página do login
         loginButton.addActionListener(e -> {
             dispose(); // fecha a tela inicial
             login.setVisible(true); // exibe a tela de login
         });
+
         // Adiciona o painelInicio ao início do JFrame
         frame.add(painelInicio, BorderLayout.PAGE_START);
 

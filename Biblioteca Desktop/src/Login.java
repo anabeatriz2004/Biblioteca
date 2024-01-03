@@ -108,7 +108,7 @@ public class Login extends JFrame {
                         // Senha incorreta para bibliotecario
                         entradaValida = false;
                         System.out.println(senhaIncorreta);
-                        JOptionPane.showMessageDialog(Login.this, senhaIncorreta );
+                        JOptionPane.showMessageDialog(Login.this, senhaIncorreta);
                     }
                 }
             }

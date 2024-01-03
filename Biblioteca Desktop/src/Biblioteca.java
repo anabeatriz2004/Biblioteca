@@ -1,54 +1,117 @@
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class Biblioteca extends JFrame {
+import static groovy.console.ui.text.FindReplaceUtility.dispose;
 
-    private final Database conexao = new Database(); // Instanciar a classe Database
+public class Biblioteca {
 
-    private JLabel biblioteca;
-    static JFrame frame;
-    private JPanel PaginaInicialPanel;
-    private JButton loginBotao;
-    private JPanel TabelaPanel;
-    private DefaultTableModel tableModel;
+    Livro livro = new Livro();
+    Login login = new Login();
 
-    Login l = new Login();
-    private String nome;
-    private int idade;
-    private String cidade;
+    JFrame frame = new JFrame("Biblioteca");
+    JList<Livro> lista = new JList<>();
+    DefaultListModel<Livro> listaModelo = new DefaultListModel<>();
+    JTextArea textArea = new JTextArea();
+    JPanel painelInicio = new JPanel(new BorderLayout());
+    JPanel painel = new JPanel();
+    JSplitPane splitPane = new JSplitPane();
+
+    // componentes
+    JLabel nome = new JLabel("Bem-vindo há biblioteca! :)");
+    JButton loginButton = new JButton("Iniciar Sessão");
 
     public Biblioteca() {
-        // vai buscar o painel Principal
-        setContentPane(PaginaInicialPanel);
-        // nome da aplicação
-        setTitle("Biblioteca");
-        // quando se feche a aplicção o programa termina
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        // Obtém a resolução da tela
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        //define tamanho da aplicação
-        setSize(screenSize);
-        // para exibir no centro da tela
-        setLocationRelativeTo(null);
-        // para vizualizar
-        setVisible(true);
+        lista();
+    }
 
-        // Botão Login
-        loginBotao.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //JOptionPane.showMessageDialog(Biblioteca.this, "Hello World");
-                Biblioteca.this.dispose(); // deixa de ver a tela inicial
-                l.setVisible(true); // ver tela login
-            }
+    /**
+     * Método para mostrar a lista que é exibida ao arrancar o programa
+     */
+    public void lista() {
+        // Adiciona a JLabel nome à esquerda no topo
+        painelInicio.add(nome, BorderLayout.WEST);
+
+        // Adiciona o LoginButton à direita no topo
+        painelInicio.add(loginButton, BorderLayout.EAST);
+
+        // mostra a página do login
+        loginButton.addActionListener(e -> {
+            dispose(); // fecha a tela inicial
+            login.exibirFrame(); // exibe a tela de login
         });
+
+        // Adiciona o painelInicio ao início do JFrame
+        frame.add(painelInicio, BorderLayout.PAGE_START);
+
+        // Restante do código para adicionar as listas e detalhes
+        lista.setModel(listaModelo);
+
+        ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
+        for (int i = 0; i < todosOsLivros.size(); i++) {
+            Livro livro = todosOsLivros.get(i);
+            listaModelo.addElement(livro);
+        }
+
+        lista.setCellRenderer(new Biblioteca.LivroRenderer());
+
+        lista.getSelectionModel().addListSelectionListener(e -> {
+            Livro livro = lista.getSelectedValue();
+            exibirDetalhesLivro(livro);
+        });
+
+        JPanel leftPanel = new JPanel(new BorderLayout());
+        leftPanel.add(new JScrollPane(lista), BorderLayout.CENTER);
+
+        splitPane.setLeftComponent(leftPanel);
+        splitPane.setRightComponent(painel);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(splitPane, BorderLayout.CENTER); // Adiciona ao centro para ocupar o restante da página
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setSize(screenSize);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    /**
+     * Método para mostrar a mostrar todos os detalhes na lista,
+     * pode ser usado por três métodos: ListaGenerica(), ListaUtilizador()
+     */
+    private void exibirDetalhesLivro(Livro livro) {
+        textArea.setText("ISBN: " + livro.getISBN() +
+                "\nTitulo: " + livro.getTitulo() +
+                "\nAutor: " + livro.getAutor() +
+                "\nEditora: " + livro.getEditora() +
+                "\nAno de Publicação: " + livro.getAnoPubli() +
+                "\nGênero: " + livro.getGenero() +
+                "\nDisponibilidade: " + livro.getDisponibilidade() +
+                "\nDescrição: " + livro.getDescricao());
+
+        // Adiciona o botão "Alterar Dados" ao painel direito
+        painel.removeAll();
+        painel.setLayout(new BorderLayout());
+        painel.add(new JScrollPane(textArea), BorderLayout.CENTER);
+        painel.revalidate();
+        painel.repaint();
+    }
+
+    class LivroRenderer extends DefaultListCellRenderer {
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            Livro livro = (Livro) value;
+            setText(livro.getTitulo());
+            return this;
+        }
+    }
+
+    public void exibirFrame() {
+        // Define a frame como visível
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {
-        // inicia a aplicação
-        SwingUtilities.invokeLater(Biblioteca::new);
+        new Biblioteca();
     }
 }

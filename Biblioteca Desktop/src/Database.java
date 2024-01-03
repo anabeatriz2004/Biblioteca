@@ -26,7 +26,10 @@ public class Database extends JFrame{
             System.out.println("Conexão bem-sucedida.");
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
-            JOptionPane.showMessageDialog(Biblioteca.frame, "Erro ao conectar há base de dados", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "Erro ao conectar há base de dados",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             System.out.println("Encerrando o programa...");
             System.exit(0);

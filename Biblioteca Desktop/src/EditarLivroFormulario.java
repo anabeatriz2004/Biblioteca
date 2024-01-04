@@ -59,7 +59,7 @@ public class EditarLivroFormulario {
         isbnTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         isbnTextField.setSize(200, 20);
         isbnTextField.setLocation(675, 150);
-        Livro livroSelecionado = livroSelecionado.consultarLivro(); /* lógica para obter o livro selecionado */
+        Livro livroSelecionado = livroSelecionado.consultarLivro(id_LivroSelecionado); /* lógica para obter o livro selecionado */
         String isbnLivro = livroSelecionado.getISBN();
         isbnTextField.setText(isbnLivro);
         frame.add(isbnTextField);

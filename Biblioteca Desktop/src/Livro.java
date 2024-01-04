@@ -122,7 +122,9 @@ public class Livro {
     }
 
     /** Método para consultar um livro pelo ID na base de dados */
-    public void consultarLivro(int idLivro) {
+    public ArrayList<Livro> consultarLivro(int idLivro) {
+        ArrayList<Livro> consultarLivro = new ArrayList<>();
+
         try {
             // Define a consulta SQL para selecionar um livro com base no ID
             String sql = "SELECT * FROM livro WHERE id_livro = ?";
@@ -152,11 +154,19 @@ public class Livro {
                             ", Autor: " + autor + ", Editora: " + editora + ", Ano de Publicação: " + anoPubli +
                             ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade + ", Descricao" +
                             descricao);
+
+                    // Cria uma instância da classe Livro
+                    Livro livro = new Livro(idLivro, isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+
+                    // Adiciona o livro à lista
+                    consultarLivro.add(livro);
                 }
+                return consultarLivro;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
     }
 

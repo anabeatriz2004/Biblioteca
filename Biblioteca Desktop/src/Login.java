@@ -16,7 +16,7 @@ public class Login {
     public JButton logarBotao = new JButton("Logar");
 
     //private final Database conexao = new Database(); // Instanciar a classe Database
-   Connection conexao = Database.getConexao();
+    Connection conexao = Database.getConexao();
 
     Utilizador u = new Utilizador();
     Bibliotecario b = new Bibliotecario();
@@ -71,7 +71,7 @@ public class Login {
 
         frame.addWindowListener(fecharPrograma());
         frame.setResizable(false);
-        frame.setVisible(true);
+        frame.setVisible(false);
     }
 
     private ActionListener clicarBotaoLogin() {

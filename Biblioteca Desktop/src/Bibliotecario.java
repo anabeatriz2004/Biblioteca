@@ -1,20 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.*;
+import java.util.*;
+
+import static groovy.console.ui.text.FindReplaceUtility.dispose;
 
 public class Bibliotecario {
     Connection conexao = Database.getConexao();
     //private Connection conexao;
 
     Livro livro = new Livro();
+    Biblioteca biblio = new Biblioteca();
 
     JFrame frame = new JFrame("Biblioteca");
     JList<Livro> lista = new JList<>();
     DefaultListModel<Livro> listaModelo = new DefaultListModel<>();
     JTextArea textArea = new JTextArea();
+    JPanel painelInicio = new JPanel(new BorderLayout());
     JPanel painel = new JPanel();
     JSplitPane splitPane = new JSplitPane();
 
@@ -22,7 +25,7 @@ public class Bibliotecario {
     JButton alterarLivroButton = new JButton("Alterar Dados do Livro");
     JButton eliminarLivroButton = new JButton("Eliminar Livro");
 
-    //Bibliotecario() {};
+    JButton terminarSessaoButton = new JButton("Terminar Sessão");
 
     /**
      * Método para mostrar a lista que é exibida, se caso for bibliotecario,
@@ -31,7 +34,23 @@ public class Bibliotecario {
      * tabela emprestimo, para visualizar os mesmos
      */
     Bibliotecario() {
-        //this.conexao = Database.getConexao();
+        //String nome = "Entrou como bibliotecário";
+        // Adiciona a JLabel nome à esquerda no topo
+        //painelInicio.add(nome, BorderLayout.WEST);
+
+        // Adiciona o LoginButton à direita no topo
+        painelInicio.add(terminarSessaoButton, BorderLayout.EAST);
+
+        // mostra a página do login
+        terminarSessaoButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(frame,
+                    "Falta acresentar o método para terminar sessão.");
+            dispose(); // fecha a tela inicial
+            biblio.exibirFrame();
+        });
+
+        // Adiciona o painelInicio ao início do JFrame
+        frame.add(painelInicio, BorderLayout.PAGE_START);
 
         lista.setModel(listaModelo);
 

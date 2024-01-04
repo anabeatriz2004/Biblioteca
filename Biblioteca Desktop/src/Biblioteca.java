@@ -7,13 +7,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static groovy.console.ui.text.FindReplaceUtility.dispose;
-
 public class Biblioteca {
     Connection conexao = Database.getConexao();
 
     Livro livro = new Livro();
-    Login login = new Login();
 
     JFrame frame = new JFrame("Biblioteca");
     JList<Livro> lista = new JList<>();
@@ -27,14 +24,7 @@ public class Biblioteca {
     JLabel nome = new JLabel("Bem-vindo há biblioteca! :)");
     JButton loginButton = new JButton("Iniciar Sessão");
 
-    public Biblioteca() {
-        lista();
-    }
-
-    /**
-     * Método para mostrar a lista que é exibida ao arrancar o programa
-     */
-    public void lista() {
+    Biblioteca() {
         // Adiciona a JLabel nome à esquerda no topo
         painelInicio.add(nome, BorderLayout.WEST);
 
@@ -43,7 +33,8 @@ public class Biblioteca {
 
         // mostra a página do login
         loginButton.addActionListener(e -> {
-            dispose(); // fecha a tela inicial
+            frame.dispose(); // fecha a tela inicial
+            Login login = new Login();
             login.exibirFrame(); // exibe a tela de login
         });
 
@@ -54,6 +45,7 @@ public class Biblioteca {
         lista.setModel(listaModelo);
 
         ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
+
         for (int i = 0; i < todosOsLivros.size(); i++) {
             Livro livro = todosOsLivros.get(i);
             listaModelo.addElement(livro);
@@ -141,7 +133,7 @@ public class Biblioteca {
         }
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         new Biblioteca();
-    }*/
+    }
 }

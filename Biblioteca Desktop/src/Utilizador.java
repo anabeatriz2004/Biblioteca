@@ -3,13 +3,18 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import static groovy.console.ui.text.FindReplaceUtility.dispose;
 
 public class Utilizador {
     //private final Database conexao = new Database();
-    Database conexao = (Database) Database.getConexao();
+    Connection conexao = Database.getConexao();
 
     Livro livro = new Livro();
+    Biblioteca biblio = new Biblioteca();
 
     JFrame frame = new JFrame("Biblioteca");
     JList<Livro> lista = new JList<>();
@@ -21,7 +26,7 @@ public class Utilizador {
 
     // componentes
     JLabel nome = new JLabel("Bem-vindo há biblioteca! :)");
-    JButton loginButton = new JButton("Iniciar Sessão");
+    JButton terminarSessaoButton = new JButton("Iniciar Sessão");
 
     public Utilizador() {
         lista();
@@ -34,12 +39,15 @@ public class Utilizador {
         // Adiciona a JLabel nome à esquerda no topo
         painelInicio.add(nome, BorderLayout.WEST);
 
-        // Adiciona o LoginButton à direita no topo
-        painelInicio.add(loginButton, BorderLayout.EAST);
+        // Adiciona o terminarSessaoButton à direita no topo
+        painelInicio.add(terminarSessaoButton, BorderLayout.EAST);
 
         // mostra a página do login
-        loginButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(frame,"Algo");
+        terminarSessaoButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(frame,
+                    "Falta acresentar o método para terminar sessão.");
+            dispose(); // fecha a tela inicial
+            biblio.exibirFrame();
         });
 
         // Adiciona o painelInicio ao início do JFrame
@@ -115,7 +123,11 @@ public class Utilizador {
             @Override
             public void windowClosing(WindowEvent e) {
                 // Chama o método para desconectar do banco de dados
-                conexao.desconectar();
+                try {
+                    conexao.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
 
                 // Fecha a aplicação
                 System.exit(0);

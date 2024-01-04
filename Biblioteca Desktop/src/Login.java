@@ -157,10 +157,10 @@ public class Login {
         return windowListener;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Login loginForm = new Login();
             loginForm.frame.setVisible(true);
         });
-    }
+    }*/
 }

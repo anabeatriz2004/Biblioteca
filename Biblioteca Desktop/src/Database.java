@@ -1,5 +1,7 @@
 import javax.swing.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Database extends JFrame {
 
@@ -23,19 +25,23 @@ public class Database extends JFrame {
     }
 
     public void conectar() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conexao = DriverManager.getConnection(url, user, password);
-            System.out.println("Conexão bem-sucedida.");
-        } catch (ClassNotFoundException | SQLException e) {
-            e.getMessage();
-            System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
-            JOptionPane.showMessageDialog(new JFrame(),
-                    "Erro ao conectar há base de dados",
-                    "Erro",
-                    JOptionPane.ERROR_MESSAGE);
-            System.out.println("Encerrando o programa...");
-            System.exit(0);
+        if (conexao == null) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conexao = DriverManager.getConnection(url, user, password);
+                System.out.println("Conexão bem-sucedida.");
+            } catch (ClassNotFoundException | SQLException e) {
+                e.getMessage();
+                System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
+                JOptionPane.showMessageDialog(new JFrame(),
+                        "Erro ao conectar há base de dados",
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE);
+                System.out.println("Encerrando o programa...");
+                System.exit(0);
+            } finally {
+                desconectar();
+            }
         }
     }
 

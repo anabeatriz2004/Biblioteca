@@ -187,10 +187,10 @@ public class AdicionarLivroFormulario {
         return windowListener;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             AdicionarLivroFormulario loginForm = new AdicionarLivroFormulario();
             loginForm.frame.setVisible(true);
         });
-    }
+    }*/
 }

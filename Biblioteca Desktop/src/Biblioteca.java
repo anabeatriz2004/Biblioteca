@@ -12,7 +12,7 @@ public class Biblioteca {
 
     Livro livro = new Livro();
 
-    JFrame frame = new JFrame("Biblioteca");
+    JFrame frame;
     JList<Livro> lista = new JList<>();
     DefaultListModel<Livro> listaModelo = new DefaultListModel<>();
     JTextArea textArea = new JTextArea();
@@ -24,7 +24,8 @@ public class Biblioteca {
     JLabel nome = new JLabel("Bem-vindo há biblioteca! :)");
     JButton loginButton = new JButton("Iniciar Sessão");
 
-    Biblioteca() {
+    public void exibirFrame() {
+        frame = new JFrame("Biblioteca");
         // Adiciona a JLabel nome à esquerda no topo
         painelInicio.add(nome, BorderLayout.WEST);
 
@@ -115,11 +116,6 @@ public class Biblioteca {
         painel.repaint();
     }
 
-    public void exibirFrame() {
-        // Define a frame como visível
-        frame.setVisible(true);
-    }
-
     class LivroRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -131,6 +127,7 @@ public class Biblioteca {
     }
 
     public static void main(String[] args) {
-        new Biblioteca();
+        Biblioteca b = new Biblioteca();
+        b.exibirFrame();
     }
 }

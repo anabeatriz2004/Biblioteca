@@ -3,12 +3,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 
-public class AdicionarLivroFormulario {
+public class EditarLivroFormulario {
     Bibliotecario b = new Bibliotecario();
 
-    JFrame frame = new JFrame("Formulário de Login");
+    JFrame frame = new JFrame("Formulário de Alteração de Dados do Livro");
+    //Icon icon = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Ambiente de Trabalho\\ESTGA\\2º ano\\1º Semestre\\Proj\\Biblioteca\\Biblioteca_vo\\Biblioteca Desktop\\img\\arrow-left-square.svg");
+    //JButton voltarBotao = new JButton(icon);
     public JButton voltarBotao = new JButton("<-- Voltar");
-    public final JLabel tituloInicialLabel = new JLabel("Adicionar Livro à Base de Dados");
+    public final JLabel tituloInicialLabel = new JLabel("Editar Livro");
     public final JLabel isbnLabel = new JLabel("ISBN: ");
     public JTextField isbnTextField = new JTextField();
     public final JLabel tituloLabel = new JLabel("Título: ");
@@ -25,9 +27,9 @@ public class AdicionarLivroFormulario {
     public JTextField disponibilidadeTextField = new JTextField();
     public final JLabel descricaoLabel = new JLabel("Descricao: ");
     public JTextField descricaoTextField = new JTextField();
-    public JButton adicionarLivroBotao = new JButton("Adicionar Livro");
+    public JButton editarlivroButton = new JButton("Adicionar Livro");
 
-    AdicionarLivroFormulario() {
+    EditarLivroFormulario() {
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);
@@ -59,7 +61,7 @@ public class AdicionarLivroFormulario {
         isbnTextField.setSize(200, 20);
         isbnTextField.setLocation(675, 150);
         frame.add(isbnTextField);
-        
+
         tituloLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         tituloLabel.setSize(200, 20);
         tituloLabel.setLocation(575, 200);
@@ -103,7 +105,7 @@ public class AdicionarLivroFormulario {
         anoPubliTextField.setSize(200, 20);
         anoPubliTextField.setLocation(675, 350);
         frame.add(anoPubliTextField);
-        
+
         generoLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         generoLabel.setSize(200, 20);
         generoLabel.setLocation(575, 400);
@@ -137,14 +139,14 @@ public class AdicionarLivroFormulario {
         descricaoTextField.setLocation(675, 500);
         frame.add(descricaoTextField);
 
-        adicionarLivroBotao.setFont(new Font("Arial", Font.PLAIN, 15));
-        adicionarLivroBotao.setSize(200, 30); // Ajustei a altura
-        adicionarLivroBotao.setLocation(675, 525); // Ajustei a posição
-        adicionarLivroBotao.addActionListener(adicionarLivro());
-        adicionarLivroBotao.setForeground(Color.WHITE);
-        adicionarLivroBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
-        adicionarLivroBotao.setBackground(new Color(30, 30, 30));
-        frame.add(adicionarLivroBotao);
+        editarlivroButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        editarlivroButton.setSize(200, 30); // Ajustei a altura
+        editarlivroButton.setLocation(675, 525); // Ajustei a posição
+        editarlivroButton.addActionListener(editarLivro());
+        editarlivroButton.setForeground(Color.WHITE);
+        editarlivroButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        editarlivroButton.setBackground(new Color(30, 30, 30));
+        frame.add(editarlivroButton);
 
         frame.addWindowListener(fecharPrograma());
         frame.setResizable(false);
@@ -158,8 +160,8 @@ public class AdicionarLivroFormulario {
             b.exibirFrame();
         };
     }
-
-    private ActionListener adicionarLivro() {
+    // NÃO FUNCIONA
+    private ActionListener editarLivro() {
         return e -> {
             JOptionPane.showMessageDialog(frame, "Nada");
         };
@@ -189,7 +191,7 @@ public class AdicionarLivroFormulario {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            AdicionarLivroFormulario loginForm = new AdicionarLivroFormulario();
+            EditarLivroFormulario loginForm = new EditarLivroFormulario();
             loginForm.frame.setVisible(true);
         });
     }

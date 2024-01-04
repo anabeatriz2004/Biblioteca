@@ -51,7 +51,9 @@ public class Bibliotecario {
         // Adiciona um ouvinte de ação para o botão "Alterar Dados"
         // NÃO FUNCIONA
         alterarLivroButton.addActionListener(e -> {
-            alterarDadosLivro();
+            Livro livroSelecionado = obterLivroSelecionado();
+            EditarLivroFormulario elf = new EditarLivroFormulario(livroSelecionado);
+            elf.exibirFrame();
         });
 
         // Adiciona um ouvinte de ação para o botão "Adicionar Livro"
@@ -147,27 +149,35 @@ public class Bibliotecario {
         JOptionPane.showMessageDialog(frame, "Implemente a lógica para adicionar um novo livro.");
     }
 
-    public Livro alterarDadosLivro() {
-
+    public Livro obterLivroSelecionado() {
         int idSelecionado = getIdComponenteSelecionado();
 
         // Verifica se algum livro está selecionado
         if (idSelecionado != -1) {
-            // Obtém o livro selecionado
-            Livro livroSelecionado = listaModelo.getElementAt(idSelecionado);
-            System.out.println(idSelecionado);
-            frame.dispose();
-            EditarLivroFormulario elf = new EditarLivroFormulario();
+            // Obtém o livro selecionado diretamente do modelo
+            return listaModelo.getElementAt(idSelecionado);
+        } else {
+            // Se nenhum livro estiver selecionado, retorna null
+            return null;
+        }
+    }
+
+    public void abrirFormularioEdicao() {
+        Livro livroSelecionado = obterLivroSelecionado();
+
+        // Verifica se um livro foi selecionado antes de exibir o formulário de edição
+        if (livroSelecionado != null) {
+            // Abre o formulário de edição e passa o livro selecionado
+            EditarLivroFormulario elf = new EditarLivroFormulario(livroSelecionado);
             elf.exibirFrame();
-            return livroSelecionado;
         } else {
             // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
             JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
                             "\nPor favor, selecione um livro para editar.",
                     "Aviso", JOptionPane.WARNING_MESSAGE);
-            return null;
         }
     }
+
 
     /**
      * Método que é usado pela ListaBibliotecario(), e vai buscar há classe Livro, o método

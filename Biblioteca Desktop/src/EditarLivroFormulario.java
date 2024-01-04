@@ -7,9 +7,6 @@ import java.awt.event.WindowListener;
 
 public class EditarLivroFormulario {
     Bibliotecario b = new Bibliotecario();
-    Livro livro = new Livro();
-
-    Livro livroSelecionado = b.alterarDadosLivro();
 
     JFrame frame = new JFrame("Formulário de Alteração de Dados do Livro");
     public JButton voltarBotao = new JButton("<-- Voltar");
@@ -32,7 +29,7 @@ public class EditarLivroFormulario {
     public JTextField descricaoTextField = new JTextField();
     public JButton editarlivroButton = new JButton("Adicionar Livro");
 
-    EditarLivroFormulario() {
+    EditarLivroFormulario (Livro livro) {
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);
@@ -63,7 +60,7 @@ public class EditarLivroFormulario {
         isbnTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         isbnTextField.setSize(200, 20);
         isbnTextField.setLocation(675, 150);
-        String isbnLivro = livroSelecionado.getISBN();
+        String isbnLivro = livro.getISBN();
         isbnTextField.setText(isbnLivro);
         frame.add(isbnTextField);
 
@@ -76,7 +73,7 @@ public class EditarLivroFormulario {
         tituloTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         tituloTextField.setSize(200, 20);
         tituloTextField.setLocation(675, 200);
-        String tituloLivro = livroSelecionado.getTitulo();
+        String tituloLivro = livro.getTitulo();
         tituloTextField.setText(tituloLivro);
         frame.add(tituloTextField);
 
@@ -89,7 +86,7 @@ public class EditarLivroFormulario {
         autorTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         autorTextField.setSize(200, 20);
         autorTextField.setLocation(675, 250);
-        String autorLivro = livroSelecionado.getAutor();
+        String autorLivro = livro.getAutor();
         autorTextField.setText(autorLivro);
         frame.add(autorTextField);
 
@@ -102,7 +99,7 @@ public class EditarLivroFormulario {
         editoraTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         editoraTextField.setSize(200, 20);
         editoraTextField.setLocation(675, 300);
-        String editoraLivro = livroSelecionado.getEditora();
+        String editoraLivro = livro.getEditora();
         editoraTextField.setText(editoraLivro);
         frame.add(editoraTextField);
 
@@ -115,7 +112,7 @@ public class EditarLivroFormulario {
         anoPubliTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         anoPubliTextField.setSize(200, 20);
         anoPubliTextField.setLocation(675, 350);
-        int anoPubliLivro = livroSelecionado.getAnoPubli();
+        int anoPubliLivro = livro.getAnoPubli();
         anoPubliTextField.setText(String.valueOf(anoPubliLivro));
         frame.add(anoPubliTextField);
 
@@ -123,7 +120,7 @@ public class EditarLivroFormulario {
         generoLabel.setSize(200, 20);
         generoLabel.setLocation(575, 400);
         generoLabel.setForeground(Color.WHITE);
-        String generoLivro = livroSelecionado.getGenero();
+        String generoLivro = livro.getGenero();
         generoTextField.setText(generoLivro);
         frame.add(generoLabel);
 
@@ -153,7 +150,7 @@ public class EditarLivroFormulario {
         descricaoTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         descricaoTextField.setSize(200, 20);
         descricaoTextField.setLocation(675, 500);
-        String descricaoLivro = livroSelecionado.getDescricao();
+        String descricaoLivro = livro.getDescricao();
         descricaoTextField.setText(descricaoLivro);
         frame.add(descricaoTextField);
 
@@ -181,14 +178,16 @@ public class EditarLivroFormulario {
 
     // NÃO FUNCIONA
     private void editarLivro() {
+        Livro livro = b.obterLivroSelecionado();
 
         int opcao = JOptionPane.showConfirmDialog(frame,
-                "Deseja mesmo eliminar o livro com o título: " + livroSelecionado.getTitulo() + "?",
+                "Deseja mesmo alterar o livro com o título: " + livro.getTitulo() + "?",
                 "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
         if (opcao == JOptionPane.YES_OPTION) {
-            livroSelecionado.alterarDados(livroSelecionado);
-            JOptionPane.showMessageDialog(frame, "Livro eliminado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            livro.alterarDados(livro);
+            JOptionPane.showMessageDialog(frame, "Livro alterado\\editado com sucesso.",
+                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             frame.dispose();
             b.refreshLivroBaseDados();
             b.exibirFrame();

@@ -130,8 +130,4 @@ public class Utilizador {
         // Retorna o WindowListener
         return windowListener;
     }
-
-    public static void main(String[] args) {
-        new Utilizador();
-    }
 }

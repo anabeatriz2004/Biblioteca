@@ -215,11 +215,4 @@ public class EditarLivroFormulario {
         // Retorna o WindowListener
         return windowListener;
     }
-
-    /*public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            EditarLivroFormulario loginForm = new EditarLivroFormulario();
-            loginForm.frame.setVisible(true);
-        });
-    }*/
 }

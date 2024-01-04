@@ -184,11 +184,4 @@ public class AdicionarLivroFormulario {
         // Retorna o WindowListener
         return windowListener;
     }
-
-    /*public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            AdicionarLivroFormulario loginForm = new AdicionarLivroFormulario();
-            loginForm.frame.setVisible(true);
-        });
-    }*/
 }

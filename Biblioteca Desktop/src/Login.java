@@ -16,7 +16,7 @@ public class Login {
     public JButton logarBotao = new JButton("Logar");
 
     //private final Database conexao = new Database(); // Instanciar a classe Database
-    Database conexao = (Database) Database.getConexao();
+   Connection conexao = Database.getConexao();
 
     Utilizador u = new Utilizador();
     Bibliotecario b = new Bibliotecario();
@@ -87,8 +87,8 @@ public class Login {
             String utilizadorSql = "SELECT * FROM utilizador WHERE email = ?";
             String bibliotecarioSql = "SELECT * FROM bibliotecario WHERE email = ?";
 
-            try (PreparedStatement pstmtUtilizador = conexao.getConexao().prepareStatement(utilizadorSql);
-                 PreparedStatement pstmtBibliotecario = conexao.getConexao().prepareStatement(bibliotecarioSql)) {
+            try (PreparedStatement pstmtUtilizador = conexao.prepareStatement(utilizadorSql);
+                 PreparedStatement pstmtBibliotecario = conexao.prepareStatement(bibliotecarioSql)) {
 
                 pstmtUtilizador.setString(1, email);
                 pstmtBibliotecario.setString(1, email);
@@ -146,8 +146,11 @@ public class Login {
         WindowListener windowListener = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // Chama o método para desconectar do banco de dados
-                conexao.desconectar();
+                try {
+                    conexao.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
 
                 // Fecha a aplicação
                 System.exit(0);

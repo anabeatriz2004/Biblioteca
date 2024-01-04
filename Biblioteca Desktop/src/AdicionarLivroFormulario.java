@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class AdicionarLivroFormulario {
+    Connection conexao = Database.getConexao();
     Bibliotecario b = new Bibliotecario();
 
     JFrame frame = new JFrame("Formulário de Login");

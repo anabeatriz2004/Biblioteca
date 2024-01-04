@@ -3,13 +3,14 @@ import com.sun.java.accessibility.util.AWTEventMonitor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static groovy.console.ui.text.FindReplaceUtility.dispose;
 
 public class Biblioteca {
-    //private final Database conexao = new Database();
-    Database conexao = (Database) Database.getConexao();
+    Connection conexao = Database.getConexao();
 
     Livro livro = new Livro();
     Login login = new Login();
@@ -87,7 +88,11 @@ public class Biblioteca {
             @Override
             public void windowClosing(WindowEvent e) {
                 // Chama o método para desconectar do banco de dados
-                conexao.desconectar();
+                try {
+                    conexao.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
 
                 // Fecha a aplicação
                 System.exit(0);

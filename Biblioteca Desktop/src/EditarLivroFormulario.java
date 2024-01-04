@@ -189,9 +189,8 @@ public class EditarLivroFormulario {
             JOptionPane.showMessageDialog(frame, "Livro alterado\\editado com sucesso.",
                     "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             frame.dispose();
-            b.refreshLivroBaseDados();
             b.exibirFrame();
-            //refreshLivroBaseDados();
+            b.refreshLivroBaseDados();
         } else {
             // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
             JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +

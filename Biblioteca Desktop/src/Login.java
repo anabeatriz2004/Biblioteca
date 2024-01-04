@@ -74,12 +74,12 @@ public class Login {
         frame.add(passwordField);
 
         logarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
-        //logarBotao.setSize(100, 30);
+        logarBotao.setSize(100, 30);
         logarBotao.setLocation(650, 300);
-        logarBotao.addActionListener(clicarBotaoLogin());
         logarBotao.setForeground(Color.WHITE);
         logarBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         logarBotao.setBackground(new Color(30, 30, 30));
+        logarBotao.addActionListener(clicarBotaoLogin());
         frame.add(logarBotao);
 
         frame.addWindowListener(fecharPrograma());

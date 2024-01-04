@@ -160,8 +160,8 @@ public class EditarLivroFormulario {
         frame.add(descricaoTextField);
 
         editarlivroButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        editarlivroButton.setSize(200, 30); // Ajustei a altura
-        editarlivroButton.setLocation(675, 525); // Ajustei a posição
+        editarlivroButton.setSize(200, 30);
+        editarlivroButton.setLocation(675, 525);
         editarlivroButton.setForeground(Color.WHITE);
         editarlivroButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         editarlivroButton.setBackground(new Color(30, 30, 30));
@@ -173,7 +173,6 @@ public class EditarLivroFormulario {
         frame.setVisible(true);
     }
 
-    // NÃO FUNCIONA
     private ActionListener voltarAtras() {
         return e -> {
             frame.dispose();

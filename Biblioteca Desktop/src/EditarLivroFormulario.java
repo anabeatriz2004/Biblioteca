@@ -8,7 +8,7 @@ public class EditarLivroFormulario {
     Connection conexao = Database.getConexao();
     Bibliotecario b = new Bibliotecario();
 
-    JFrame frame = new JFrame("Formulário de Alteração de Dados do Livro");
+    JFrame frame;
     public JButton voltarBotao = new JButton("<-- Voltar");
     Livro livro = b.obterLivroSelecionado();
     public final JLabel tituloInicialLabel = new JLabel("Editar Livro" + livro.getID_livro());
@@ -33,6 +33,8 @@ public class EditarLivroFormulario {
     EditarLivroFormulario() {}
 
     public void exibirFrame (Livro livro) {
+        frame = new JFrame("Formulário de Alteração de Dados do Livro");
+
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);

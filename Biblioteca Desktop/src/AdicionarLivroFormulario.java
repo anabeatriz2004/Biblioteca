@@ -7,7 +7,7 @@ public class AdicionarLivroFormulario {
     Connection conexao = Database.getConexao();
     Bibliotecario b = new Bibliotecario();
 
-    JFrame frame = new JFrame("Formulário de Login");
+    JFrame frame;
     public JButton voltarBotao = new JButton("<-- Voltar");
     public final JLabel tituloInicialLabel = new JLabel("Adicionar Livro à Base de Dados");
     public final JLabel isbnLabel = new JLabel("ISBN: ");
@@ -31,6 +31,8 @@ public class AdicionarLivroFormulario {
     AdicionarLivroFormulario() {}
 
     public void exibirFrame() {
+        frame = new JFrame("Formulário - Adicionar Livro");
+
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);

@@ -12,7 +12,7 @@ public class Bibliotecario {
     Livro livro = new Livro();
     Biblioteca biblio = new Biblioteca();
 
-    JFrame frame = new JFrame("Biblioteca");
+    JFrame frame;
     JList<Livro> lista = new JList<>();
     DefaultListModel<Livro> listaModelo = new DefaultListModel<>();
     JTextArea textArea = new JTextArea();
@@ -36,6 +36,7 @@ public class Bibliotecario {
     }
 
     public void exibirFrame() {
+        frame = new JFrame("Bibliotecario");
         //String nome = "Entrou como bibliotecário";
         // Adiciona a JLabel nome à esquerda no topo
         //painelInicio.add(nome, BorderLayout.WEST);

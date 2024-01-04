@@ -7,8 +7,9 @@ import java.awt.event.WindowListener;
 import java.sql.*;
 
 public class Login {
+
     public JButton voltarBotao = new JButton("<-- Voltar");
-    JFrame frame = new JFrame("Formulário de Login");
+    JFrame frame;
     public final JLabel loginLabel = new JLabel("Login");
     public final JLabel emailLabel = new JLabel("Email: ");
     public final JLabel passwordLabel = new JLabel("Password: ");
@@ -30,6 +31,8 @@ public class Login {
     public Login() {}
 
     public void exibirFrame() {
+        frame = new JFrame("Formulário de Login");
+
         voltarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
         voltarBotao.setSize(110, 30); // Ajustei a altura
         voltarBotao.setLocation(0, 0); // Ajustei a posição
@@ -42,13 +45,13 @@ public class Login {
         voltarBotao.setBackground(new Color(30, 30, 30));
         frame.add(voltarBotao);
 
-        loginLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        loginLabel.setFont(new Font("Arial", Font.BOLD, 15));
         loginLabel.setSize(100, 20);
         loginLabel.setLocation(700, 150);
         loginLabel.setForeground(Color.WHITE);
         frame.add(loginLabel);
 
-        emailLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        emailLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         emailLabel.setSize(100, 20);
         emailLabel.setLocation(600, 200);
         emailLabel.setForeground(Color.WHITE);
@@ -59,7 +62,7 @@ public class Login {
         emailTextField.setLocation(675, 200);
         frame.add(emailTextField);
 
-        passwordLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        passwordLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         passwordLabel.setSize(100, 20);
         passwordLabel.setLocation(575, 250);
         passwordLabel.setForeground(Color.WHITE);
@@ -71,8 +74,8 @@ public class Login {
         frame.add(passwordField);
 
         logarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
-        logarBotao.setSize(100, 30); // Ajustei a altura
-        logarBotao.setLocation(650, 300); // Ajustei a posição
+        //logarBotao.setSize(100, 30);
+        logarBotao.setLocation(650, 300);
         logarBotao.addActionListener(clicarBotaoLogin());
         logarBotao.setForeground(Color.WHITE);
         logarBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));

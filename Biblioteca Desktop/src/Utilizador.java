@@ -6,7 +6,8 @@ import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 public class Utilizador {
-    private final Database conexao = new Database();
+    //private final Database conexao = new Database();
+    Database conexao = (Database) Database.getConexao();
 
     Livro livro = new Livro();
 

@@ -15,7 +15,8 @@ public class Login {
     public JPasswordField passwordField = new JPasswordField();
     public JButton logarBotao = new JButton("Logar");
 
-    private final Database conexao = new Database(); // Instanciar a classe Database
+    //private final Database conexao = new Database(); // Instanciar a classe Database
+    Database conexao = (Database) Database.getConexao();
 
     Utilizador u = new Utilizador();
     Bibliotecario b = new Bibliotecario();

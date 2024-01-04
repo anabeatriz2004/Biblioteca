@@ -1,14 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Bibliotecario {
-    private final Database conexao = new Database();
+    Connection conexao = Database.getConexao();
+    //private Connection conexao;
 
     Livro livro = new Livro();
-    AdicionarLivroFormulario alf = new AdicionarLivroFormulario();
-    EditarLivroFormulario elf = new EditarLivroFormulario();
 
     JFrame frame = new JFrame("Biblioteca");
     JList<Livro> lista = new JList<>();
@@ -21,6 +22,8 @@ public class Bibliotecario {
     JButton alterarLivroButton = new JButton("Alterar Dados do Livro");
     JButton eliminarLivroButton = new JButton("Eliminar Livro");
 
+    //Bibliotecario() {};
+
     /**
      * Método para mostrar a lista que é exibida, se caso for bibliotecario,
      * este pode visualizar todos os livros, tal como o utilizador,
@@ -28,6 +31,8 @@ public class Bibliotecario {
      * tabela emprestimo, para visualizar os mesmos
      */
     Bibliotecario() {
+        //this.conexao = Database.getConexao();
+
         lista.setModel(listaModelo);
 
         ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
@@ -53,6 +58,7 @@ public class Bibliotecario {
         // NÃO FUNCIONA
         adicionarLivroButton.addActionListener(e -> {
             frame.dispose();
+            AdicionarLivroFormulario alf = new AdicionarLivroFormulario();
             alf.exibirFrame();
         });
 
@@ -149,7 +155,9 @@ public class Bibliotecario {
         if (idSelecionado != -1) {
             // Obtém o livro selecionado
             Livro livroSelecionado = listaModelo.getElementAt(idSelecionado);
+            System.out.println(idSelecionado);
             frame.dispose();
+            EditarLivroFormulario elf = new EditarLivroFormulario();
             elf.exibirFrame();
             return livroSelecionado;
         } else {
@@ -221,7 +229,11 @@ public class Bibliotecario {
             @Override
             public void windowClosing(WindowEvent e) {
                 // Chama o método para desconectar do banco de dados
-                conexao.desconectar();
+                try {
+                    conexao.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
 
                 // Fecha a aplicação
                 System.exit(0);

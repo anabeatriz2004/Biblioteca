@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import static groovy.console.ui.text.FindReplaceUtility.dispose;
 
 public class Biblioteca {
-    private final Database conexao = new Database();
+    //private final Database conexao = new Database();
+    Database conexao = (Database) Database.getConexao();
 
     Livro livro = new Livro();
     Login login = new Login();

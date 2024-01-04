@@ -1,8 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class EditarLivroFormulario {
+    Connection conexao = Database.getConexao();
     Bibliotecario b = new Bibliotecario();
 
     JFrame frame = new JFrame("Formulário de Alteração de Dados do Livro");
@@ -204,11 +207,12 @@ public class EditarLivroFormulario {
         WindowListener windowListener = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // Chama o método para desconectar do banco de dados
-                //conexao.desconectar();
-
-                // Fecha a aplicação
-                System.exit(0);
+                try {
+                    conexao.close();
+                    System.exit(0);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         };
 

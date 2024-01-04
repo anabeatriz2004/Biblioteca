@@ -115,15 +115,12 @@ public class Utilizador {
         WindowListener windowListener = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // Chama o método para desconectar do banco de dados
                 try {
                     conexao.close();
+                    System.exit(0);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
-
-                // Fecha a aplicação
-                System.exit(0);
             }
         };
 

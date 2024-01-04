@@ -30,12 +30,6 @@ public class Login {
     public Login() {}
 
     public void exibirFrame() {
-        frame.setLayout(null);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setSize(screenSize);
-        frame.getContentPane().setBackground(Color.BLACK);
-        frame.getColorModel();
-
         voltarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
         voltarBotao.setSize(110, 30); // Ajustei a altura
         voltarBotao.setLocation(0, 0); // Ajustei a posição
@@ -86,7 +80,9 @@ public class Login {
         frame.add(logarBotao);
 
         frame.addWindowListener(fecharPrograma());
-        frame.setResizable(false);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setSize(screenSize);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -159,12 +155,10 @@ public class Login {
             public void windowClosing(WindowEvent e) {
                 try {
                     conexao.close();
+                    System.exit(0);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
-
-                // Fecha a aplicação
-                System.exit(0);
             }
         };
 

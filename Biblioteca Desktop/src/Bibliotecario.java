@@ -103,6 +103,7 @@ public class Bibliotecario {
     public int getIdComponenteSelecionado() {
         // Obtém o índice do livro selecionado na lista
         int indiceSelecionado = lista.getSelectedIndex();
+        indiceSelecionado--;
 
         // Verifica se algum livro está selecionado
         if (indiceSelecionado != -1) {

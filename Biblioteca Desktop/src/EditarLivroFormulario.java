@@ -10,7 +10,8 @@ public class EditarLivroFormulario {
 
     JFrame frame = new JFrame("Formulário de Alteração de Dados do Livro");
     public JButton voltarBotao = new JButton("<-- Voltar");
-    public final JLabel tituloInicialLabel = new JLabel("Editar Livro");
+    Livro livro = b.obterLivroSelecionado();
+    public final JLabel tituloInicialLabel = new JLabel("Editar Livro" + livro.getID_livro());
     public final JLabel isbnLabel = new JLabel("ISBN: ");
     public JTextField isbnTextField = new JTextField();
     public final JLabel tituloLabel = new JLabel("Título: ");
@@ -27,7 +28,7 @@ public class EditarLivroFormulario {
     public JTextField disponibilidadeTextField = new JTextField();
     public final JLabel descricaoLabel = new JLabel("Descricao: ");
     public JTextField descricaoTextField = new JTextField();
-    public JButton editarlivroButton = new JButton("Adicionar Livro");
+    public JButton editarlivroButton = new JButton("Editar Livro");
 
     EditarLivroFormulario (Livro livro) {
         frame.setLayout(null);
@@ -157,10 +158,10 @@ public class EditarLivroFormulario {
         editarlivroButton.setFont(new Font("Arial", Font.PLAIN, 15));
         editarlivroButton.setSize(200, 30); // Ajustei a altura
         editarlivroButton.setLocation(675, 525); // Ajustei a posição
-        //editarlivroButton.addActionListener(editarLivro());
         editarlivroButton.setForeground(Color.WHITE);
         editarlivroButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         editarlivroButton.setBackground(new Color(30, 30, 30));
+        editarlivroButton.addActionListener(e-> { editarLivro(); });
         frame.add(editarlivroButton);
 
         frame.addWindowListener(fecharPrograma());
@@ -176,7 +177,6 @@ public class EditarLivroFormulario {
         };
     }
 
-    // NÃO FUNCIONA
     private void editarLivro() {
         Livro livro = b.obterLivroSelecionado();
 

@@ -7,6 +7,8 @@ public class EditarLivroFormulario {
     Bibliotecario b = new Bibliotecario();
     Livro livro = new Livro();
 
+    Livro livroSelecionado = b.alterarDadosLivro();
+
     JFrame frame = new JFrame("Formulário de Alteração de Dados do Livro");
     public JButton voltarBotao = new JButton("<-- Voltar");
     public final JLabel tituloInicialLabel = new JLabel("Editar Livro");
@@ -59,9 +61,9 @@ public class EditarLivroFormulario {
         isbnTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         isbnTextField.setSize(200, 20);
         isbnTextField.setLocation(675, 150);
-        Livro livroSelecionado = livroSelecionado.consultarLivro(id_LivroSelecionado); /* lógica para obter o livro selecionado */
-        String isbnLivro = livroSelecionado.getISBN();
-        isbnTextField.setText(isbnLivro);
+        //Livro livroSelecionado = livroSelecionado.consultarLivro(id_LivroSelecionado); /* lógica para obter o livro selecionado */
+        //String isbnLivro = livroSelecionado.getISBN();
+        //isbnTextField.setText(isbnLivro);
         frame.add(isbnTextField);
 
         tituloLabel.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -166,31 +168,24 @@ public class EditarLivroFormulario {
     // NÃO FUNCIONA
     private void editarLivro() {
         int indiceSelecionado = b.getIdComponenteSelecionado();
-
-        // Verifica se algum livro está selecionado
-        if (indiceSelecionado != -1) {
-            // Obtém o livro selecionado
-            Livro livroSelecionado = b.listaModelo.getElementAt(indiceSelecionado);
-
             // Pergunta de confirmação
             int opcao = JOptionPane.showConfirmDialog(frame,
                     "Deseja mesmo eliminar o livro com o título: " + livroSelecionado.getTitulo() + "?",
                     "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
             if (opcao == JOptionPane.YES_OPTION) {
-                // Se o usuário clicar em "Sim", exibe a mensagem de sucesso
-                livroSelecionado.alterarDados(indiceSelecionado, livroSelecionado);
+                livroSelecionado.alterarDados(livroSelecionado);
                 JOptionPane.showMessageDialog(frame, "Livro eliminado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 frame.dispose();
                 b.refreshLivroBaseDados();
                 b.exibirFrame();
                 //refreshLivroBaseDados();
+            } else {
+                // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
+                JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
+                                "\nPor favor, selecione um livro para eliminar.",
+                        "Aviso", JOptionPane.WARNING_MESSAGE);
             }
-        } else {
-            // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
-            JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
-                            "\nPor favor, selecione um livro para eliminar.",
-                    "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
 

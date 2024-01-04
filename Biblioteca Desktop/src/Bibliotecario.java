@@ -7,6 +7,7 @@ public class Bibliotecario {
     private final Database conexao = new Database();
 
     Livro livro = new Livro();
+    AdicionarLivroFormulario alf = new AdicionarLivroFormulario();
     EditarLivroFormulario elf = new EditarLivroFormulario();
 
     JFrame frame = new JFrame("Biblioteca");
@@ -45,14 +46,14 @@ public class Bibliotecario {
         // Adiciona um ouvinte de ação para o botão "Alterar Dados"
         // NÃO FUNCIONA
         alterarLivroButton.addActionListener(e -> {
-            int idSelecionado = getIdComponenteSelecionado();
-            alterarDadosLivro(idSelecionado);
+            alterarDadosLivro();
         });
 
         // Adiciona um ouvinte de ação para o botão "Adicionar Livro"
         // NÃO FUNCIONA
         adicionarLivroButton.addActionListener(e -> {
-            //int idSelecionado = getIdComponenteSelecionado();
+            frame.dispose();
+            alf.exibirFrame();
         });
 
         // Adiciona um ouvinte de ação para o botão "Eliminar Livro"
@@ -140,22 +141,23 @@ public class Bibliotecario {
         JOptionPane.showMessageDialog(frame, "Implemente a lógica para adicionar um novo livro.");
     }
 
-    private void alterarDadosLivro(int id_LivroSelecionado) {
+    public Livro alterarDadosLivro() {
 
-        int indiceSelecionado = getIdComponenteSelecionado();
+        int idSelecionado = getIdComponenteSelecionado();
 
         // Verifica se algum livro está selecionado
-        if (indiceSelecionado != -1) {
+        if (idSelecionado != -1) {
             // Obtém o livro selecionado
-            Livro livroSelecionado = listaModelo.getElementAt(indiceSelecionado);
-
+            Livro livroSelecionado = listaModelo.getElementAt(idSelecionado);
             frame.dispose();
             elf.exibirFrame();
+            return livroSelecionado;
         } else {
             // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
             JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
                             "\nPor favor, selecione um livro para editar.",
                     "Aviso", JOptionPane.WARNING_MESSAGE);
+            return null;
         }
     }
 

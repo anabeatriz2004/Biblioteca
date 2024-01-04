@@ -122,9 +122,7 @@ public class Livro {
     }
 
     /** Método para consultar um livro pelo ID na base de dados */
-    public ArrayList<Livro> consultarLivro(int idLivro) {
-        ArrayList<Livro> consultarLivro = new ArrayList<>();
-
+    public void consultarLivro(int idLivro) {
         try {
             // Define a consulta SQL para selecionar um livro com base no ID
             String sql = "SELECT * FROM livro WHERE id_livro = ?";
@@ -154,19 +152,11 @@ public class Livro {
                             ", Autor: " + autor + ", Editora: " + editora + ", Ano de Publicação: " + anoPubli +
                             ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade + ", Descricao" +
                             descricao);
-
-                    // Cria uma instância da classe Livro
-                    Livro livro = new Livro(idLivro, isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
-
-                    // Adiciona o livro à lista
-                    consultarLivro.add(livro);
                 }
-                return consultarLivro;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
     }
 
@@ -247,7 +237,7 @@ public class Livro {
     }
 
     /** método para alterar dados de um livro*/
-    public void alterarDados(int idAEditar,Livro livro) {
+    public void alterarDados(Livro livro) {
         try {
             // Query SQL para atualizar os dados do livro
             String sql = "UPDATE livros SET ISBN=?, titulo=?, autor=?, editora=?, anoPubli=?, genero=?, disponibilidade=?, descricao=? WHERE id_livro=?";
@@ -262,9 +252,7 @@ public class Livro {
                 preparedStatement.setString(6, livro.getGenero());
                 preparedStatement.setBoolean(7, livro.isDisponibilidade());
                 preparedStatement.setString(8, livro.getDescricao());
-
-                // Define o parâmetro WHERE
-                preparedStatement.setInt(9, idAEditar);
+                preparedStatement.setInt(9, livro.getID_livro());
 
                 // Executa a atualização
                 preparedStatement.executeUpdate();

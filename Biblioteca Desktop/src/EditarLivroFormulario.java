@@ -8,8 +8,6 @@ public class EditarLivroFormulario {
     Livro livro = new Livro();
 
     JFrame frame = new JFrame("Formulário de Alteração de Dados do Livro");
-    //Icon icon = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Ambiente de Trabalho\\ESTGA\\2º ano\\1º Semestre\\Proj\\Biblioteca\\Biblioteca_vo\\Biblioteca Desktop\\img\\arrow-left-square.svg");
-    //JButton voltarBotao = new JButton(icon);
     public JButton voltarBotao = new JButton("<-- Voltar");
     public final JLabel tituloInicialLabel = new JLabel("Editar Livro");
     public final JLabel isbnLabel = new JLabel("ISBN: ");
@@ -61,7 +59,9 @@ public class EditarLivroFormulario {
         isbnTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         isbnTextField.setSize(200, 20);
         isbnTextField.setLocation(675, 150);
-        //isbnTextField.getText();
+        Livro livroSelecionado = livroSelecionado.consultarLivro(); /* lógica para obter o livro selecionado */
+        String isbnLivro = livroSelecionado.getISBN();
+        isbnTextField.setText(isbnLivro);
         frame.add(isbnTextField);
 
         tituloLabel.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -162,8 +162,9 @@ public class EditarLivroFormulario {
             b.exibirFrame();
         };
     }
+
     // NÃO FUNCIONA
-    private ActionListener editarLivro(int id_LivroSelecionado) {
+    private void editarLivro() {
         int indiceSelecionado = b.getIdComponenteSelecionado();
 
         // Verifica se algum livro está selecionado
@@ -178,7 +179,7 @@ public class EditarLivroFormulario {
 
             if (opcao == JOptionPane.YES_OPTION) {
                 // Se o usuário clicar em "Sim", exibe a mensagem de sucesso
-                livroSelecionado.alterarDados(id_LivroSelecionado);
+                livroSelecionado.alterarDados(indiceSelecionado, livroSelecionado);
                 JOptionPane.showMessageDialog(frame, "Livro eliminado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 //refreshLivroBaseDados();
             }

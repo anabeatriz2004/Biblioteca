@@ -7,6 +7,7 @@ public class Bibliotecario {
     private final Database conexao = new Database();
 
     Livro livro = new Livro();
+    EditarLivroFormulario elf = new EditarLivroFormulario();
 
     JFrame frame = new JFrame("Biblioteca");
     JList<Livro> lista = new JList<>();
@@ -43,13 +44,15 @@ public class Bibliotecario {
 
         // Adiciona um ouvinte de ação para o botão "Alterar Dados"
         // NÃO FUNCIONA
-        alterarLivroButton.addActionListener(e -> alterarDadosLivro());
+        alterarLivroButton.addActionListener(e -> {
+            int idSelecionado = getIdComponenteSelecionado();
+            alterarDadosLivro(idSelecionado);
+        });
 
         // Adiciona um ouvinte de ação para o botão "Adicionar Livro"
         // NÃO FUNCIONA
         adicionarLivroButton.addActionListener(e -> {
-            int idSelecionado = getIdComponenteSelecionado();
-
+            //int idSelecionado = getIdComponenteSelecionado();
         });
 
         // Adiciona um ouvinte de ação para o botão "Eliminar Livro"
@@ -88,7 +91,7 @@ public class Bibliotecario {
         frame.setVisible(true);
     }
 
-    private int getIdComponenteSelecionado() {
+    public int getIdComponenteSelecionado() {
         // Obtém o índice do livro selecionado na lista
         int indiceSelecionado = lista.getSelectedIndex();
 
@@ -138,31 +141,22 @@ public class Bibliotecario {
     }
 
     private void alterarDadosLivro(int id_LivroSelecionado) {
-        int indiceSelecionado = getIdComponenteSelecionado();
 
-        // Lógica para alterar os dados do livro (pode ser um novo JFrame, JOptionPane, etc.)
-        JOptionPane.showMessageDialog(frame, "Implemente a lógica para alterar os dados do livro.");
+        int indiceSelecionado = getIdComponenteSelecionado();
 
         // Verifica se algum livro está selecionado
         if (indiceSelecionado != -1) {
             // Obtém o livro selecionado
             Livro livroSelecionado = listaModelo.getElementAt(indiceSelecionado);
 
-            // Pergunta de confirmação
-            int opcao = JOptionPane.showConfirmDialog(frame,
-                    "Deseja mesmo eliminar o livro com o título: " + livroSelecionado.getTitulo() + "?",
-                    "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-
-            if (opcao == JOptionPane.YES_OPTION) {
-                // Se o usuário clicar em "Sim", exibe a mensagem de sucesso
-                livroSelecionado.alterarDados(id_LivroSelecionado);
-                JOptionPane.showMessageDialog(frame, "Livro eliminado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                refreshLivroBaseDados();
-            }
+            // Se o usuário clicar em "Sim", exibe a mensagem de sucesso
+            //livroSelecionado.alterarDados(id_LivroSelecionado, livroSelecionado);
+            frame.dispose();
+            elf.exibirFrame();
         } else {
             // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
             JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
-                            "\nPor favor, selecione um livro para eliminar.",
+                            "\nPor favor, selecione um livro para editar.",
                     "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }

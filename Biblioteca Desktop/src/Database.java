@@ -39,9 +39,9 @@ public class Database extends JFrame {
                         JOptionPane.ERROR_MESSAGE);
                 System.out.println("Encerrando o programa...");
                 System.exit(0);
-            } finally {
-                desconectar();
             }
+        } else {
+            return;
         }
     }
 

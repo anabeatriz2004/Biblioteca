@@ -5,6 +5,7 @@ import java.sql.*;
 
 public class EditarLivroFormulario {
     Bibliotecario b = new Bibliotecario();
+    Livro livro = new Livro();
 
     JFrame frame = new JFrame("Formulário de Alteração de Dados do Livro");
     //Icon icon = new ImageIcon("C:\\Users\\ASUS\\OneDrive\\Ambiente de Trabalho\\ESTGA\\2º ano\\1º Semestre\\Proj\\Biblioteca\\Biblioteca_vo\\Biblioteca Desktop\\img\\arrow-left-square.svg");
@@ -60,6 +61,7 @@ public class EditarLivroFormulario {
         isbnTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         isbnTextField.setSize(200, 20);
         isbnTextField.setLocation(675, 150);
+        //isbnTextField.getText();
         frame.add(isbnTextField);
 
         tituloLabel.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -142,7 +144,7 @@ public class EditarLivroFormulario {
         editarlivroButton.setFont(new Font("Arial", Font.PLAIN, 15));
         editarlivroButton.setSize(200, 30); // Ajustei a altura
         editarlivroButton.setLocation(675, 525); // Ajustei a posição
-        editarlivroButton.addActionListener(editarLivro());
+        //editarlivroButton.addActionListener(editarLivro());
         editarlivroButton.setForeground(Color.WHITE);
         editarlivroButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         editarlivroButton.setBackground(new Color(30, 30, 30));
@@ -161,10 +163,31 @@ public class EditarLivroFormulario {
         };
     }
     // NÃO FUNCIONA
-    private ActionListener editarLivro() {
-        return e -> {
-            JOptionPane.showMessageDialog(frame, "Nada");
-        };
+    private ActionListener editarLivro(int id_LivroSelecionado) {
+        int indiceSelecionado = b.getIdComponenteSelecionado();
+
+        // Verifica se algum livro está selecionado
+        if (indiceSelecionado != -1) {
+            // Obtém o livro selecionado
+            Livro livroSelecionado = b.listaModelo.getElementAt(indiceSelecionado);
+
+            // Pergunta de confirmação
+            int opcao = JOptionPane.showConfirmDialog(frame,
+                    "Deseja mesmo eliminar o livro com o título: " + livroSelecionado.getTitulo() + "?",
+                    "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+            if (opcao == JOptionPane.YES_OPTION) {
+                // Se o usuário clicar em "Sim", exibe a mensagem de sucesso
+                livroSelecionado.alterarDados(id_LivroSelecionado);
+                JOptionPane.showMessageDialog(frame, "Livro eliminado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                //refreshLivroBaseDados();
+            }
+        } else {
+            // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
+            JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
+                            "\nPor favor, selecione um livro para eliminar.",
+                    "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     public void exibirFrame() {

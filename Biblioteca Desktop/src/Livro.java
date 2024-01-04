@@ -60,7 +60,6 @@ public class Livro {
         return titulo;
     }
     public void setTitulo(String titulo) {
-
         this.titulo = titulo;
     }
     public String getAutor() {
@@ -238,65 +237,31 @@ public class Livro {
     }
 
     /** método para alterar dados de um livro*/
-    private void alterarLivro(Livro livro) {
-        // ID do livro que você deseja alterar
-        int idLivroParaAlterar = 1;
-
-        // novos atributos para poder alterar valores
-        String novo_ISBN = "";
-        String novo_titulo = "";
-        String novo_autor = "";
-        String novo_editora = "";
-        int novo_anoPubli = 0;
-        String novo_genero = "";
-        boolean novo_disponibilidade = true;
-        String novo_descricao = "";
-
-
-        // Novos dados para o livro
-        Livro novoLivro = new Livro();
-        novoLivro.setID_livro(idLivroParaAlterar);
-        novoLivro.setISBN(novo_ISBN);
-        novoLivro.setTitulo(novo_titulo);
-        novoLivro.setAutor(novo_autor);
-        novoLivro.setEditora(novo_editora);
-        novoLivro.setAnoPubli(novo_anoPubli);
-        novoLivro.setGenero(novo_genero);
-        novoLivro.setDisponibilidade(novo_disponibilidade);
-        novoLivro.setDescricao(novo_descricao);
-
+    public void alterarDados(int idAEditar,Livro livro) {
         try {
-            // Consulta SQL para atualizar os dados do livro com base no ID
-            String sql = "UPDATE livro SET ISBN=?, titulo=?, autor=?, editora=?, anoPubli=?, genero=?, disponibilidade=?, descricao=? WHERE id_livro=?";
+            // Query SQL para atualizar os dados do livro
+            String sql = "UPDATE livros SET ISBN=?, titulo=?, autor=?, editora=?, anoPubli=?, genero=?, disponibilidade=?, descricao=? WHERE id_livro=?";
 
-            // Cria um PreparedStatement para a consulta SQL
-            try (PreparedStatement  pstmt = conexao.getConexao().prepareStatement(sql)) {
-                // Define os novos dados do livro nos lugares dos pontos de interrogação
-                 pstmt.setString(1, livro.getISBN());
-                 pstmt.setString(2, livro.getTitulo());
-                 pstmt.setString(3, livro.getAutor());
-                 pstmt.setString(4, livro.getEditora());
-                 pstmt.setInt(5, livro.getAnoPubli());
-                 pstmt.setString(6, livro.getGenero());
-                 pstmt.setBoolean(7, livro.isDisponibilidade());
-                 pstmt.setString(8, livro.getDescricao());
-                 pstmt.setInt(9, livro.getID_livro());
+            try (PreparedStatement preparedStatement = conexao.getConexao().prepareStatement(sql)) {
+                // Define os parâmetros na query
+                preparedStatement.setString(1, livro.getISBN());
+                preparedStatement.setString(2, livro.getTitulo());
+                preparedStatement.setString(3, livro.getAutor());
+                preparedStatement.setString(4, livro.getEditora());
+                preparedStatement.setInt(5, livro.getAnoPubli());
+                preparedStatement.setString(6, livro.getGenero());
+                preparedStatement.setBoolean(7, livro.isDisponibilidade());
+                preparedStatement.setString(8, livro.getDescricao());
 
-                // Executa a atualização (operação de alteração)
-                int linhasAfetadas =  pstmt.executeUpdate();
+                // Define o parâmetro WHERE
+                preparedStatement.setInt(9, idAEditar);
 
-                // Verifica se a alteração foi bem-sucedida
-                if (linhasAfetadas > 0) {
-                    System.out.println("Livro alterado com sucesso!");
-                } else {
-                    System.out.println("Nenhum livro encontrado com o ID fornecido.");
-                }
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+                // Executa a atualização
+                preparedStatement.executeUpdate();
+                System.out.println("Dados do livro alterados com sucesso!");
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("Erro ao alterar dados do livro: " + e.getMessage());
         }
     }
 

@@ -47,7 +47,10 @@ public class Bibliotecario {
 
         // Adiciona um ouvinte de ação para o botão "Adicionar Livro"
         // NÃO FUNCIONA
-        adicionarLivroButton.addActionListener(e -> adicionarLivro());
+        adicionarLivroButton.addActionListener(e -> {
+            int idSelecionado = getIdComponenteSelecionado();
+
+        });
 
         // Adiciona um ouvinte de ação para o botão "Eliminar Livro"
         // Obtém o ID do livro selecionado e chama o método eliminarLivro
@@ -128,14 +131,40 @@ public class Bibliotecario {
         }
     }
 
+    // NÃO FUNCIONA
     private void adicionarLivro() {
         // Lógica para adicionar um novo livro (pode ser um novo JFrame, JOptionPane, etc.)
         JOptionPane.showMessageDialog(frame, "Implemente a lógica para adicionar um novo livro.");
     }
 
-    private void alterarDadosLivro() {
+    private void alterarDadosLivro(int id_LivroSelecionado) {
+        int indiceSelecionado = getIdComponenteSelecionado();
+
         // Lógica para alterar os dados do livro (pode ser um novo JFrame, JOptionPane, etc.)
         JOptionPane.showMessageDialog(frame, "Implemente a lógica para alterar os dados do livro.");
+
+        // Verifica se algum livro está selecionado
+        if (indiceSelecionado != -1) {
+            // Obtém o livro selecionado
+            Livro livroSelecionado = listaModelo.getElementAt(indiceSelecionado);
+
+            // Pergunta de confirmação
+            int opcao = JOptionPane.showConfirmDialog(frame,
+                    "Deseja mesmo eliminar o livro com o título: " + livroSelecionado.getTitulo() + "?",
+                    "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+            if (opcao == JOptionPane.YES_OPTION) {
+                // Se o usuário clicar em "Sim", exibe a mensagem de sucesso
+                livroSelecionado.alterarDados(id_LivroSelecionado);
+                JOptionPane.showMessageDialog(frame, "Livro eliminado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                refreshLivroBaseDados();
+            }
+        } else {
+            // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
+            JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
+                            "\nPor favor, selecione um livro para eliminar.",
+                    "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     /**

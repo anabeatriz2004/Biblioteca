@@ -33,6 +33,8 @@ public class Login {
     public void exibirFrame() {
         frame = new JFrame("Formulário de Login");
 
+        frame.setLayout(new FlowLayout());
+
         voltarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
         voltarBotao.setSize(110, 30); // Ajustei a altura
         voltarBotao.setLocation(0, 0); // Ajustei a posição
@@ -74,7 +76,7 @@ public class Login {
         frame.add(passwordField);
 
         logarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
-        logarBotao.setSize(100, 30);
+        logarBotao.setPreferredSize(new Dimension(100, 30));
         logarBotao.setLocation(650, 300);
         logarBotao.setForeground(Color.WHITE);
         logarBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
@@ -167,5 +169,9 @@ public class Login {
 
         // Retorna o WindowListener
         return windowListener;
+    }
+    public static void main(String[] args) {
+        Login log = new Login();
+        log.exibirFrame();
     }
 }

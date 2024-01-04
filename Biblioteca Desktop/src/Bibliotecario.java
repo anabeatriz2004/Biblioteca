@@ -149,8 +149,6 @@ public class Bibliotecario {
             // Obtém o livro selecionado
             Livro livroSelecionado = listaModelo.getElementAt(indiceSelecionado);
 
-            // Se o usuário clicar em "Sim", exibe a mensagem de sucesso
-            //livroSelecionado.alterarDados(id_LivroSelecionado, livroSelecionado);
             frame.dispose();
             elf.exibirFrame();
         } else {
@@ -193,7 +191,7 @@ public class Bibliotecario {
         }
     }
 
-    private void refreshLivroBaseDados() {
+    public void refreshLivroBaseDados() {
         listaModelo.clear();
 
         ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();

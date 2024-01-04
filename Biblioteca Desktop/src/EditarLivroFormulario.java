@@ -181,6 +181,9 @@ public class EditarLivroFormulario {
                 // Se o usuário clicar em "Sim", exibe a mensagem de sucesso
                 livroSelecionado.alterarDados(indiceSelecionado, livroSelecionado);
                 JOptionPane.showMessageDialog(frame, "Livro eliminado com sucesso.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                frame.dispose();
+                b.refreshLivroBaseDados();
+                b.exibirFrame();
                 //refreshLivroBaseDados();
             }
         } else {

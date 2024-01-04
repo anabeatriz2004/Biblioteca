@@ -28,7 +28,9 @@ public class AdicionarLivroFormulario {
     public JTextField descricaoTextField = new JTextField();
     public JButton adicionarLivroBotao = new JButton("Adicionar Livro");
 
-    AdicionarLivroFormulario() {
+    AdicionarLivroFormulario() {}
+
+    public void exibirFrame() {
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);
@@ -164,11 +166,6 @@ public class AdicionarLivroFormulario {
         return e -> {
             JOptionPane.showMessageDialog(frame, "Nada");
         };
-    }
-
-    public void exibirFrame() {
-        // Define a frame como visível
-        frame.setVisible(true);
     }
 
     private WindowListener fecharPrograma() {

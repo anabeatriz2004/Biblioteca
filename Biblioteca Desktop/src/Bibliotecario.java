@@ -1,10 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.*;
-import java.util.*;
-
-import static groovy.console.ui.text.FindReplaceUtility.dispose;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Bibliotecario {
     Connection conexao = Database.getConexao();
@@ -34,6 +33,9 @@ public class Bibliotecario {
      * tabela emprestimo, para visualizar os mesmos
      */
     Bibliotecario() {
+    }
+
+    public void exibirFrame() {
         //String nome = "Entrou como bibliotecário";
         // Adiciona a JLabel nome à esquerda no topo
         //painelInicio.add(nome, BorderLayout.WEST);
@@ -45,7 +47,7 @@ public class Bibliotecario {
         terminarSessaoButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(frame,
                     "Falta acresentar o método para terminar sessão.");
-            dispose(); // fecha a tela inicial
+            frame.dispose(); // fecha a tela inicial
             biblio.exibirFrame();
         });
 
@@ -71,8 +73,8 @@ public class Bibliotecario {
         // NÃO FUNCIONA
         alterarLivroButton.addActionListener(e -> {
             Livro livroSelecionado = obterLivroSelecionado();
-            EditarLivroFormulario elf = new EditarLivroFormulario(livroSelecionado);
-            elf.exibirFrame();
+            EditarLivroFormulario elf = new EditarLivroFormulario();
+            elf.exibirFrame(livroSelecionado);
         });
 
         // Adiciona um ouvinte de ação para o botão "Adicionar Livro"
@@ -188,8 +190,8 @@ public class Bibliotecario {
         // Verifica se um livro foi selecionado antes de exibir o formulário de edição
         if (livroSelecionado != null) {
             // Abre o formulário de edição e passa o livro selecionado
-            EditarLivroFormulario elf = new EditarLivroFormulario(livroSelecionado);
-            elf.exibirFrame();
+            EditarLivroFormulario elf = new EditarLivroFormulario();
+            elf.exibirFrame(livroSelecionado);
         } else {
             // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
             JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
@@ -282,15 +284,6 @@ public class Bibliotecario {
             setText(livro.getTitulo());
             return this;
         }
-    }
-
-    public void exibirFrame() {
-        // Define a frame como visível
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        new Bibliotecario();
     }
 }
 

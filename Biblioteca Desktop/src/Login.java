@@ -7,6 +7,7 @@ import java.awt.event.WindowListener;
 import java.sql.*;
 
 public class Login {
+    public JButton voltarBotao = new JButton("<-- Voltar");
     JFrame frame = new JFrame("Formulário de Login");
     public final JLabel loginLabel = new JLabel("Login");
     public final JLabel emailLabel = new JLabel("Email: ");
@@ -20,17 +21,32 @@ public class Login {
 
     Utilizador u = new Utilizador();
     Bibliotecario b = new Bibliotecario();
+    Biblioteca biblio = new Biblioteca();
 
     boolean entradaValida = false;
 
     String senhaIncorreta = "Senha incorreta. Por favor, tente novamente";
 
-    public Login() {
+    public Login() {}
+
+    public void exibirFrame() {
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);
         frame.getContentPane().setBackground(Color.BLACK);
         frame.getColorModel();
+
+        voltarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
+        voltarBotao.setSize(110, 30); // Ajustei a altura
+        voltarBotao.setLocation(0, 0); // Ajustei a posição
+        voltarBotao.addActionListener(e -> {
+            frame.dispose();
+            biblio.exibirFrame();
+        });
+        voltarBotao.setForeground(Color.WHITE);
+        voltarBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        voltarBotao.setBackground(new Color(30, 30, 30));
+        frame.add(voltarBotao);
 
         loginLabel.setFont(new Font("Arial", Font.BOLD, 20));
         loginLabel.setSize(100, 20);
@@ -71,7 +87,7 @@ public class Login {
 
         frame.addWindowListener(fecharPrograma());
         frame.setResizable(false);
-        frame.setVisible(false);
+        frame.setVisible(true);
     }
 
     private ActionListener clicarBotaoLogin() {
@@ -134,11 +150,6 @@ public class Login {
             e.printStackTrace();
             System.out.println("Erro ao conectar ao banco de dados");
         }
-    }
-
-    public void exibirFrame() {
-        // Define a frame como visível
-        frame.setVisible(true);
     }
 
     private WindowListener fecharPrograma() {

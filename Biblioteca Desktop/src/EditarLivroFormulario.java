@@ -27,7 +27,9 @@ public class EditarLivroFormulario {
     public JTextField descricaoTextField = new JTextField();
     public JButton editarlivroButton = new JButton("Editar Livro");
 
-    EditarLivroFormulario (Livro livro) {
+    EditarLivroFormulario() {}
+
+    public void exibirFrame (Livro livro) {
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);
@@ -195,11 +197,6 @@ public class EditarLivroFormulario {
                     "Aviso", JOptionPane.WARNING_MESSAGE);
 
         }
-    }
-
-    public void exibirFrame() {
-        // Define a frame como visível
-        frame.setVisible(true);
     }
 
     private WindowListener fecharPrograma() {

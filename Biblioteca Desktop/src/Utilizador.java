@@ -7,8 +7,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static groovy.console.ui.text.FindReplaceUtility.dispose;
-
 public class Utilizador {
     //private final Database conexao = new Database();
     Connection conexao = Database.getConexao();
@@ -28,14 +26,12 @@ public class Utilizador {
     JLabel nome = new JLabel("Bem-vindo há biblioteca! :)");
     JButton terminarSessaoButton = new JButton("Iniciar Sessão");
 
-    public Utilizador() {
-        lista();
-    }
+    public Utilizador() {}
 
     /**
      * Método para mostrar a lista que é exibida ao arrancar o programa
      */
-    public void lista() {
+    public void exibirFrame() {
         // Adiciona a JLabel nome à esquerda no topo
         painelInicio.add(nome, BorderLayout.WEST);
 
@@ -46,7 +42,7 @@ public class Utilizador {
         terminarSessaoButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(frame,
                     "Falta acresentar o método para terminar sessão.");
-            dispose(); // fecha a tela inicial
+            frame.dispose(); // fecha a tela inicial
             biblio.exibirFrame();
         });
 
@@ -114,10 +110,7 @@ public class Utilizador {
         }
     }
 
-    public void exibirFrame() {
-        // Define a frame como visível
-        frame.setVisible(true);
-    } private WindowListener fecharPrograma() {
+    private WindowListener fecharPrograma() {
         // Cria um WindowListener
         WindowListener windowListener = new WindowAdapter() {
             @Override

@@ -40,7 +40,7 @@ public class EditarLivroFormulario {
     public void exibirFrame (int idLivroSelecionado) {
         frame = new JFrame("Formulário de Alteração de Dados do Livro");
 
-        ArrayList<Livro> livroArray = new ArrayList<>();
+        ArrayList<Livro> livroArray;
 
         livroArray = livro.consultarLivro(idLivroSelecionado);
 
@@ -176,7 +176,7 @@ public class EditarLivroFormulario {
         editarlivroButton.setForeground(Color.WHITE);
         editarlivroButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         editarlivroButton.setBackground(new Color(30, 30, 30));
-        editarlivroButton.addActionListener(e-> { editarLivro(); });
+        editarlivroButton.addActionListener(e-> { editarLivro(idLivroSelecionado); });
         frame.add(editarlivroButton);
 
         frame.addWindowListener(fecharPrograma());
@@ -191,7 +191,7 @@ public class EditarLivroFormulario {
         };
     }
 
-    private Livro obterDadosLivroEditado() {
+    private void editarLivro(int id) {
         String isbn = isbnTextField.getText();
         String titulo = tituloTextField.getText();
         String autor = autorTextField.getText();
@@ -214,14 +214,7 @@ public class EditarLivroFormulario {
         // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
         disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
 
-        Livro livroEditado = new Livro(isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
-
-        return livroEditado;
-    }
-
-    private void editarLivro() {
-        Livro livroEditado;
-        livroEditado = obterDadosLivroEditado();
+        Livro livroEditado = new Livro(id, isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
 
         int opcao = JOptionPane.showConfirmDialog(frame,
                 "Deseja mesmo alterar o livro com o título: " + livro.getTitulo() + "?",

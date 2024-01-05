@@ -19,7 +19,7 @@ public class Livro {
     public Livro () {}
 
     // Construtor
-    public Livro(String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
+    /*public Livro(String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
@@ -28,7 +28,7 @@ public class Livro {
         this.genero = genero;
         this.disponibilidade = disponibilidade;
         this.descricao = descricao;
-    }
+    }*/
 
     // Construtor
     public Livro(int id_livro, String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {

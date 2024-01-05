@@ -47,22 +47,28 @@ public class EditarLivroFormulario {
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize); System.out.println(screenSize);
+        frame.getContentPane().setBackground(Color.BLACK);
         frame.getColorModel();
 
         voltarBotao.setFont(new Font("Arial", Font.PLAIN, 12));
-        voltarBotao.setSize(110, 30); // Ajustei a altura
-        voltarBotao.setLocation(0, 0); // Ajustei a posição
+        voltarBotao.setSize(110, 30);
+        voltarBotao.setLocation(0, 0);
+        voltarBotao.setForeground(Color.WHITE);
+        voltarBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        voltarBotao.setBackground(new Color(30, 30, 30));
         voltarBotao.addActionListener(voltarAtras());
         frame.add(voltarBotao);
 
         tituloInicialLabel.setFont(new Font("Arial", Font.PLAIN, 25));
         tituloInicialLabel.setSize(200, 20);
         tituloInicialLabel.setLocation(650, 50);
+        tituloInicialLabel.setForeground(Color.WHITE);
         frame.add(tituloInicialLabel);
 
         isbnLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         isbnLabel.setSize(200, 20);
         isbnLabel.setLocation(100, 150);
+        isbnLabel.setForeground(Color.WHITE);
         frame.add(isbnLabel);
 
         isbnTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -75,6 +81,7 @@ public class EditarLivroFormulario {
         tituloLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         tituloLabel.setSize(200, 20);
         tituloLabel.setLocation(100, 200);
+        tituloLabel.setForeground(Color.WHITE);
         frame.add(tituloLabel);
 
         tituloTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -87,6 +94,7 @@ public class EditarLivroFormulario {
         autorLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         autorLabel.setSize(200, 20);
         autorLabel.setLocation(100, 250);
+        autorLabel.setForeground(Color.WHITE);
         frame.add(autorLabel);
 
         autorTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -99,6 +107,7 @@ public class EditarLivroFormulario {
         editoraLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         editoraLabel.setSize(200, 20);
         editoraLabel.setLocation(100, 300);
+        editoraLabel.setForeground(Color.WHITE);
         frame.add(editoraLabel);
 
         editoraTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -111,6 +120,7 @@ public class EditarLivroFormulario {
         anoPubliLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         anoPubliLabel.setSize(200, 20);
         anoPubliLabel.setLocation(100, 350);
+        anoPubliLabel.setForeground(Color.WHITE);
         frame.add(anoPubliLabel);
 
         anoPubliTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -123,6 +133,7 @@ public class EditarLivroFormulario {
         generoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         generoLabel.setSize(200, 20);
         generoLabel.setLocation(100, 400);
+        generoLabel.setForeground(Color.WHITE);
         frame.add(generoLabel);
 
         generoTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -135,6 +146,7 @@ public class EditarLivroFormulario {
         disponibilidadeLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         disponibilidadeLabel.setSize(200, 20);
         disponibilidadeLabel.setLocation(100, 450);
+        disponibilidadeLabel.setForeground(Color.WHITE);
         frame.add(disponibilidadeLabel);
 
         // mudar a forma de saber se está disponível ou emprestado
@@ -148,6 +160,7 @@ public class EditarLivroFormulario {
         descricaoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         descricaoLabel.setSize(200, 20);
         descricaoLabel.setLocation(100, 500);
+        descricaoLabel.setForeground(Color.WHITE);
         frame.add(descricaoLabel);
 
         descricaoTextArea.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -159,10 +172,10 @@ public class EditarLivroFormulario {
 
         editarlivroButton.setFont(new Font("Arial", Font.PLAIN, 20));
         editarlivroButton.setSize(200, 30);
-        editarlivroButton.setLocation(650, 600);
-        editarlivroButton.setForeground(Color.PINK);
-        editarlivroButton.setBackground(Color.BLUE);
-        editarlivroButton.addActionListener(e-> { editarLivro(idLivroSelecionado); });
+        editarlivroButton.setLocation(650, 615);
+        editarlivroButton.setForeground(Color.WHITE);
+        editarlivroButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        editarlivroButton.setBackground(new Color(30, 30, 30));
         frame.add(editarlivroButton);
 
         frame.addWindowListener(fecharPrograma());

@@ -81,9 +81,9 @@ public class Bibliotecario {
         // Adiciona um ouvinte de ação para o botão "Alterar Dados"
         // NÃO FUNCIONA
         alterarLivroButton.addActionListener(e -> {
-            Livro livroSelecionado = obterLivroSelecionado();
+            int idLivroSelecionado = getIdComponenteSelecionado();
             EditarLivroFormulario elf = new EditarLivroFormulario();
-            elf.exibirFrame(livroSelecionado);
+            elf.exibirFrame(idLivroSelecionado);
         });
 
         // Adiciona um ouvinte de ação para o botão "Eliminar Livro"
@@ -172,34 +172,35 @@ public class Bibliotecario {
         JOptionPane.showMessageDialog(frame, "Implemente a lógica para adicionar um novo livro.");
     }
 
-    public Livro obterLivroSelecionado() {
+    /*public int obterLivroSelecionado() {
         int idSelecionado = getIdComponenteSelecionado();
 
         // Verifica se algum livro está selecionado
         if (idSelecionado != -1) {
             // Obtém o livro selecionado diretamente do modelo
+            listaModelo.getElementAt(idSelecionado);
             return listaModelo.getElementAt(idSelecionado);
         } else {
             // Se nenhum livro estiver selecionado, retorna null
             return null;
         }
-    }
+    }*/
 
-    public void abrirFormularioEdicao() {
+    /*public void abrirFormularioEdicao() {
         Livro livroSelecionado = obterLivroSelecionado();
 
         // Verifica se um livro foi selecionado antes de exibir o formulário de edição
         if (livroSelecionado != null) {
             // Abre o formulário de edição e passa o livro selecionado
             EditarLivroFormulario elf = new EditarLivroFormulario();
-            elf.exibirFrame(livroSelecionado);
+            elf.exibirFrame(obterLivroSelecionado);
         } else {
             // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
             JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
                             "\nPor favor, selecione um livro para editar.",
                     "Aviso", JOptionPane.WARNING_MESSAGE);
         }
-    }
+    }*/
 
 
     /**

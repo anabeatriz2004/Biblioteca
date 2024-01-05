@@ -1,5 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
 import java.sql.*;
 import java.util.*;
 
@@ -123,7 +121,8 @@ public class Livro {
     }
 
     /** Método para consultar um livro pelo ID na base de dados */
-    public void consultarLivro(int idLivro) {
+    public ArrayList<Livro>  consultarLivro(int idLivro) {
+        ArrayList<Livro> livroArray = new ArrayList<>();
         try {
             // Define a consulta SQL para selecionar um livro com base no ID
             String sql = "SELECT * FROM livro WHERE id_livro = ?";
@@ -139,6 +138,7 @@ public class Livro {
                 // Processa os resultados
                 while (resultado.next()) {
                     // Recupera os dados do livro
+                    String id = resultado.getString("id_livro");
                     String isbn = resultado.getString("ISBN");
                     String titulo = resultado.getString("titulo");
                     String autor = resultado.getString("autor");
@@ -148,17 +148,18 @@ public class Livro {
                     boolean disponibilidade = resultado.getBoolean("disponibilidade");
                     String descricao = resultado.getString("descricao");
 
-                    // Faça o que deseja com os dados, por exemplo, imprimir na tela
-                    System.out.println("ID: " + idLivro + ", ISBN: " + isbn + ", Título: " + titulo +
-                            ", Autor: " + autor + ", Editora: " + editora + ", Ano de Publicação: " + anoPubli +
-                            ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade + ", Descricao" +
-                            descricao);
+                    Livro livro = new Livro(idLivro, isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+
+                    // Adiciona o livro à lista
+                    livroArray.add(livro);
                 }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
+        return livroArray;
     }
 
     /** Método para consultar todos os livros na base de dados */

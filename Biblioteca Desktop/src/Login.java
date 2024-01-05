@@ -33,8 +33,6 @@ public class Login {
     public void exibirFrame() {
         frame = new JFrame("Formulário de Login");
 
-        frame.setLayout(new FlowLayout());
-
         voltarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
         voltarBotao.setSize(110, 30); // Ajustei a altura
         voltarBotao.setLocation(0, 0); // Ajustei a posição
@@ -42,21 +40,16 @@ public class Login {
             frame.dispose();
             biblio.exibirFrame();
         });
-        voltarBotao.setForeground(Color.WHITE);
-        voltarBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
-        voltarBotao.setBackground(new Color(30, 30, 30));
         frame.add(voltarBotao);
 
         loginLabel.setFont(new Font("Arial", Font.BOLD, 15));
         loginLabel.setSize(100, 20);
         loginLabel.setLocation(700, 150);
-        loginLabel.setForeground(Color.WHITE);
         frame.add(loginLabel);
 
         emailLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         emailLabel.setSize(100, 20);
         emailLabel.setLocation(600, 200);
-        emailLabel.setForeground(Color.WHITE);
         frame.add(emailLabel);
 
         emailTextField.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -67,7 +60,6 @@ public class Login {
         passwordLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         passwordLabel.setSize(100, 20);
         passwordLabel.setLocation(575, 250);
-        passwordLabel.setForeground(Color.WHITE);
         frame.add(passwordLabel);
 
         passwordField.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -76,11 +68,8 @@ public class Login {
         frame.add(passwordField);
 
         logarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
-        logarBotao.setPreferredSize(new Dimension(100, 30));
+        //logarBotao.setPreferredSize(new Dimension(100, 30));
         logarBotao.setLocation(650, 300);
-        logarBotao.setForeground(Color.WHITE);
-        logarBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
-        logarBotao.setBackground(new Color(30, 30, 30));
         logarBotao.addActionListener(clicarBotaoLogin());
         frame.add(logarBotao);
 

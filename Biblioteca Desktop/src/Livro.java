@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.sql.*;
 import java.util.*;
 
@@ -242,7 +243,7 @@ public class Livro {
     public void alterarDados(Livro livro) {
         try {
             // Query SQL para atualizar os dados do livro
-            String sql = "UPDATE livros SET ISBN=?, titulo=?, autor=?, editora=?, anoPubli=?, genero=?, disponibilidade=?, descricao=? WHERE id_livro=?";
+            String sql = "UPDATE livro SET ISBN=?, titulo=?, autor=?, editora=?, ano_publi=?, genero=?, disponibilidade=?, descricao=? WHERE id_livro=?";
 
             try (PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
                 // Define os parâmetros na query
@@ -258,10 +259,13 @@ public class Livro {
 
                 // Executa a atualização
                 preparedStatement.executeUpdate();
-                System.out.println("Dados do livro alterados com sucesso!");
+                JOptionPane.showMessageDialog(new JFrame(), "Livro alterado\\editado com sucesso.",
+                        "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (SQLException e) {
             System.err.println("Erro ao alterar dados do livro: " + e.getMessage());
+            JOptionPane.showMessageDialog(new JFrame(), "Livro alterado\\editado com sucesso.",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 

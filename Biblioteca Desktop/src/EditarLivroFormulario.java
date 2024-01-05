@@ -154,7 +154,7 @@ public class EditarLivroFormulario {
         disponibilidadeTextField.setSize(200, 20);
         disponibilidadeTextField.setLocation(675, 450);
         String disponibilidadeLivro = livroArray.get(0).getDisponibilidade();
-        generoTextField.setText(disponibilidadeLivro);
+        disponibilidadeTextField.setText(disponibilidadeLivro);
         frame.add(disponibilidadeTextField);
 
         descricaoLabel.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -229,11 +229,8 @@ public class EditarLivroFormulario {
 
         if (opcao == JOptionPane.YES_OPTION) {
             livro.alterarDados(livroEditado);
-            JOptionPane.showMessageDialog(frame, "Livro alterado\\editado com sucesso.",
-                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             frame.dispose();
             b.exibirFrame();
-            b.refreshLivroBaseDados();
         } else {
             // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
             JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +

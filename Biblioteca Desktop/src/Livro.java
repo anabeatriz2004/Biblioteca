@@ -245,26 +245,31 @@ public class Livro {
             // Query SQL para atualizar os dados do livro
             String sql = "UPDATE livro SET ISBN=?, titulo=?, autor=?, editora=?, ano_publi=?, genero=?, disponibilidade=?, descricao=? WHERE id_livro=?";
 
-            try (PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
+            try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
                 // Define os parâmetros na query
-                preparedStatement.setString(1, livro.getISBN());
-                preparedStatement.setString(2, livro.getTitulo());
-                preparedStatement.setString(3, livro.getAutor());
-                preparedStatement.setString(4, livro.getEditora());
-                preparedStatement.setInt(5, livro.getAnoPubli());
-                preparedStatement.setString(6, livro.getGenero());
-                preparedStatement.setBoolean(7, livro.isDisponibilidade());
-                preparedStatement.setString(8, livro.getDescricao());
-                preparedStatement.setInt(9, livro.getID_livro());
+                pstmt.setString(1, livro.getISBN());
+                pstmt.setString(2, livro.getTitulo());
+                pstmt.setString(3, livro.getAutor());
+                pstmt.setString(4, livro.getEditora());
+                pstmt.setInt(5, livro.getAnoPubli());
+                pstmt.setString(6, livro.getGenero());
+                pstmt.setBoolean(7, livro.isDisponibilidade());
+                pstmt.setString(8, livro.getDescricao());
+                pstmt.setInt(9, livro.getID_livro());
+                System.out.println(pstmt);
 
                 // Executa a atualização
-                preparedStatement.executeUpdate();
+                pstmt.executeUpdate();
+               // conexao.commit(); // Confirmar as alterações
+
                 JOptionPane.showMessageDialog(new JFrame(), "Livro alterado\\editado com sucesso.",
                         "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (SQLException e) {
+            //conexao.rollback(); // Em caso de erro, fazer o rollback
+            e.printStackTrace();
             System.err.println("Erro ao alterar dados do livro: " + e.getMessage());
-            JOptionPane.showMessageDialog(new JFrame(), "Livro alterado\\editado com sucesso.",
+            JOptionPane.showMessageDialog(new JFrame(), "Erro ao alterar o livro",
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }

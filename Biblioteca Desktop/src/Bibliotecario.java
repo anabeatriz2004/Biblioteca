@@ -257,8 +257,8 @@ public class Bibliotecario {
     }
 
     private WindowListener fecharPrograma() {
-        // Cria um WindowListener
-        WindowListener windowListener = new WindowAdapter() {
+
+        return new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
@@ -269,12 +269,9 @@ public class Bibliotecario {
                 }
             }
         };
-
-        // Retorna o WindowListener
-        return windowListener;
     }
 
-    class LivroRenderer extends DefaultListCellRenderer {
+    static class LivroRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);

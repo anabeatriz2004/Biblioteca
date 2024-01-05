@@ -205,7 +205,9 @@ public class EditarLivroFormulario {
 
     private WindowListener fecharPrograma() {
         // Cria um WindowListener
-        WindowListener windowListener = new WindowAdapter() {
+
+        // Retorna o WindowListener
+        return new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
@@ -216,8 +218,5 @@ public class EditarLivroFormulario {
                 }
             }
         };
-
-        // Retorna o WindowListener
-        return windowListener;
     }
 }

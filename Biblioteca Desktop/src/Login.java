@@ -143,8 +143,7 @@ public class Login {
     }
 
     private WindowListener fecharPrograma() {
-        // Cria um WindowListener
-        WindowListener windowListener = new WindowAdapter() {
+        return new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
@@ -155,10 +154,8 @@ public class Login {
                 }
             }
         };
-
-        // Retorna o WindowListener
-        return windowListener;
     }
+
     public static void main(String[] args) {
         Login log = new Login();
         log.exibirFrame();

@@ -59,7 +59,7 @@ public class Utilizador {
             listaModelo.addElement(livro);
         }
 
-        lista.setCellRenderer(new Utilizador.LivroRenderer());
+        lista.setCellRenderer(new LivroRenderer());
 
         lista.getSelectionModel().addListSelectionListener(e -> {
             Livro livro = lista.getSelectedValue();
@@ -102,7 +102,7 @@ public class Utilizador {
         painel.repaint();
     }
 
-    class LivroRenderer extends DefaultListCellRenderer {
+    static class LivroRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
@@ -113,8 +113,7 @@ public class Utilizador {
     }
 
     private WindowListener fecharPrograma() {
-        // Cria um WindowListener
-        WindowListener windowListener = new WindowAdapter() {
+        return new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
@@ -125,8 +124,5 @@ public class Utilizador {
                 }
             }
         };
-
-        // Retorna o WindowListener
-        return windowListener;
     }
 }

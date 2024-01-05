@@ -171,8 +171,7 @@ public class AdicionarLivroFormulario {
     }
 
     private WindowListener fecharPrograma() {
-        // Cria um WindowListener
-        WindowListener windowListener = new WindowAdapter() {
+        return new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 // Chama o método para desconectar do banco de dados
@@ -182,8 +181,5 @@ public class AdicionarLivroFormulario {
                 System.exit(0);
             }
         };
-
-        // Retorna o WindowListener
-        return windowListener;
     }
 }

@@ -9,7 +9,7 @@ public class AdicionarLivroFormulario {
 
     JFrame frame;
     public JButton voltarBotao = new JButton("<-- Voltar");
-    public final JLabel tituloInicialLabel = new JLabel("Adicionar Livro à Base de Dados");
+    public final JLabel tituloInicialLabel = new JLabel("Adicionar Livro");
     public final JLabel isbnLabel = new JLabel("ISBN: ");
     public JTextField isbnTextField = new JTextField();
     public final JLabel tituloLabel = new JLabel("Título: ");
@@ -25,127 +25,126 @@ public class AdicionarLivroFormulario {
     public final JLabel disponibilidadeLabel = new JLabel("Disponibilidade: ");
     public JTextField disponibilidadeTextField = new JTextField();
     public final JLabel descricaoLabel = new JLabel("Descricao: ");
-    public JTextField descricaoTextField = new JTextField();
+    public JTextArea descricaoTextArea = new JTextArea();
     public JButton adicionarLivroBotao = new JButton("Adicionar Livro");
 
     AdicionarLivroFormulario() {}
 
     public void exibirFrame() {
         frame = new JFrame("Formulário - Adicionar Livro");
-
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setSize(screenSize);
+        frame.setSize(screenSize); System.out.println(screenSize);
         frame.getContentPane().setBackground(Color.BLACK);
         frame.getColorModel();
 
-        voltarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
-        voltarBotao.setSize(110, 30); // Ajustei a altura
-        voltarBotao.setLocation(0, 0); // Ajustei a posição
-        voltarBotao.addActionListener(voltarAtras());
+        voltarBotao.setFont(new Font("Arial", Font.PLAIN, 12));
+        voltarBotao.setSize(110, 30);
+        voltarBotao.setLocation(0, 0);
         voltarBotao.setForeground(Color.WHITE);
         voltarBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         voltarBotao.setBackground(new Color(30, 30, 30));
+        voltarBotao.addActionListener(voltarAtras());
         frame.add(voltarBotao);
 
-        tituloInicialLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        tituloInicialLabel.setSize(200, 20);
-        tituloInicialLabel.setLocation(575, 50);
+        tituloInicialLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        tituloInicialLabel.setSize(200, 100);
+        tituloInicialLabel.setLocation(650, 50);
         tituloInicialLabel.setForeground(Color.WHITE);
         frame.add(tituloInicialLabel);
 
-        isbnLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        isbnLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         isbnLabel.setSize(200, 20);
-        isbnLabel.setLocation(575, 150);
+        isbnLabel.setLocation(100, 150);
         isbnLabel.setForeground(Color.WHITE);
         frame.add(isbnLabel);
 
-        isbnTextField.setFont(new Font("Arial", Font.PLAIN, 15));
-        isbnTextField.setSize(200, 20);
-        isbnTextField.setLocation(675, 150);
+        isbnTextField.setFont(new Font("Arial", Font.PLAIN, 12));
+        isbnTextField.setSize(1100, 20);
+        isbnTextField.setLocation(200, 150);
         frame.add(isbnTextField);
-        
-        tituloLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        tituloLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         tituloLabel.setSize(200, 20);
-        tituloLabel.setLocation(575, 200);
+        tituloLabel.setLocation(100, 200);
         tituloLabel.setForeground(Color.WHITE);
         frame.add(tituloLabel);
 
-        tituloTextField.setFont(new Font("Arial", Font.PLAIN, 15));
-        tituloTextField.setSize(200, 20);
-        tituloTextField.setLocation(675, 200);
+        tituloTextField.setFont(new Font("Arial", Font.PLAIN, 12));
+        tituloTextField.setSize(1100, 20);
+        tituloTextField.setLocation(200, 200);
         frame.add(tituloTextField);
 
-        autorLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        autorLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         autorLabel.setSize(200, 20);
-        autorLabel.setLocation(575, 250);
+        autorLabel.setLocation(100, 250);
         autorLabel.setForeground(Color.WHITE);
         frame.add(autorLabel);
 
-        autorTextField.setFont(new Font("Arial", Font.PLAIN, 15));
-        autorTextField.setSize(200, 20);
-        autorTextField.setLocation(675, 250);
+        autorTextField.setFont(new Font("Arial", Font.PLAIN, 12));
+        autorTextField.setSize(1100, 20);
+        autorTextField.setLocation(200, 250);
         frame.add(autorTextField);
 
-        editoraLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        editoraLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         editoraLabel.setSize(200, 20);
-        editoraLabel.setLocation(575, 300);
+        editoraLabel.setLocation(100, 300);
         editoraLabel.setForeground(Color.WHITE);
         frame.add(editoraLabel);
 
-        editoraTextField.setFont(new Font("Arial", Font.PLAIN, 15));
-        editoraTextField.setSize(200, 20);
-        editoraTextField.setLocation(675, 300);
+        editoraTextField.setFont(new Font("Arial", Font.PLAIN, 12));
+        editoraTextField.setSize(1100, 20);
+        editoraTextField.setLocation(200, 300);
         frame.add(editoraTextField);
 
-        anoPubliLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        anoPubliLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         anoPubliLabel.setSize(200, 20);
-        anoPubliLabel.setLocation(500, 350);
+        anoPubliLabel.setLocation(100, 350);
         anoPubliLabel.setForeground(Color.WHITE);
         frame.add(anoPubliLabel);
 
-        anoPubliTextField.setFont(new Font("Arial", Font.PLAIN, 15));
-        anoPubliTextField.setSize(200, 20);
-        anoPubliTextField.setLocation(675, 350);
+        anoPubliTextField.setFont(new Font("Arial", Font.PLAIN, 12));
+        anoPubliTextField.setSize(1100, 20);
+        anoPubliTextField.setLocation(200, 350);
         frame.add(anoPubliTextField);
-        
-        generoLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        generoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         generoLabel.setSize(200, 20);
-        generoLabel.setLocation(575, 400);
+        generoLabel.setLocation(100, 400);
         generoLabel.setForeground(Color.WHITE);
         frame.add(generoLabel);
 
-        generoTextField.setFont(new Font("Arial", Font.PLAIN, 15));
-        generoTextField.setSize(200, 20);
-        generoTextField.setLocation(675, 400);
+        generoTextField.setFont(new Font("Arial", Font.PLAIN, 12));
+        generoTextField.setSize(1100, 20);
+        generoTextField.setLocation(200, 400);
         frame.add(generoTextField);
 
-        disponibilidadeLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        disponibilidadeLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         disponibilidadeLabel.setSize(200, 20);
-        disponibilidadeLabel.setLocation(525, 450);
+        disponibilidadeLabel.setLocation(100, 450);
         disponibilidadeLabel.setForeground(Color.WHITE);
         frame.add(disponibilidadeLabel);
 
-        disponibilidadeTextField.setFont(new Font("Arial", Font.PLAIN, 15));
-        disponibilidadeTextField.setSize(200, 20);
-        disponibilidadeTextField.setLocation(675, 450);
+        // mudar a forma de saber se está disponível ou emprestado
+        disponibilidadeTextField.setFont(new Font("Arial", Font.PLAIN, 12));
+        disponibilidadeTextField.setSize(1100, 20);
+        disponibilidadeTextField.setLocation(200, 450);
         frame.add(disponibilidadeTextField);
 
-        descricaoLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        descricaoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         descricaoLabel.setSize(200, 20);
-        descricaoLabel.setLocation(575, 500);
+        descricaoLabel.setLocation(100, 500);
         descricaoLabel.setForeground(Color.WHITE);
         frame.add(descricaoLabel);
 
-        descricaoTextField.setFont(new Font("Arial", Font.PLAIN, 15));
-        descricaoTextField.setSize(200, 20);
-        descricaoTextField.setLocation(675, 500);
-        frame.add(descricaoTextField);
+        descricaoTextArea.setFont(new Font("Arial", Font.PLAIN, 12));
+        descricaoTextArea.setSize(1100, 100);
+        descricaoTextArea.setLocation(200, 500);
+        frame.add(descricaoTextArea);
 
-        adicionarLivroBotao.setFont(new Font("Arial", Font.PLAIN, 15));
-        adicionarLivroBotao.setSize(200, 30); // Ajustei a altura
-        adicionarLivroBotao.setLocation(675, 525); // Ajustei a posição
-        adicionarLivroBotao.addActionListener(adicionarLivro());
+        adicionarLivroBotao.setFont(new Font("Arial", Font.PLAIN, 20));
+        adicionarLivroBotao.setSize(200, 30);
+        adicionarLivroBotao.setLocation(650, 615);
         adicionarLivroBotao.setForeground(Color.WHITE);
         adicionarLivroBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         adicionarLivroBotao.setBackground(new Color(30, 30, 30));

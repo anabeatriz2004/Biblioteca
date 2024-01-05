@@ -70,20 +70,20 @@ public class Bibliotecario {
             // refreshLivroBaseDados();
         });
 
-        // Adiciona um ouvinte de ação para o botão "Alterar Dados"
-        // NÃO FUNCIONA
-        alterarLivroButton.addActionListener(e -> {
-            Livro livroSelecionado = obterLivroSelecionado();
-            EditarLivroFormulario elf = new EditarLivroFormulario();
-            elf.exibirFrame(livroSelecionado);
-        });
-
         // Adiciona um ouvinte de ação para o botão "Adicionar Livro"
         // NÃO FUNCIONA
         adicionarLivroButton.addActionListener(e -> {
             frame.dispose();
             AdicionarLivroFormulario alf = new AdicionarLivroFormulario();
             alf.exibirFrame();
+        });
+
+        // Adiciona um ouvinte de ação para o botão "Alterar Dados"
+        // NÃO FUNCIONA
+        alterarLivroButton.addActionListener(e -> {
+            Livro livroSelecionado = obterLivroSelecionado();
+            EditarLivroFormulario elf = new EditarLivroFormulario();
+            elf.exibirFrame(livroSelecionado);
         });
 
         // Adiciona um ouvinte de ação para o botão "Eliminar Livro"
@@ -125,7 +125,6 @@ public class Bibliotecario {
     public int getIdComponenteSelecionado() {
         // Obtém o índice do livro selecionado na lista
         int indiceSelecionado = lista.getSelectedIndex();
-        indiceSelecionado--;
 
         // Verifica se algum livro está selecionado
         if (indiceSelecionado != -1) {
@@ -139,6 +138,7 @@ public class Bibliotecario {
             return -1;  // Valor padrão indicando nenhum livro selecionado
         }
     }
+
 
     private void exibirDetalhesLivro(Livro livro) {
         try {

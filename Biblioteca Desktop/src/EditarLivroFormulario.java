@@ -9,11 +9,13 @@ import java.sql.SQLException;
 
 public class EditarLivroFormulario {
     Connection conexao = Database.getConexao();
+
     Bibliotecario b = new Bibliotecario();
+    Livro livro = new Livro();
 
     JFrame frame;
     public JButton voltarBotao = new JButton("<-- Voltar");
-    Livro livro = b.obterLivroSelecionado();
+    //Livro livro = b.obterLivroSelecionado();
     public final JLabel tituloInicialLabel = new JLabel("Editar Livro" + livro.getID_livro());
     public final JLabel isbnLabel = new JLabel("ISBN: ");
     public JTextField isbnTextField = new JTextField();
@@ -36,6 +38,8 @@ public class EditarLivroFormulario {
     EditarLivroFormulario() {}
 
     public void exibirFrame (Livro livro) {
+        this.livro = livro;
+
         frame = new JFrame("Formulário de Alteração de Dados do Livro");
 
         frame.setLayout(null);

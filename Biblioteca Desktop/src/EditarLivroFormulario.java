@@ -87,7 +87,7 @@ public class EditarLivroFormulario {
         tituloTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         tituloTextField.setSize(200, 20);
         tituloTextField.setLocation(675, 200);
-        String tituloLivro = livroArray.get(2).getTitulo();
+        String tituloLivro = livroArray.get(0).getTitulo();
         tituloTextField.setText(tituloLivro);
         frame.add(tituloTextField);
 
@@ -100,7 +100,7 @@ public class EditarLivroFormulario {
         autorTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         autorTextField.setSize(200, 20);
         autorTextField.setLocation(675, 250);
-        String autorLivro = livroArray.get(3).getAutor();
+        String autorLivro = livroArray.get(0).getAutor();
         autorTextField.setText(autorLivro);
         frame.add(autorTextField);
 
@@ -113,7 +113,7 @@ public class EditarLivroFormulario {
         editoraTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         editoraTextField.setSize(200, 20);
         editoraTextField.setLocation(675, 300);
-        String editoraLivro = livroArray.get(4).getEditora();
+        String editoraLivro = livroArray.get(0).getEditora();
         editoraTextField.setText(editoraLivro);
         frame.add(editoraTextField);
 
@@ -126,7 +126,7 @@ public class EditarLivroFormulario {
         anoPubliTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         anoPubliTextField.setSize(200, 20);
         anoPubliTextField.setLocation(675, 350);
-        int anoPubliLivro = livroArray.get(5).getAnoPubli();
+        int anoPubliLivro = livroArray.get(0).getAnoPubli();
         anoPubliTextField.setText(String.valueOf(anoPubliLivro));
         frame.add(anoPubliTextField);
 
@@ -139,7 +139,7 @@ public class EditarLivroFormulario {
         generoTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         generoTextField.setSize(200, 20);
         generoTextField.setLocation(675, 400);
-        String generoLivro = livroArray.get(6).getGenero();
+        String generoLivro = livroArray.get(0).getGenero();
         generoTextField.setText(generoLivro);
         frame.add(generoTextField);
 
@@ -153,7 +153,7 @@ public class EditarLivroFormulario {
         disponibilidadeTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         disponibilidadeTextField.setSize(200, 20);
         disponibilidadeTextField.setLocation(675, 450);
-        String disponibilidadeLivro = livroArray.get(7).getDisponibilidade();
+        String disponibilidadeLivro = livroArray.get(0).getDisponibilidade();
         generoTextField.setText(disponibilidadeLivro);
         frame.add(disponibilidadeTextField);
 
@@ -166,7 +166,7 @@ public class EditarLivroFormulario {
         descricaoTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         descricaoTextField.setSize(200, 20);
         descricaoTextField.setLocation(675, 500);
-        String descricaoLivro = livroArray.get(8).getDescricao();
+        String descricaoLivro = livroArray.get(0).getDescricao();
         descricaoTextField.setText(descricaoLivro);
         frame.add(descricaoTextField);
 

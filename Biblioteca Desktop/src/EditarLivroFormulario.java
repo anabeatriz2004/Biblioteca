@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -180,7 +183,37 @@ public class EditarLivroFormulario {
         };
     }
 
+    private Livro obterDadosLivroEditado() {
+        String isbn = isbnTextField.getText();
+        String titulo = tituloTextField.getText();
+        String autor = autorTextField.getText();
+        String editora = editoraTextField.getText();
+        String anoPubliStr = anoPubliTextField.getText();
+        String genero = generoTextField.getText();
+        String disponibilidadeStr = disponibilidadeTextField.getText();
+        String descricao = descricaoTextField.getText();
+
+        int anoPubli = 0;
+        boolean disponibilidade = true;
+
+        try {
+            anoPubli = Integer.parseInt(anoPubliStr);
+        } catch (NumberFormatException e) {
+            // Tratar erro de conversão, se necessário
+            e.printStackTrace();
+        }
+
+        // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
+        disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
+
+        Livro livroEditado = new Livro(isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+
+        return livroEditado;
+    }
+
     private void editarLivro() {
+        Livro livroEditado;
+        livroEditado = obterDadosLivroEditado();
         Livro livro = b.obterLivroSelecionado();
 
         int opcao = JOptionPane.showConfirmDialog(frame,
@@ -188,7 +221,7 @@ public class EditarLivroFormulario {
                 "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
         if (opcao == JOptionPane.YES_OPTION) {
-            livro.alterarDados(livro);
+            livro.alterarDados(livroEditado);
             JOptionPane.showMessageDialog(frame, "Livro alterado\\editado com sucesso.",
                     "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             frame.dispose();

@@ -280,5 +280,10 @@ public class Bibliotecario {
             return this;
         }
     }
+
+    public static void main(String[] args) {
+        Bibliotecario b = new Bibliotecario();
+        b.exibirFrame();
+    }
 }
 

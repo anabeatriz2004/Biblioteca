@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class AdicionarLivroFormulario {
     Connection conexao = Database.getConexao();
@@ -9,23 +10,41 @@ public class AdicionarLivroFormulario {
 
     JFrame frame;
     public JButton voltarBotao = new JButton("<-- Voltar");
+
     public final JLabel tituloInicialLabel = new JLabel("Adicionar Livro");
+
     public final JLabel isbnLabel = new JLabel("ISBN: ");
     public JTextField isbnTextField = new JTextField();
+    public final JLabel isbnErroLabel = new JLabel("Algo errado");
+
     public final JLabel tituloLabel = new JLabel("Título: ");
     public JTextField tituloTextField = new JTextField();
+    public final JLabel tituloErroLabel = new JLabel();
+
     public final JLabel autorLabel = new JLabel("Autor: ");
     public JTextField autorTextField = new JTextField();
+    public final JLabel autorErroLabel = new JLabel();
+
     public final JLabel editoraLabel = new JLabel("Editora: ");
     public JTextField editoraTextField = new JTextField();
+    public final JLabel editoraErroLabel = new JLabel();
+
     public final JLabel anoPubliLabel = new JLabel("Ano de Publicação: ");
     public JTextField anoPubliTextField = new JTextField();
+    public final JLabel anoPubliErroLabel = new JLabel();
+
     public final JLabel generoLabel = new JLabel("Gênero: ");
     public JTextField generoTextField = new JTextField();
+    public final JLabel generoErroLabel = new JLabel();
+
     public final JLabel disponibilidadeLabel = new JLabel("Disponibilidade: ");
     public JTextField disponibilidadeTextField = new JTextField();
+    public final JLabel disponilidadeErroLabel = new JLabel();
+
     public final JLabel descricaoLabel = new JLabel("Descricao: ");
     public JTextArea descricaoTextArea = new JTextArea();
+    public final JLabel descricaoErroLabel = new JLabel();
+
     public JButton adicionarLivroBotao = new JButton("Adicionar Livro");
 
     AdicionarLivroFormulario() {}
@@ -63,6 +82,12 @@ public class AdicionarLivroFormulario {
         isbnTextField.setSize(1100, 20);
         isbnTextField.setLocation(200, 150);
         frame.add(isbnTextField);
+
+        isbnErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        isbnErroLabel.setSize(200, 20);
+        isbnErroLabel.setLocation(200, 175);
+        isbnErroLabel.setForeground(Color.RED);
+        frame.add(isbnLabel);
 
         tituloLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         tituloLabel.setSize(200, 20);
@@ -155,7 +180,6 @@ public class AdicionarLivroFormulario {
         frame.setVisible(true);
     }
 
-    // NÃO FUNCIONA
     private ActionListener voltarAtras() {
         return e -> {
             frame.dispose();
@@ -163,8 +187,27 @@ public class AdicionarLivroFormulario {
         };
     }
 
+    public void verificarDados () {
+        ArrayList<Livro> livroAAdicionar = new ArrayList<>();
+
+        String isbn = isbnTextField.getText();
+        String titulo = tituloTextField.getText();
+        String autor = autorTextField.getText();
+        String editora = editoraTextField.getText();
+        String anoPubliStr = anoPubliTextField.getText();
+        String genero = generoTextField.getText();
+        String disponibilidadeStr = disponibilidadeTextField.getText();
+        String descricao = descricaoTextArea.getText();
+
+        if (isbn.isEmpty()) {
+
+        }
+
+    }
+
     private ActionListener adicionarLivro() {
         return e -> {
+            //inserirLivro();
             JOptionPane.showMessageDialog(frame, "Nada");
         };
     }

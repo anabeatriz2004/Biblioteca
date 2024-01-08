@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.sql.*;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 public class AdicionarLivroFormulario {
@@ -190,6 +193,7 @@ public class AdicionarLivroFormulario {
 
     public Livro verificarDados () {
         ArrayList<Livro> livroAAdicionar = new ArrayList<>();
+        boolean dadoValido;
 
         String isbn = isbnTextField.getText();
         String titulo = tituloTextField.getText();
@@ -203,15 +207,47 @@ public class AdicionarLivroFormulario {
         int anoPubli = 0;
         boolean disponibilidade;
 
-        try {
-            anoPubli = Integer.parseInt(anoPubliStr);
-        } catch (NumberFormatException e) {
-            // Tratar erro de conversão, se necessário
-            e.printStackTrace();
+        if (isbn.isEmpty()) {
+            dadoValido = true;
         }
 
-        // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
-        disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
+        if (titulo.isEmpty()) {
+            dadoValido = true;
+        }
+
+        if (autor.isEmpty()) {
+            dadoValido = true;
+        }
+
+        if (editora.isEmpty()) {
+            dadoValido = true;
+        }
+
+        if (anoPubliStr.isEmpty()) {
+            dadoValido = true;
+        } else {
+            try {
+                anoPubli = Integer.parseInt(anoPubliStr);
+            } catch (NumberFormatException e) {
+                // Tratar erro de conversão, se necessário
+                e.printStackTrace();
+            }
+        }
+
+        if (genero.isEmpty()) {
+            dadoValido = true;
+        }
+
+        if (disponibilidade.isEmpty()) {
+            dadoValido = true;
+        } else {
+            // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
+            disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
+        }
+
+        if (descricao.isEmpty()) {
+            dadoValido = true;
+        }
 
         Livro livro = new Livro(isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
         return livro;

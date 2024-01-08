@@ -7,9 +7,8 @@ import java.util.ArrayList;
 
 public class Bibliotecario {
     Connection conexao = Database.getConexao();
-    //private Connection conexao;
 
-    Livro livro = new Livro(isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+    Livro livro = new Livro();
     Biblioteca biblio = new Biblioteca();
 
     JFrame frame;

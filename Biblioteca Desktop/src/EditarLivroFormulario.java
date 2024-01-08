@@ -187,7 +187,7 @@ public class EditarLivroFormulario {
     }
 
     private void editarLivro(int id) {
-        String isbn = isbnTextField.getText();
+        String isbnStr = isbnTextField.getText();
         String titulo = tituloTextField.getText();
         String autor = autorTextField.getText();
         String editora = editoraTextField.getText();
@@ -196,10 +196,12 @@ public class EditarLivroFormulario {
         String disponibilidadeStr = disponibilidadeTextField.getText();
         String descricao = descricaoTextArea.getText();
 
+        int isbn = 0;
         int anoPubli = 0;
         boolean disponibilidade = true;
 
         try {
+            isbn = Integer.parseInt(isbnStr);
             anoPubli = Integer.parseInt(anoPubliStr);
         } catch (NumberFormatException e) {
             // Tratar erro de conversão, se necessário

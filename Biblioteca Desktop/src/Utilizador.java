@@ -11,7 +11,7 @@ public class Utilizador {
     //private final Database conexao = new Database();
     Connection conexao = Database.getConexao();
 
-    Livro livro = new Livro(isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+    Livro livro = new Livro();
     Biblioteca biblio = new Biblioteca();
 
     JFrame frame;

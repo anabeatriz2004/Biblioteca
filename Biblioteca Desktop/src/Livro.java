@@ -16,6 +16,8 @@ public class Livro {
     //private final Database conexao = new Database();
     Connection conexao = Database.getConexao();
 
+    public Livro() {}
+
     // Construtor
     public Livro(int ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
         this.ISBN = ISBN;

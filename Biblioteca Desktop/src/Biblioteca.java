@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Biblioteca {
     Connection conexao = Database.getConexao();
 
-    Livro livro = new Livro(isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+    Livro livro = new Livro();
 
     JFrame frame;
     JList<Livro> lista = new JList<>();

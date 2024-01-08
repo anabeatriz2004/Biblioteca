@@ -173,6 +173,7 @@ public class AdicionarLivroFormulario {
         adicionarLivroBotao.setForeground(Color.WHITE);
         adicionarLivroBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         adicionarLivroBotao.setBackground(new Color(30, 30, 30));
+        adicionarlivroButton.addActionListener(e-> { adicionarLivro(); });
         frame.add(adicionarLivroBotao);
 
         frame.addWindowListener(fecharPrograma());
@@ -216,12 +217,12 @@ public class AdicionarLivroFormulario {
         return livro;
     }
 
-    private ActionListener adicionarLivro() {
+    /*private ActionListener adicionarLivro(Livro livro) {
         return e -> {
-            //inserirLivro();
+            livro.inserirLivro(livro);
             JOptionPane.showMessageDialog(frame, "Nada");
         };
-    }
+    }*/
 
     private WindowListener fecharPrograma() {
         return new WindowAdapter() {

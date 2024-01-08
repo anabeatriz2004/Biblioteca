@@ -176,6 +176,7 @@ public class EditarLivroFormulario {
         editarlivroButton.setForeground(Color.WHITE);
         editarlivroButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         editarlivroButton.setBackground(new Color(30, 30, 30));
+        editarlivroButton.addActionListener(e-> { editarLivro(idLivroSelecionado); });
         frame.add(editarlivroButton);
 
         frame.addWindowListener(fecharPrograma());

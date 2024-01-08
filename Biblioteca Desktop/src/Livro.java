@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Livro {
     private int id_livro;
-    private String ISBN;
+    private int ISBN;
     private String titulo;
     private String autor;
     private String editora;
@@ -16,10 +16,8 @@ public class Livro {
     //private final Database conexao = new Database();
     Connection conexao = Database.getConexao();
 
-    public Livro () {}
-
     // Construtor
-    /*public Livro(String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
+    public Livro(int ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
@@ -28,10 +26,10 @@ public class Livro {
         this.genero = genero;
         this.disponibilidade = disponibilidade;
         this.descricao = descricao;
-    }*/
+    }
 
     // Construtor
-    public Livro(int id_livro, String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
+    public Livro(int id_livro, int ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
         this.id_livro = id_livro;
         this.ISBN = ISBN;
         this.titulo = titulo;
@@ -50,10 +48,10 @@ public class Livro {
     public void setID_livro(int id_livro) {
         this.id_livro = id_livro;
     }
-    public String getISBN() {
+    public Integer getISBN() {
         return ISBN;
     }
-    public void setISBN(String ISBN) {
+    public void setISBN(int ISBN) {
         this.ISBN = ISBN;
     }
     public String getTitulo() {
@@ -140,7 +138,7 @@ public class Livro {
                 while (resultado.next()) {
                     // Recupera os dados do livro
                     String id = resultado.getString("id_livro");
-                    String isbn = resultado.getString("ISBN");
+                    int ISBN = resultado.getInt("ISBN");
                     String titulo = resultado.getString("titulo");
                     String autor = resultado.getString("autor");
                     String editora = resultado.getString("editora");
@@ -149,7 +147,7 @@ public class Livro {
                     boolean disponibilidade = resultado.getBoolean("disponibilidade");
                     String descricao = resultado.getString("descricao");
 
-                    Livro livro = new Livro(idLivro, isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+                    Livro livro = new Livro(idLivro, ISBN, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
 
                     // Adiciona o livro à lista
                     livroArray.add(livro);
@@ -180,7 +178,7 @@ public class Livro {
                 while (resultado.next()) {
                     // Recupera os dados do livro
                     int idLivro = resultado.getInt("id_livro");
-                    String isbn = resultado.getString("ISBN");
+                    int ISBN = resultado.getInt("ISBN");
                     String titulo = resultado.getString("titulo");
                     String autor = resultado.getString("autor");
                     String editora = resultado.getString("editora");
@@ -190,12 +188,12 @@ public class Livro {
                     String descricao = resultado.getString("descricao");
 
                     // Faça o que deseja com os dados, por exemplo, imprimir na tela
-                    /*System.out.println("ID: " + idLivro + ", ISBN: " + isbn + ", Título: " + titulo +
+                    /*System.out.println("ID: " + idLivro + ", ISBN: " + ISBN + ", Título: " + titulo +
                             ", Autor: " + autor + ", Editora: " + editora + ", Ano de Publicação: " + anoPubli +
                             ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade);*/
 
                     // Cria uma instância da classe Livro
-                    Livro livro = new Livro(idLivro, isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+                    Livro livro = new Livro(idLivro, ISBN, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
 
                     // Adiciona o livro à lista
                     todosOsLivros.add(livro);
@@ -219,7 +217,7 @@ public class Livro {
             try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
                 // Define os parâmetros da consulta com base no livro fornecido
                 pstmt.setLong(1, livro.getID_livro());
-                pstmt.setString(2, livro.getISBN());
+                pstmt.setInt(2, livro.getISBN());
                 pstmt.setString(3, livro.getTitulo());
                 pstmt.setString(4, livro.getAutor());
                 pstmt.setString(5, livro.getEditora());
@@ -247,7 +245,7 @@ public class Livro {
 
             try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
                 // Define os parâmetros na query
-                pstmt.setString(1, livro.getISBN());
+                pstmt.setInt(1, livro.getISBN());
                 pstmt.setString(2, livro.getTitulo());
                 pstmt.setString(3, livro.getAutor());
                 pstmt.setString(4, livro.getEditora());

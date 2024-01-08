@@ -1,18 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.awt.event.*;
+import java.sql.*;
+import java.util.*;
 
 public class EditarLivroFormulario {
     Connection conexao = Database.getConexao();
 
     Bibliotecario b = new Bibliotecario();
-    Livro livro = new Livro();
+    Livro livro;
 
     JFrame frame;
     public JButton voltarBotao = new JButton("<-- Voltar");
@@ -74,8 +70,8 @@ public class EditarLivroFormulario {
         isbnTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         isbnTextField.setSize(1100, 20);
         isbnTextField.setLocation(200, 150);
-        String isbnLivro = livroArray.get(0).getISBN();
-        isbnTextField.setText(isbnLivro);
+        int isbnLivro = livroArray.get(0).getISBN();
+        isbnTextField.setText(String.valueOf(isbnLivro));
         frame.add(isbnTextField);
 
         tituloLabel.setFont(new Font("Arial", Font.PLAIN, 12));

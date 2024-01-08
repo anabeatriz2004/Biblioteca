@@ -1,5 +1,3 @@
-import com.sun.java.accessibility.util.AWTEventMonitor;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 public class Biblioteca {
     Connection conexao = Database.getConexao();
 
-    Livro livro = new Livro();
+    Livro livro = new Livro(isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
 
     JFrame frame;
     JList<Livro> lista = new JList<>();

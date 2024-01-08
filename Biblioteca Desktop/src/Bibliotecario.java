@@ -9,7 +9,7 @@ public class Bibliotecario {
     Connection conexao = Database.getConexao();
     //private Connection conexao;
 
-    Livro livro = new Livro();
+    Livro livro = new Livro(isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
     Biblioteca biblio = new Biblioteca();
 
     JFrame frame;

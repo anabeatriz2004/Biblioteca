@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class AdicionarLivroFormulario {
     Connection conexao = Database.getConexao();
@@ -190,8 +190,6 @@ public class AdicionarLivroFormulario {
     public void verificarDados () {
         ArrayList<Livro> livroAAdicionar = new ArrayList<>();
 
-        boolean dadoValido = false;
-
         String isbn = isbnTextField.getText();
         String titulo = tituloTextField.getText();
         String autor = autorTextField.getText();
@@ -202,17 +200,14 @@ public class AdicionarLivroFormulario {
         String descricao = descricaoTextArea.getText();
 
         if (isbn.isEmpty()) {
-            dadoValido = true;
-        } else {
 
-            dadoValido = false;
         }
 
     }
+
     private ActionListener adicionarLivro() {
         return e -> {
-
-            //livro.inserirLivro(livro);
+            //inserirLivro();
             JOptionPane.showMessageDialog(frame, "Nada");
         };
     }

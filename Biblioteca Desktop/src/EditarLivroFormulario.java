@@ -1,14 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.sql.*;
-import java.util.*;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class EditarLivroFormulario {
     Connection conexao = Database.getConexao();
 
     Bibliotecario b = new Bibliotecario();
-    Livro livro;
+    Livro livro = new Livro();
 
     JFrame frame;
     public JButton voltarBotao = new JButton("<-- Voltar");
@@ -70,8 +74,8 @@ public class EditarLivroFormulario {
         isbnTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         isbnTextField.setSize(1100, 20);
         isbnTextField.setLocation(200, 150);
-        int isbnLivro = livroArray.get(0).getISBN();
-        isbnTextField.setText(String.valueOf(isbnLivro));
+        String isbnLivro = livroArray.get(0).getISBN();
+        isbnTextField.setText(isbnLivro);
         frame.add(isbnTextField);
 
         tituloLabel.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -187,7 +191,7 @@ public class EditarLivroFormulario {
     }
 
     private void editarLivro(int id) {
-        String isbnStr = isbnTextField.getText();
+        String isbn = isbnTextField.getText();
         String titulo = tituloTextField.getText();
         String autor = autorTextField.getText();
         String editora = editoraTextField.getText();
@@ -196,12 +200,10 @@ public class EditarLivroFormulario {
         String disponibilidadeStr = disponibilidadeTextField.getText();
         String descricao = descricaoTextArea.getText();
 
-        int isbn = 0;
         int anoPubli = 0;
         boolean disponibilidade = true;
 
         try {
-            isbn = Integer.parseInt(isbnStr);
             anoPubli = Integer.parseInt(anoPubliStr);
         } catch (NumberFormatException e) {
             // Tratar erro de conversão, se necessário

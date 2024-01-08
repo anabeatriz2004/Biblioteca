@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class Livro {
     private int id_livro;
@@ -19,7 +19,7 @@ public class Livro {
     public Livro () {}
 
     // Construtor
-    /*public Livro(String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
+    public Livro(String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
@@ -28,7 +28,7 @@ public class Livro {
         this.genero = genero;
         this.disponibilidade = disponibilidade;
         this.descricao = descricao;
-    }*/
+    }
 
     // Construtor
     public Livro(int id_livro, String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
@@ -213,31 +213,42 @@ public class Livro {
     public void inserirLivro(Livro livro) {
         try {
             // Define a consulta SQL para inserir um novo livro
-            String sql = "INSERT INTO livro (id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO livro (ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-            // Cria o objeto PreparedStatement para evitar SQL Injection
-            try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
-                // Define os parâmetros da consulta com base no livro fornecido
-                pstmt.setLong(1, livro.getID_livro());
-                pstmt.setString(2, livro.getISBN());
-                pstmt.setString(3, livro.getTitulo());
-                pstmt.setString(4, livro.getAutor());
-                pstmt.setString(5, livro.getEditora());
-                pstmt.setInt(6, livro.getAnoPubli());
-                pstmt.setString(7, livro.getGenero());
-                pstmt.setBoolean(8, livro.isDisponibilidade());
-                pstmt.setString(9, livro.getDescricao());
+            // Cria o objeto PreparedStatement para evitar SQL Injection e obter o ID gerado automaticamente
+            try (PreparedStatement pstmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                pstmt.setString(1, livro.getISBN());
+                pstmt.setString(2, livro.getTitulo());
+                pstmt.setString(3, livro.getAutor());
+                pstmt.setString(4, livro.getEditora());
+                pstmt.setInt(5, livro.getAnoPubli());
+                pstmt.setString(6, livro.getGenero());
+                pstmt.setBoolean(7, livro.isDisponibilidade());
+                pstmt.setString(8, livro.getDescricao());
 
                 // Executa a consulta
-                pstmt.executeUpdate();
+                int affectedRows = pstmt.executeUpdate();
+
+                if (affectedRows == 0) {
+                    System.out.println("Falha ao inserir o livro. Nenhum registro foi afetado.");
+                } else {
+                    // Obtém o ID gerado automaticamente, se aplicável
+                    try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            long idLivro = generatedKeys.getLong(1);
+                            System.out.println("Livro inserido com sucesso! ID do Livro: " + idLivro);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-
-
-            System.out.println("Livro inserido com sucesso!");
         } catch (SQLException e) {
+            System.err.println("Erro ao inserir o livro: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 
     /** método para alterar dados de um livro*/
     public void alterarDados(Livro livro) {

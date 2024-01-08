@@ -53,7 +53,7 @@ public class AdicionarLivroFormulario {
         frame = new JFrame("Formulário - Adicionar Livro");
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setSize(screenSize); System.out.println(screenSize);
+        frame.setSize(screenSize);
         frame.getContentPane().setBackground(Color.BLACK);
         frame.getColorModel();
 
@@ -187,7 +187,7 @@ public class AdicionarLivroFormulario {
         };
     }
 
-    public void verificarDados () {
+    public Livro verificarDados () {
         ArrayList<Livro> livroAAdicionar = new ArrayList<>();
 
         String isbn = isbnTextField.getText();
@@ -199,10 +199,21 @@ public class AdicionarLivroFormulario {
         String disponibilidadeStr = disponibilidadeTextField.getText();
         String descricao = descricaoTextArea.getText();
 
-        if (isbn.isEmpty()) {
+        int anoPubli = 0;
+        boolean disponibilidade;
 
+        try {
+            anoPubli = Integer.parseInt(anoPubliStr);
+        } catch (NumberFormatException e) {
+            // Tratar erro de conversão, se necessário
+            e.printStackTrace();
         }
 
+        // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
+        disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
+
+        Livro livro = new Livro(isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+        return livro;
     }
 
     private ActionListener adicionarLivro() {

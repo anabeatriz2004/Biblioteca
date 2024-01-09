@@ -176,7 +176,7 @@ public class AdicionarLivroFormulario {
         adicionarLivroBotao.setForeground(Color.WHITE);
         adicionarLivroBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         adicionarLivroBotao.setBackground(new Color(30, 30, 30));
-        adicionarlivroButton.addActionListener(e-> { adicionarLivro(); });
+        adicionarLivroBotao.addActionListener(e-> { adicionarLivro(); });
         frame.add(adicionarLivroBotao);
 
         frame.addWindowListener(fecharPrograma());
@@ -191,7 +191,7 @@ public class AdicionarLivroFormulario {
         };
     }
 
-    public Livro verificarDados () {
+    public void adicionarLivro () {
         ArrayList<Livro> livroAAdicionar = new ArrayList<>();
         boolean dadoValido;
 
@@ -205,7 +205,7 @@ public class AdicionarLivroFormulario {
         String descricao = descricaoTextArea.getText();
 
         int anoPubli = 0;
-        boolean disponibilidade;
+        boolean disponibilidade = false;
 
         if (isbn.isEmpty()) {
             dadoValido = true;
@@ -238,7 +238,7 @@ public class AdicionarLivroFormulario {
             dadoValido = true;
         }
 
-        if (disponibilidade.isEmpty()) {
+        if (disponibilidadeStr.isEmpty()) {
             dadoValido = true;
         } else {
             // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
@@ -250,15 +250,11 @@ public class AdicionarLivroFormulario {
         }
 
         Livro livro = new Livro(isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
-        return livro;
-    }
 
-    /*private ActionListener adicionarLivro(Livro livro) {
-        return e -> {
-            livro.inserirLivro(livro);
-            JOptionPane.showMessageDialog(frame, "Nada");
-        };
-    }*/
+        livro.inserirLivro(livro);
+
+        JOptionPane.showMessageDialog(frame, "Nada");
+    }
 
     private WindowListener fecharPrograma() {
         return new WindowAdapter() {

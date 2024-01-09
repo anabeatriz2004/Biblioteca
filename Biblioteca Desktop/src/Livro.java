@@ -212,7 +212,7 @@ public class Livro {
     /** código para inserir livros na base de dados */
     public void inserirLivro(Livro livro) {
         try {
-            // Define a consulta SQL para inserir um novo livro
+            // Define a consulta SQL para inserir um novo livro sem incluir o campo 'id_livro'
             String sql = "INSERT INTO livro (ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             // Cria o objeto PreparedStatement para evitar SQL Injection e obter o ID gerado automaticamente
@@ -238,8 +238,6 @@ public class Livro {
                             long idLivro = generatedKeys.getLong(1);
                             System.out.println("Livro inserido com sucesso! ID do Livro: " + idLivro);
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
                 }
             }
@@ -248,6 +246,7 @@ public class Livro {
             e.printStackTrace();
         }
     }
+
 
 
     /** método para alterar dados de um livro*/

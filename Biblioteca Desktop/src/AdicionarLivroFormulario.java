@@ -267,14 +267,20 @@ public class AdicionarLivroFormulario {
             }
 
             if (titulo.isEmpty()) {
+                tituloErroLabel.setText("titulo sem dados!");
+                tituloErroLabel.setForeground(Color.green);
                 dadoValido = true;
             }
 
             if (autor.isEmpty()) {
+                autorErroLabel.setText("Autor sem dados!");
+                autorErroLabel.setForeground(Color.green);
                 dadoValido = true;
             }
 
             if (editora.isEmpty()) {
+                editoraErroLabel.setText("Editora sem dados!");
+                editoraErroLabel.setForeground(Color.green);
                 dadoValido = true;
             }
 
@@ -307,10 +313,14 @@ public class AdicionarLivroFormulario {
 
 
             if (genero.isEmpty()) {
+                generoErroLabel.setText("Gênero sem dados!");
+                generoErroLabel.setForeground(Color.green);
                 dadoValido = true;
             }
 
             if (disponibilidadeStr.isEmpty()) {
+                disponibilidadeErroLabel.setText("Disponibilidade sem dados!");
+                disponibilidadeErroLabel.setForeground(Color.green);
                 disponibilidade = true;
                 dadoValido = true;
             } else {
@@ -319,6 +329,8 @@ public class AdicionarLivroFormulario {
             }
 
             if (descricao.isEmpty()) {
+                descricaoErroLabel.setText("Disponibilidade sem dados!");
+                descricaoErroLabel.setForeground(Color.green);
                 dadoValido = true;
             }
         }

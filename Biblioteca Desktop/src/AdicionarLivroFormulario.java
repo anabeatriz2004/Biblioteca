@@ -18,15 +18,15 @@ public class AdicionarLivroFormulario {
 
     public final JLabel isbnLabel = new JLabel("ISBN: ");
     public JTextField isbnTextField = new JTextField();
-    public final JLabel isbnErroLabel = new JLabel("Algo errado");
+    public final JLabel isbnErroLabel = new JLabel("ISBN sem dados!");
 
     public final JLabel tituloLabel = new JLabel("Título: ");
     public JTextField tituloTextField = new JTextField();
-    public final JLabel tituloErroLabel = new JLabel();
+    public final JLabel tituloErroLabel = new JLabel("Título sem dados!");
 
     public final JLabel autorLabel = new JLabel("Autor: ");
     public JTextField autorTextField = new JTextField();
-    public final JLabel autorErroLabel = new JLabel();
+    public final JLabel autorErroLabel = new JLabel("Autor sem dados!");
 
     public final JLabel editoraLabel = new JLabel("Editora: ");
     public JTextField editoraTextField = new JTextField();
@@ -34,19 +34,19 @@ public class AdicionarLivroFormulario {
 
     public final JLabel anoPubliLabel = new JLabel("Ano de Publicação: ");
     public JTextField anoPubliTextField = new JTextField();
-    public final JLabel anoPubliErroLabel = new JLabel();
+    public final JLabel anoPubliErroLabel = new JLabel("Ano de Publicação sem dados!");
 
     public final JLabel generoLabel = new JLabel("Gênero: ");
     public JTextField generoTextField = new JTextField();
-    public final JLabel generoErroLabel = new JLabel();
+    public final JLabel generoErroLabel = new JLabel("Gênero sem dados!");
 
     public final JLabel disponibilidadeLabel = new JLabel("Disponibilidade: ");
     public JTextField disponibilidadeTextField = new JTextField();
-    public final JLabel disponilidadeErroLabel = new JLabel();
+    public final JLabel disponibilidadeErroLabel = new JLabel("Disponibilidade sem dados!");
 
     public final JLabel descricaoLabel = new JLabel("Descricao: ");
     public JTextArea descricaoTextArea = new JTextArea();
-    public final JLabel descricaoErroLabel = new JLabel();
+    public final JLabel descricaoErroLabel = new JLabel("Descricao sem dados!");
 
     public JButton adicionarLivroBotao = new JButton("Adicionar Livro");
 
@@ -89,14 +89,20 @@ public class AdicionarLivroFormulario {
         isbnErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         isbnErroLabel.setSize(200, 20);
         isbnErroLabel.setLocation(200, 175);
-        //isbnErroLabel.setForeground(Color.RED);
-        frame.add(isbnLabel);
+        isbnErroLabel.setForeground(Color.WHITE);
+        frame.add(isbnErroLabel);
 
         tituloLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         tituloLabel.setSize(200, 20);
         tituloLabel.setLocation(100, 200);
         tituloLabel.setForeground(Color.WHITE);
         frame.add(tituloLabel);
+
+        tituloErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        tituloErroLabel.setSize(200, 20);
+        tituloErroLabel.setLocation(200, 225);
+        tituloErroLabel.setForeground(Color.WHITE);
+        frame.add(tituloErroLabel);
 
         tituloTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         tituloTextField.setSize(1100, 20);
@@ -109,6 +115,12 @@ public class AdicionarLivroFormulario {
         autorLabel.setForeground(Color.WHITE);
         frame.add(autorLabel);
 
+        autorErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        autorErroLabel.setSize(200, 20);
+        autorErroLabel.setLocation(200, 275);
+        autorErroLabel.setForeground(Color.WHITE);
+        frame.add(autorErroLabel);
+
         autorTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         autorTextField.setSize(1100, 20);
         autorTextField.setLocation(200, 250);
@@ -119,6 +131,12 @@ public class AdicionarLivroFormulario {
         editoraLabel.setLocation(100, 300);
         editoraLabel.setForeground(Color.WHITE);
         frame.add(editoraLabel);
+
+        editoraErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        editoraErroLabel.setSize(200, 20);
+        editoraErroLabel.setLocation(200, 325);
+        editoraErroLabel.setForeground(Color.WHITE);
+        frame.add(editoraErroLabel);
 
         editoraTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         editoraTextField.setSize(1100, 20);
@@ -131,6 +149,12 @@ public class AdicionarLivroFormulario {
         anoPubliLabel.setForeground(Color.WHITE);
         frame.add(anoPubliLabel);
 
+        anoPubliErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        anoPubliErroLabel.setSize(200, 20);
+        anoPubliErroLabel.setLocation(200, 375);
+        anoPubliErroLabel.setForeground(Color.WHITE);
+        frame.add(anoPubliErroLabel);
+
         anoPubliTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         anoPubliTextField.setSize(1100, 20);
         anoPubliTextField.setLocation(200, 350);
@@ -141,6 +165,12 @@ public class AdicionarLivroFormulario {
         generoLabel.setLocation(100, 400);
         generoLabel.setForeground(Color.WHITE);
         frame.add(generoLabel);
+
+        generoErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        generoErroLabel.setSize(200, 20);
+        generoErroLabel.setLocation(200, 425);
+        generoErroLabel.setForeground(Color.WHITE);
+        frame.add(anoPubliErroLabel);
 
         generoTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         generoTextField.setSize(1100, 20);
@@ -153,6 +183,12 @@ public class AdicionarLivroFormulario {
         disponibilidadeLabel.setForeground(Color.WHITE);
         frame.add(disponibilidadeLabel);
 
+        disponibilidadeErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        disponibilidadeErroLabel.setSize(200, 20);
+        disponibilidadeErroLabel.setLocation(200, 475);
+        disponibilidadeErroLabel.setForeground(Color.WHITE);
+        frame.add(disponibilidadeErroLabel);
+
         // mudar a forma de saber se está disponível ou emprestado
         disponibilidadeTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         disponibilidadeTextField.setSize(1100, 20);
@@ -164,6 +200,12 @@ public class AdicionarLivroFormulario {
         descricaoLabel.setLocation(100, 500);
         descricaoLabel.setForeground(Color.WHITE);
         frame.add(descricaoLabel);
+
+        descricaoErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        descricaoErroLabel.setSize(200, 20);
+        descricaoErroLabel.setLocation(200, 525);
+        descricaoErroLabel.setForeground(Color.WHITE);
+        frame.add(descricaoErroLabel);
 
         descricaoTextArea.setFont(new Font("Arial", Font.PLAIN, 12));
         descricaoTextArea.setSize(1100, 100);

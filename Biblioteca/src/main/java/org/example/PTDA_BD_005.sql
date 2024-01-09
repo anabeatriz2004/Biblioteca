@@ -2,34 +2,34 @@ DROP DATABASE IF EXISTS PTDA_BD_005;
 CREATE DATABASE PTDA_BD_005;
 USE PTDA_BD_005;
 
-CREATE TABLE utilizador 
+CREATE TABLE utilizador
 	(id_utilizador INT PRIMARY KEY,
     nome VARCHAR(50),
     email VARCHAR(50),
-	senha Varchar(25), 
+	senha Varchar(25),
     telefone INT,
     data_nascimento DATE,
     morada VARCHAR(50));
 
-CREATE TABLE bibliotecario 
+CREATE TABLE bibliotecario
 	(id_bibliotecario INT PRIMARY KEY,
     nome VARCHAR(50),
     email VARCHAR(50),
-	senha Varchar(25), 
+	senha Varchar(25),
     telefone INT,
     data_contratacao DATE);
-    
-CREATE TABLE livro 
-	(id_livro INT PRIMARY KEY,
-    ISBN VARCHAR(13), 
-    titulo VARCHAR(25),
-    autor VARCHAR(25),
-    editora VARCHAR(25),
-    ano_publi INT,
-    genero VARCHAR(50),
-    disponibilidade BOOLEAN, #true - disponível; false- emprestado
-    descricao VARCHAR (1000));
-    
+
+CREATE TABLE livro
+	(id_livro INT AUTO_INCREMENT PRIMARY KEY,
+     ISBN VARCHAR(255),
+     titulo VARCHAR(255),
+     autor VARCHAR(255),
+     editora VARCHAR(255),
+     ano_publi INT,
+     genero VARCHAR(255),
+     disponibilidade BOOLEAN,
+     descricao TEXT);
+
 CREATE TABLE emprestimo (
     id_emprestimo INT PRIMARY KEY,
     id_livro INT,
@@ -40,18 +40,18 @@ CREATE TABLE emprestimo (
     FOREIGN KEY (id_livro) REFERENCES livro (id_livro),
     FOREIGN KEY (id_utilizador) REFERENCES utilizador (id_utilizador),
     FOREIGN KEY (id_bibliotecario) REFERENCES bibliotecario (id_bibliotecario));
-    
-    
+
+
 INSERT INTO utilizador
 	(id_utilizador, nome, email, senha, telefone, data_nascimento, morada)
     VALUES (1, 'Maria Gonçalves', 'maria_gonc@gmail.com', '123456', 915654783, '2006-1-29', null),
     (2, 'João Ribeiro', 'joao_rib@gmail.com', '123456', 915657438, '2000-1-29', null),
     (3, 'maria', 'maria@gmail.com', '123456', 912345678, '2004-01-01', null);
-    
-INSERT INTO bibliotecario 
+
+INSERT INTO bibliotecario
 	(id_bibliotecario, nome, email, senha, telefone, data_contratacao)
     VALUES (1, 'Marta Rosado', 'marta_rosado@gmail.com', 'Admin2017', 925484678, '2017-1-29');
-    
+
 INSERT INTO livro (id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade, descricao)
 VALUES (1, '9780061120084', 'To Kill a Mockingbird', 'Harper Lee', 'Harper Perennial', 1960, 'Fiction', true,
 		'A classic novel that explores racial injustice and moral growth in the American South.'),
@@ -69,7 +69,7 @@ VALUES (1, '9780061120084', 'To Kill a Mockingbird', 'Harper Lee', 'Harper Peren
 		'A memoir about a woman who grows up in a strict and abusive household but eventually escapes to learn about the world.'),
     (8, '9780061124266', 'The Alchemist', 'Paulo Coelho', 'HarperOne', 1988, 'Fiction', true,
 		'A philosophical novel that follows the journey of Santiago, a shepherd boy, as he seeks a hidden treasure in Egypt.'),
-    (9, '9780062315007', 'The Girl on the Train', 'Paula Hawkins', 'Riverhead Books', 2015, 'Mystery', true, 
+    (9, '9780062315007', 'The Girl on the Train', 'Paula Hawkins', 'Riverhead Books', 2015, 'Mystery', true,
 		'A psychological thriller that explores the lives of three women intertwined by secrets and deception.'),
     (10, '9780062358202', 'Where the Crawdads Sing', 'Delia Owens', 'G.P. Putnam\'s Sons', 2018, 'Mystery', true,
 		'A mystery novel that follows the life of Kya Clark, the "Marsh Girl," in the marshes of North Carolina.'),
@@ -79,7 +79,7 @@ VALUES (1, '9780061120084', 'To Kill a Mockingbird', 'Harper Lee', 'Harper Peren
 		'A horror novel that follows Jack Torrance and his family as they become the winter caretakers of the haunted Overlook Hotel.'),
     (13, '9780060256654', 'Matilda', 'Roald Dahl', 'Puffin Books', 1988, 'Children\'s Fiction', true,
 		'A children\'s novel about a young girl with telekinetic abilities who loves to read and stand up against injustice.'),
-    (14, '9780385475723', 'Brave New World', 'Aldous Huxley', 'HarperPerennial', 1932, 'Science Fiction', true, 
+    (14, '9780385475723', 'Brave New World', 'Aldous Huxley', 'HarperPerennial', 1932, 'Science Fiction', true,
 		'A dystopian novel that explores a futuristic society where advanced technology controls every aspect of life.'),
-    (15, '9780061120084', 'The Lord of the Rings', 'J.R.R. Tolkien', 'Mariner Books', 1954, 'Fantasy', true, 
+    (15, '9780061120084', 'The Lord of the Rings', 'J.R.R. Tolkien', 'Mariner Books', 1954, 'Fantasy', true,
 		'A fantasy trilogy that follows the quest to destroy the One Ring and defeat the Dark Lord Sauron.');

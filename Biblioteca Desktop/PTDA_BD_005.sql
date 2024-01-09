@@ -20,15 +20,15 @@ CREATE TABLE bibliotecario
     data_contratacao DATE);
 
 CREATE TABLE livro
-	(id_livro INT PRIMARY KEY,
-    ISBN VARCHAR(13),
-    titulo VARCHAR(25),
-    autor VARCHAR(25),
-    editora VARCHAR(25),
-    ano_publi INT,
-    genero VARCHAR(50),
-    disponibilidade BOOLEAN, #true - disponível; false- emprestado
-    descricao VARCHAR (1000));
+	(id_livro INT AUTO_INCREMENT PRIMARY KEY,
+     ISBN VARCHAR(255),
+     titulo VARCHAR(255),
+     autor VARCHAR(255),
+     editora VARCHAR(255),
+     ano_publi INT,
+     genero VARCHAR(255),
+     disponibilidade BOOLEAN,
+     descricao TEXT);
 
 CREATE TABLE emprestimo (
     id_emprestimo INT PRIMARY KEY,

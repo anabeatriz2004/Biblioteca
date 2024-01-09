@@ -212,8 +212,8 @@ public class Livro {
     /** código para inserir livros na base de dados */
     public void inserirLivro(Livro livro) {
         try {
-            // Define a consulta SQL para inserir um novo livro, incluindo todas as colunas, exceto id_livro
-            String sql = "INSERT INTO livro (ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            // Define a consulta SQL para inserir um novo livro, incluindo todas as colunas, incluindo id_livro
+            String sql = "INSERT INTO livro (id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade, descricao) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             // Cria o objeto PreparedStatement para evitar SQL Injection e obter o ID gerado automaticamente
             try (PreparedStatement pstmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -247,8 +247,6 @@ public class Livro {
             e.printStackTrace();
         }
     }
-
-
 
     /** método para alterar dados de um livro*/
     public void alterarDados(Livro livro) {

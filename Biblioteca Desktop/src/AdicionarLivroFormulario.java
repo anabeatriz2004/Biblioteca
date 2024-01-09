@@ -5,7 +5,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
-import java.util.ArrayList;
 
 public class AdicionarLivroFormulario {
     Connection conexao = Database.getConexao();
@@ -30,7 +29,7 @@ public class AdicionarLivroFormulario {
 
     public final JLabel editoraLabel = new JLabel("Editora: ");
     public JTextField editoraTextField = new JTextField();
-    public final JLabel editoraErroLabel = new JLabel();
+    public final JLabel editoraErroLabel = new JLabel("Editora sem dados!");
 
     public final JLabel anoPubliLabel = new JLabel("Ano de Publicação: ");
     public JTextField anoPubliTextField = new JTextField();
@@ -63,8 +62,8 @@ public class AdicionarLivroFormulario {
         voltarBotao.setFont(new Font("Arial", Font.PLAIN, 12));
         voltarBotao.setSize(110, 30);
         voltarBotao.setLocation(0, 0);
-        voltarBotao.setForeground(Color.WHITE);
-        voltarBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        voltarBotao.setForeground(Color.white);
+        voltarBotao.setBorder(BorderFactory.createLineBorder(Color.white, 2));
         voltarBotao.setBackground(new Color(30, 30, 30));
         voltarBotao.addActionListener(voltarAtras());
         frame.add(voltarBotao);
@@ -72,13 +71,13 @@ public class AdicionarLivroFormulario {
         tituloInicialLabel.setFont(new Font("Arial", Font.PLAIN, 25));
         tituloInicialLabel.setSize(200, 100);
         tituloInicialLabel.setLocation(650, 50);
-        tituloInicialLabel.setForeground(Color.WHITE);
+        tituloInicialLabel.setForeground(Color.white);
         frame.add(tituloInicialLabel);
 
         isbnLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         isbnLabel.setSize(200, 20);
         isbnLabel.setLocation(100, 150);
-        isbnLabel.setForeground(Color.WHITE);
+        isbnLabel.setForeground(Color.white);
         frame.add(isbnLabel);
 
         isbnTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -89,19 +88,19 @@ public class AdicionarLivroFormulario {
         isbnErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         isbnErroLabel.setSize(200, 20);
         isbnErroLabel.setLocation(200, 175);
-        isbnErroLabel.setForeground(Color.WHITE);
+        isbnErroLabel.setForeground(Color.white);
         frame.add(isbnErroLabel);
 
         tituloLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         tituloLabel.setSize(200, 20);
         tituloLabel.setLocation(100, 200);
-        tituloLabel.setForeground(Color.WHITE);
+        tituloLabel.setForeground(Color.white);
         frame.add(tituloLabel);
 
         tituloErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         tituloErroLabel.setSize(200, 20);
         tituloErroLabel.setLocation(200, 225);
-        tituloErroLabel.setForeground(Color.WHITE);
+        tituloErroLabel.setForeground(Color.white);
         frame.add(tituloErroLabel);
 
         tituloTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -112,13 +111,13 @@ public class AdicionarLivroFormulario {
         autorLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         autorLabel.setSize(200, 20);
         autorLabel.setLocation(100, 250);
-        autorLabel.setForeground(Color.WHITE);
+        autorLabel.setForeground(Color.white);
         frame.add(autorLabel);
 
         autorErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         autorErroLabel.setSize(200, 20);
         autorErroLabel.setLocation(200, 275);
-        autorErroLabel.setForeground(Color.WHITE);
+        autorErroLabel.setForeground(Color.white);
         frame.add(autorErroLabel);
 
         autorTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -129,13 +128,13 @@ public class AdicionarLivroFormulario {
         editoraLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         editoraLabel.setSize(200, 20);
         editoraLabel.setLocation(100, 300);
-        editoraLabel.setForeground(Color.WHITE);
+        editoraLabel.setForeground(Color.white);
         frame.add(editoraLabel);
 
         editoraErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         editoraErroLabel.setSize(200, 20);
         editoraErroLabel.setLocation(200, 325);
-        editoraErroLabel.setForeground(Color.CYAN);
+        editoraErroLabel.setForeground(Color.white);
         frame.add(editoraErroLabel);
 
         editoraTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -146,13 +145,13 @@ public class AdicionarLivroFormulario {
         anoPubliLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         anoPubliLabel.setSize(200, 20);
         anoPubliLabel.setLocation(100, 350);
-        anoPubliLabel.setForeground(Color.WHITE);
+        anoPubliLabel.setForeground(Color.white);
         frame.add(anoPubliLabel);
 
         anoPubliErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         anoPubliErroLabel.setSize(200, 20);
         anoPubliErroLabel.setLocation(200, 375);
-        anoPubliErroLabel.setForeground(Color.WHITE);
+        anoPubliErroLabel.setForeground(Color.white);
         frame.add(anoPubliErroLabel);
 
         anoPubliTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -163,13 +162,13 @@ public class AdicionarLivroFormulario {
         generoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         generoLabel.setSize(200, 20);
         generoLabel.setLocation(100, 400);
-        generoLabel.setForeground(Color.WHITE);
+        generoLabel.setForeground(Color.white);
         frame.add(generoLabel);
 
         generoErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         generoErroLabel.setSize(200, 20);
         generoErroLabel.setLocation(200, 425);
-        generoErroLabel.setForeground(Color.WHITE);
+        generoErroLabel.setForeground(Color.white);
         frame.add(generoErroLabel);
 
         generoTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -180,7 +179,7 @@ public class AdicionarLivroFormulario {
         disponibilidadeLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         disponibilidadeLabel.setSize(200, 20);
         disponibilidadeLabel.setLocation(100, 450);
-        disponibilidadeLabel.setForeground(Color.WHITE);
+        disponibilidadeLabel.setForeground(Color.white);
         frame.add(disponibilidadeLabel);
 
         disponibilidadeErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -198,13 +197,13 @@ public class AdicionarLivroFormulario {
         descricaoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         descricaoLabel.setSize(200, 20);
         descricaoLabel.setLocation(100, 500);
-        descricaoLabel.setForeground(Color.WHITE);
+        descricaoLabel.setForeground(Color.white);
         frame.add(descricaoLabel);
 
         descricaoErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         descricaoErroLabel.setSize(200, 20);
         descricaoErroLabel.setLocation(200, 600);
-        descricaoErroLabel.setForeground(Color.WHITE);
+        descricaoErroLabel.setForeground(Color.white);
         frame.add(descricaoErroLabel);
 
         descricaoTextArea.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -215,8 +214,8 @@ public class AdicionarLivroFormulario {
         adicionarLivroBotao.setFont(new Font("Arial", Font.PLAIN, 20));
         adicionarLivroBotao.setSize(200, 30);
         adicionarLivroBotao.setLocation(650, 615);
-        adicionarLivroBotao.setForeground(Color.WHITE);
-        adicionarLivroBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        adicionarLivroBotao.setForeground(Color.white);
+        adicionarLivroBotao.setBorder(BorderFactory.createLineBorder(Color.white, 2));
         adicionarLivroBotao.setBackground(new Color(30, 30, 30));
         adicionarLivroBotao.addActionListener(e-> { adicionarLivro(); });
         frame.add(adicionarLivroBotao);
@@ -235,10 +234,10 @@ public class AdicionarLivroFormulario {
 
     public Livro verificarDados() {
         // ArrayList<Livro> livroAAdicionar = new ArrayList<>();
-        boolean dadoValido;
+        boolean dadoValido = false;
 
         // buscar os dados do formulário
-        String isbn = isbnTextField.getText();
+        String isbnStr = isbnTextField.getText();
         String titulo = tituloTextField.getText();
         String autor = autorTextField.getText();
         String editora = editoraTextField.getText();
@@ -250,56 +249,81 @@ public class AdicionarLivroFormulario {
         int anoPubli = 0;
         boolean disponibilidade = false;
 
-        // vê se o isbn é posto corretamente
-        if (isbn.isEmpty()) {
-            isbnErroLabel.setText("Isbn sem dados!");
-            isbnErroLabel.setForeground(Color.green);
-            dadoValido = true;
-        } else {
-            isbnErroLabel.setText("Isbn sem dados!");
-            isbnErroLabel.setForeground(Color.red);
-            dadoValido = false;
-        }
+        while (dadoValido) {
+            // vê se o isbn é posto corretamente
+            if (isbnStr.isEmpty()) {
+                isbnErroLabel.setText("Isbn sem dados!");
+                isbnErroLabel.setForeground(Color.green);
+                String isbn = isbnStr;
+                dadoValido = true;
+            } else if (isbnStr.matches("\\d{13}")) {
+                isbnErroLabel.setText("ISBN inserido corretamente!");
+                isbnErroLabel.setForeground(Color.green);
+                dadoValido = true;
+            } else {
+                isbnErroLabel.setText("Confirme se tem 13 números!");
+                isbnErroLabel.setForeground(Color.red);
+                dadoValido = false;
+            }
 
-        if (titulo.isEmpty()) {
-            dadoValido = true;
-        }
+            if (titulo.isEmpty()) {
+                dadoValido = true;
+            }
 
-        if (autor.isEmpty()) {
-            dadoValido = true;
-        }
+            if (autor.isEmpty()) {
+                dadoValido = true;
+            }
 
-        if (editora.isEmpty()) {
-            dadoValido = true;
-        }
+            if (editora.isEmpty()) {
+                dadoValido = true;
+            }
 
-        if (anoPubliStr.isEmpty()) {
-            dadoValido = true;
-        } else {
-            try {
-                anoPubli = Integer.parseInt(anoPubliStr);
-            } catch (NumberFormatException e) {
-                // Tratar erro de conversão, se necessário
-                e.printStackTrace();
+            // Vê se o anoPubli é inserido corretamente
+            if (anoPubliStr.isEmpty()) {
+                anoPubliErroLabel.setText("Ano de publicação sem dados!");
+                anoPubliErroLabel.setForeground(Color.green);
+                dadoValido = true;
+            } else {
+                try {
+                    // Tenta converter a string anoPubliStr para um número inteiro
+                    anoPubli = Integer.parseInt(anoPubliStr);
+
+                    // Verificar se o anoPubli está dentro de um intervalo específico (por exemplo, 1000 a 3000)
+                    if (anoPubli >= 0 && anoPubli <= 2024) {
+                        anoPubliErroLabel.setText("Ano de publicação inserido corretamente!");
+                        anoPubliErroLabel.setForeground(Color.green);
+                        dadoValido = true;
+                    } else {
+                        anoPubliErroLabel.setText("O ano de publicação deve estar entre 0 e 2024!");
+                        anoPubliErroLabel.setForeground(Color.red);
+                        dadoValido = false;
+                    }
+                } catch (NumberFormatException e) {
+                    anoPubliErroLabel.setText("Confirme se inseriu um número válido para o ano de publicação!");
+                    anoPubliErroLabel.setForeground(Color.red);
+                    dadoValido = false;
+                }
+            }
+
+
+            if (genero.isEmpty()) {
+                dadoValido = true;
+            }
+
+            if (disponibilidadeStr.isEmpty()) {
+                disponibilidade = true;
+                dadoValido = true;
+            } else {
+                // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
+                disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
+            }
+
+            if (descricao.isEmpty()) {
+                dadoValido = true;
             }
         }
 
-        if (genero.isEmpty()) {
-            dadoValido = true;
-        }
-
-        if (disponibilidadeStr.isEmpty()) {
-            dadoValido = true;
-        } else {
-            // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
-            disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
-        }
-
-        if (descricao.isEmpty()) {
-            dadoValido = true;
-        }
-
-        Livro livro = new Livro(isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+        Livro livro = new Livro(isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
         return livro;
     }
 

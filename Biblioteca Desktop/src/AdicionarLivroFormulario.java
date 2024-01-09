@@ -89,7 +89,7 @@ public class AdicionarLivroFormulario {
         isbnErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         isbnErroLabel.setSize(200, 20);
         isbnErroLabel.setLocation(200, 175);
-        isbnErroLabel.setForeground(Color.RED);
+        //isbnErroLabel.setForeground(Color.RED);
         frame.add(isbnLabel);
 
         tituloLabel.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -191,10 +191,11 @@ public class AdicionarLivroFormulario {
         };
     }
 
-    public void adicionarLivro () {
-        ArrayList<Livro> livroAAdicionar = new ArrayList<>();
+    public Livro verificarDados() {
+        // ArrayList<Livro> livroAAdicionar = new ArrayList<>();
         boolean dadoValido;
 
+        // buscar os dados do formulário
         String isbn = isbnTextField.getText();
         String titulo = tituloTextField.getText();
         String autor = autorTextField.getText();
@@ -207,8 +208,15 @@ public class AdicionarLivroFormulario {
         int anoPubli = 0;
         boolean disponibilidade = false;
 
+        // vê se o isbn é posto corretamente
         if (isbn.isEmpty()) {
+            isbnErroLabel.setText("Isbn sem dados!");
+            isbnErroLabel.setForeground(Color.green);
             dadoValido = true;
+        } else {
+            isbnErroLabel.setText("Isbn sem dados!");
+            isbnErroLabel.setForeground(Color.red);
+            dadoValido = false;
         }
 
         if (titulo.isEmpty()) {
@@ -250,8 +258,15 @@ public class AdicionarLivroFormulario {
         }
 
         Livro livro = new Livro(isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+        return livro;
+    }
 
-        livro.inserirLivro(livro);
+
+    public void adicionarLivro () {
+
+        Livro livroAdicionado = verificarDados();
+
+        livroAdicionado.inserirLivro(livroAdicionado);
 
         JOptionPane.showMessageDialog(frame, "Nada");
     }

@@ -135,7 +135,7 @@ public class AdicionarLivroFormulario {
         editoraErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         editoraErroLabel.setSize(200, 20);
         editoraErroLabel.setLocation(200, 325);
-        editoraErroLabel.setForeground(Color.WHITE);
+        editoraErroLabel.setForeground(Color.CYAN);
         frame.add(editoraErroLabel);
 
         editoraTextField.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -170,7 +170,7 @@ public class AdicionarLivroFormulario {
         generoErroLabel.setSize(200, 20);
         generoErroLabel.setLocation(200, 425);
         generoErroLabel.setForeground(Color.WHITE);
-        frame.add(anoPubliErroLabel);
+        frame.add(generoErroLabel);
 
         generoTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         generoTextField.setSize(1100, 20);
@@ -186,7 +186,7 @@ public class AdicionarLivroFormulario {
         disponibilidadeErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         disponibilidadeErroLabel.setSize(200, 20);
         disponibilidadeErroLabel.setLocation(200, 475);
-        disponibilidadeErroLabel.setForeground(Color.WHITE);
+        disponibilidadeErroLabel.setForeground(Color.white);
         frame.add(disponibilidadeErroLabel);
 
         // mudar a forma de saber se está disponível ou emprestado
@@ -203,7 +203,7 @@ public class AdicionarLivroFormulario {
 
         descricaoErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         descricaoErroLabel.setSize(200, 20);
-        descricaoErroLabel.setLocation(200, 525);
+        descricaoErroLabel.setLocation(200, 600);
         descricaoErroLabel.setForeground(Color.WHITE);
         frame.add(descricaoErroLabel);
 

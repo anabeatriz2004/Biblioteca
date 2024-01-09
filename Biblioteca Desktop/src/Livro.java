@@ -213,7 +213,7 @@ public class Livro {
     public void inserirLivro(Livro livro) {
         try {
             // Define a consulta SQL para inserir um novo livro, excluindo o campo id_livro
-            String sql = "INSERT INTO livro (ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO livro (id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             // Cria o objeto PreparedStatement para evitar SQL Injection e obter o ID gerado automaticamente
             try (PreparedStatement pstmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -262,9 +262,6 @@ public class Livro {
             e.printStackTrace();
         }
     }
-
-
-
 
     /** método para alterar dados de um livro*/
     public void alterarDados(Livro livro) {

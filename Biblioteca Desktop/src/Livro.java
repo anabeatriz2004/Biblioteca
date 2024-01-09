@@ -212,40 +212,57 @@ public class Livro {
     /** código para inserir livros na base de dados */
     public void inserirLivro(Livro livro) {
         try {
-            // Define a consulta SQL para inserir um novo livro sem incluir o campo 'id_livro'
+            // Define a consulta SQL para inserir um novo livro, excluindo o campo id_livro
             String sql = "INSERT INTO livro (ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade, descricao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             // Cria o objeto PreparedStatement para evitar SQL Injection e obter o ID gerado automaticamente
             try (PreparedStatement pstmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                pstmt.setString(1, livro.getISBN());
-                pstmt.setString(2, livro.getTitulo());
-                pstmt.setString(3, livro.getAutor());
-                pstmt.setString(4, livro.getEditora());
-                pstmt.setInt(5, livro.getAnoPubli());
-                pstmt.setString(6, livro.getGenero());
-                pstmt.setBoolean(7, livro.isDisponibilidade());
-                pstmt.setString(8, livro.getDescricao());
-
                 // Executa a consulta
                 int affectedRows = pstmt.executeUpdate();
 
                 if (affectedRows == 0) {
                     System.out.println("Falha ao inserir o livro. Nenhum registro foi afetado.");
                 } else {
-                    // Obtém o ID gerado automaticamente, se aplicável
+                    // Obtém o ID gerado automaticamente
                     try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                         if (generatedKeys.next()) {
-                            long idLivro = generatedKeys.getLong(1);
-                            System.out.println("Livro inserido com sucesso! ID do Livro: " + idLivro);
+                            int idLivro = generatedKeys.getInt(1);
+                            pstmt.setInt(1, idLivro);
+                            //System.out.println("Livro inserido com sucesso! ID do Livro: " + idLivro);
                         }
                     }
                 }
+
+                pstmt.setString(2, livro.getISBN());
+                pstmt.setString(3, livro.getTitulo());
+                pstmt.setString(4, livro.getAutor());
+                pstmt.setString(5, livro.getEditora());
+                pstmt.setInt(6, livro.getAnoPubli());
+                pstmt.setString(7, livro.getGenero());
+                pstmt.setBoolean(8, livro.isDisponibilidade());
+                pstmt.setString(9, livro.getDescricao());
+
+                /*// Executa a consulta
+                int affectedRows = pstmt.executeUpdate();
+
+                if (affectedRows == 0) {
+                    System.out.println("Falha ao inserir o livro. Nenhum registro foi afetado.");
+                } else {
+                    // Obtém o ID gerado automaticamente
+                    try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            int idLivro = generatedKeys.getInt(1);
+                            System.out.println("Livro inserido com sucesso! ID do Livro: " + idLivro);
+                        }
+                    }
+                }*/
             }
         } catch (SQLException e) {
             System.err.println("Erro ao inserir o livro: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 
 
 

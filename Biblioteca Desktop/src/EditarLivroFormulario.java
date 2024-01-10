@@ -280,7 +280,7 @@ public class EditarLivroFormulario {
 
         if (isbnStr.isEmpty()) {
             isbnErroLabel.setText("Isbn sem dados!");
-            isbnErroLabel.setForeground(Color.green);
+            isbnErroLabel.setForeground(Color.yellow);
             dadoValidoIsbn = true;
         } else if (isbnStr.matches("\\d{13}")) {
             isbnErroLabel.setText("ISBN inserido corretamente!");
@@ -298,18 +298,30 @@ public class EditarLivroFormulario {
 
         if (titulo.isEmpty()) {
             tituloErroLabel.setText("Título sem dados!");
+            tituloErroLabel.setForeground(Color.yellow);
+            dadoValidoTitulo = true;
+        } else {
+            tituloErroLabel.setText("Título inserido corretamente!");
             tituloErroLabel.setForeground(Color.green);
             dadoValidoTitulo = true;
         }
 
         if (autor.isEmpty()) {
             autorErroLabel.setText("Autor sem dados!");
+            autorErroLabel.setForeground(Color.yellow);
+            dadoValidoAutor = true;
+        } else {
+            autorErroLabel.setText("Autor inserido corretamente!");
             autorErroLabel.setForeground(Color.green);
             dadoValidoAutor = true;
         }
 
         if (editora.isEmpty()) {
             editoraErroLabel.setText("Editora sem dados!");
+            editoraErroLabel.setForeground(Color.yellow);
+            dadoValidoEditora = true;
+        } else {
+            editoraErroLabel.setText("Editora inserido corretamente!");
             editoraErroLabel.setForeground(Color.green);
             dadoValidoEditora = true;
         }
@@ -317,7 +329,7 @@ public class EditarLivroFormulario {
         // Vê se o anoPubli é inserido corretamente
         if (anoPubliStr.isEmpty()) {
             anoPubliErroLabel.setText("Ano de publicação sem dados!");
-            anoPubliErroLabel.setForeground(Color.green);
+            anoPubliErroLabel.setForeground(Color.yellow);
             dadoValidoAnoPubli = true;
         } else {
             try {
@@ -341,9 +353,12 @@ public class EditarLivroFormulario {
             }
         }
 
-
         if (genero.isEmpty()) {
             generoErroLabel.setText("Gênero sem dados!");
+            generoErroLabel.setForeground(Color.yellow);
+            dadoValidoGenero = true;
+        } else {
+            generoErroLabel.setText("Gênero inserido corretamente!");
             generoErroLabel.setForeground(Color.green);
             dadoValidoGenero = true;
         }
@@ -362,6 +377,10 @@ public class EditarLivroFormulario {
 
         if (descricao.isEmpty()) {
             descricaoErroLabel.setText("Descrição sem dados!");
+            descricaoErroLabel.setForeground(Color.yellow);
+            dadoValidoDescricao = true;
+        } else {
+            descricaoErroLabel.setText("Descricao inserido corretamente!");
             descricaoErroLabel.setForeground(Color.green);
             dadoValidoDescricao = true;
         }

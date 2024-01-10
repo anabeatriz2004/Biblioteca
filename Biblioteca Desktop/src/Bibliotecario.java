@@ -176,36 +176,6 @@ public class Bibliotecario {
         JOptionPane.showMessageDialog(frame, "Implemente a lógica para adicionar um novo livro.");
     }
 
-    /*public int obterLivroSelecionado() {
-        int idSelecionado = getIdComponenteSelecionado();
-
-        // Verifica se algum livro está selecionado
-        if (idSelecionado != -1) {
-            // Obtém o livro selecionado diretamente do modelo
-            listaModelo.getElementAt(idSelecionado);
-            return listaModelo.getElementAt(idSelecionado);
-        } else {
-            // Se nenhum livro estiver selecionado, retorna null
-            return null;
-        }
-    }*/
-
-    /*public void abrirFormularioEdicao() {
-        Livro livroSelecionado = obterLivroSelecionado();
-
-        // Verifica se um livro foi selecionado antes de exibir o formulário de edição
-        if (livroSelecionado != null) {
-            // Abre o formulário de edição e passa o livro selecionado
-            EditarLivroFormulario elf = new EditarLivroFormulario();
-            elf.exibirFrame(obterLivroSelecionado);
-        } else {
-            // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
-            JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
-                            "\nPor favor, selecione um livro para editar.",
-                    "Aviso", JOptionPane.WARNING_MESSAGE);
-        }
-    }*/
-
 
     /**
      * Método que é usado pela ListaBibliotecario(), e vai buscar há classe Livro, o método
@@ -281,7 +251,7 @@ public class Bibliotecario {
         public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
             Livro livro = (Livro) value;
-            setText(livro.getTitulo());
+            setText(livro.getID_livro() + ": " +  livro.getTitulo());
             return this;
         }
     }

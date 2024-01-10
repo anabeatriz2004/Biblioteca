@@ -49,7 +49,8 @@ public class AdicionarLivroFormulario {
 
     public JButton adicionarLivroBotao = new JButton("Adicionar Livro");
 
-    AdicionarLivroFormulario() {}
+    AdicionarLivroFormulario() {
+    }
 
     public void exibirFrame() {
         frame = new JFrame("Formulário - Adicionar Livro");
@@ -217,7 +218,9 @@ public class AdicionarLivroFormulario {
         adicionarLivroBotao.setForeground(Color.white);
         adicionarLivroBotao.setBorder(BorderFactory.createLineBorder(Color.white, 2));
         adicionarLivroBotao.setBackground(new Color(30, 30, 30));
-        adicionarLivroBotao.addActionListener(e-> { adicionarLivro(); });
+        adicionarLivroBotao.addActionListener(e -> {
+            adicionarLivro();
+        });
         frame.add(adicionarLivroBotao);
 
         frame.addWindowListener(fecharPrograma());
@@ -256,121 +259,120 @@ public class AdicionarLivroFormulario {
         int anoPubli = 0;
         boolean disponibilidade = false;
 
-        if (!(dadoValidoIsbn && dadoValidoTitulo && dadoValidoAutor && dadoValidoEditora && dadoValidoAnoPubli && dadoValidoGenero && dadoValidoDisponibilidade && dadoValidoDescricao)) {
-            if (isbnStr.isEmpty()) {
-                isbnErroLabel.setText("Isbn sem dados!");
-                isbnErroLabel.setForeground(Color.green);
-                dadoValidoIsbn = true;
-            } else if (isbnStr.matches("\\d{13}")) {
-                isbnErroLabel.setText("ISBN inserido corretamente!");
-                isbnErroLabel.setForeground(Color.green);
-                dadoValidoIsbn = true;
+        if (isbnStr.isEmpty()) {
+            isbnErroLabel.setText("Isbn sem dados!");
+            isbnErroLabel.setForeground(Color.green);
+            dadoValidoIsbn = true;
+        } else if (isbnStr.matches("\\d{13}")) {
+            isbnErroLabel.setText("ISBN inserido corretamente!");
+            isbnErroLabel.setForeground(Color.green);
+            dadoValidoIsbn = true;
+        } else {
+            if (isbnStr.matches(".*\\D.*")) {
+                isbnErroLabel.setText("O ISBN só pode conter números!");
             } else {
-                if (isbnStr.matches(".*\\D.*")) {
-                    isbnErroLabel.setText("O ISBN só pode conter números!");
+                isbnErroLabel.setText("Confirme se tem 13 números!");
+            }
+            isbnErroLabel.setForeground(Color.red);
+            dadoValidoIsbn = false;
+        }
+
+        if (titulo.isEmpty()) {
+            tituloErroLabel.setText("Título sem dados!");
+            tituloErroLabel.setForeground(Color.green);
+            dadoValidoTitulo = true;
+        }
+
+        if (autor.isEmpty()) {
+            autorErroLabel.setText("Autor sem dados!");
+            autorErroLabel.setForeground(Color.green);
+            dadoValidoAutor = true;
+        }
+
+        if (editora.isEmpty()) {
+            editoraErroLabel.setText("Editora sem dados!");
+            editoraErroLabel.setForeground(Color.green);
+            dadoValidoEditora = true;
+        }
+
+        // Vê se o anoPubli é inserido corretamente
+        if (anoPubliStr.isEmpty()) {
+            anoPubliErroLabel.setText("Ano de publicação sem dados!");
+            anoPubliErroLabel.setForeground(Color.green);
+            dadoValidoAnoPubli = true;
+        } else {
+            try {
+                // Tenta converter a string anoPubliStr para um número inteiro
+                anoPubli = Integer.parseInt(anoPubliStr);
+
+                // Verificar se o anoPubli está dentro de um intervalo específico (por exemplo, 1000 a 3000)
+                if (anoPubli >= 0 && anoPubli <= 2024) {
+                    anoPubliErroLabel.setText("Ano de publicação inserido corretamente!");
+                    anoPubliErroLabel.setForeground(Color.green);
+                    dadoValidoAnoPubli = true;
                 } else {
-                    isbnErroLabel.setText("Confirme se tem 13 números!");
-                }
-                isbnErroLabel.setForeground(Color.red);
-                dadoValidoIsbn = false;
-            }
-
-            if (titulo.isEmpty()) {
-                tituloErroLabel.setText("Título sem dados!");
-                tituloErroLabel.setForeground(Color.green);
-                dadoValidoTitulo = true;
-            }
-
-            if (autor.isEmpty()) {
-                autorErroLabel.setText("Autor sem dados!");
-                autorErroLabel.setForeground(Color.green);
-                dadoValidoAutor = true;
-            }
-
-            if (editora.isEmpty()) {
-                editoraErroLabel.setText("Editora sem dados!");
-                editoraErroLabel.setForeground(Color.green);
-                dadoValidoEditora = true;
-            }
-
-            // Vê se o anoPubli é inserido corretamente
-            if (anoPubliStr.isEmpty()) {
-                anoPubliErroLabel.setText("Ano de publicação sem dados!");
-                anoPubliErroLabel.setForeground(Color.green);
-                dadoValidoAnoPubli = true;
-            } else {
-                try {
-                    // Tenta converter a string anoPubliStr para um número inteiro
-                    anoPubli = Integer.parseInt(anoPubliStr);
-
-                    // Verificar se o anoPubli está dentro de um intervalo específico (por exemplo, 1000 a 3000)
-                    if (anoPubli >= 0 && anoPubli <= 2024) {
-                        anoPubliErroLabel.setText("Ano de publicação inserido corretamente!");
-                        anoPubliErroLabel.setForeground(Color.green);
-                        dadoValidoAnoPubli = true;
-                    } else {
-                        anoPubliErroLabel.setText("O ano de publicação deve estar entre 0 e 2024!");
-                        anoPubliErroLabel.setForeground(Color.red);
-                        dadoValidoAnoPubli = false;
-                    }
-                } catch (NumberFormatException e) {
-                    anoPubliErroLabel.setText("Confirme se inseriu um número válido para o ano de publicação!");
+                    anoPubliErroLabel.setText("O ano de publicação deve estar entre 0 e 2024!");
                     anoPubliErroLabel.setForeground(Color.red);
                     dadoValidoAnoPubli = false;
                 }
+            } catch (NumberFormatException e) {
+                anoPubliErroLabel.setText("Confirme se inseriu um número válido para o ano de publicação!");
+                anoPubliErroLabel.setForeground(Color.red);
+                dadoValidoAnoPubli = false;
             }
+        }
 
 
-            if (genero.isEmpty()) {
-                generoErroLabel.setText("Gênero sem dados!");
-                generoErroLabel.setForeground(Color.green);
-                dadoValidoGenero = true;
-            }
+        if (genero.isEmpty()) {
+            generoErroLabel.setText("Gênero sem dados!");
+            generoErroLabel.setForeground(Color.green);
+            dadoValidoGenero = true;
+        }
 
-            if (disponibilidadeStr.isEmpty()) {
-                disponibilidadeErroLabel.setText("Disponibilidade sem dados, fica \"Disponível\" por defeito.");
-                disponibilidadeErroLabel.setForeground(Color.green);
-                disponibilidade = true; // for defeito está disponível para empréstimo
-                dadoValidoDisponibilidade = true;
-            } else if ((disponibilidadeStr.equals("true")) || (disponibilidadeStr.equalsIgnoreCase("disponivel"))) {
-                disponibilidadeErroLabel.setText("Declarou que o livro se encontra disponivel");
-                disponibilidadeErroLabel.setForeground(Color.green);
-                disponibilidade = true;
-                dadoValidoDisponibilidade = true;
-            } else if (disponibilidadeStr.equals("false") || disponibilidadeStr.equalsIgnoreCase("emprestado")) {
-                disponibilidadeErroLabel.setText("Declarou que o livro foi emprestado.");
-                disponibilidadeErroLabel.setForeground(Color.green);
-                disponibilidade = false;
-                dadoValidoDisponibilidade = true;
-                // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
-                //disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
-            } else {
-                disponibilidadeErroLabel.setText("Dado Inválido!");
-                disponibilidadeErroLabel.setForeground(Color.red);
-            }
-
-            if (descricao.isEmpty()) {
-                descricaoErroLabel.setText("Descrição sem dados!");
-                descricaoErroLabel.setForeground(Color.green);
-                dadoValidoDescricao = true;
-            }
-
-            // se caso os dados forem postos corretamente, adicionar livro
+        if (disponibilidadeStr.isEmpty()) {
+            disponibilidadeErroLabel.setText("Disponibilidade sem dados, fica \"Disponível\" por defeito.");
+            disponibilidadeErroLabel.setForeground(Color.green);
+            disponibilidade = true; // for defeito está disponível para empréstimo
+            dadoValidoDisponibilidade = true;
+        } else if ((disponibilidadeStr.equals("true")) || (disponibilidadeStr.equalsIgnoreCase("disponivel"))) {
+            disponibilidadeErroLabel.setText("Declarou que o livro se encontra disponivel");
+            disponibilidadeErroLabel.setForeground(Color.green);
+            disponibilidade = true;
+            dadoValidoDisponibilidade = true;
+        } else if (disponibilidadeStr.equals("false") || disponibilidadeStr.equalsIgnoreCase("emprestado")) {
+            disponibilidadeErroLabel.setText("Declarou que o livro foi emprestado.");
+            disponibilidadeErroLabel.setForeground(Color.green);
+            disponibilidade = false;
+            dadoValidoDisponibilidade = true;
+            // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
+            //disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
         } else {
+            disponibilidadeErroLabel.setText("Dado Inválido!");
+            disponibilidadeErroLabel.setForeground(Color.red);
+        }
+
+        if (descricao.isEmpty()) {
+            descricaoErroLabel.setText("Descrição sem dados!");
+            descricaoErroLabel.setForeground(Color.green);
+            dadoValidoDescricao = true;
+        }
+
+        // Verifica se todos os dados são válidos
+        if (dadoValidoIsbn && dadoValidoTitulo && dadoValidoAutor && dadoValidoEditora && dadoValidoAnoPubli && dadoValidoGenero && dadoValidoDisponibilidade && dadoValidoDescricao) {
             Livro livro = new Livro(isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
             dadoValido = true;
             return livro;
+        } else {
+            // Se algum dado não for válido, não permita a criação do livro e retorne null
+            return null;
         }
-        return null;
     }
 
-
-    public void adicionarLivro () {
+    public void adicionarLivro() {
         Livro livroAdicionado = verificarDados();
-
         livroAdicionado.inserirLivro(livroAdicionado);
-
-        JOptionPane.showMessageDialog(frame, "Nada");
+        frame.dispose();
+        b.exibirFrame();
     }
 
     private WindowListener fecharPrograma() {

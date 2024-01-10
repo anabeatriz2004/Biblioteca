@@ -88,7 +88,7 @@ public class AdicionarLivroFormulario {
         frame.add(isbnTextField);
 
         isbnErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        isbnErroLabel.setSize(200, 20);
+        isbnErroLabel.setSize(1100, 20);
         isbnErroLabel.setLocation(200, 175);
         isbnErroLabel.setForeground(Color.white);
         frame.add(isbnErroLabel);
@@ -100,7 +100,7 @@ public class AdicionarLivroFormulario {
         frame.add(tituloLabel);
 
         tituloErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        tituloErroLabel.setSize(200, 20);
+        tituloErroLabel.setSize(1100, 20);
         tituloErroLabel.setLocation(200, 225);
         tituloErroLabel.setForeground(Color.white);
         frame.add(tituloErroLabel);
@@ -117,7 +117,7 @@ public class AdicionarLivroFormulario {
         frame.add(autorLabel);
 
         autorErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        autorErroLabel.setSize(200, 20);
+        autorErroLabel.setSize(1100, 20);
         autorErroLabel.setLocation(200, 275);
         autorErroLabel.setForeground(Color.white);
         frame.add(autorErroLabel);
@@ -134,7 +134,7 @@ public class AdicionarLivroFormulario {
         frame.add(editoraLabel);
 
         editoraErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        editoraErroLabel.setSize(200, 20);
+        editoraErroLabel.setSize(1100, 20);
         editoraErroLabel.setLocation(200, 325);
         editoraErroLabel.setForeground(Color.white);
         frame.add(editoraErroLabel);
@@ -151,7 +151,7 @@ public class AdicionarLivroFormulario {
         frame.add(anoPubliLabel);
 
         anoPubliErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        anoPubliErroLabel.setSize(200, 20);
+        anoPubliErroLabel.setSize(1100, 20);
         anoPubliErroLabel.setLocation(200, 375);
         anoPubliErroLabel.setForeground(Color.white);
         frame.add(anoPubliErroLabel);
@@ -168,7 +168,7 @@ public class AdicionarLivroFormulario {
         frame.add(generoLabel);
 
         generoErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        generoErroLabel.setSize(200, 20);
+        generoErroLabel.setSize(1100, 20);
         generoErroLabel.setLocation(200, 425);
         generoErroLabel.setForeground(Color.white);
         frame.add(generoErroLabel);
@@ -185,7 +185,7 @@ public class AdicionarLivroFormulario {
         frame.add(disponibilidadeLabel);
 
         disponibilidadeErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        disponibilidadeErroLabel.setSize(200, 20);
+        disponibilidadeErroLabel.setSize(1100, 20);
         disponibilidadeErroLabel.setLocation(200, 475);
         disponibilidadeErroLabel.setForeground(Color.white);
         frame.add(disponibilidadeErroLabel);
@@ -205,7 +205,7 @@ public class AdicionarLivroFormulario {
         frame.add(descricaoLabel);
 
         descricaoErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        descricaoErroLabel.setSize(200, 20);
+        descricaoErroLabel.setSize(1100, 20);
         descricaoErroLabel.setLocation(200, 600);
         descricaoErroLabel.setForeground(Color.white);
         frame.add(descricaoErroLabel);

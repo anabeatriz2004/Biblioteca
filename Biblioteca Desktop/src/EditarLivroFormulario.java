@@ -153,7 +153,7 @@ public class EditarLivroFormulario {
         disponibilidadeTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         disponibilidadeTextField.setSize(1100, 20);
         disponibilidadeTextField.setLocation(200, 450);
-        String disponibilidadeLivro = livroArray.get(0).getDisponibilidade();
+        String disponibilidadeLivro = livroArray.get(0).isDisponibilidade();
         disponibilidadeTextField.setText(disponibilidadeLivro);
         frame.add(disponibilidadeTextField);
 

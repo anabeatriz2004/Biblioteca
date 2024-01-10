@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class EditarLivroFormulario {
     Connection conexao = Database.getConexao();
     Bibliotecario b = new Bibliotecario();
+    Livro livro = new Livro();
 
     JFrame frame;
     public JButton voltarBotao = new JButton("<-- Voltar");
@@ -41,7 +42,6 @@ public class EditarLivroFormulario {
     public final JLabel generoErroLabel = new JLabel("Gênero sem dados!");
 
     public final JLabel disponibilidadeLabel = new JLabel("Disponibilidade: ");
-    //public JTextField disponibilidadeTextField = new JTextField();
     public JComboBox<String> disponibilidadeComboBox = new JComboBox<>();
     public final JLabel disponibilidadeErroLabel = new JLabel("Disponibilidade sem dados!");
 
@@ -49,10 +49,9 @@ public class EditarLivroFormulario {
     public JTextArea descricaoTextArea = new JTextArea();
     public final JLabel descricaoErroLabel = new JLabel("Descricao sem dados!");
 
-    public JButton adicionarLivroBotao = new JButton("Adicionar Livro");
+    public JButton editarLivroBotao = new JButton("Adicionar Livro");
 
-    EditarLivroFormulario() {
-    }
+    EditarLivroFormulario() {}
 
     public void exibirFrame(int idLivroSelecionado) {
         ArrayList<Livro> livroArray;
@@ -114,6 +113,8 @@ public class EditarLivroFormulario {
         tituloTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         tituloTextField.setSize(1100, 20);
         tituloTextField.setLocation(200, 200);
+        String tituloLivro = livroArray.get(0).getTitulo();
+        tituloTextField.setText(tituloLivro);
         frame.add(tituloTextField);
 
         autorLabel.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -131,6 +132,8 @@ public class EditarLivroFormulario {
         autorTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         autorTextField.setSize(1100, 20);
         autorTextField.setLocation(200, 250);
+        String autorLivro = livroArray.get(0).getAutor();
+        autorTextField.setText(autorLivro);
         frame.add(autorTextField);
 
         editoraLabel.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -148,6 +151,8 @@ public class EditarLivroFormulario {
         editoraTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         editoraTextField.setSize(1100, 20);
         editoraTextField.setLocation(200, 300);
+        String editoraLivro = livroArray.get(0).getEditora();
+        editoraTextField.setText(editoraLivro);
         frame.add(editoraTextField);
 
         anoPubliLabel.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -165,6 +170,8 @@ public class EditarLivroFormulario {
         anoPubliTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         anoPubliTextField.setSize(1100, 20);
         anoPubliTextField.setLocation(200, 350);
+        int anoPubliLivro = livroArray.get(0).getAnoPubli();
+        anoPubliTextField.setText(String.valueOf(anoPubliLivro));
         frame.add(anoPubliTextField);
 
         generoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -182,6 +189,8 @@ public class EditarLivroFormulario {
         generoTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         generoTextField.setSize(1100, 20);
         generoTextField.setLocation(200, 400);
+        String generoLivro = livroArray.get(0).getGenero();
+        generoTextField.setText(generoLivro);
         frame.add(generoTextField);
 
         disponibilidadeLabel.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -202,6 +211,8 @@ public class EditarLivroFormulario {
         disponibilidadeComboBox.setFont(new Font("Arial", Font.PLAIN, 12));
         disponibilidadeComboBox.setSize(1100, 20);
         disponibilidadeComboBox.setLocation(200, 450);
+        String disponibilidadeLivro = String.valueOf(livroArray.get(0).isDisponibilidade());
+        disponibilidadeComboBox.setSelectedItem(disponibilidadeLivro);
         frame.add(disponibilidadeComboBox);
 
         descricaoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -219,18 +230,18 @@ public class EditarLivroFormulario {
         descricaoTextArea.setFont(new Font("Arial", Font.PLAIN, 12));
         descricaoTextArea.setSize(1100, 100);
         descricaoTextArea.setLocation(200, 500);
+        String descricaoLivro = livroArray.get(0).getDescricao();
+        descricaoTextArea.setText(descricaoLivro);
         frame.add(descricaoTextArea);
 
-        adicionarLivroBotao.setFont(new Font("Arial", Font.PLAIN, 20));
-        adicionarLivroBotao.setSize(200, 30);
-        adicionarLivroBotao.setLocation(650, 615);
-        adicionarLivroBotao.setForeground(Color.white);
-        adicionarLivroBotao.setBorder(BorderFactory.createLineBorder(Color.white, 2));
-        adicionarLivroBotao.setBackground(new Color(30, 30, 30));
-        adicionarLivroBotao.addActionListener(e -> {
-            adicionarLivro();
-        });
-        frame.add(adicionarLivroBotao);
+        editarLivroBotao.setFont(new Font("Arial", Font.PLAIN, 20));
+        editarLivroBotao.setSize(200, 30);
+        editarLivroBotao.setLocation(650, 615);
+        editarLivroBotao.setForeground(Color.WHITE);
+        editarLivroBotao.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        editarLivroBotao.setBackground(new Color(30, 30, 30));
+        editarLivroBotao.addActionListener(e-> { editarLivro(idLivroSelecionado); });
+        frame.add(editarLivroBotao);
 
         frame.addWindowListener(fecharPrograma());
         frame.setResizable(false);
@@ -245,7 +256,6 @@ public class EditarLivroFormulario {
     }
 
     public Livro verificarDados() {
-        boolean dadoValido = false;
         boolean dadoValidoIsbn = false;
         boolean dadoValidoTitulo = false;
         boolean dadoValidoAutor = false;
@@ -358,8 +368,7 @@ public class EditarLivroFormulario {
 
         // Verifica se todos os dados são válidos
         if (dadoValidoIsbn && dadoValidoTitulo && dadoValidoAutor && dadoValidoEditora && dadoValidoAnoPubli && dadoValidoGenero && dadoValidoDisponibilidade && dadoValidoDescricao) {
-            Livro livro = new Livro(isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
-            dadoValido = true;
+            Livro livro = new Livro( isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
             return livro;
         } else {
             // Se algum dado não for válido, não permita a criação do livro e retorne null
@@ -367,7 +376,7 @@ public class EditarLivroFormulario {
         }
     }
 
-    public void adicionarLivro() {
+    public void editarLivro(int idLivroSelecionado) {
         Livro livroAdicionado = verificarDados();
         livroAdicionado.inserirLivro(livroAdicionado);
         frame.dispose();

@@ -32,6 +32,9 @@ public class Utilizador {
      * Método para mostrar a lista que é exibida ao arrancar o programa
      */
     public void exibirFrame() {
+        listaModelo.clear();
+        if (!(listaModelo.isEmpty())) {refreshLivroBaseDados();}
+
         frame = new JFrame("Biblioteca");
 
         // Adiciona a JLabel nome à esquerda no topo
@@ -100,6 +103,28 @@ public class Utilizador {
         painel.add(new JScrollPane(textArea), BorderLayout.CENTER);
         painel.revalidate();
         painel.repaint();
+    }
+
+    public void refreshLivroBaseDados() {
+        listaModelo.clear();
+
+        ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
+        for (Livro livroAtual : todosOsLivros) {
+            listaModelo.addElement(livroAtual);
+            //id_LivroSelecionado = i + 1;
+        }
+
+        lista.setCellRenderer(new Bibliotecario.LivroRenderer());
+
+        try {
+            lista.getSelectionModel().addListSelectionListener(e -> {
+                Livro livroSelecionado = lista.getSelectedValue();
+                exibirDetalhesLivro(livroSelecionado);
+            });
+        } catch (NullPointerException e) {
+            System.out.println("erroooooooooooooooooooooooooouuuuuuuuuuuuuuuuuuu");
+            e.fillInStackTrace();
+        }
     }
 
     static class LivroRenderer extends DefaultListCellRenderer {

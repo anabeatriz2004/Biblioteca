@@ -37,7 +37,6 @@ public class Bibliotecario {
 
     public void exibirFrame() {
         listaModelo.clear();
-
         if (!(listaModelo.isEmpty())) {refreshLivroBaseDados();}
 
         frame = new JFrame("Bibliotecario");

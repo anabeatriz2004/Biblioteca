@@ -25,6 +25,9 @@ public class Biblioteca {
     JButton loginButton = new JButton("Iniciar Sessão");
 
     public void exibirFrame() {
+        listaModelo.clear();
+        if (!(listaModelo.isEmpty())) {refreshLivroBaseDados();}
+
         frame = new JFrame("Biblioteca");
         // Adiciona a JLabel nome à esquerda no topo
         painelInicio.add(nome, BorderLayout.WEST);
@@ -52,7 +55,7 @@ public class Biblioteca {
             listaModelo.addElement(livro);
         }
 
-        //lista.setCellRenderer(new Biblioteca.LivroRenderer());
+        lista.setCellRenderer(new Biblioteca.LivroRenderer());
 
         lista.getSelectionModel().addListSelectionListener(e -> {
             Livro livro = lista.getSelectedValue();
@@ -110,6 +113,28 @@ public class Biblioteca {
         painel.add(new JScrollPane(textArea), BorderLayout.CENTER);
         painel.revalidate();
         painel.repaint();
+    }
+
+    public void refreshLivroBaseDados() {
+        listaModelo.clear();
+
+        ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
+        for (Livro livroAtual : todosOsLivros) {
+            listaModelo.addElement(livroAtual);
+            //id_LivroSelecionado = i + 1;
+        }
+
+        lista.setCellRenderer(new Bibliotecario.LivroRenderer());
+
+        try {
+            lista.getSelectionModel().addListSelectionListener(e -> {
+                Livro livroSelecionado = lista.getSelectedValue();
+                exibirDetalhesLivro(livroSelecionado);
+            });
+        } catch (NullPointerException e) {
+            System.out.println("erroooooooooooooooooooooooooouuuuuuuuuuuuuuuuuuu");
+            e.fillInStackTrace();
+        }
     }
 
     static class LivroRenderer extends DefaultListCellRenderer {

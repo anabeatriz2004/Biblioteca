@@ -40,7 +40,8 @@ public class AdicionarLivroFormulario {
     public final JLabel generoErroLabel = new JLabel("Gênero sem dados!");
 
     public final JLabel disponibilidadeLabel = new JLabel("Disponibilidade: ");
-    public JTextField disponibilidadeTextField = new JTextField();
+    //public JTextField disponibilidadeTextField = new JTextField();
+    public JComboBox<String> disponibilidadeComboBox = new JComboBox<>();
     public final JLabel disponibilidadeErroLabel = new JLabel("Disponibilidade sem dados!");
 
     public final JLabel descricaoLabel = new JLabel("Descricao: ");
@@ -190,10 +191,12 @@ public class AdicionarLivroFormulario {
         frame.add(disponibilidadeErroLabel);
 
         // mudar a forma de saber se está disponível ou emprestado
-        disponibilidadeTextField.setFont(new Font("Arial", Font.PLAIN, 12));
-        disponibilidadeTextField.setSize(1100, 20);
-        disponibilidadeTextField.setLocation(200, 450);
-        frame.add(disponibilidadeTextField);
+        disponibilidadeComboBox.addItem("Disponível");
+        disponibilidadeComboBox.addItem("Emprestado");
+        disponibilidadeComboBox.setFont(new Font("Arial", Font.PLAIN, 12));
+        disponibilidadeComboBox.setSize(1100, 20);
+        disponibilidadeComboBox.setLocation(200, 450);
+        frame.add(disponibilidadeComboBox);
 
         descricaoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         descricaoLabel.setSize(200, 20);
@@ -253,11 +256,11 @@ public class AdicionarLivroFormulario {
         String editora = editoraTextField.getText();
         String anoPubliStr = anoPubliTextField.getText();
         String genero = generoTextField.getText();
-        String disponibilidadeStr = disponibilidadeTextField.getText();
+        String disponibilidadeStr = (String) disponibilidadeComboBox.getSelectedItem();
         String descricao = descricaoTextArea.getText();
 
         int anoPubli = 0;
-        boolean disponibilidade = false;
+        boolean disponibilidade = true;
 
         if (isbnStr.isEmpty()) {
             isbnErroLabel.setText("Isbn sem dados!");
@@ -329,26 +332,16 @@ public class AdicionarLivroFormulario {
             dadoValidoGenero = true;
         }
 
-        if (disponibilidadeStr.isEmpty()) {
-            disponibilidadeErroLabel.setText("Disponibilidade sem dados, fica \"Disponível\" por defeito.");
-            disponibilidadeErroLabel.setForeground(Color.green);
-            disponibilidade = true; // for defeito está disponível para empréstimo
-            dadoValidoDisponibilidade = true;
-        } else if ((disponibilidadeStr.equals("true")) || (disponibilidadeStr.equalsIgnoreCase("disponivel"))) {
-            disponibilidadeErroLabel.setText("Declarou que o livro se encontra disponivel");
+        if (disponibilidadeStr.equals("Disponível")) {
+            disponibilidadeErroLabel.setText("Declarou que o livro se encontra disponivel.");
             disponibilidadeErroLabel.setForeground(Color.green);
             disponibilidade = true;
             dadoValidoDisponibilidade = true;
-        } else if (disponibilidadeStr.equals("false") || disponibilidadeStr.equalsIgnoreCase("emprestado")) {
+        } else if (disponibilidadeStr.equals("Emprestado")) {
             disponibilidadeErroLabel.setText("Declarou que o livro foi emprestado.");
             disponibilidadeErroLabel.setForeground(Color.green);
             disponibilidade = false;
             dadoValidoDisponibilidade = true;
-            // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
-            //disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
-        } else {
-            disponibilidadeErroLabel.setText("Dado Inválido!");
-            disponibilidadeErroLabel.setForeground(Color.red);
         }
 
         if (descricao.isEmpty()) {

@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Livro {
     private int id_livro;
@@ -232,12 +232,20 @@ public class Livro {
 
                 if (affectedRows == 0) {
                     System.out.println("Falha ao inserir o livro. Nenhum registro foi afetado.");
+                    JOptionPane.showMessageDialog(new JFrame(),
+                            "Erro ao inserir livro na base de dados",
+                            "Erro",
+                            JOptionPane.ERROR_MESSAGE);
                 } else {
                     // Obtém o ID gerado automaticamente
                     try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                         if (generatedKeys.next()) {
                             int idLivro = generatedKeys.getInt(1);
                             System.out.println("Livro inserido com sucesso! ID do Livro: " + idLivro);
+                            JOptionPane.showMessageDialog(new JFrame(),
+                                    "Livro inserido com sucesso!",
+                                    "Sucesso",
+                                    JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                 }

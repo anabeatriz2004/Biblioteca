@@ -233,6 +233,7 @@ public class AdicionarLivroFormulario {
     }
 
     public Livro verificarDados() {
+        boolean dadoValido = false;
         boolean dadoValidoIsbn = false;
         boolean dadoValidoTitulo = false;
         boolean dadoValidoAutor = false;
@@ -255,19 +256,21 @@ public class AdicionarLivroFormulario {
         int anoPubli = 0;
         boolean disponibilidade = false;
 
-        while (!(dadoValidoIsbn && dadoValidoTitulo && dadoValidoAutor && dadoValidoEditora && dadoValidoAnoPubli && dadoValidoGenero && dadoValidoDisponibilidade && dadoValidoDescricao)) {
-            // vê se o isbn é posto corretamente
+        if (!(dadoValidoIsbn && dadoValidoTitulo && dadoValidoAutor && dadoValidoEditora && dadoValidoAnoPubli && dadoValidoGenero && dadoValidoDisponibilidade && dadoValidoDescricao)) {
             if (isbnStr.isEmpty()) {
                 isbnErroLabel.setText("Isbn sem dados!");
                 isbnErroLabel.setForeground(Color.green);
-                String isbn = isbnStr;
                 dadoValidoIsbn = true;
             } else if (isbnStr.matches("\\d{13}")) {
                 isbnErroLabel.setText("ISBN inserido corretamente!");
                 isbnErroLabel.setForeground(Color.green);
                 dadoValidoIsbn = true;
             } else {
-                isbnErroLabel.setText("Confirme se tem 13 números!");
+                if (isbnStr.matches(".*\\D.*")) {
+                    isbnErroLabel.setText("O ISBN só pode conter números!");
+                } else {
+                    isbnErroLabel.setText("Confirme se tem 13 números!");
+                }
                 isbnErroLabel.setForeground(Color.red);
                 dadoValidoIsbn = false;
             }
@@ -342,24 +345,27 @@ public class AdicionarLivroFormulario {
                 // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
                 //disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
             } else {
-                descricaoErroLabel.setText("Dado Inválido!");
-                descricaoErroLabel.setForeground(Color.red);
-                dadoValidoDescricao = false;
+                disponibilidadeErroLabel.setText("Dado Inválido!");
+                disponibilidadeErroLabel.setForeground(Color.red);
             }
 
-            // se caso os dados forem postos corretamente, adicionar livr0
-            if (dadoValidoIsbn && dadoValidoTitulo && dadoValidoAutor && dadoValidoEditora && dadoValidoAnoPubli && dadoValidoGenero && dadoValidoDisponibilidade && dadoValidoDescricao) {
-                Livro livro = new Livro(isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
-                return livro;
+            if (descricao.isEmpty()) {
+                descricaoErroLabel.setText("Descrição sem dados!");
+                descricaoErroLabel.setForeground(Color.green);
+                dadoValidoDescricao = true;
             }
 
+            // se caso os dados forem postos corretamente, adicionar livro
+        } else {
+            Livro livro = new Livro(isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+            dadoValido = true;
+            return livro;
         }
         return null;
     }
 
 
     public void adicionarLivro () {
-
         Livro livroAdicionado = verificarDados();
 
         livroAdicionado.inserirLivro(livroAdicionado);

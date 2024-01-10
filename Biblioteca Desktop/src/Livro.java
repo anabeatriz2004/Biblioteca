@@ -11,6 +11,7 @@ public class Livro {
     private int anoPubli;
     private String genero;
     private boolean disponibilidade;
+    private String disponibilidadeStr;
     private String descricao;
 
     //private final Database conexao = new Database();
@@ -87,13 +88,10 @@ public class Livro {
         this.genero = genero;
     }
     public boolean isDisponibilidade() {
+        if (disponibilidadeStr.equals("true")) {
             return true;
-    }
-    public String getDisponibilidade() {
-        if (disponibilidade) {
-            return "Disponível";
         } else {
-            return "Emprestado";
+            return false;
         }
     }
     public void setDisponibilidade(boolean disponibilidade) {

@@ -6,14 +6,14 @@ import java.sql.SQLException;
 public class Database {
 
     // conexão há base de dados da ua
-    private static final String url = "jdbc:mysql://estga-dev.ua.pt/PTDA_BD_005";
+    /*private static final String url = "jdbc:mysql://estga-dev.ua.pt/PTDA_BD_005";
     private static final String user = "PTDA_005";
-    private static final String password = "Zh#pos539";
+    private static final String password = "Zh#pos539";*/
 
     // Configuração da conexão localhost
-    /*private static final String url = "jdbc:mysql://localhost/PTDA_BD_005";
+    private static final String url = "jdbc:mysql://localhost/PTDA_BD_005";
     private static final String user = "root";
-    private static final String password = "RandomGirl2.0";*/
+    private static final String password = "RandomGirl2.0";
 
     // Conexão estática
     private static Connection conexao = null;

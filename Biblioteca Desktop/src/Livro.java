@@ -87,8 +87,15 @@ public class Livro {
     public void setGenero(String genero) {
         this.genero = genero;
     }
-    public boolean isDisponibilidade() {
+    public String getDisponibilidade() {
         if (disponibilidadeStr.equals("true")) {
+            return "Disponível";
+        } else {
+            return "Emprestado";
+        }
+    }
+    public boolean isDisponibilidade() {
+        if (disponibilidade) {
             return true;
         } else {
             return false;

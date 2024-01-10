@@ -153,7 +153,7 @@ public class Bibliotecario {
                     "\nEditora: " + livro.getEditora() +
                     "\nAno de Publicação: " + livro.getAnoPubli() +
                     "\nGênero: " + livro.getGenero() +
-                    "\nDisponibilidade: " + livro.isDisponibilidade() +
+                    "\nDisponibilidade: " + livro.getDisponibilidade() +
                     "\nDescrição: " + livro.getDescricao());
 
             // Adiciona o botão "Alterar Dados" ao painel direito
@@ -166,16 +166,8 @@ public class Bibliotecario {
             painel.repaint();
         } catch (NullPointerException e) {
             e.fillInStackTrace();
-            //System.out.println("erroooooooooooooooooooooooooouuuuuuuuuuuuuuuuuuu");
         }
     }
-
-    // NÃO FUNCIONA
-    private void adicionarLivro() {
-        // Lógica para adicionar um novo livro (pode ser um novo JFrame, JOptionPane, etc.)
-        JOptionPane.showMessageDialog(frame, "Implemente a lógica para adicionar um novo livro.");
-    }
-
 
     /**
      * Método que é usado pela ListaBibliotecario(), e vai buscar há classe Livro, o método

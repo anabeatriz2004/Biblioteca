@@ -55,7 +55,7 @@ INSERT INTO bibliotecario
 INSERT INTO livro (id_livro, ISBN, titulo, autor, editora, ano_publi, genero, disponibilidade, descricao)
 VALUES (1, '9780061120084', 'To Kill a Mockingbird', 'Harper Lee', 'Harper Perennial', 1960, 'Fiction', true,
 		'A classic novel that explores racial injustice and moral growth in the American South.'),
-    (2, '9780142407332', 'The Catcher in the Rye', 'J.D. Salinger', 'Little, Brown and Company', 1951, 'Fiction', true,
+    (2, '9780142407332', 'The Catcher in the Rye', 'J.D. Salinger', 'Little, Brown and Company', 1951, 'Fiction', false,
 		'A coming-of-age novel narrated by a teenage boy who has been expelled from prep school.'),
     (3, '9781400032716', 'The Great Gatsby', 'F. Scott Fitzgerald', 'Scribner', 1925, 'Fiction', true,
 		'A story of the American Dream, decadence, and the Roaring Twenties.'),

@@ -233,8 +233,14 @@ public class AdicionarLivroFormulario {
     }
 
     public Livro verificarDados() {
-        // ArrayList<Livro> livroAAdicionar = new ArrayList<>();
-        boolean dadoValido = false;
+        boolean dadoValidoIsbn = false;
+        boolean dadoValidoTitulo = false;
+        boolean dadoValidoAutor = false;
+        boolean dadoValidoEditora = false;
+        boolean dadoValidoAnoPubli = false;
+        boolean dadoValidoGenero = false;
+        boolean dadoValidoDisponibilidade = false;
+        boolean dadoValidoDescricao = false;
 
         // buscar os dados do formulário
         String isbnStr = isbnTextField.getText();
@@ -249,46 +255,46 @@ public class AdicionarLivroFormulario {
         int anoPubli = 0;
         boolean disponibilidade = false;
 
-        while (dadoValido) {
+        while (!(dadoValidoIsbn && dadoValidoTitulo && dadoValidoAutor && dadoValidoEditora && dadoValidoAnoPubli && dadoValidoGenero && dadoValidoDisponibilidade && dadoValidoDescricao)) {
             // vê se o isbn é posto corretamente
             if (isbnStr.isEmpty()) {
                 isbnErroLabel.setText("Isbn sem dados!");
                 isbnErroLabel.setForeground(Color.green);
                 String isbn = isbnStr;
-                dadoValido = true;
+                dadoValidoIsbn = true;
             } else if (isbnStr.matches("\\d{13}")) {
                 isbnErroLabel.setText("ISBN inserido corretamente!");
                 isbnErroLabel.setForeground(Color.green);
-                dadoValido = true;
+                dadoValidoIsbn = true;
             } else {
                 isbnErroLabel.setText("Confirme se tem 13 números!");
                 isbnErroLabel.setForeground(Color.red);
-                dadoValido = false;
+                dadoValidoIsbn = false;
             }
 
             if (titulo.isEmpty()) {
-                tituloErroLabel.setText("titulo sem dados!");
+                tituloErroLabel.setText("Título sem dados!");
                 tituloErroLabel.setForeground(Color.green);
-                dadoValido = true;
+                dadoValidoTitulo = true;
             }
 
             if (autor.isEmpty()) {
                 autorErroLabel.setText("Autor sem dados!");
                 autorErroLabel.setForeground(Color.green);
-                dadoValido = true;
+                dadoValidoAutor = true;
             }
 
             if (editora.isEmpty()) {
                 editoraErroLabel.setText("Editora sem dados!");
                 editoraErroLabel.setForeground(Color.green);
-                dadoValido = true;
+                dadoValidoEditora = true;
             }
 
             // Vê se o anoPubli é inserido corretamente
             if (anoPubliStr.isEmpty()) {
                 anoPubliErroLabel.setText("Ano de publicação sem dados!");
                 anoPubliErroLabel.setForeground(Color.green);
-                dadoValido = true;
+                dadoValidoAnoPubli = true;
             } else {
                 try {
                     // Tenta converter a string anoPubliStr para um número inteiro
@@ -298,16 +304,16 @@ public class AdicionarLivroFormulario {
                     if (anoPubli >= 0 && anoPubli <= 2024) {
                         anoPubliErroLabel.setText("Ano de publicação inserido corretamente!");
                         anoPubliErroLabel.setForeground(Color.green);
-                        dadoValido = true;
+                        dadoValidoAnoPubli = true;
                     } else {
                         anoPubliErroLabel.setText("O ano de publicação deve estar entre 0 e 2024!");
                         anoPubliErroLabel.setForeground(Color.red);
-                        dadoValido = false;
+                        dadoValidoAnoPubli = false;
                     }
                 } catch (NumberFormatException e) {
                     anoPubliErroLabel.setText("Confirme se inseriu um número válido para o ano de publicação!");
                     anoPubliErroLabel.setForeground(Color.red);
-                    dadoValido = false;
+                    dadoValidoAnoPubli = false;
                 }
             }
 
@@ -315,28 +321,40 @@ public class AdicionarLivroFormulario {
             if (genero.isEmpty()) {
                 generoErroLabel.setText("Gênero sem dados!");
                 generoErroLabel.setForeground(Color.green);
-                dadoValido = true;
+                dadoValidoGenero = true;
             }
 
             if (disponibilidadeStr.isEmpty()) {
-                disponibilidadeErroLabel.setText("Disponibilidade sem dados!");
+                disponibilidadeErroLabel.setText("Disponibilidade sem dados, fica \"Disponível\" por defeito.");
+                disponibilidadeErroLabel.setForeground(Color.green);
+                disponibilidade = true; // for defeito está disponível para empréstimo
+                dadoValidoDisponibilidade = true;
+            } else if ((disponibilidadeStr.equals("true")) || (disponibilidadeStr.equalsIgnoreCase("disponivel"))) {
+                disponibilidadeErroLabel.setText("Declarou que o livro se encontra disponivel");
                 disponibilidadeErroLabel.setForeground(Color.green);
                 disponibilidade = true;
-                dadoValido = true;
-            } else {
+                dadoValidoDisponibilidade = true;
+            } else if (disponibilidadeStr.equals("false") || disponibilidadeStr.equalsIgnoreCase("emprestado")) {
+                disponibilidadeErroLabel.setText("Declarou que o livro foi emprestado.");
+                disponibilidadeErroLabel.setForeground(Color.green);
+                disponibilidade = false;
+                dadoValidoDisponibilidade = true;
                 // Supondo que o campo disponibilidade seja representado por "true" ou "false" na entrada
-                disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
+                //disponibilidade = Boolean.parseBoolean(disponibilidadeStr);
+            } else {
+                descricaoErroLabel.setText("Dado Inválido!");
+                descricaoErroLabel.setForeground(Color.red);
+                dadoValidoDescricao = false;
             }
 
-            if (descricao.isEmpty()) {
-                descricaoErroLabel.setText("Disponibilidade sem dados!");
-                descricaoErroLabel.setForeground(Color.green);
-                dadoValido = true;
+            // se caso os dados forem postos corretamente, adicionar livr0
+            if (dadoValidoIsbn && dadoValidoTitulo && dadoValidoAutor && dadoValidoEditora && dadoValidoAnoPubli && dadoValidoGenero && dadoValidoDisponibilidade && dadoValidoDescricao) {
+                Livro livro = new Livro(isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+                return livro;
             }
+
         }
-
-        Livro livro = new Livro(isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
-        return livro;
+        return null;
     }
 
 

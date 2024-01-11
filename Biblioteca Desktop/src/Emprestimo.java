@@ -101,13 +101,12 @@ public class Emprestimo {
         }
     }
 
-    public void atualizar_estado_livro(boolean disponibilidade) {
+    public void atualizar_estado_livro(int idLivro, boolean disponibilidade) {
         try {
-
             String sql = "UPDATE livro SET disponibilidade = ? WHERE id_livro = ?";
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             pstmt.setBoolean(1, disponibilidade);
-            pstmt.setInt(2, id_livro);
+            pstmt.setInt(2, idLivro);
 
             pstmt.executeUpdate();
 

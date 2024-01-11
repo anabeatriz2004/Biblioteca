@@ -119,15 +119,17 @@ public class Utilizador {
     public void emprestarLivro (int idUtilizador, int idLivro) {
         ArrayList<Livro> livroASerLido;
         livroASerLido = livro.consultarLivro(idLivro);
-
+        String titulo = livroASerLido.get(0).getTitulo();
+        boolean disponibilidade = !(livroASerLido.get(0).isDisponibilidade());
         int opcao = JOptionPane.showConfirmDialog(frame,
-                "Tem a certeza que quer ler o livro: " + livroASerLido.get(0).getTitulo() + "?",
+                "Tem a certeza que quer ler o livro: " + titulo + "?",
                 "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
         if (opcao == JOptionPane.YES_OPTION) {
             System.out.println("Livro emprestado" + livroASerLido.get(0).getTitulo() + "!");
             emp.emprestarLivro(idUtilizador, idLivro);
             Utilizador u = new Utilizador();
+            emp.atualizar_estado_livro(idLivro, disponibilidade);
             frame.dispose();
             u.exibirFrame(idUtilizador);
         } else {

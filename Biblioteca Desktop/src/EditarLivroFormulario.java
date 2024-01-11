@@ -399,8 +399,23 @@ public class EditarLivroFormulario {
     public void editarLivro(int id) {
         Livro livroEditado = verificarDados(id);
         livroEditado.alterarDados(livroEditado);
-        frame.dispose();
-        b.exibirFrame();
+        
+        int opcao = JOptionPane.showConfirmDialog(frame,
+                "Deseja mesmo alterar o livro com o título: " + livro.getTitulo() + "?",
+                "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (opcao == JOptionPane.YES_OPTION) {
+            livro.alterarDados(livroEditado);
+            frame.dispose();
+            b.exibirFrame();
+        } else {
+            // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
+            JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
+                            "\nPor favor, selecione um livro para eliminar.",
+                    "Aviso", JOptionPane.WARNING_MESSAGE);
+
+        }
+    }
     }
 
     private WindowListener fecharPrograma() {

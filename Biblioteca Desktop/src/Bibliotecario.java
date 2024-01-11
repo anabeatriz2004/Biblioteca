@@ -141,7 +141,7 @@ public class Bibliotecario {
             return -1;  // Valor padrão indicando nenhum livro selecionado
         }
     }
-
+    
     private void exibirDetalhesLivro(Livro livro) {
         try {
             textArea.setText("ID" + livro.getID_livro() +

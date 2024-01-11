@@ -103,10 +103,11 @@ public class Utilizador {
         painel.add(new JScrollPane(textArea), BorderLayout.CENTER);
         if (livro.isDisponibilidade()) {
             emprestimoButton.addActionListener(e-> { emprestarLivro (idUtilizador, livro.getID_livro());});
+            painel.add(emprestimoButton, BorderLayout.NORTH);
         } else {
             devolverButton.addActionListener(e-> { devolverLivro(idUtilizador, livro.getID_livro());});
+            painel.add(devolverButton, BorderLayout.NORTH);
         }
-        painel.add(emprestimoButton, BorderLayout.NORTH);
         painel.revalidate();
         painel.repaint();
     }
@@ -116,22 +117,23 @@ public class Utilizador {
     }
 
     public void emprestarLivro (int idUtilizador, int idLivro) {
+        ArrayList<Livro> livroASerLido;
+        livroASerLido = livro.consultarLivro(idLivro);
 
         int opcao = JOptionPane.showConfirmDialog(frame,
-                "Deseja mesmo alterar o livro com o título: " + livro.getTitulo() + "?",
+                "Tem a certeza que quer ler o livro: " + livroASerLido.get(0).getTitulo() + "?",
                 "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
         if (opcao == JOptionPane.YES_OPTION) {
+            System.out.println("Livro emprestado" + livroASerLido.get(0).getTitulo() + "!");
             emp.emprestarLivro(idUtilizador, idLivro);
             Utilizador u = new Utilizador();
             frame.dispose();
             u.exibirFrame(idUtilizador);
         } else {
-            // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
-            JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
-                            "\nPor favor, selecione um livro para eliminar.",
+            JOptionPane.showMessageDialog(frame, "Por favor." +
+                            "Selecione outro livro para ler.",
                     "Aviso", JOptionPane.WARNING_MESSAGE);
-
         }
     }
 

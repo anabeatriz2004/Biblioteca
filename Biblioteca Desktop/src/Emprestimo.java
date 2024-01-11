@@ -83,9 +83,9 @@ public class Emprestimo {
                 try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int idEmprestimo = generatedKeys.getInt(1);
-                        System.out.println("Livro inserido com sucesso! ID do Livro: " + idEmprestimo);
+                        System.out.println("Livro emprestado com sucesso!");
                         JOptionPane.showMessageDialog(new JFrame(),
-                                "Livro inserido com sucesso!",
+                                "Livro emprestado com sucesso!" + "\n devolver livro até dia:" + dataDevolucao,
                                 "Sucesso",
                                 JOptionPane.INFORMATION_MESSAGE);
                     }

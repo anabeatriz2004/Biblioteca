@@ -14,7 +14,6 @@ public class Livro {
     private String disponibilidadeStr;
     private String descricao;
 
-    //private final Database conexao = new Database();
     Connection conexao = Database.getConexao();
 
     public Livro () {}
@@ -232,7 +231,6 @@ public class Livro {
                 pstmt.setBoolean(7, livro.isDisponibilidade());
                 pstmt.setString(8, livro.getDescricao());
 
-                // Executa a consulta
                 int affectedRows = pstmt.executeUpdate();
 
                 if (affectedRows == 0) {

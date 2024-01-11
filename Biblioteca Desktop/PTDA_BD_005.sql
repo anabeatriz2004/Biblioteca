@@ -34,7 +34,6 @@ CREATE TABLE emprestimo (
     id_emprestimo INT PRIMARY KEY,
     id_livro INT,
     id_utilizador INT,
-    id_bibliotecario INT,
     data_emprestimo DATE,
     data_devolucao DATE,
     FOREIGN KEY (id_livro) REFERENCES livro (id_livro),

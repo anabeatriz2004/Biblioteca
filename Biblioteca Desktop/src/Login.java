@@ -103,11 +103,12 @@ public class Login {
                 ResultSet resultSetBibliotecario = pstmtBibliotecario.executeQuery();
 
                 if (resultSetUtilizador.next()) {
+                    int idUtilizador = resultSetUtilizador.getInt("id_utilizador");
                     String senhaUtilizador = resultSetUtilizador.getString("senha");
                     if (senhaUtilizador.equals(senha)) {
                         System.out.println("Entrou como utilizador");
                         frame.dispose();
-                        u.exibirFrame();
+                        u.exibirFrame(idUtilizador);
                         entradaValida = true;
                         return;
                     } else {

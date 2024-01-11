@@ -13,6 +13,7 @@ public class Utilizador {
 
     Livro livro = new Livro();
     Biblioteca biblio = new Biblioteca();
+    Emprestimo emp = new Emprestimo();
 
     JFrame frame;
     JList<Livro> lista = new JList<>();
@@ -31,9 +32,9 @@ public class Utilizador {
     /**
      * Método para mostrar a lista que é exibida ao arrancar o programa
      */
-    public void exibirFrame() {
+    public void exibirFrame(int idUtilizador) {
         listaModelo.clear();
-        if (!(listaModelo.isEmpty())) {refreshLivroBaseDados();}
+        if (!(listaModelo.isEmpty())) {refreshLivroBaseDados(idUtilizador);}
 
         frame = new JFrame("Biblioteca");
 
@@ -65,7 +66,7 @@ public class Utilizador {
 
         lista.getSelectionModel().addListSelectionListener(e -> {
             Livro livro = lista.getSelectedValue();
-            exibirDetalhesLivro(livro);
+            exibirDetalhesLivro(idUtilizador, livro);
         });
 
         JPanel leftPanel = new JPanel(new BorderLayout());
@@ -86,7 +87,7 @@ public class Utilizador {
      * Método para mostrar a mostrar todos os detalhes na lista,
      * pode ser usado por três métodos: ListaGenerica(), ListaUtilizador()
      */
-    private void exibirDetalhesLivro(Livro livro) {
+    private void exibirDetalhesLivro(int idUtilizador, Livro livro) {
         textArea.setText("ISBN: " + livro.getISBN() +
                 "\nTitulo: " + livro.getTitulo() +
                 "\nAutor: " + livro.getAutor() +
@@ -101,41 +102,40 @@ public class Utilizador {
         painel.setLayout(new BorderLayout());
         painel.add(new JScrollPane(textArea), BorderLayout.CENTER);
         if (livro.isDisponibilidade()) {
-            emprestimoButton.addActionListener(e-> { emprestarLivro (livro.getID_livro());});
+            emprestimoButton.addActionListener(e-> { emprestarLivro (idUtilizador, livro.getID_livro());});
         } else {
-            devolverButton.addActionListener(e-> { devolverLivro(livro.getID_livro());});
+            devolverButton.addActionListener(e-> { devolverLivro(idUtilizador, livro.getID_livro());});
         }
         painel.add(emprestimoButton, BorderLayout.NORTH);
         painel.revalidate();
         painel.repaint();
     }
 
-    public void devolverLivro (int id) {
+    public void devolverLivro (int idUtilizador, int idLivro) {
         JOptionPane.showMessageDialog(frame, "Devolver");
     }
 
-    public void emprestarLivro (int id) {
-        JOptionPane.showMessageDialog(frame, "Emprestar");
-    }
+    public void emprestarLivro (int idUtilizador, int idLivro) {
 
-    public int getIdComponenteSelecionado() {
-        // Obtém o índice do livro selecionado na lista
-        int indiceSelecionado = lista.getSelectedIndex();
+        int opcao = JOptionPane.showConfirmDialog(frame,
+                "Deseja mesmo alterar o livro com o título: " + livro.getTitulo() + "?",
+                "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
-        // Verifica se algum livro está selecionado
-        if (indiceSelecionado != -1) {
-            // Obtém o livro selecionado
-            Livro livroSelecionado = listaModelo.getElementAt(indiceSelecionado);
-
-            // Retorna o ID do livro selecionado
-            return livroSelecionado.getID_livro();
+        if (opcao == JOptionPane.YES_OPTION) {
+            emp.emprestarLivro(idUtilizador, idLivro);
+            Utilizador u = new Utilizador();
+            frame.dispose();
+            u.exibirFrame(idUtilizador);
         } else {
-            // Retorna um valor padrão ou lança uma exceção, dependendo do seu requisito
-            return -1;  // Valor padrão indicando nenhum livro selecionado
+            // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
+            JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +
+                            "\nPor favor, selecione um livro para eliminar.",
+                    "Aviso", JOptionPane.WARNING_MESSAGE);
+
         }
     }
 
-    public void refreshLivroBaseDados() {
+    public void refreshLivroBaseDados(int idUtilizador) {
         listaModelo.clear();
 
         ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
@@ -149,7 +149,7 @@ public class Utilizador {
         try {
             lista.getSelectionModel().addListSelectionListener(e -> {
                 Livro livroSelecionado = lista.getSelectedValue();
-                exibirDetalhesLivro(livroSelecionado);
+                exibirDetalhesLivro(idUtilizador, livroSelecionado);
             });
         } catch (NullPointerException e) {
             System.out.println("erroooooooooooooooooooooooooouuuuuuuuuuuuuuuuuuu");
@@ -183,6 +183,6 @@ public class Utilizador {
 
     public static void main(String[] args) {
         Utilizador u = new Utilizador();
-        u.exibirFrame();
+        u.exibirFrame(1);
     }
 }

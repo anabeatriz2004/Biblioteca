@@ -34,8 +34,9 @@ CREATE TABLE emprestimo (
     id_emprestimo INT AUTO_INCREMENT PRIMARY KEY,
     id_livro INT,
     id_utilizador INT,
-    data_emprestimo DATE,
-    data_devolucao DATE,
+    data_emprestimo DATETIME,
+    data_devolucao DATETIME,
+    date_devolvido DATETIME,
     FOREIGN KEY (id_livro) REFERENCES livro (id_livro),
     FOREIGN KEY (id_utilizador) REFERENCES utilizador (id_utilizador));
 
@@ -63,7 +64,7 @@ VALUES (1, '9780061120084', 'To Kill a Mockingbird', 'Harper Lee', 'Harper Peren
 		'A fantasy novel that follows the journey of Bilbo Baggins as he helps a group of dwarves reclaim their homeland.'),
     (6, '9780062561029', 'To Kill a Kingdom', 'Alexandra Christo', 'Feiwel & Friends', 2018,
 		'Young Adult Fantasy', true, 'A dark and twisted reimagining of The Little Mermaid.'),
-    (7, '9780735219090', 'AAAAAAAAAAAAAAAAAA', 'Tara Westover', 'Random House', 2018, 'Memoir', true,
+    (7, '9780735219090', 'Educated', 'Tara Westover', 'Random House', 2018, 'Memoir', true,
 		'A memoir about a woman who grows up in a strict and abusive household but eventually escapes to learn about the world.'),
     (8, '9780061124266', 'The Alchemist', 'Paulo Coelho', 'HarperOne', 1988, 'Fiction', true,
 		'A philosophical novel that follows the journey of Santiago, a shepherd boy, as he seeks a hidden treasure in Egypt.'),

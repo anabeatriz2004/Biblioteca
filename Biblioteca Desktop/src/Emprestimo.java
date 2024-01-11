@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Emprestimo {
 
-    Connection conexao = Database.getConexao();
+    static Connection conexao = Database.getConexao();
 
     private int id_emprestimo;
     private int id_livro;
@@ -59,6 +59,36 @@ public class Emprestimo {
         this.dataDevolucao = dataDevolucao;
     }
 
+    public int obterIdEmprestimo(int idLivro, int idUtilizador) throws SQLException {
+        String sql = "SELECT id_emprestimo FROM emprestimo WHERE id_livro = ? AND id_utilizador = ? AND date_devolvido IS NULL";
+        PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+        preparedStatement.setInt(1, idLivro);
+        preparedStatement.setInt(2, idUtilizador);
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getInt("id_emprestimo");
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    public static void atualizarDevolucaoLivro(int idEmprestimo, int idLivro) throws SQLException {
+        String updateEmprestimo = "UPDATE emprestimo SET data_devolucao = NOW(), date_devolvido = NOW() WHERE id_emprestimo = ?";
+        String updateLivro = "UPDATE livro SET disponibilidade = TRUE WHERE id_livro = ?";
+
+        try (PreparedStatement preparedStatementEmprestimo = conexao.prepareStatement(updateEmprestimo);
+             PreparedStatement preparedStatementLivro = conexao.prepareStatement(updateLivro)) {
+
+            preparedStatementEmprestimo.setInt(1, idEmprestimo);
+            preparedStatementEmprestimo.executeUpdate();
+
+            preparedStatementLivro.setInt(1, idLivro);
+            preparedStatementLivro.executeUpdate();
+        }
+    }
+
+
     public void emprestarLivro(int idUtilizador, int idLivro) {
         try {
             dataEmprestimo = LocalDate.now();
@@ -98,7 +128,6 @@ public class Emprestimo {
             e.printStackTrace();
         }
     }
-
 
     public void atualizar_estado_livro(int idLivro, boolean disponibilidade) {
         try {

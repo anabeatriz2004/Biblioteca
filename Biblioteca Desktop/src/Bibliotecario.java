@@ -142,7 +142,6 @@ public class Bibliotecario {
         }
     }
 
-
     private void exibirDetalhesLivro(Livro livro) {
         try {
             textArea.setText("ID" + livro.getID_livro() +

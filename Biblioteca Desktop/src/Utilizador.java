@@ -21,10 +21,10 @@ public class Utilizador {
     JPanel painelInicio = new JPanel(new BorderLayout());
     JPanel painel = new JPanel();
     JSplitPane splitPane = new JSplitPane();
-
-    // componentes
-    JLabel nome = new JLabel("Bem-vindo há biblioteca! :)");
-    JButton terminarSessaoButton = new JButton("Iniciar Sessão");
+    JLabel nome = new JLabel("Entrou como utilizador!");
+    JButton devolverButton = new JButton("Devolução");
+    JButton emprestimoButton = new JButton("Empréstimo");
+    JButton terminarSessaoButton = new JButton("Terminar Sessão");
 
     public Utilizador() {}
 
@@ -40,7 +40,6 @@ public class Utilizador {
         // Adiciona a JLabel nome à esquerda no topo
         painelInicio.add(nome, BorderLayout.WEST);
 
-        // Adiciona o terminarSessaoButton à direita no topo
         painelInicio.add(terminarSessaoButton, BorderLayout.EAST);
 
         // mostra a página do login
@@ -94,15 +93,46 @@ public class Utilizador {
                 "\nEditora: " + livro.getEditora() +
                 "\nAno de Publicação: " + livro.getAnoPubli() +
                 "\nGênero: " + livro.getGenero() +
-                "\nDisponibilidade: " + livro.isDisponibilidade() +
+                "\nDisponibilidade: " + livro.getDisponibilidade() +
                 "\nDescrição: " + livro.getDescricao());
 
         // Adiciona o botão "Alterar Dados" ao painel direito
         painel.removeAll();
         painel.setLayout(new BorderLayout());
         painel.add(new JScrollPane(textArea), BorderLayout.CENTER);
+        if (livro.isDisponibilidade()) {
+            emprestimoButton.addActionListener(e-> { emprestarLivro (livro.getID_livro());});
+        } else {
+            devolverButton.addActionListener(e-> { devolverLivro(livro.getID_livro());});
+        }
+        painel.add(emprestimoButton, BorderLayout.NORTH);
         painel.revalidate();
         painel.repaint();
+    }
+
+    public void devolverLivro (int id) {
+        JOptionPane.showMessageDialog(frame, "Devolver");
+    }
+
+    public void emprestarLivro (int id) {
+        JOptionPane.showMessageDialog(frame, "Emprestar");
+    }
+
+    public int getIdComponenteSelecionado() {
+        // Obtém o índice do livro selecionado na lista
+        int indiceSelecionado = lista.getSelectedIndex();
+
+        // Verifica se algum livro está selecionado
+        if (indiceSelecionado != -1) {
+            // Obtém o livro selecionado
+            Livro livroSelecionado = listaModelo.getElementAt(indiceSelecionado);
+
+            // Retorna o ID do livro selecionado
+            return livroSelecionado.getID_livro();
+        } else {
+            // Retorna um valor padrão ou lança uma exceção, dependendo do seu requisito
+            return -1;  // Valor padrão indicando nenhum livro selecionado
+        }
     }
 
     public void refreshLivroBaseDados() {
@@ -149,5 +179,10 @@ public class Utilizador {
                 }
             }
         };
+    }
+
+    public static void main(String[] args) {
+        Utilizador u = new Utilizador();
+        u.exibirFrame();
     }
 }

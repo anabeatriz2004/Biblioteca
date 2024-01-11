@@ -399,7 +399,7 @@ public class EditarLivroFormulario {
     public void editarLivro(int id) {
         Livro livroEditado = verificarDados(id);
         livroEditado.alterarDados(livroEditado);
-        
+
         int opcao = JOptionPane.showConfirmDialog(frame,
                 "Deseja mesmo alterar o livro com o título: " + livro.getTitulo() + "?",
                 "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -415,7 +415,6 @@ public class EditarLivroFormulario {
                     "Aviso", JOptionPane.WARNING_MESSAGE);
 
         }
-    }
     }
 
     private WindowListener fecharPrograma() {

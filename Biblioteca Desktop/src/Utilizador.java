@@ -129,7 +129,7 @@ public class Utilizador {
             System.out.println("Livro emprestado" + livroASerLido.get(0).getTitulo() + "!");
             emp.emprestarLivro(idUtilizador, idLivro);
             Utilizador u = new Utilizador();
-            emp.atualizar_estado_livro(idLivro, disponibilidade);
+            //emp.atualizar_estado_livro(disponibilidade);
             frame.dispose();
             u.exibirFrame(idUtilizador);
         } else {

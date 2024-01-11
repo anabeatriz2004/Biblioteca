@@ -31,7 +31,7 @@ CREATE TABLE livro
      descricao TEXT);
 
 CREATE TABLE emprestimo (
-    id_emprestimo INT PRIMARY KEY,
+    id_emprestimo INT AUTO_INCREMENT PRIMARY KEY,
     id_livro INT,
     id_utilizador INT,
     data_emprestimo DATE,

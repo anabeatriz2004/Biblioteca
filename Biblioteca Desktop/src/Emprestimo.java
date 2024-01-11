@@ -1,6 +1,9 @@
 import javax.swing.*;
-import java.sql.*;
-import java.time.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class Emprestimo {
 
@@ -63,12 +66,12 @@ public class Emprestimo {
         try {
             dataEmprestimo = LocalDate.now();
             dataDevolucao = LocalDate.now().plusDays(15);
-            String sql = "INSERT INTO emprestimo (id_emprestimo, id_livro, id_utilizador, dataEmprestimo, dataDevolucao) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO emprestimo (id_emprestimo, id_livro, id_utilizador, dataEmprestimo, dataDevolucao) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             pstmt.setInt(1, idLivro);
             pstmt.setInt(2, idUtilizador);
-            pstmt.setTimestamp(4, java.sql.Timestamp.valueOf(dataEmprestimo.atStartOfDay()));
-            pstmt.setTimestamp(5, java.sql.Timestamp.valueOf(dataDevolucao.atStartOfDay()));
+            pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(dataEmprestimo.atStartOfDay()));
+            pstmt.setTimestamp(4, java.sql.Timestamp.valueOf(dataDevolucao.atStartOfDay()));
 
             int affectedRows = pstmt.executeUpdate();
 
@@ -92,10 +95,9 @@ public class Emprestimo {
                 }
             }
 
-            pstmt.executeUpdate();
-
-            pstmt.close();
-            atualizar_estado_livro(false); //Atualiza a disponibilidade do livro
+            //pstmt.executeUpdate();
+            //pstmt.close();
+            atualizar_estado_livro(idLivro, false); //Atualiza a disponibilidade do livro
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,7 +108,7 @@ public class Emprestimo {
             String sql = "UPDATE livro SET disponibilidade = ? WHERE id_livro = ?";
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             pstmt.setBoolean(1, disponibilidade);
-            pstmt.setInt(2, idLivro);
+            pstmt.setInt(2, id_livro);
 
             pstmt.executeUpdate();
 

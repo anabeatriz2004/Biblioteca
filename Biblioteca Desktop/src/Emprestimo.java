@@ -74,7 +74,7 @@ public class Emprestimo {
     }
 
     public static void atualizarDevolucaoLivro(int idEmprestimo, int idLivro) throws SQLException {
-        String updateEmprestimo = "UPDATE emprestimo SET data_devolucao = NOW(), date_devolvido = NOW() WHERE id_emprestimo = ?";
+        String updateEmprestimo = "UPDATE emprestimo SET date_devolvido = NOW() WHERE id_emprestimo = ?";
         String updateLivro = "UPDATE livro SET disponibilidade = TRUE WHERE id_livro = ?";
 
         try (PreparedStatement preparedStatementEmprestimo = conexao.prepareStatement(updateEmprestimo);

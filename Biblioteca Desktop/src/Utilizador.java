@@ -123,18 +123,34 @@ public class Utilizador {
     }
 
     public void devolverLivro (int idUtilizador, int idLivro) {
-        ArrayList<Livro> livroASerLido;
-        livroASerLido = livro.consultarLivro(idLivro);
-        String titulo = livroASerLido.get(0).getTitulo();
-        boolean disponibilidade = !(livroASerLido.get(0).isDisponibilidade());
+        ArrayList<Livro> livroASerDevolvido;
+        livroASerDevolvido = livro.consultarLivro(idLivro);
+        String titulo = livroASerDevolvido.get(0).getTitulo();
+        boolean disponibilidade = !(livroASerDevolvido.get(0).isDisponibilidade());
+        int idEmprestimo = 0;
+        try {
+            idEmprestimo = emp.obterIdEmprestimo(idLivro, idUtilizador);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         int opcao = JOptionPane.showConfirmDialog(frame,
                 "Tem a certeza que quer ler o livro: " + titulo + "?",
                 "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
         if (opcao == JOptionPane.YES_OPTION) {
-            System.out.println("Livro devolvido " + livroASerLido.get(0).getTitulo() + "!");
-            //emp.devolverLivro(idUtilizador, idLivro);
+            System.out.println("Livro devolvido " + livroASerDevolvido.get(0).getTitulo() + "!");
+            if (idEmprestimo != 0) {
+                // Atualizar a data de devolução e disponibilidade do livro
+                try {
+                    emp.atualizarDevolucaoLivro(idEmprestimo, idLivro);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("Livro devolvido com sucesso!");
+            } else {
+                System.out.println("Livro não emprestado ou já devolvido.");
+            }
             Utilizador u = new Utilizador();
             emp.atualizar_estado_livro(idLivro, disponibilidade);
             frame.dispose();

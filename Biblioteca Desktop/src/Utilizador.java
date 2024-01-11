@@ -102,14 +102,24 @@ public class Utilizador {
         painel.setLayout(new BorderLayout());
         painel.add(new JScrollPane(textArea), BorderLayout.CENTER);
         if (livro.isDisponibilidade()) {
-            emprestimoButton.addActionListener(e-> { emprestarLivro (idUtilizador, livro.getID_livro());});
-            painel.add(emprestimoButton, BorderLayout.NORTH);
+            adicionarBotaoEmprestimo(idUtilizador, livro);
         } else {
-            devolverButton.addActionListener(e-> { devolverLivro(idUtilizador, livro.getID_livro());});
-            painel.add(devolverButton, BorderLayout.NORTH);
+            adicionarBotaoDevolucao(idUtilizador, livro);
         }
         painel.revalidate();
         painel.repaint();
+    }
+
+    private void adicionarBotaoEmprestimo(int idUtilizador, Livro livro) {
+        JButton emprestimoButton = new JButton("Empréstimo");
+        emprestimoButton.addActionListener(e -> emprestarLivro(idUtilizador, livro.getID_livro()));
+        painel.add(emprestimoButton, BorderLayout.NORTH);
+    }
+
+    private void adicionarBotaoDevolucao(int idUtilizador, Livro livro) {
+        JButton devolverButton = new JButton("Devolução");
+        devolverButton.addActionListener(e -> devolverLivro(idUtilizador, livro.getID_livro()));
+        painel.add(devolverButton, BorderLayout.NORTH);
     }
 
     public void devolverLivro (int idUtilizador, int idLivro) {
@@ -121,15 +131,16 @@ public class Utilizador {
         livroASerLido = livro.consultarLivro(idLivro);
         String titulo = livroASerLido.get(0).getTitulo();
         boolean disponibilidade = !(livroASerLido.get(0).isDisponibilidade());
+
         int opcao = JOptionPane.showConfirmDialog(frame,
                 "Tem a certeza que quer ler o livro: " + titulo + "?",
                 "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
         if (opcao == JOptionPane.YES_OPTION) {
-            System.out.println("Livro emprestado" + livroASerLido.get(0).getTitulo() + "!");
+            System.out.println("Livro emprestado " + livroASerLido.get(0).getTitulo() + "!");
             emp.emprestarLivro(idUtilizador, idLivro);
             Utilizador u = new Utilizador();
-            //emp.atualizar_estado_livro(disponibilidade);
+            emp.atualizar_estado_livro(idLivro, !(disponibilidade));
             frame.dispose();
             u.exibirFrame(idUtilizador);
         } else {

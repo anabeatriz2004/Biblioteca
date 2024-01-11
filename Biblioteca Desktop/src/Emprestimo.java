@@ -1,8 +1,5 @@
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 
 public class Emprestimo {
@@ -66,8 +63,10 @@ public class Emprestimo {
         try {
             dataEmprestimo = LocalDate.now();
             dataDevolucao = LocalDate.now().plusDays(15);
-            String sql = "INSERT INTO emprestimo (id_emprestimo, id_livro, id_utilizador, dataEmprestimo, dataDevolucao) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = conexao.prepareStatement(sql);
+
+            // Ajuste na ordem dos placeholders e remoção do id_emprestimo da lista de colunas
+            String sql = "INSERT INTO emprestimo (id_livro, id_utilizador, data_emprestimo, data_devolucao) VALUES (?, ?, ?, ?)";
+            PreparedStatement pstmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, idLivro);
             pstmt.setInt(2, idUtilizador);
             pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(dataEmprestimo.atStartOfDay()));
@@ -76,7 +75,7 @@ public class Emprestimo {
             int affectedRows = pstmt.executeUpdate();
 
             if (affectedRows == 0) {
-                System.out.println("Falha ao inserir emprestimo. Nenhum registro foi afetado.");
+                System.out.println("Falha ao inserir empréstimo. Nenhum registro foi afetado.");
                 JOptionPane.showMessageDialog(new JFrame(),
                         "Erro ao adicionar dados na tabela emprestimo",
                         "Erro",
@@ -88,20 +87,18 @@ public class Emprestimo {
                         int idEmprestimo = generatedKeys.getInt(1);
                         System.out.println("Livro emprestado com sucesso!");
                         JOptionPane.showMessageDialog(new JFrame(),
-                                "Livro emprestado com sucesso!" + "\n devolver livro até dia:" + dataDevolucao,
+                                "Livro emprestado com sucesso!" + "\n Devolver livro até dia: " + dataDevolucao,
                                 "Sucesso",
                                 JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }
-
-            //pstmt.executeUpdate();
-            //pstmt.close();
-            atualizar_estado_livro(idLivro, false); //Atualiza a disponibilidade do livro
+            pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     public void atualizar_estado_livro(int idLivro, boolean disponibilidade) {
         try {

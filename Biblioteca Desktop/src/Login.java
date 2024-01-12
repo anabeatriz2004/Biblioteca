@@ -9,8 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** A classe Login representa a interface de login na aplicação da biblioteca. */
 public class Login {
 
+    // Componentes da interface gráfica
     public JButton voltarBotao = new JButton("<-- Voltar");
     JFrame frame;
     public final JLabel loginLabel = new JLabel("Login");
@@ -20,21 +22,26 @@ public class Login {
     public JPasswordField passwordField = new JPasswordField();
     public JButton logarBotao = new JButton("Logar");
 
-    //private final Database conexao = new Database(); // Instanciar a classe Database
+    // Conexão à base de dados utilizando a classe Database
     Connection conexao = Database.getConexao();
 
+    // Instâncias de outras classes necessárias
     Utilizador u = new Utilizador();
     Bibliotecario b = new Bibliotecario();
     Biblioteca biblio = new Biblioteca();
 
+    // Variável para verificar se a entrada é válida
     boolean entradaValida = false;
 
+    // Mensagem de senha incorreta
     String senhaIncorreta = "Senha incorreta. Por favor, tente novamente";
 
+    /** Construtor da classe Login. */
     public Login() {}
 
-    /** Código para exibir a frame do login */
+    /** Método para exibir a frame do login */
     public void exibirFrame() {
+        // Código para personalizar a frame
         frame = new JFrame("Formulário de Login");
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -42,6 +49,7 @@ public class Login {
         frame.getContentPane().setBackground(Color.BLACK);
         frame.getColorModel();
 
+        // Código para personalizar o botão para voltar
         voltarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
         voltarBotao.setSize(110, 30);
         voltarBotao.setLocation(0, 0);
@@ -49,47 +57,55 @@ public class Login {
             frame.dispose();
             biblio.exibirFrame();
         });
-        frame.add(voltarBotao);
+        frame.add(voltarBotao); // adiciona há frame
 
+        // Código para personalizar o label do login
         loginLabel.setFont(new Font("Arial", Font.BOLD, 15));
         loginLabel.setSize(100, 20);
         loginLabel.setLocation(700, 150);
         loginLabel.setForeground(Color.WHITE);
-        frame.add(loginLabel);
+        frame.add(loginLabel); // adiciona há frame
 
+        // Código para personalizar a label do email
         emailLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         emailLabel.setSize(100, 20);
         emailLabel.setLocation(600, 200);
         emailLabel.setForeground(Color.WHITE);
-        frame.add(emailLabel);
+        frame.add(emailLabel); // adiciona há frame
 
+        // Código para personalizar a caixa de texto do email
         emailTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         emailTextField.setSize(190, 20);
         emailTextField.setLocation(675, 200);
-        frame.add(emailTextField);
+        frame.add(emailTextField); // adiciona há frame
 
+        // Código para personalizar a label da password
         passwordLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         passwordLabel.setSize(100, 20);
         passwordLabel.setLocation(575, 250);
         passwordLabel.setForeground(Color.WHITE);
-        frame.add(passwordLabel);
+        frame.add(passwordLabel); // adiciona há frame
 
+        // Código para personalizar a caixa de texto da password
         passwordField.setFont(new Font("Arial", Font.PLAIN, 15));
         passwordField.setSize(190, 20);
         passwordField.setLocation(675, 250);
-        frame.add(passwordField);
+        frame.add(passwordField); // adiciona há frame
 
+        // Código para personalizar o botão para efetuar login
         logarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
         logarBotao.setSize(110, 30);
         logarBotao.setLocation(650, 300);
         logarBotao.addActionListener(clicarBotaoLogin());
-        frame.add(logarBotao);
+        frame.add(logarBotao); // adiciona há frame
 
         frame.addWindowListener(fecharPrograma());
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
+    /** Retorna um ActionListener para o botão de login.
+     * @return O ActionListener para o botão de login. */
     private ActionListener clicarBotaoLogin() {
         return e -> {
             String email = emailTextField.getText();
@@ -98,6 +114,9 @@ public class Login {
         };
     }
 
+    /** Método para verificar o login com base no email e senha fornecidos.
+     * @param email O email fornecido.
+     * @param senha A senha fornecida. */
     public void verificarLogin(String email, String senha) {
         try {
             String utilizadorSql = "SELECT * FROM utilizador WHERE email = ?";
@@ -153,7 +172,8 @@ public class Login {
         }
     }
 
-    /** Método que é lê se clicou no botão "fechar", e fecha a conexão com a base de dados*/
+    /** Retorna um WindowListener para fechar o programa corretamente.
+     * @return O WindowListener para fechar o programa corretamente. */
     private WindowListener fecharPrograma() {
         return new WindowAdapter() {
             @Override
@@ -166,10 +186,5 @@ public class Login {
                 }
             }
         };
-    }
-
-    public static void main(String[] args) {
-        Login log = new Login();
-        log.exibirFrame();
     }
 }

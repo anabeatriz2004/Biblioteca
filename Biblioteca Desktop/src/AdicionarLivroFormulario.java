@@ -66,167 +66,192 @@ public class AdicionarLivroFormulario {
     /** Método para exibir a frame do formulário para inserir livros na base de dados */
     public void exibirFrame() {
         // Código para personalizar a frame
-        frame = new JFrame("Formulário - Adicionar Livro");
-        frame.setLayout(null);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setSize(screenSize);
-        frame.getContentPane().setBackground(Color.BLACK);
-        frame.getColorModel();
+        frame = new JFrame("Formulário - Adicionar Livro"); // cria e coloca o nome da frame
+        frame.setLayout(null); // não tem layout definido
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // descobre o tamanho do ecrã
+        frame.setSize(screenSize); // define o tamanho do ecrã
+        frame.getContentPane().setBackground(Color.BLACK); // coloca a cor de fundo a preto
 
-        voltarBotao.setFont(new Font("Arial", Font.PLAIN, 12));
-        voltarBotao.setSize(110, 30);
-        voltarBotao.setLocation(0, 0);
-        voltarBotao.setForeground(Color.white);
-        voltarBotao.setBorder(BorderFactory.createLineBorder(Color.white, 2));
-        voltarBotao.setBackground(new Color(30, 30, 30));
-        voltarBotao.addActionListener(voltarAtras());
-        frame.add(voltarBotao);
+        // Código para personalizar a voltao, para voltar
+        voltarBotao.setFont(new Font("Arial", Font.PLAIN, 12)); // seleciona a fonte da letra e o tamanho
+        voltarBotao.setSize(110, 30); // seleciona o teamnho do botão
+        voltarBotao.setLocation(0, 0); // seleciona o lugar, onde ficará posicionado
+        voltarBotao.setForeground(Color.white); // coloca a cor de texto a branco
+        voltarBotao.setBorder(BorderFactory.createLineBorder(Color.white, 2)); // coloca a borda do botão a branco
+        voltarBotao.setBackground(new Color(30, 30, 30)); // coloca a cor de fundo a branco
+        voltarBotao.addActionListener(voltarAtras()); //Código para ir buscar a ação do botão
+        frame.add(voltarBotao); // adiciona há frame
 
+        // Código para personalizar o título
         tituloInicialLabel.setFont(new Font("Arial", Font.PLAIN, 25));
         tituloInicialLabel.setSize(200, 100);
         tituloInicialLabel.setLocation(650, 50);
         tituloInicialLabel.setForeground(Color.white);
-        frame.add(tituloInicialLabel);
+        frame.add(tituloInicialLabel); // adiciona há frame
 
+        // Código para personalizar o texto da label do isbn
         isbnLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         isbnLabel.setSize(200, 20);
         isbnLabel.setLocation(100, 150);
         isbnLabel.setForeground(Color.white);
-        frame.add(isbnLabel);
+        frame.add(isbnLabel); // adiciona há frame
 
-        isbnTextField.setFont(new Font("Arial", Font.PLAIN, 12));
-        isbnTextField.setSize(1100, 20);
-        isbnTextField.setLocation(200, 150);
-        frame.add(isbnTextField);
-
+        // Código para personalizar o lugar onde será exibido os erros
         isbnErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         isbnErroLabel.setSize(1100, 20);
         isbnErroLabel.setLocation(200, 175);
         isbnErroLabel.setForeground(Color.white);
-        frame.add(isbnErroLabel);
+        frame.add(isbnErroLabel); // adiciona há frame
 
+        // Código para personalizar o campo de texto, neste caso do isbn
+        isbnTextField.setFont(new Font("Arial", Font.PLAIN, 12));
+        isbnTextField.setSize(1100, 20);
+        isbnTextField.setLocation(200, 150);
+        frame.add(isbnTextField); // adiciona há frame
+
+        // Código para personalizar a label do título
         tituloLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         tituloLabel.setSize(200, 20);
         tituloLabel.setLocation(100, 200);
         tituloLabel.setForeground(Color.white);
-        frame.add(tituloLabel);
+        frame.add(tituloLabel); // adiciona há frame
 
+        // Código para personalizar o lugar onde aparecerá os erros do título
         tituloErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         tituloErroLabel.setSize(1100, 20);
         tituloErroLabel.setLocation(200, 225);
         tituloErroLabel.setForeground(Color.white);
-        frame.add(tituloErroLabel);
+        frame.add(tituloErroLabel); // adiciona há frame
 
+        // Código para personalizar o campo de texto do título
         tituloTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         tituloTextField.setSize(1100, 20);
         tituloTextField.setLocation(200, 200);
-        frame.add(tituloTextField);
+        frame.add(tituloTextField); // adiciona há frame
 
+        // Código para personalizar a label so autor
         autorLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         autorLabel.setSize(200, 20);
         autorLabel.setLocation(100, 250);
         autorLabel.setForeground(Color.white);
-        frame.add(autorLabel);
+        frame.add(autorLabel); // adiciona há frame
 
+        // Código para personalizar o lugar onde aparecerá os erros do título
         autorErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         autorErroLabel.setSize(1100, 20);
         autorErroLabel.setLocation(200, 275);
         autorErroLabel.setForeground(Color.white);
-        frame.add(autorErroLabel);
+        frame.add(autorErroLabel); // adiciona há frame
 
+        // Código para personalizar o campo de texto do autor
         autorTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         autorTextField.setSize(1100, 20);
         autorTextField.setLocation(200, 250);
-        frame.add(autorTextField);
+        frame.add(autorTextField); // adiciona há frame
 
+        // Código para personalizar a label da editora
         editoraLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         editoraLabel.setSize(200, 20);
         editoraLabel.setLocation(100, 300);
         editoraLabel.setForeground(Color.white);
-        frame.add(editoraLabel);
+        frame.add(editoraLabel); // adiciona há frame
 
+        // Código para personalizar onde aparecerá os erros da editora
         editoraErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         editoraErroLabel.setSize(1100, 20);
         editoraErroLabel.setLocation(200, 325);
         editoraErroLabel.setForeground(Color.white);
-        frame.add(editoraErroLabel);
+        frame.add(editoraErroLabel);  // adiciona há frame
 
+        // Código opara personalizar o campo de texto da editora
         editoraTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         editoraTextField.setSize(1100, 20);
         editoraTextField.setLocation(200, 300);
-        frame.add(editoraTextField);
+        frame.add(editoraTextField); // adiciona há frame
 
+        // Código para personalizar a label do ano de publicação
         anoPubliLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         anoPubliLabel.setSize(200, 20);
         anoPubliLabel.setLocation(100, 350);
         anoPubliLabel.setForeground(Color.white);
-        frame.add(anoPubliLabel);
+        frame.add(anoPubliLabel); // adiciona há frame
 
+        // Código para personailzar onde apareceram os erros do ano de publicação
         anoPubliErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         anoPubliErroLabel.setSize(1100, 20);
         anoPubliErroLabel.setLocation(200, 375);
         anoPubliErroLabel.setForeground(Color.white);
-        frame.add(anoPubliErroLabel);
+        frame.add(anoPubliErroLabel); // adiciona há frame
 
+        // Código para personalizar o campo de texto de ano da publicação
         anoPubliTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         anoPubliTextField.setSize(1100, 20);
         anoPubliTextField.setLocation(200, 350);
-        frame.add(anoPubliTextField);
+        frame.add(anoPubliTextField);  // adiciona há frame
 
+        // Código para personalizar a label do gênero do livro
         generoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         generoLabel.setSize(200, 20);
         generoLabel.setLocation(100, 400);
         generoLabel.setForeground(Color.white);
-        frame.add(generoLabel);
+        frame.add(generoLabel); // adiciona há frame
 
+        // Código para personalizar onde apareerá os erros do gênero do livro
         generoErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         generoErroLabel.setSize(1100, 20);
         generoErroLabel.setLocation(200, 425);
         generoErroLabel.setForeground(Color.white);
-        frame.add(generoErroLabel);
+        frame.add(generoErroLabel); // adiciona há frame
 
+        // Código para personalizar o campo de texto do gênero
         generoTextField.setFont(new Font("Arial", Font.PLAIN, 12));
         generoTextField.setSize(1100, 20);
         generoTextField.setLocation(200, 400);
-        frame.add(generoTextField);
+        frame.add(generoTextField); // adiciona há frame
 
+        // Código para personalizar a label da dispobilidade
         disponibilidadeLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         disponibilidadeLabel.setSize(200, 20);
         disponibilidadeLabel.setLocation(100, 450);
         disponibilidadeLabel.setForeground(Color.white);
-        frame.add(disponibilidadeLabel);
+        frame.add(disponibilidadeLabel); // adiciona há frame
 
+        // Código para personalizar onde aparecerá os erros da disponibilidade
         disponibilidadeErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         disponibilidadeErroLabel.setSize(1100, 20);
         disponibilidadeErroLabel.setLocation(200, 475);
         disponibilidadeErroLabel.setForeground(Color.white);
-        frame.add(disponibilidadeErroLabel);
+        frame.add(disponibilidadeErroLabel); // adiciona há frame
 
-        // mudar a forma de saber se está disponível ou emprestado
-        disponibilidadeComboBox.addItem("Disponível");
-        disponibilidadeComboBox.addItem("Emprestado");
+        // Código para personalizar a caixa de combinaçãoo da disponibilidade
+        disponibilidadeComboBox.addItem("Disponível"); // adiciona há caixa de combinação o item (se fosse do tipo boolean, seria true)
+        disponibilidadeComboBox.addItem("Emprestado"); // adiciona há caixa de combinação o item (se fosse do tipo boolean, seria false)
         disponibilidadeComboBox.setFont(new Font("Arial", Font.PLAIN, 12));
         disponibilidadeComboBox.setSize(1100, 20);
         disponibilidadeComboBox.setLocation(200, 450);
-        frame.add(disponibilidadeComboBox);
+        frame.add(disponibilidadeComboBox); // adiciona há frame
 
+        // Código para personalizar a label da descricao
         descricaoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         descricaoLabel.setSize(200, 20);
         descricaoLabel.setLocation(100, 500);
         descricaoLabel.setForeground(Color.white);
-        frame.add(descricaoLabel);
+        frame.add(descricaoLabel); // adiciona há frame
 
+        // Código para personalizar onde apareceram os erros da descrição
         descricaoErroLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         descricaoErroLabel.setSize(1100, 20);
         descricaoErroLabel.setLocation(200, 600);
         descricaoErroLabel.setForeground(Color.white);
-        frame.add(descricaoErroLabel);
+        frame.add(descricaoErroLabel); // adiciona há frame
 
+        // Código para personalizar a caixa de texto de descrição
         descricaoTextArea.setFont(new Font("Arial", Font.PLAIN, 12));
         descricaoTextArea.setSize(1100, 100);
         descricaoTextArea.setLocation(200, 500);
-        frame.add(descricaoTextArea);
+        frame.add(descricaoTextArea); // adiciona há frame
 
+        // Código para personalizar o botão para adicionar livro
         adicionarLivroBotao.setFont(new Font("Arial", Font.PLAIN, 20));
         adicionarLivroBotao.setSize(200, 30);
         adicionarLivroBotao.setLocation(650, 615);
@@ -236,23 +261,26 @@ public class AdicionarLivroFormulario {
         adicionarLivroBotao.addActionListener(e -> {
             adicionarLivro();
         });
-        frame.add(adicionarLivroBotao);
+        frame.add(adicionarLivroBotao); // adiciona há frame
 
-        frame.addWindowListener(fecharPrograma());
-        frame.setResizable(false);
-        frame.setVisible(true);
+        frame.addWindowListener(fecharPrograma()); // Adiciona um WindowListener para lidar com eventos de fechamento da janela
+        frame.setResizable(false); // a janela não é redimensionável
+        frame.setVisible(true); // a janela é visível
     }
 
     /** Método que apaga a frame atual e volta para a frame da classe Bibliotecário*/
     private ActionListener voltarAtras() {
         return e -> {
-            frame.dispose();
-            b.exibirFrame();
+            frame.dispose(); // feche a janela
+            b.exibirFrame(); // exibe a frame do bibliotecário
         };
     }
 
-    /** Frame para verificar se todos os dados estão a ser inseridos corretamente*/
+    /** Método utilizado após clicar no botão adicionarLivroBotao, recolhe os dados dos campos de texto,
+     * e verfica se estão a ser colocados corretamente antes de ser inseridos na base de dados */
     public Livro verificarDados() {
+        // componentes para a validação dos dados, de início estão a falso,
+        // pois não podem ser inseridos na base de dados
         boolean dadoValidoIsbn = false;
         boolean dadoValidoTitulo = false;
         boolean dadoValidoAutor = false;
@@ -262,86 +290,90 @@ public class AdicionarLivroFormulario {
         boolean dadoValidoDisponibilidade = false;
         boolean dadoValidoDescricao = false;
 
-        // buscar os dados do formulário
+        // recolhe os dados do campos de texto
         String isbnStr = isbnTextField.getText();
         String titulo = tituloTextField.getText();
         String autor = autorTextField.getText();
         String editora = editoraTextField.getText();
         String anoPubliStr = anoPubliTextField.getText();
         String genero = generoTextField.getText();
-        String disponibilidadeStr = (String) disponibilidadeComboBox.getSelectedItem();
+        String disponibilidadeStr = (String) disponibilidadeComboBox.getSelectedItem(); // recolhe o dado selecionado
         String descricao = descricaoTextArea.getText();
 
+        // criação de componentes de acordo como serão inseridos na base de dados
         int anoPubli = 0;
         boolean disponibilidade = true;
 
-        if (isbnStr.isEmpty()) {
-            isbnErroLabel.setText("Isbn sem dados!");
-            isbnErroLabel.setForeground(Color.yellow);
-            dadoValidoIsbn = true;
-        } else if (isbnStr.matches("\\d{13}")) {
-            isbnErroLabel.setText("ISBN inserido corretamente!");
-            isbnErroLabel.setForeground(Color.green);
-            dadoValidoIsbn = true;
+        // verifica se o isbn é inserido corretamente
+        if (isbnStr.isEmpty()) { // verifica se não contém dados
+            isbnErroLabel.setText("Isbn sem dados!"); // avisa que está vazio
+            isbnErroLabel.setForeground(Color.yellow); // coloca o texto a amarelo
+            dadoValidoIsbn = true; // dado válido, pode ser inserido
+        } else if (isbnStr.matches("\\d{13}")) { // verifica se têm 13 números
+            isbnErroLabel.setText("ISBN inserido corretamente!"); // avisa que é inserido corretamente
+            isbnErroLabel.setForeground(Color.green); // coloca o texto a verde
+            dadoValidoIsbn = true; // dado válido, pode ser inserido
         } else {
-            if (isbnStr.matches(".*\\D.*")) {
-                isbnErroLabel.setText("O ISBN só pode conter números!");
+            if (isbnStr.matches(".*\\D.*")) { // caso contrário, verifica se tem dados não númericos
+                isbnErroLabel.setText("O ISBN só pode conter números!"); // avisa que só pode ter letras
             } else {
-                isbnErroLabel.setText("Confirme se tem 13 números!");
+                isbnErroLabel.setText("Confirme se tem 13 números!"); // caso contrário, diz para confirmar se têm realmente 13 dígitos
             }
-            isbnErroLabel.setForeground(Color.red);
-            dadoValidoIsbn = false;
+            isbnErroLabel.setForeground(Color.red); // coloca o texto a vermelho
+            dadoValidoIsbn = false; // dado inválido, não pode ser inserido
         }
 
-        if (titulo.isEmpty()) {
-            tituloErroLabel.setText("Título sem dados!");
-            tituloErroLabel.setForeground(Color.yellow);
-            dadoValidoTitulo = true;
-        } else {
-            tituloErroLabel.setText("Título inserido corretamente!");
-            tituloErroLabel.setForeground(Color.green);
-            dadoValidoTitulo = true;
+        // verifica se o título é inserido corretamente
+        if (titulo.isEmpty()) { // verifica se não contém dados
+            tituloErroLabel.setText("Título sem dados!"); // afirma que está sem dados
+            tituloErroLabel.setForeground(Color.yellow); // apresenta texto a amarelo
+            dadoValidoTitulo = true; // dado válido, pode ser inserido
+        } else { // caso contrário, verifica se contém dados
+            tituloErroLabel.setText("Título inserido corretamente!"); // afirma que fora inserido corretamente
+            tituloErroLabel.setForeground(Color.green); // coloca o texto a verde
+            dadoValidoTitulo = true; // dado válido, pode ser inserido
         }
 
-        if (autor.isEmpty()) {
-            autorErroLabel.setText("Autor sem dados!");
-            autorErroLabel.setForeground(Color.yellow);
-            dadoValidoAutor = true;
-        } else {
-            autorErroLabel.setText("Autor inserido corretamente!");
-            autorErroLabel.setForeground(Color.green);
-            dadoValidoAutor = true;
+        // verifica se o autor é inserido corretamente
+        if (autor.isEmpty()) { // verifica se não contém dados
+            autorErroLabel.setText("Autor sem dados!"); // avisa que está sem dados
+            autorErroLabel.setForeground(Color.yellow); // coloca o texto a amarelo
+            dadoValidoAutor = true; // dado válido, pode ser inserido
+        } else { // caso contrário, verifica se contém dados
+            autorErroLabel.setText("Autor inserido corretamente!"); // avisa que foi inserido corretamente
+            autorErroLabel.setForeground(Color.green); // coloca o texto a verde
+            dadoValidoAutor = true; // dado válido, pode ser inserido
         }
 
-        if (editora.isEmpty()) {
-            editoraErroLabel.setText("Editora sem dados!");
-            editoraErroLabel.setForeground(Color.yellow);
-            dadoValidoEditora = true;
-        } else {
-            editoraErroLabel.setText("Editora inserido corretamente!");
-            editoraErroLabel.setForeground(Color.green);
-            dadoValidoEditora = true;
+        if (editora.isEmpty()) { // verifica se a editora é inserida corretamente
+            editoraErroLabel.setText("Editora sem dados!"); // avisa que não contém dados
+            editoraErroLabel.setForeground(Color.yellow); // coloca o texto amarelo
+            dadoValidoEditora = true; // dado válido, pde ser inserido
+        } else { // caso contrário, verifica se contém dados
+            editoraErroLabel.setText("Editora inserido corretamente!"); // avisa que foi inserido corretamente
+            editoraErroLabel.setForeground(Color.green); // coloca o texto a verde
+            dadoValidoEditora = true; // dado válido, pode ser inserido
         }
 
         // Vê se o anoPubli é inserido corretamente
-        if (anoPubliStr.isEmpty()) {
-            anoPubliErroLabel.setText("Ano de publicação sem dados!");
-            anoPubliErroLabel.setForeground(Color.yellow);
+        if (anoPubliStr.isEmpty()) { // verifica se contém dados
+            anoPubliErroLabel.setText("Ano de publicação sem dados!"); // verifica se está sem dados
+            anoPubliErroLabel.setForeground(Color.yellow); // coloca o texto a amarelo
             dadoValidoAnoPubli = true;
-        } else {
+        } else { // caso contrário...
             try {
                 // Tenta converter a string anoPubliStr para um número inteiro
                 anoPubli = Integer.parseInt(anoPubliStr);
 
-                // Verificar se o anoPubli está dentro de um intervalo específico (por exemplo, 1000 a 3000)
+                // Verificar se está dentro de um intervalo específico (por exemplo, 0 a 2024)
                 if (anoPubli >= 0 && anoPubli <= 2024) {
-                    anoPubliErroLabel.setText("Ano de publicação inserido corretamente!");
-                    anoPubliErroLabel.setForeground(Color.green);
-                    dadoValidoAnoPubli = true;
-                } else {
-                    anoPubliErroLabel.setText("O ano de publicação deve estar entre 0 e 2024!");
-                    anoPubliErroLabel.setForeground(Color.red);
-                    dadoValidoAnoPubli = false;
+                    anoPubliErroLabel.setText("Ano de publicação inserido corretamente!"); // avisa que foi inserido corretamente
+                    anoPubliErroLabel.setForeground(Color.green); // coloca o texto a verde
+                    dadoValidoAnoPubli = true; // dado válido pode ser inserido
+                } else { // caso não estiver, dentro do intervalo especificado
+                    anoPubliErroLabel.setText("O ano de publicação deve estar entre 0 e 2024!"); // avisa que deve está entre o intervalo especificado
+                    anoPubliErroLabel.setForeground(Color.red); // coloca o texto a vermelho
+                    dadoValidoAnoPubli = false; // dado inválido não pode ser inserido
                 }
             } catch (NumberFormatException e) {
                 anoPubliErroLabel.setText("Confirme se inseriu um número válido para o ano de publicação!");

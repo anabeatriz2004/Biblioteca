@@ -228,6 +228,10 @@ public class Bibliotecario {
         };
     }
 
+    /**
+     * LivroRenderer é uma classe que atua como um renderizador personalizado para uma JList de objetos Livro.
+     * Ele estende DefaultListCellRenderer para personalizar a exibição dos elementos na lista.
+     */
     static class LivroRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -236,11 +240,6 @@ public class Bibliotecario {
             setText(livro.getID_livro() + ": " +  livro.getTitulo());
             return this;
         }
-    }
-
-    public static void main(String[] args) {
-        Bibliotecario b = new Bibliotecario();
-        b.exibirFrame();
     }
 }
 

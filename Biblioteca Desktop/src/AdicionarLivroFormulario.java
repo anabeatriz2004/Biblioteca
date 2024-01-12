@@ -233,6 +233,7 @@ public class AdicionarLivroFormulario {
         frame.setVisible(true);
     }
 
+    /** Método que apaga a frame atual e volta para a frame da classe Bibliotecário*/
     private ActionListener voltarAtras() {
         return e -> {
             frame.dispose();
@@ -240,6 +241,7 @@ public class AdicionarLivroFormulario {
         };
     }
 
+    /** Frame para verificar se todos os dados estão a ser inseridos corretamente*/
     public Livro verificarDados() {
         boolean dadoValido = false;
         boolean dadoValidoIsbn = false;

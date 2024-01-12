@@ -2,16 +2,21 @@ import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDate;
 
+/** A classe Emprestimo representa um empréstimo de livro em uma biblioteca.
+ * Ela possui métodos para realizar operações relacionadas a empréstimos e interação com a base de dados. */
 public class Emprestimo {
 
+    // Conexão estática à base de dados utilizando a classe Database
     static Connection conexao = Database.getConexao();
 
+    // Atributos da classe representando um empréstimo
     private int id_emprestimo;
     private int id_livro;
     private int id_utilizador;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
 
+    // Métodos getters para os atributos
     public int getId_emprestimo() {
         return id_emprestimo;
     }
@@ -27,6 +32,8 @@ public class Emprestimo {
     public LocalDate getdataDevolucao() {
         return dataDevolucao;
     }
+
+    // Métodos setters para os atributos
     public void setId_emprestimo(int id_emprestimo) {
         this.id_emprestimo = id_emprestimo;
     }
@@ -43,13 +50,23 @@ public class Emprestimo {
         this.dataDevolucao = dataDevolucao;
     }
 
+    /** Construtor padrão da classe Emprestimo */
     Emprestimo() {}
 
+    /** Construtor da classe Emprestimo com parâmetros iniciais.
+     * @param id_livro ID do livro associado ao empréstimo.
+     * @param id_utilizador ID do utilizador associado ao empréstimo. */
     public Emprestimo(int id_livro, int id_utilizador) {
         this.id_livro = id_livro;
         this.id_utilizador = id_utilizador;
     }
 
+    /** Construtor da classe Emprestimo com todos os atributos.
+     * @param id_emprestimo ID do empréstimo.
+     * @param id_livro ID do livro associado ao empréstimo.
+     * @param id_utilizador ID do utilizador associado ao empréstimo.
+     * @param dataEmprestimo Data de empréstimo.
+     * @param dataDevolucao Data prevista para devolução. */
     public Emprestimo(int id_emprestimo, int id_livro, int id_utilizador, LocalDate dataEmprestimo,
                       LocalDate dataDevolucao) {
         this.id_emprestimo = id_emprestimo;
@@ -59,6 +76,11 @@ public class Emprestimo {
         this.dataDevolucao = dataDevolucao;
     }
 
+    /** Obtém o ID do empréstimo para um livro e utilizador específicos que ainda não foi devolvido.
+     * @param idLivro ID do livro.
+     * @param idUtilizador ID do utilizador.
+     * @return ID do empréstimo ou 0 se não encontrado.
+     * @throws SQLException Exceção de SQL. */
     public int obterIdEmprestimo(int idLivro, int idUtilizador) throws SQLException {
         String sql = "SELECT id_emprestimo FROM emprestimo WHERE id_livro = ? AND id_utilizador = ? AND date_devolvido IS NULL";
         PreparedStatement preparedStatement = conexao.prepareStatement(sql);
@@ -73,6 +95,10 @@ public class Emprestimo {
         }
     }
 
+    /** Atualiza a devolução de um livro e marca-o como disponível.
+     * @param idEmprestimo ID do empréstimo.
+     * @param idLivro ID do livro.
+     * @throws SQLException Exceção de SQL. */
     public static void atualizarDevolucaoLivro(int idEmprestimo, int idLivro) throws SQLException {
         String updateEmprestimo = "UPDATE emprestimo SET date_devolvido = NOW() WHERE id_emprestimo = ?";
         String updateLivro = "UPDATE livro SET disponibilidade = TRUE WHERE id_livro = ?";
@@ -88,7 +114,9 @@ public class Emprestimo {
         }
     }
 
-
+    /** Realiza o empréstimo de um livro para um utilizador.
+     * @param idUtilizador ID do utilizador.
+     * @param idLivro ID do livro. */
     public void emprestarLivro(int idUtilizador, int idLivro) {
         try {
             dataEmprestimo = LocalDate.now();
@@ -128,7 +156,9 @@ public class Emprestimo {
             e.printStackTrace();
         }
     }
-
+    /** Atualiza o estado de disponibilidade de um livro na base de dados.
+     * @param idLivro ID do livro.
+     * @param disponibilidade Novo estado de disponibilidade (true para disponível, false para indisponível). */
     public void atualizar_estado_livro(int idLivro, boolean disponibilidade) {
         try {
             String sql = "UPDATE livro SET disponibilidade = ? WHERE id_livro = ?";

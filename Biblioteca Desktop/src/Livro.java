@@ -2,7 +2,9 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.*;
 
+/** A classe Livro representa um livro em uma biblioteca, incluindo métodos para interação com a base de dados. */
 public class Livro {
+    // Atributos da classe representando um livro
     private int id_livro;
     private String ISBN;
     private String titulo;
@@ -11,15 +13,25 @@ public class Livro {
     private int anoPubli;
     private String genero;
     private boolean disponibilidade;
-    private String disponibilidadeStr;
     private String descricao;
 
+    // Conexão à base de dados utilizando a classe Database
     Connection conexao = Database.getConexao();
 
+    /** Construtor padrão da classe Livro. */
     public Livro () {}
 
-    // Construtor
+    /** Construtor da classe Livro com parâmetros iniciais.
+     * @param ISBN Número de identificação do livro.
+     * @param titulo Título do livro.
+     * @param autor Autor do livro.
+     * @param editora Editora do livro.
+     * @param anoPubli Ano de publicação do livro.
+     * @param genero Gênero do livro.
+     * @param disponibilidade Disponibilidade do livro (true para disponível, false para emprestado).
+     * @param descricao Descrição do livro. */
     public Livro(String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
+        // Inicializa atributos com os parâmetros fornecidos
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
@@ -30,8 +42,18 @@ public class Livro {
         this.descricao = descricao;
     }
 
-    // Construtor
+    /** Construtor da classe Livro com todos os atributos.
+     * @param id_livro ID do livro.
+     * @param ISBN Número de identificação do livro.
+     * @param titulo Título do livro.
+     * @param autor Autor do livro.
+     * @param editora Editora do livro.
+     * @param anoPubli Ano de publicação do livro.
+     * @param genero Gênero do livro.
+     * @param disponibilidade Disponibilidade do livro (true para disponível, false para emprestado).
+     * @param descricao Descrição do livro. */
     public Livro(int id_livro, String ISBN, String titulo, String autor, String editora, int anoPubli, String genero, boolean disponibilidade, String descricao) {
+        // Inicializa atributos com os parâmetros fornecidos
         this.id_livro = id_livro;
         this.ISBN = ISBN;
         this.titulo = titulo;
@@ -43,7 +65,7 @@ public class Livro {
         this.descricao = descricao;
     }
 
-    // Métodos getter e setter para cada atributo
+    // Métodos getters e setters para cada atributo
     public int getID_livro() {
         return id_livro;
     }
@@ -86,6 +108,7 @@ public class Livro {
     public void setGenero(String genero) {
         this.genero = genero;
     }
+    // método para mostrar os dados da disponibilidade do tipo string
     public String getDisponibilidade() {
         if (disponibilidade) {
             return "Disponível";
@@ -93,12 +116,10 @@ public class Livro {
             return "Emprestado";
         }
     }
+    // método para mostrar os dados da disponibilidade do tipo boolean
     public boolean isDisponibilidade() {
-        if (disponibilidade) {
-            return true;
-        } else {
-            return false;
-        }
+        if (disponibilidade) return true;
+        else return false;
     }
     public void setDisponibilidade(boolean disponibilidade) {
         this.disponibilidade = disponibilidade;
@@ -110,7 +131,8 @@ public class Livro {
         this.descricao = descricao;
     }
 
-    // Método toString sobrescrito
+    /** Retorna uma representação de string do objeto Livro.
+     * @return String contendo informações detalhadas do livro. */
     @Override
     public String toString() {
         return "Livro: " +
@@ -125,7 +147,9 @@ public class Livro {
                 "\n";
     }
 
-    /** Método para consultar um livro pelo ID na base de dados */
+    /** Consulta um livro na base de dados pelo ID.
+     * @param idLivro ID do livro a ser consultado.
+     * @return ArrayList contendo os livros encontrados com o ID especificado. */
     public ArrayList<Livro>  consultarLivro(int idLivro) {
         ArrayList<Livro> livroArray = new ArrayList<>();
         try {
@@ -143,7 +167,6 @@ public class Livro {
                 // Processa os resultados
                 while (resultado.next()) {
                     // Recupera os dados do livro
-                    String id = resultado.getString("id_livro");
                     String isbn = resultado.getString("ISBN");
                     String titulo = resultado.getString("titulo");
                     String autor = resultado.getString("autor");
@@ -167,7 +190,10 @@ public class Livro {
         return livroArray;
     }
 
-    /** Método para consultar todos os livros na base de dados */
+    /**
+     * Consulta todos os livros na base de dados.
+     * @return ArrayList contendo todos os livros encontrados na base de dados.
+     */
     public ArrayList<Livro>  consultarTodosLivros() {
         ArrayList<Livro> todosOsLivros = new ArrayList<>();
 
@@ -193,11 +219,6 @@ public class Livro {
                     boolean disponibilidade = resultado.getBoolean("disponibilidade");
                     String descricao = resultado.getString("descricao");
 
-                    // Faça o que deseja com os dados, por exemplo, imprimir na tela
-                    /*System.out.println("ID: " + idLivro + ", ISBN: " + isbn + ", Título: " + titulo +
-                            ", Autor: " + autor + ", Editora: " + editora + ", Ano de Publicação: " + anoPubli +
-                            ", Gênero: " + genero + ", Disponibilidade: " + disponibilidade);*/
-
                     // Cria uma instância da classe Livro
                     Livro livro = new Livro(idLivro, isbn, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
 
@@ -213,7 +234,8 @@ public class Livro {
         }
     }
 
-    /** código para inserir livros na base de dados */
+    /** Insere um novo livro na base de dados.
+     * @param livro Objeto Livro a ser inserido na base de dados. */
     public void inserirLivro(Livro livro) {
         try {
             // Define a consulta SQL para inserir um novo livro, incluindo todas as colunas, incluindo id_livro
@@ -259,7 +281,8 @@ public class Livro {
         }
     }
 
-    /** método para alterar dados de um livro*/
+    /** Altera os dados de um livro na base de dados.
+     * @param livro Objeto Livro contendo os novos dados. */
     public void alterarDados(Livro livro) {
         try {
             // Query SQL para atualizar os dados do livro
@@ -294,7 +317,8 @@ public class Livro {
         }
     }
 
-    /** método para eliminar livro da base de dados */
+    /** Exclui um livro da base de dados pelo ID.
+     * @param idLivro ID do livro a ser excluído. */
     public void eliminarLivro(int idLivro) {
         try {
             // Consulta SQL para excluir o livro com base no ID

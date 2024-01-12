@@ -257,7 +257,7 @@ public class EditarLivroFormulario {
         };
     }
 
-    public Livro verificarDados() {
+    public Livro verificarDados(int id) {
         // componentes para a validação dos dados, de início estão a falso,
         // pois não podem ser inseridos na base de dados
         boolean dadoValidoIsbn;
@@ -399,8 +399,8 @@ public class EditarLivroFormulario {
 
         // Verifica se todos os dados são válidos
         if (dadoValidoIsbn && dadoValidoTitulo && dadoValidoAutor && dadoValidoEditora && dadoValidoAnoPubli && dadoValidoGenero && dadoValidoDisponibilidade && dadoValidoDescricao) {
-            Livro livro = new Livro(isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
-            return livro; // retorna o livro
+            Livro livro = new Livro(id, isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+            return livro;
         } else {
             // Se algum dado não for válido, não permita a criação do livro e retorne null
             return null;
@@ -409,7 +409,6 @@ public class EditarLivroFormulario {
 
     public void editarLivro(int id) {
         Livro livroEditado = verificarDados(id);
-        livroEditado.alterarDados(livroEditado);
 
         int opcao = JOptionPane.showConfirmDialog(frame,
                 "Deseja mesmo alterar o livro com o título: " + livro.getTitulo() + "?",
@@ -417,8 +416,8 @@ public class EditarLivroFormulario {
 
         if (opcao == JOptionPane.YES_OPTION) {
             livro.alterarDados(livroEditado);
-            frame.dispose();
-            b.exibirFrame();
+            frame.dispose(); // feche a janela atual
+            b.exibirFrame(); // mostra a janela do bibliotecário
         } else {
             // Se nenhum livro estiver selecionado, exibe uma mensagem de aviso
             JOptionPane.showMessageDialog(frame, "Livro selecionado não existe. " +

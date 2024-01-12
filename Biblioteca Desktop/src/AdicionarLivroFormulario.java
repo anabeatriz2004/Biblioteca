@@ -302,7 +302,7 @@ public class AdicionarLivroFormulario {
 
         // criação de componentes de acordo como serão inseridos na base de dados
         int anoPubli = 0;
-        boolean disponibilidade = true;
+        boolean disponibilidade = true; // está disponível por defeito
 
         // verifica se o isbn é inserido corretamente
         if (isbnStr.isEmpty()) { // verifica se não contém dados

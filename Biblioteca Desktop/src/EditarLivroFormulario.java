@@ -257,142 +257,150 @@ public class EditarLivroFormulario {
         };
     }
 
-    public Livro verificarDados(int id) {
-        boolean dadoValido = false;
-        boolean dadoValidoIsbn = false;
-        boolean dadoValidoTitulo = false;
-        boolean dadoValidoAutor = false;
-        boolean dadoValidoEditora = false;
-        boolean dadoValidoAnoPubli = false;
-        boolean dadoValidoGenero = false;
+    public Livro verificarDados() {
+        // componentes para a validação dos dados, de início estão a falso,
+        // pois não podem ser inseridos na base de dados
+        boolean dadoValidoIsbn;
+        boolean dadoValidoTitulo;
+        boolean dadoValidoAutor;
+        boolean dadoValidoEditora;
+        boolean dadoValidoAnoPubli;
+        boolean dadoValidoGenero;
         boolean dadoValidoDisponibilidade = false;
-        boolean dadoValidoDescricao = false;
+        boolean dadoValidoDescricao;
 
-        // buscar os dados do formulário
+        // recolhe os dados do campos de texto
         String isbnStr = isbnTextField.getText();
         String titulo = tituloTextField.getText();
         String autor = autorTextField.getText();
         String editora = editoraTextField.getText();
         String anoPubliStr = anoPubliTextField.getText();
         String genero = generoTextField.getText();
-        String disponibilidadeStr = (String) disponibilidadeComboBox.getSelectedItem();
+        String disponibilidadeStr = (String) disponibilidadeComboBox.getSelectedItem(); // recolhe o dado selecionado
         String descricao = descricaoTextArea.getText();
 
+        // criação de componentes de acordo como serão inseridos na base de dados
         int anoPubli = 0;
-        boolean disponibilidade = true;
+        boolean disponibilidade = true; // está disponível por defeito
 
-        if (isbnStr.isEmpty()) {
-            isbnErroLabel.setText("Isbn sem dados!");
-            isbnErroLabel.setForeground(Color.yellow);
-            dadoValidoIsbn = true;
-        } else if (isbnStr.matches("\\d{13}")) {
-            isbnErroLabel.setText("ISBN inserido corretamente!");
-            isbnErroLabel.setForeground(Color.green);
-            dadoValidoIsbn = true;
+        // verifica se o isbn é inserido corretamente
+        if (isbnStr.isEmpty()) { // verifica se não contém dados
+            isbnErroLabel.setText("Isbn sem dados!"); // avisa que está vazio
+            isbnErroLabel.setForeground(Color.yellow); // coloca o texto a amarelo
+            dadoValidoIsbn = true; // dado válido, pode ser inserido
+        } else if (isbnStr.matches("\\d{13}")) { // verifica se têm 13 números
+            isbnErroLabel.setText("ISBN inserido corretamente!"); // avisa que é inserido corretamente
+            isbnErroLabel.setForeground(Color.green); // coloca o texto a verde
+            dadoValidoIsbn = true; // dado válido, pode ser inserido
         } else {
-            if (isbnStr.matches(".*\\D.*")) {
-                isbnErroLabel.setText("O ISBN só pode conter números!");
+            if (isbnStr.matches(".*\\D.*")) { // caso contrário, verifica se tem dados não númericos
+                isbnErroLabel.setText("O ISBN só pode conter números!"); // avisa que só pode ter letras
             } else {
-                isbnErroLabel.setText("Confirme se tem 13 números!");
+                isbnErroLabel.setText("Confirme se tem 13 números!"); // caso contrário, diz para confirmar se têm realmente 13 dígitos
             }
-            isbnErroLabel.setForeground(Color.red);
-            dadoValidoIsbn = false;
+            isbnErroLabel.setForeground(Color.red); // coloca o texto a vermelho
+            dadoValidoIsbn = false; // dado inválido, não pode ser inserido
         }
 
-        if (titulo.isEmpty()) {
-            tituloErroLabel.setText("Título sem dados!");
-            tituloErroLabel.setForeground(Color.yellow);
-            dadoValidoTitulo = true;
-        } else {
-            tituloErroLabel.setText("Título inserido corretamente!");
-            tituloErroLabel.setForeground(Color.green);
-            dadoValidoTitulo = true;
+        // verifica se o título é inserido corretamente
+        if (titulo.isEmpty()) { // verifica se não contém dados
+            tituloErroLabel.setText("Título sem dados!"); // afirma que está sem dados
+            tituloErroLabel.setForeground(Color.yellow); // apresenta texto a amarelo
+            dadoValidoTitulo = true; // dado válido, pode ser inserido
+        } else { // caso contrário, verifica se contém dados
+            tituloErroLabel.setText("Título inserido corretamente!"); // afirma que fora inserido corretamente
+            tituloErroLabel.setForeground(Color.green); // coloca o texto a verde
+            dadoValidoTitulo = true; // dado válido, pode ser inserido
         }
 
-        if (autor.isEmpty()) {
-            autorErroLabel.setText("Autor sem dados!");
-            autorErroLabel.setForeground(Color.yellow);
-            dadoValidoAutor = true;
-        } else {
-            autorErroLabel.setText("Autor inserido corretamente!");
-            autorErroLabel.setForeground(Color.green);
-            dadoValidoAutor = true;
+        // verifica se o autor é inserido corretamente
+        if (autor.isEmpty()) { // verifica se não contém dados
+            autorErroLabel.setText("Autor sem dados!"); // avisa que está sem dados
+            autorErroLabel.setForeground(Color.yellow); // coloca o texto a amarelo
+            dadoValidoAutor = true; // dado válido, pode ser inserido
+        } else { // caso contrário, verifica se contém dados
+            autorErroLabel.setText("Autor inserido corretamente!"); // avisa que foi inserido corretamente
+            autorErroLabel.setForeground(Color.green); // coloca o texto a verde
+            dadoValidoAutor = true; // dado válido, pode ser inserido
         }
 
-        if (editora.isEmpty()) {
-            editoraErroLabel.setText("Editora sem dados!");
-            editoraErroLabel.setForeground(Color.yellow);
-            dadoValidoEditora = true;
-        } else {
-            editoraErroLabel.setText("Editora inserido corretamente!");
-            editoraErroLabel.setForeground(Color.green);
-            dadoValidoEditora = true;
+        // verifica se a editora é inserida corretamente
+        if (editora.isEmpty()) { // verifica se a editora é inserida corretamente
+            editoraErroLabel.setText("Editora sem dados!"); // avisa que não contém dados
+            editoraErroLabel.setForeground(Color.yellow); // coloca o texto amarelo
+            dadoValidoEditora = true; // dado válido, pde ser inserido
+        } else { // caso contrário, verifica se contém dados
+            editoraErroLabel.setText("Editora inserido corretamente!"); // avisa que foi inserido corretamente
+            editoraErroLabel.setForeground(Color.green); // coloca o texto a verde
+            dadoValidoEditora = true; // dado válido, pode ser inserido
         }
 
         // Vê se o anoPubli é inserido corretamente
-        if (anoPubliStr.isEmpty()) {
-            anoPubliErroLabel.setText("Ano de publicação sem dados!");
-            anoPubliErroLabel.setForeground(Color.yellow);
+        if (anoPubliStr.isEmpty()) { // verifica se contém dados
+            anoPubliErroLabel.setText("Ano de publicação sem dados!"); // verifica se está sem dados
+            anoPubliErroLabel.setForeground(Color.yellow); // coloca o texto a amarelo
             dadoValidoAnoPubli = true;
-        } else {
+        } else { // caso contrário...
             try {
                 // Tenta converter a string anoPubliStr para um número inteiro
                 anoPubli = Integer.parseInt(anoPubliStr);
 
-                // Verificar se o anoPubli está dentro de um intervalo específico (por exemplo, 1000 a 3000)
+                // Verificar se está dentro de um intervalo específico (por exemplo, 0 a 2024)
                 if (anoPubli >= 0 && anoPubli <= 2024) {
-                    anoPubliErroLabel.setText("Ano de publicação inserido corretamente!");
-                    anoPubliErroLabel.setForeground(Color.green);
-                    dadoValidoAnoPubli = true;
-                } else {
-                    anoPubliErroLabel.setText("O ano de publicação deve estar entre 0 e 2024!");
-                    anoPubliErroLabel.setForeground(Color.red);
-                    dadoValidoAnoPubli = false;
+                    anoPubliErroLabel.setText("Ano de publicação inserido corretamente!"); // avisa que foi inserido corretamente
+                    anoPubliErroLabel.setForeground(Color.green); // coloca o texto a verde
+                    dadoValidoAnoPubli = true; // dado válido pode ser inserido
+                } else { // caso não estiver, dentro do intervalo especificado
+                    anoPubliErroLabel.setText("O ano de publicação deve estar entre 0 e 2024!"); // avisa que deve está entre o intervalo especificado
+                    anoPubliErroLabel.setForeground(Color.red); // coloca o texto a vermelho
+                    dadoValidoAnoPubli = false; // dado inválido não pode ser inserido
                 }
-            } catch (NumberFormatException e) {
-                anoPubliErroLabel.setText("Confirme se inseriu um número válido para o ano de publicação!");
-                anoPubliErroLabel.setForeground(Color.red);
-                dadoValidoAnoPubli = false;
+            } catch (NumberFormatException e) { // se caso ocorrer um erro em tentar tornar uma string em um número
+                anoPubliErroLabel.setText("Confirme se inseriu um número válido para o ano de publicação!"); // avisa que inseriu uma string
+                anoPubliErroLabel.setForeground(Color.red); // coloca o texto a vermelho
+                dadoValidoAnoPubli = false; // dado inválido, não pode ser inserido
             }
         }
 
-        if (genero.isEmpty()) {
-            generoErroLabel.setText("Gênero sem dados!");
-            generoErroLabel.setForeground(Color.yellow);
-            dadoValidoGenero = true;
-        } else {
-            generoErroLabel.setText("Gênero inserido corretamente!");
-            generoErroLabel.setForeground(Color.green);
-            dadoValidoGenero = true;
+        // verifica se o gênero é inserido corretamente
+        if (genero.isEmpty()) { // verifica se o gênero está vazio
+            generoErroLabel.setText("Gênero sem dados!"); // avisa que não tem dados
+            generoErroLabel.setForeground(Color.yellow); // coloca o texto a amarelo
+            dadoValidoGenero = true; // dado válido, pode ser inserido
+        } else { // caso contrário...
+            generoErroLabel.setText("Gênero inserido corretamente!"); // gênero inserido corretamente
+            generoErroLabel.setForeground(Color.green); // coloca o texto a verde
+            dadoValidoGenero = true; // dado válido, pode ser inserido
         }
 
-        if (disponibilidadeStr.equals("Disponível")) {
-            disponibilidadeErroLabel.setText("Declarou que o livro se encontra disponivel.");
-            disponibilidadeErroLabel.setForeground(Color.green);
-            disponibilidade = true;
-            dadoValidoDisponibilidade = true;
-        } else if (disponibilidadeStr.equals("Emprestado")) {
-            disponibilidadeErroLabel.setText("Declarou que o livro foi emprestado.");
-            disponibilidadeErroLabel.setForeground(Color.green);
-            disponibilidade = false;
-            dadoValidoDisponibilidade = true;
+        // verifica se o estado da disponibilidade
+        if (disponibilidadeStr.equals("Disponível")) { // verifica se está disponíveç
+            disponibilidadeErroLabel.setText("Declarou que o livro se encontra disponivel."); // declara que o livro está disponível
+            disponibilidadeErroLabel.setForeground(Color.green); // coloca o texto a verde
+            disponibilidade = true; // afirma que está disponível
+            dadoValidoDisponibilidade = true; // dado válido, pode ser inserido
+        } else if (disponibilidadeStr.equals("Emprestado")) { // verifica se está emprestado
+            disponibilidadeErroLabel.setText("Declarou que o livro foi emprestado."); // declara que o livro foi emprestado
+            disponibilidadeErroLabel.setForeground(Color.green); // coloca o texto a verde
+            disponibilidade = false; // afirma que já fora emprestado
+            dadoValidoDisponibilidade = true; // dado válido, pode ser inserido
         }
 
-        if (descricao.isEmpty()) {
-            descricaoErroLabel.setText("Descrição sem dados!");
-            descricaoErroLabel.setForeground(Color.yellow);
-            dadoValidoDescricao = true;
-        } else {
-            descricaoErroLabel.setText("Descricao inserido corretamente!");
-            descricaoErroLabel.setForeground(Color.green);
-            dadoValidoDescricao = true;
+        // verifica se a descrição foi incerido corretamente
+        if (descricao.isEmpty()) { // verifica se a descrição está vazia
+            descricaoErroLabel.setText("Gênero sem dados!"); // avisa que não tem dados
+            descricaoErroLabel.setForeground(Color.yellow); // coloca o texto a amarelo
+            dadoValidoDescricao = true; // dado válido, pode ser inserido
+        } else { // caso contrário...
+            descricaoErroLabel.setText("Gênero inserido corretamente!"); // descrição inserido corretamente
+            descricaoErroLabel.setForeground(Color.green); // coloca o texto a verde
+            dadoValidoDescricao = true; // dado válido, pode ser inserido
         }
 
         // Verifica se todos os dados são válidos
         if (dadoValidoIsbn && dadoValidoTitulo && dadoValidoAutor && dadoValidoEditora && dadoValidoAnoPubli && dadoValidoGenero && dadoValidoDisponibilidade && dadoValidoDescricao) {
-            Livro livro = new Livro(id, isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
-            dadoValido = true;
-            return livro;
+            Livro livro = new Livro(isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
+            return livro; // retorna o livro
         } else {
             // Se algum dado não for válido, não permita a criação do livro e retorne null
             return null;

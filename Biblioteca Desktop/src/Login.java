@@ -31,11 +31,15 @@ public class Login {
 
     String senhaIncorreta = "Senha incorreta. Por favor, tente novamente";
 
-    public Login() {
-    }
+    public Login() {}
 
     public void exibirFrame() {
         frame = new JFrame("Formulário de Login");
+        frame.setLayout(null);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setSize(screenSize);
+        frame.getContentPane().setBackground(Color.BLACK);
+        frame.getColorModel();
 
         voltarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
         voltarBotao.setSize(110, 30);
@@ -49,11 +53,13 @@ public class Login {
         loginLabel.setFont(new Font("Arial", Font.BOLD, 15));
         loginLabel.setSize(100, 20);
         loginLabel.setLocation(700, 150);
+        loginLabel.setForeground(Color.WHITE);
         frame.add(loginLabel);
 
         emailLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         emailLabel.setSize(100, 20);
         emailLabel.setLocation(600, 200);
+        emailLabel.setForeground(Color.WHITE);
         frame.add(emailLabel);
 
         emailTextField.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -64,6 +70,7 @@ public class Login {
         passwordLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         passwordLabel.setSize(100, 20);
         passwordLabel.setLocation(575, 250);
+        passwordLabel.setForeground(Color.WHITE);
         frame.add(passwordLabel);
 
         passwordField.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -78,8 +85,6 @@ public class Login {
         frame.add(logarBotao);
 
         frame.addWindowListener(fecharPrograma());
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setSize(screenSize);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }

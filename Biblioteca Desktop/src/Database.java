@@ -19,13 +19,7 @@ public class Database {
     private static Connection conexao = null;
 
     // Bloco estático para inicializar a conexão
-    static {
-        conectar();
-    }
-
-    private Database() {
-        // Construtor privado para evitar instanciação externa
-    }
+    static {conectar(); }
 
     public static Connection getConexao() {
         return conexao;

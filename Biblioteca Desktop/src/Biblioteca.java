@@ -7,11 +7,15 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/** A classe Biblioteca representa a interface principal da aplicação de biblioteca. */
 public class Biblioteca {
+    // Conexão à base de dados utilizando a classe Database
     Connection conexao = Database.getConexao();
 
+    // Instância da classe Livro para interação com a base de dados
     Livro livro = new Livro();
 
+    // Componentes da interface gráfica
     JFrame frame;
     JList<Livro> lista = new JList<>();
     DefaultListModel<Livro> listaModelo = new DefaultListModel<>();
@@ -24,7 +28,7 @@ public class Biblioteca {
     JLabel nome = new JLabel("Bem-vindo há biblioteca! :)");
     JButton loginButton = new JButton("Iniciar Sessão");
 
-    /** Código para exibir a frame da página inicial */
+    /** Método para exibir a frame da página inicial da biblioteca. */
     public void exibirFrame() {
         // limpa a lista
         listaModelo.clear();
@@ -51,20 +55,24 @@ public class Biblioteca {
         // Restante do código para adicionar as listas e detalhes
         lista.setModel(listaModelo);
 
+        // o array todosOsLivros, guarda todos os dados existentes na base de daos
         ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
 
-        for (int i = 0; i < todosOsLivros.size(); i++) {
-            Livro livro = todosOsLivros.get(i);
+        // percorre o array todosOsLivros e adicina há lista modelo
+        for (Livro livro : todosOsLivros) {
             listaModelo.addElement(livro);
         }
 
+        // chama o método para mostrar os títulos dos livros
         lista.setCellRenderer(new Biblioteca.LivroRenderer());
 
+        // Adiciona o ouvinte de seleção de itens na lista
         lista.getSelectionModel().addListSelectionListener(e -> {
             Livro livro = lista.getSelectedValue();
             exibirDetalhesLivro(livro);
         });
 
+        // cria um novo painel, que mostra os títulos dos livros do lado direito
         JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.add(new JScrollPane(lista), BorderLayout.CENTER);
 
@@ -81,10 +89,8 @@ public class Biblioteca {
         frame.setVisible(true);
     }
 
-    /**
-     * Método para mostrar a mostrar todos os detalhes na lista,
-     * pode ser usado por três métodos: ListaGenerica(), ListaUtilizador()
-     */
+    /** Método para exibir os detalhes de um livro na interface gráfica.
+     * @param livro Objeto Livro para exibir detalhes. */
     private void exibirDetalhesLivro(Livro livro) {
         textArea.setText("ISBN: " + livro.getISBN() +
                 "\nTitulo: " + livro.getTitulo() +
@@ -103,6 +109,7 @@ public class Biblioteca {
         painel.repaint();
     }
 
+    /** Método para atualizar a lista de livros na base de dados e recriar a lista de modelo. */
     public void refreshLivroBaseDados() {
         listaModelo.clear();
 
@@ -125,6 +132,7 @@ public class Biblioteca {
         }
     }
 
+    /** Renderer personalizado para a lista de livros. */
     static class LivroRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -135,12 +143,8 @@ public class Biblioteca {
         }
     }
 
-    public static void main(String[] args) {
-        Biblioteca b = new Biblioteca();
-        b.exibirFrame();
-    }
-
-    /** Método que é lê se clicou no botão "fechar", e fecha a conexão com a base de dados*/
+    /** Método que lê se clicou no botão "fechar" e fecha a conexão com a base de dados.
+     * @return Um ouvinte de evento para o fechamento da janela. */
     private WindowListener fecharPrograma() {
         return new WindowAdapter() {
             @Override
@@ -153,5 +157,12 @@ public class Biblioteca {
                 }
             }
         };
+    }
+
+    /** Método principal para iniciar a aplicação.
+     * @param args Argumentos de linha de comando (não utilizados neste caso). */
+    public static void main(String[] args) {
+        Biblioteca b = new Biblioteca();
+        b.exibirFrame();
     }
 }

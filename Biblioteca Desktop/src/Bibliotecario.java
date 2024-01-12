@@ -5,13 +5,18 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/** A classe Bibliotecario representa a interface do bibliotecário na aplicação de biblioteca. */
 public class Bibliotecario {
+    // Conexão à base de dados utilizando a classe Database
     Connection conexao = Database.getConexao();
-    //private Connection conexao;
 
+    // Instância da classe Livro para interação com a base de dados
     Livro livro = new Livro();
+
+    // Instância da classe Biblioteca para navegação entre telas
     Biblioteca biblio = new Biblioteca();
 
+    // Componentes da interface gráfica
     JFrame frame;
     JList<Livro> lista = new JList<>();
     DefaultListModel<Livro> listaModelo = new DefaultListModel<>();
@@ -20,13 +25,13 @@ public class Bibliotecario {
     JPanel painel = new JPanel();
     JSplitPane splitPane = new JSplitPane();
 
+    // Botões da interface
     JButton adicionarLivroButton = new JButton("Adicionar Livro");
     JButton alterarLivroButton = new JButton("Alterar Dados do Livro");
     JButton eliminarLivroButton = new JButton("Eliminar Livro");
-
     JButton terminarSessaoButton = new JButton("Terminar Sessão");
 
-
+    /** Construtor padrão da classe Bibliotecario. */
     Bibliotecario() {}
 
     /** Método para exibir a frame do bibliotecário, se efetuar login como bibliotecário */
@@ -62,11 +67,9 @@ public class Bibliotecario {
         lista.getSelectionModel().addListSelectionListener(e -> {
             Livro livro = lista.getSelectedValue();
             exibirDetalhesLivro(livro);
-            // refreshLivroBaseDados();
         });
 
         // Adiciona um ouvinte de ação para o botão "Adicionar Livro"
-        // NÃO FUNCIONA
         adicionarLivroButton.addActionListener(e -> {
             frame.dispose();
             AdicionarLivroFormulario alf = new AdicionarLivroFormulario();
@@ -117,7 +120,8 @@ public class Bibliotecario {
         frame.setVisible(true);
     }
 
-    /** Método para ir buscar o id do livro que é selecionado na lista */
+    /** Método para obter o ID do livro selecionado na lista.
+     * @return ID do livro selecionado. */
     public int getIdComponenteSelecionado() {
         // Obtém o índice do livro selecionado na lista
         int indiceSelecionado = lista.getSelectedIndex();
@@ -135,7 +139,8 @@ public class Bibliotecario {
         }
     }
 
-    /** Método para exibir os detalhes do livro, sendo este exibido do lado direito */
+    /** Método para exibir os detalhes do livro na área de texto.
+     * @param livro Objeto Livro para exibir detalhes. */
     private void exibirDetalhesLivro(Livro livro) {
         try {
             textArea.setText("ID" + livro.getID_livro() +
@@ -161,7 +166,8 @@ public class Bibliotecario {
         }
     }
 
-    /** Método que elimina um determinado livro, da base de dados, e confirma se realmente o pretende o fazer */
+    /** Método para eliminar um livro da base de dados.
+     * @param id_LivroSelecionado ID do livro a ser eliminado. */
     private void eliminarLivro(int id_LivroSelecionado) {
         // Obtém o índice do livro selecionado na lista
         int indiceSelecionado = lista.getSelectedIndex();
@@ -190,7 +196,7 @@ public class Bibliotecario {
         }
     }
 
-    /** Método que é usado para limpar a lista, e voltar a exibir todos os livros da base de dados*/
+    /** Método para atualizar a lista de livros na base de dados e recriar a lista de modelo. */
     public void refreshLivroBaseDados() {
         listaModelo.clear();
 
@@ -213,7 +219,7 @@ public class Bibliotecario {
         }
     }
 
-    /** Método que é lê se clicou no botão "fechar", e fecha a conexão com a base de dados*/
+    /** Método que é lê se clicou no botão "fechar", e fecha a conexão com a base de dados. */
     private WindowListener fecharPrograma() {
         return new WindowAdapter() {
             @Override

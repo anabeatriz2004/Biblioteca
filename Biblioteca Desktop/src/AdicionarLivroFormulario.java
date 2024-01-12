@@ -7,55 +7,65 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/** A classe AdicionarLivroFormulario representa um formulário para adicionar um novo livro. */
 public class AdicionarLivroFormulario {
-    Connection conexao = Database.getConexao();
+    Connection conexao = Database.getConexao(); // conecta-se à da base de dados
     Bibliotecario b = new Bibliotecario();
 
     JFrame frame;
-    public JButton voltarBotao = new JButton("<-- Voltar");
+    public JButton voltarBotao = new JButton("<-- Voltar"); // botão para voltar
 
-    public final JLabel tituloInicialLabel = new JLabel("Adicionar Livro");
+    public final JLabel tituloInicialLabel = new JLabel("Adicionar Livro"); // título do programa
 
+    // componenetes da frame sobre o isbn
     public final JLabel isbnLabel = new JLabel("ISBN: ");
     public JTextField isbnTextField = new JTextField();
     public final JLabel isbnErroLabel = new JLabel("ISBN sem dados!");
 
+    // componenetes da frame sobre o título
     public final JLabel tituloLabel = new JLabel("Título: ");
     public JTextField tituloTextField = new JTextField();
     public final JLabel tituloErroLabel = new JLabel("Título sem dados!");
 
+    // componentes da frame sobre o autor
     public final JLabel autorLabel = new JLabel("Autor: ");
     public JTextField autorTextField = new JTextField();
     public final JLabel autorErroLabel = new JLabel("Autor sem dados!");
 
+    // componentes da frame sobre a editora
     public final JLabel editoraLabel = new JLabel("Editora: ");
     public JTextField editoraTextField = new JTextField();
     public final JLabel editoraErroLabel = new JLabel("Editora sem dados!");
 
+    // componenetes da frame sobre o ano de publicação
     public final JLabel anoPubliLabel = new JLabel("Ano de Publicação: ");
     public JTextField anoPubliTextField = new JTextField();
     public final JLabel anoPubliErroLabel = new JLabel("Ano de Publicação sem dados!");
 
+    // componenetes da frame sobre o gênero
     public final JLabel generoLabel = new JLabel("Gênero: ");
     public JTextField generoTextField = new JTextField();
     public final JLabel generoErroLabel = new JLabel("Gênero sem dados!");
 
+    // componenetes da frame sobre a dispobilidade
     public final JLabel disponibilidadeLabel = new JLabel("Disponibilidade: ");
-    //public JTextField disponibilidadeTextField = new JTextField();
     public JComboBox<String> disponibilidadeComboBox = new JComboBox<>();
     public final JLabel disponibilidadeErroLabel = new JLabel("Disponibilidade sem dados!");
 
+    // componenetes da frame sobre o descrição
     public final JLabel descricaoLabel = new JLabel("Descricao: ");
     public JTextArea descricaoTextArea = new JTextArea();
     public final JLabel descricaoErroLabel = new JLabel("Descricao sem dados!");
 
+    // botão para adicionar livro
     public JButton adicionarLivroBotao = new JButton("Adicionar Livro");
 
-    AdicionarLivroFormulario() {
-    }
+    // construtor simples e vazio
+    AdicionarLivroFormulario() {}
 
-    /** Código para exibir a frame do AdicionarLivroFormulário.java */
+    /** Método para exibir a frame do formulário para inserir livros na base de dados */
     public void exibirFrame() {
+        // Código para personalizar a frame
         frame = new JFrame("Formulário - Adicionar Livro");
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -243,7 +253,6 @@ public class AdicionarLivroFormulario {
 
     /** Frame para verificar se todos os dados estão a ser inseridos corretamente*/
     public Livro verificarDados() {
-        boolean dadoValido = false;
         boolean dadoValidoIsbn = false;
         boolean dadoValidoTitulo = false;
         boolean dadoValidoAutor = false;
@@ -377,7 +386,6 @@ public class AdicionarLivroFormulario {
         // Verifica se todos os dados são válidos
         if (dadoValidoIsbn && dadoValidoTitulo && dadoValidoAutor && dadoValidoEditora && dadoValidoAnoPubli && dadoValidoGenero && dadoValidoDisponibilidade && dadoValidoDescricao) {
             Livro livro = new Livro(isbnStr, titulo, autor, editora, anoPubli, genero, disponibilidade, descricao);
-            dadoValido = true;
             return livro;
         } else {
             // Se algum dado não for válido, não permita a criação do livro e retorne null
@@ -385,6 +393,7 @@ public class AdicionarLivroFormulario {
         }
     }
 
+    /** Método para adicionar livros há base de dados*/
     public void adicionarLivro() {
         Livro livroAdicionado = verificarDados();
         livroAdicionado.inserirLivro(livroAdicionado);

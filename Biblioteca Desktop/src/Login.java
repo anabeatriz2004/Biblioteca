@@ -4,7 +4,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Login {
 
@@ -28,14 +31,15 @@ public class Login {
 
     String senhaIncorreta = "Senha incorreta. Por favor, tente novamente";
 
-    public Login() {}
+    public Login() {
+    }
 
     public void exibirFrame() {
         frame = new JFrame("Formulário de Login");
 
         voltarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
-        voltarBotao.setSize(110, 30); // Ajustei a altura
-        voltarBotao.setLocation(0, 0); // Ajustei a posição
+        voltarBotao.setSize(110, 30);
+        voltarBotao.setLocation(0, 0);
         voltarBotao.addActionListener(e -> {
             frame.dispose();
             biblio.exibirFrame();
@@ -68,7 +72,7 @@ public class Login {
         frame.add(passwordField);
 
         logarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
-        //logarBotao.setPreferredSize(new Dimension(100, 30));
+        logarBotao.setSize(110, 30);
         logarBotao.setLocation(650, 300);
         logarBotao.addActionListener(clicarBotaoLogin());
         frame.add(logarBotao);

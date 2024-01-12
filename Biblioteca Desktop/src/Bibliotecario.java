@@ -26,23 +26,15 @@ public class Bibliotecario {
 
     JButton terminarSessaoButton = new JButton("Terminar Sessão");
 
-    /**
-     * Método para mostrar a lista que é exibida, se caso for bibliotecario,
-     * este pode visualizar todos os livros, tal como o utilizador,
-     * pode adicionar livro, alterar livro, e eliminar um livro, também têm acesso há
-     * tabela emprestimo, para visualizar os mesmos
-     */
-    Bibliotecario() {
-    }
 
+    Bibliotecario() {}
+
+    /** Método para exibir a frame do bibliotecário, se efetuar login como bibliotecário*/
     public void exibirFrame() {
         listaModelo.clear();
         if (!(listaModelo.isEmpty())) {refreshLivroBaseDados();}
 
         frame = new JFrame("Bibliotecario");
-        //String nome = "Entrou como bibliotecário";
-        // Adiciona a JLabel nome à esquerda no topo
-        //painelInicio.add(nome, BorderLayout.WEST);
 
         // Adiciona o LoginButton à direita no topo
         painelInicio.add(terminarSessaoButton, BorderLayout.EAST);

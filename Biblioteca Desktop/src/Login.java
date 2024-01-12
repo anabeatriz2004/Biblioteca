@@ -33,6 +33,7 @@ public class Login {
 
     public Login() {}
 
+    /** Código para exibir a frame do login */
     public void exibirFrame() {
         frame = new JFrame("Formulário de Login");
         frame.setLayout(null);

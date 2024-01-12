@@ -29,9 +29,7 @@ public class Utilizador {
 
     public Utilizador() {}
 
-    /**
-     * Método para mostrar a lista que é exibida ao arrancar o programa
-     */
+    /** Método para exibir a frame do utilizador se entrar como utilizador */
     public void exibirFrame(int idUtilizador) {
         listaModelo.clear();
         if (!(listaModelo.isEmpty())) {refreshLivroBaseDados(idUtilizador);}

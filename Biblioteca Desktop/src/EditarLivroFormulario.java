@@ -51,6 +51,8 @@ public class EditarLivroFormulario {
 
     EditarLivroFormulario() {}
 
+    /** Método para exibir a frame de EditarLivroFormulário
+     * ATENÇÃO: Só pode ser exibida, se entrar como utillizador*/
     public void exibirFrame(int idLivroSelecionado) {
         frame = new JFrame("Formulário de Alteração de Dados do Livro");
 

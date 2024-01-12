@@ -24,8 +24,11 @@ public class Biblioteca {
     JLabel nome = new JLabel("Bem-vindo há biblioteca! :)");
     JButton loginButton = new JButton("Iniciar Sessão");
 
+    /** Código para exibir a frame da página inicial */
     public void exibirFrame() {
+        // limpa a lista
         listaModelo.clear();
+        // busca novamente a lista de todos os livros da base de dados
         if (!(listaModelo.isEmpty())) {refreshLivroBaseDados();}
 
         frame = new JFrame("Biblioteca");

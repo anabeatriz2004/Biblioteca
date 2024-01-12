@@ -53,6 +53,7 @@ public class AdicionarLivroFormulario {
     AdicionarLivroFormulario() {
     }
 
+    /** Código para exibir a frame do AdicionarLivroFormulário.java */
     public void exibirFrame() {
         frame = new JFrame("Formulário - Adicionar Livro");
         frame.setLayout(null);

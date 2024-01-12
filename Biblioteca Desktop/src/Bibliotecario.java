@@ -29,7 +29,7 @@ public class Bibliotecario {
 
     Bibliotecario() {}
 
-    /** Método para exibir a frame do bibliotecário, se efetuar login como bibliotecário*/
+    /** Método para exibir a frame do bibliotecário, se efetuar login como bibliotecário */
     public void exibirFrame() {
         listaModelo.clear();
         if (!(listaModelo.isEmpty())) {refreshLivroBaseDados();}
@@ -117,6 +117,7 @@ public class Bibliotecario {
         frame.setVisible(true);
     }
 
+    /** Método para ir buscar o id do livro que é selecionado na lista */
     public int getIdComponenteSelecionado() {
         // Obtém o índice do livro selecionado na lista
         int indiceSelecionado = lista.getSelectedIndex();
@@ -133,7 +134,8 @@ public class Bibliotecario {
             return -1;  // Valor padrão indicando nenhum livro selecionado
         }
     }
-    
+
+    /** Método para exibir os detalhes do livro, sendo este exibido do lado direito */
     private void exibirDetalhesLivro(Livro livro) {
         try {
             textArea.setText("ID" + livro.getID_livro() +
@@ -159,10 +161,7 @@ public class Bibliotecario {
         }
     }
 
-    /**
-     * Método que é usado pela ListaBibliotecario(), e vai buscar há classe Livro, o método
-     * eliminarLivro(), para assim o eliminar
-     */
+    /** Método que elimina um determinado livro, da base de dados, e confirma se realmente o pretende o fazer */
     private void eliminarLivro(int id_LivroSelecionado) {
         // Obtém o índice do livro selecionado na lista
         int indiceSelecionado = lista.getSelectedIndex();
@@ -191,6 +190,7 @@ public class Bibliotecario {
         }
     }
 
+    /** Método que é usado para limpar a lista, e voltar a exibir todos os livros da base de dados*/
     public void refreshLivroBaseDados() {
         listaModelo.clear();
 
@@ -213,8 +213,8 @@ public class Bibliotecario {
         }
     }
 
+    /** Método que é lê se clicou no botão "fechar", e fecha a conexão com a base de dados*/
     private WindowListener fecharPrograma() {
-
         return new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

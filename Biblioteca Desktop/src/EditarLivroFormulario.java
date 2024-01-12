@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EditarLivroFormulario {
@@ -419,15 +420,17 @@ public class EditarLivroFormulario {
         }
     }
 
+    /** Método que é lê se clicou no botão "fechar", e fecha a conexão com a base de dados*/
     private WindowListener fecharPrograma() {
         return new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // Chama o método para desconectar do banco de dados
-                //conexao.desconectar();
-
-                // Fecha a aplicação
-                System.exit(0);
+                try {
+                    conexao.close();
+                    System.exit(0);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         };
     }

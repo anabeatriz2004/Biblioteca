@@ -153,6 +153,7 @@ public class Login {
         }
     }
 
+    /** Método que é lê se clicou no botão "fechar", e fecha a conexão com a base de dados*/
     private WindowListener fecharPrograma() {
         return new WindowAdapter() {
             @Override

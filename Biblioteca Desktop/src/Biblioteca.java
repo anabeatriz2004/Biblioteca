@@ -81,21 +81,6 @@ public class Biblioteca {
         frame.setVisible(true);
     }
 
-    private WindowListener fecharPrograma() {
-        return new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                try {
-                    conexao.close();
-                    System.exit(0);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        };
-    }
-
-
     /**
      * Método para mostrar a mostrar todos os detalhes na lista,
      * pode ser usado por três métodos: ListaGenerica(), ListaUtilizador()
@@ -153,5 +138,20 @@ public class Biblioteca {
     public static void main(String[] args) {
         Biblioteca b = new Biblioteca();
         b.exibirFrame();
+    }
+
+    /** Método que é lê se clicou no botão "fechar", e fecha a conexão com a base de dados*/
+    private WindowListener fecharPrograma() {
+        return new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    conexao.close();
+                    System.exit(0);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        };
     }
 }

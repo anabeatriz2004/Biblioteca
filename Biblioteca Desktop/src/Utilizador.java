@@ -120,6 +120,30 @@ public class Utilizador {
         painel.add(devolverButton, BorderLayout.NORTH);
     }
 
+    public void emprestarLivro (int idUtilizador, int idLivro) {
+        ArrayList<Livro> livroASerLido;
+        livroASerLido = livro.consultarLivro(idLivro);
+        String titulo = livroASerLido.get(0).getTitulo();
+        boolean disponibilidade = !(livroASerLido.get(0).isDisponibilidade());
+
+        int opcao = JOptionPane.showConfirmDialog(frame,
+                "Tem a certeza que quer ler o livro: " + titulo + "?",
+                "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (opcao == JOptionPane.YES_OPTION) {
+            System.out.println("Livro emprestado " + livroASerLido.get(0).getTitulo() + "!");
+            emp.emprestarLivro(idUtilizador, idLivro);
+            Utilizador u = new Utilizador();
+            emp.atualizar_estado_livro(idLivro, disponibilidade);
+            frame.dispose();
+            u.exibirFrame(idUtilizador);
+        } else {
+            JOptionPane.showMessageDialog(frame, "Por favor." +
+                            "Selecione outro livro para ler.",
+                    "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
     public void devolverLivro (int idUtilizador, int idLivro) {
         ArrayList<Livro> livroASerDevolvido;
         livroASerDevolvido = livro.consultarLivro(idLivro);
@@ -160,37 +184,12 @@ public class Utilizador {
         }
     }
 
-    public void emprestarLivro (int idUtilizador, int idLivro) {
-        ArrayList<Livro> livroASerLido;
-        livroASerLido = livro.consultarLivro(idLivro);
-        String titulo = livroASerLido.get(0).getTitulo();
-        boolean disponibilidade = !(livroASerLido.get(0).isDisponibilidade());
-
-        int opcao = JOptionPane.showConfirmDialog(frame,
-                "Tem a certeza que quer ler o livro: " + titulo + "?",
-                "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-
-        if (opcao == JOptionPane.YES_OPTION) {
-            System.out.println("Livro emprestado " + livroASerLido.get(0).getTitulo() + "!");
-            emp.emprestarLivro(idUtilizador, idLivro);
-            Utilizador u = new Utilizador();
-            emp.atualizar_estado_livro(idLivro, disponibilidade);
-            frame.dispose();
-            u.exibirFrame(idUtilizador);
-        } else {
-            JOptionPane.showMessageDialog(frame, "Por favor." +
-                            "Selecione outro livro para ler.",
-                    "Aviso", JOptionPane.WARNING_MESSAGE);
-        }
-    }
-
     public void refreshLivroBaseDados(int idUtilizador) {
         listaModelo.clear();
 
         ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
         for (Livro livroAtual : todosOsLivros) {
             listaModelo.addElement(livroAtual);
-            //id_LivroSelecionado = i + 1;
         }
 
         lista.setCellRenderer(new Bibliotecario.LivroRenderer());
@@ -201,7 +200,7 @@ public class Utilizador {
                 exibirDetalhesLivro(idUtilizador, livroSelecionado);
             });
         } catch (NullPointerException e) {
-            System.out.println("erroooooooooooooooooooooooooouuuuuuuuuuuuuuuuuuu");
+            System.out.println("erro");
             e.fillInStackTrace();
         }
     }
@@ -229,10 +228,5 @@ public class Utilizador {
                 }
             }
         };
-    }
-
-    public static void main(String[] args) {
-        Utilizador u = new Utilizador();
-        u.exibirFrame(1);
     }
 }

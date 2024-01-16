@@ -214,7 +214,7 @@ public class Bibliotecario {
                 exibirDetalhesLivro(livroSelecionado);
             });
         } catch (NullPointerException e) {
-            System.out.println("erroooooooooooooooooooooooooouuuuuuuuuuuuuuuuuuu");
+            System.out.println("erro");
             e.fillInStackTrace();
         }
     }

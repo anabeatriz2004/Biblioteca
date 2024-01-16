@@ -99,7 +99,7 @@ public class Emprestimo {
      * @param idEmprestimo ID do empréstimo.
      * @param idLivro ID do livro.
      * @throws SQLException Exceção de SQL. */
-    public static void atualizarDevolucaoLivro(int idEmprestimo, int idLivro) throws SQLException {
+    public void atualizarDevolucaoLivro(int idEmprestimo, int idLivro) throws SQLException {
         String updateEmprestimo = "UPDATE emprestimo SET date_devolvido = NOW() WHERE id_emprestimo = ?";
         String updateLivro = "UPDATE livro SET disponibilidade = TRUE WHERE id_livro = ?";
 
@@ -156,6 +156,7 @@ public class Emprestimo {
             e.printStackTrace();
         }
     }
+
     /** Atualiza o estado de disponibilidade de um livro na base de dados.
      * @param idLivro ID do livro.
      * @param disponibilidade Novo estado de disponibilidade (true para disponível, false para indisponível). */

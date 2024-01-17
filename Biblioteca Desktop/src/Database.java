@@ -33,13 +33,13 @@ public class Database {
                 System.out.println("Conexão bem-sucedida.");
             }
         } catch (ClassNotFoundException | SQLException e) {
-            e.getMessage();
             System.err.println("Erro ao conectar ao banco de dados: " + e.getMessage());
             JOptionPane.showMessageDialog(new JFrame(),
                     "Erro ao conectar há base de dados",
                     "Erro",
                     JOptionPane.ERROR_MESSAGE);
             System.out.println("Encerrando o programa...");
+            e.getMessage();
             System.exit(0);
         }
     }

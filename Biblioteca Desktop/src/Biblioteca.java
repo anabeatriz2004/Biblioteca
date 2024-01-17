@@ -98,7 +98,7 @@ public class Biblioteca {
                 "\nEditora: " + livro.getEditora() +
                 "\nAno de Publicação: " + livro.getAnoPubli() +
                 "\nGênero: " + livro.getGenero() +
-                "\nDisponibilidade: " + livro.isDisponibilidade() +
+                "\nDisponibilidade: " + livro.getDisponibilidade() +
                 "\nDescrição: " + livro.getDescricao());
 
         // Adiciona o botão "Alterar Dados" ao painel direito

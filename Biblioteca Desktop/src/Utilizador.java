@@ -109,7 +109,7 @@ public class Utilizador {
     }
 
     private void adicionarBotaoEmprestimo(int idUtilizador, Livro livro) {
-        JButton emprestimoButton = new JButton("Empréstimo");
+        JButton emprestimoButton = new JButton("Requesitar");
         emprestimoButton.addActionListener(e -> emprestarLivro(idUtilizador, livro.getID_livro()));
         painel.add(emprestimoButton, BorderLayout.NORTH);
     }
@@ -131,16 +131,15 @@ public class Utilizador {
                 "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
         if (opcao == JOptionPane.YES_OPTION) {
-            System.out.println("Livro emprestado " + livroASerLido.get(0).getTitulo() + "!");
+            System.out.println("Livro requisitado " + livroASerLido.get(0).getTitulo() + "!");
             emp.emprestarLivro(idUtilizador, idLivro);
             Utilizador u = new Utilizador();
             emp.atualizar_estado_livro(idLivro, disponibilidade);
             frame.dispose();
             u.exibirFrame(idUtilizador);
         } else {
-            JOptionPane.showMessageDialog(frame, "Por favor." +
-                            "Selecione outro livro para ler.",
-                    "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "Operação cancelada.",
+                    "Cancelado", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -157,11 +156,12 @@ public class Utilizador {
         }
 
         int opcao = JOptionPane.showConfirmDialog(frame,
-                "Tem a certeza que quer ler o livro: " + titulo + "?",
+                "Tem a certeza que quer devolver o livro: " + titulo + "?",
                 "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
         if (opcao == JOptionPane.YES_OPTION) {
-            System.out.println("Livro devolvido " + livroASerDevolvido.get(0).getTitulo() + "!");
+            System.out.println("Livro devolvido " + livroASerDevolvido.get(0).getTitulo() + "! +" +
+                    "\nTem 3 dias para devolver o livro há biblioteca, fisicamente");
             if (idEmprestimo != 0) {
                 // Atualizar a data de devolução e disponibilidade do livro
                 try {

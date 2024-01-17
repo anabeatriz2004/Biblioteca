@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /** A classe Emprestimo representa um empréstimo de livro em uma biblioteca.
  * Ela possui métodos para realizar operações relacionadas a empréstimos e interação com a base de dados. */
@@ -111,6 +112,14 @@ public class Emprestimo {
 
             preparedStatementLivro.setInt(1, idLivro);
             preparedStatementLivro.executeUpdate();
+
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "Livro devolvido com sucesso!" +
+                            "\nTem 3 dias para devolver o livro há biblioteca, fisicamente",
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } catch (Error e) {
+            e.printStackTrace();
         }
     }
 
@@ -145,7 +154,9 @@ public class Emprestimo {
                         int idEmprestimo = generatedKeys.getInt(1);
                         System.out.println("Livro emprestado com sucesso!");
                         JOptionPane.showMessageDialog(new JFrame(),
-                                "Livro emprestado com sucesso!" + "\n Devolver livro até dia: " + dataDevolucao,
+                                "Livro emprestado com sucesso!" +
+                                        "\n Devolver livro até dia: " + dataDevolucao +
+                                        "\nTem 3 dias para devolver o livro há biblioteca, fisicamente",
                                 "Sucesso",
                                 JOptionPane.INFORMATION_MESSAGE);
                     }

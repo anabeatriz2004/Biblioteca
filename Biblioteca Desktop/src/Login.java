@@ -46,13 +46,15 @@ public class Login {
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);
-        frame.getContentPane().setBackground(Color.BLACK);
         frame.getColorModel();
 
         // Código para personalizar o botão para voltar
         voltarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
         voltarBotao.setSize(110, 30);
         voltarBotao.setLocation(0, 0);
+        voltarBotao.setForeground(Color.white);
+        voltarBotao.setBorder(BorderFactory.createLineBorder(Color.white, 2));
+        voltarBotao.setBackground(new Color(30, 30, 30));
         voltarBotao.addActionListener(e -> {
             frame.dispose();
             biblio.exibirFrame();
@@ -63,14 +65,12 @@ public class Login {
         loginLabel.setFont(new Font("Arial", Font.BOLD, 15));
         loginLabel.setSize(100, 20);
         loginLabel.setLocation(700, 150);
-        loginLabel.setForeground(Color.WHITE);
         frame.add(loginLabel); // adiciona há frame
 
         // Código para personalizar a label do email
         emailLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         emailLabel.setSize(100, 20);
         emailLabel.setLocation(600, 200);
-        emailLabel.setForeground(Color.WHITE);
         frame.add(emailLabel); // adiciona há frame
 
         // Código para personalizar a caixa de texto do email
@@ -83,7 +83,6 @@ public class Login {
         passwordLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         passwordLabel.setSize(100, 20);
         passwordLabel.setLocation(575, 250);
-        passwordLabel.setForeground(Color.WHITE);
         frame.add(passwordLabel); // adiciona há frame
 
         // Código para personalizar a caixa de texto da password

@@ -37,7 +37,7 @@ CREATE TABLE emprestimo (
     id_bibliotecario INT,
     data_emprestimo DATETIME,
     data_devolucao DATETIME,
-    date_devolvido DATETIME,
+    data_devolvido DATETIME,
     FOREIGN KEY (id_livro) REFERENCES livro (id_livro),
     FOREIGN KEY (id_utilizador) REFERENCES utilizador (id_utilizador),
     FOREIGN KEY (id_bibliotecario) REFERENCES bibliotecario (id_bibliotecario));
@@ -84,3 +84,20 @@ VALUES (1, '9780061120084', 'To Kill a Mockingbird', 'Harper Lee', 'Harper Peren
 		'A dystopian novel that explores a futuristic society where advanced technology controls every aspect of life.'),
     (15, '9780061120084', 'The Lord of the Rings', 'J.R.R. Tolkien', 'Mariner Books', 1954, 'Fantasy', true,
 		'A fantasy trilogy that follows the quest to destroy the One Ring and defeat the Dark Lord Sauron.');
+
+INSERT INTO emprestimo (id_livro, id_utilizador, id_bibliotecario, data_emprestimo, data_devolucao, data_devolvido)
+	VALUES(1, 1, 1, '2024-01-18 10:00:00', '2024-01-25 15:00:00', NULL),
+	(2, 2, 1, '2024-01-19 11:30:00', '2024-01-26 16:45:00', NULL),
+	(3, 3, 1, '2024-01-20 09:15:00', '2024-01-27 14:30:00', NULL),
+	(4, 1, 1, '2024-01-21 14:00:00', '2024-01-28 18:00:00', NULL),
+	(5, 2, 1, '2024-01-22 16:45:00', '2024-01-29 10:30:00', NULL),
+	(6, 3, 1, '2024-01-23 13:30:00', '2024-01-30 12:15:00', NULL),
+	(7, 1, 1, '2024-01-24 11:00:00', '2024-01-31 17:45:00', NULL),
+	(8, 2, 1, '2024-01-25 10:30:00', '2024-02-01 09:00:00', NULL),
+	(9, 3, 1, '2024-01-26 12:45:00', '2024-02-02 14:30:00', NULL),
+	(10, 1, 1, '2024-01-27 15:15:00', '2024-02-03 16:00:00', NULL),
+	(11, 2, 1, '2024-01-28 08:00:00', '2024-02-04 11:30:00', NULL),
+	(12, 3, 1, '2024-01-29 09:45:00', '2024-02-05 13:45:00', NULL),
+	(13, 1, 1, '2024-01-30 14:30:00', '2024-02-06 15:30:00', NULL),
+	(14, 2, 1, '2024-01-31 11:30:00', '2024-02-07 17:00:00', NULL),
+	(15, 3, 1, '2024-02-01 10:00:00', '2024-02-08 16:15:00', NULL);

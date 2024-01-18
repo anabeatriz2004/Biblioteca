@@ -107,9 +107,9 @@ public class MostraEmprestimo{
      * @param emp Objeto emprestimo para exibir detalhes. */
     private void exibirDetalhesEmprestimo(Emprestimo emp) throws SQLException {
         textArea.setText("Id do empréstimo: " + emp.getId_emprestimo() +
-                "\nLivro: " + emp.getId_livro() + ": " + emp.obterTituloLivro() +
-                "\nUtilizador: " + emp.getId_utilizador() + ": " + emp.obterNomeUtilizador() +
-                "\nId do bibliotecario: " + emp.getId_bibliotecario() + ": " + emp.obterNomeBibliotecario() +
+                "\nLivro: " + emp.getId_livro() + ": " + emp.obterTituloLivro(emp.getId_livro()) +
+                "\nUtilizador: " + emp.getId_utilizador() + ": " + emp.obterNomeUtilizador(emp.getId_utilizador()) +
+                "\nId do bibliotecario: " + emp.getId_bibliotecario() + ": " + emp.obterNomeBibliotecario(emp.getId_bibliotecario()) +
                 "\nData do Empréstimo: " + emp.getdataEmprestimo() +
                 "\nData do dia que deverá/deveria devolver: " + emp.getdataDevolucao() +
                 "\nData do dia que fora devolvido: " + emp.getdataDevolvido());

@@ -135,7 +135,7 @@ public class Emprestimo {
                     int id_bibliotecario = resultado.getInt("id_bibliotecario");
                     LocalDate data_emprestimo = (resultado.getDate("data_emprestimo") != null) ? resultado.getDate("data_emprestimo").toLocalDate() : null;
                     LocalDate data_devolucao = (resultado.getDate("data_devolucao") != null) ? resultado.getDate("data_devolucao").toLocalDate() : null;
-                    LocalDate data_devolvido = (resultado.getDate("date_devolvido") != null) ? resultado.getDate("date_devolvido").toLocalDate() : null;
+                    LocalDate data_devolvido = (resultado.getDate("data_devolvido") != null) ? resultado.getDate("data_devolvido").toLocalDate() : null;
 
                     // Cria uma instância da classe Livro
                     Emprestimo livro = new Emprestimo(id_emprestimo, id_livro, id_utilizador, id_bibliotecario, data_emprestimo, data_devolucao, data_devolvido);
@@ -152,9 +152,10 @@ public class Emprestimo {
         }
     }
 
-    public String obterTituloLivro() throws SQLException {
-        String sql = "select titulo from livro inner join emprestimo on livro.id_livro = emprestimo.id_livro";
+    public String obterTituloLivro(int id_livro) throws SQLException {
+        String sql = "SELECT titulo FROM livro WHERE livro.id_livro = ?";
         PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+        preparedStatement.setInt(1, id_livro);
         try (ResultSet resultSet = preparedStatement.executeQuery()) {
             if (resultSet.next()) {
                 return resultSet.getString("titulo");
@@ -164,9 +165,10 @@ public class Emprestimo {
         }
     }
 
-    public String obterNomeUtilizador() throws SQLException {
-        String sql = "select nome from utilizador inner join emprestimo on utilizador.id_utilizador = emprestimo.id_utilizador";
+    public String obterNomeUtilizador(int id_utilizador) throws SQLException {
+        String sql = "SELECT nome FROM utilizador WHERE id_utilizador = ?";
         PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+        preparedStatement.setInt(1, id_utilizador);
         try (ResultSet resultSet = preparedStatement.executeQuery()) {
             if (resultSet.next()) {
                 return resultSet.getString("nome");
@@ -176,9 +178,10 @@ public class Emprestimo {
         }
     }
 
-    public String obterNomeBibliotecario() throws SQLException {
-        String sql = "select nome from bibliotecario inner join emprestimo on bibliotecario.id_bibliotecario = emprestimo.id_bibliotecario";
+    public String obterNomeBibliotecario(int id_bibliotecario) throws SQLException {
+        String sql = "SELECT nome FROM bibliotecario WHERE id_bibliotecario = ?";
         PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+        preparedStatement.setInt(1, id_bibliotecario);
         try (ResultSet resultSet = preparedStatement.executeQuery()) {
             if (resultSet.next()) {
                 return resultSet.getString("nome");
@@ -194,7 +197,7 @@ public class Emprestimo {
      * @return ID do empréstimo ou 0 se não encontrado.
      * @throws SQLException Exceção de SQL. */
     public int obterIdEmprestimo(int idLivro, int idUtilizador) throws SQLException {
-        String sql = "SELECT id_emprestimo FROM emprestimo WHERE id_livro = ? AND id_utilizador = ? AND date_devolvido IS NULL";
+        String sql = "SELECT id_emprestimo FROM emprestimo WHERE id_livro = ? AND id_utilizador = ? AND data_devolvido IS NULL";
         PreparedStatement preparedStatement = conexao.prepareStatement(sql);
         preparedStatement.setInt(1, idLivro);
         preparedStatement.setInt(2, idUtilizador);
@@ -212,7 +215,7 @@ public class Emprestimo {
      * @param idLivro ID do livro.
      * @throws SQLException Exceção de SQL. */
     public void atualizarDevolucaoLivro(int idEmprestimo, int idLivro) throws SQLException {
-        String updateEmprestimo = "UPDATE emprestimo SET date_devolvido = NOW() WHERE id_emprestimo = ?";
+        String updateEmprestimo = "UPDATE emprestimo SET data_devolvido = NOW() WHERE id_emprestimo = ?";
         String updateLivro = "UPDATE livro SET disponibilidade = TRUE WHERE id_livro = ?";
 
         try (PreparedStatement preparedStatementEmprestimo = conexao.prepareStatement(updateEmprestimo);

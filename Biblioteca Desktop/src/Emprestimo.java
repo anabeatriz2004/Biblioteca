@@ -152,6 +152,10 @@ public class Emprestimo {
         }
     }
 
+    /** Obtém o título do livro associado a um empréstimo.
+     * @param id_livro ID do livro.
+     * @return Título do livro.
+     * @throws SQLException Exceção de SQL. */
     public String obterTituloLivro(int id_livro) throws SQLException {
         String sql = "SELECT titulo FROM livro WHERE livro.id_livro = ?";
         PreparedStatement preparedStatement = conexao.prepareStatement(sql);
@@ -165,6 +169,10 @@ public class Emprestimo {
         }
     }
 
+    /** Obtém o nome do utilizador associado a um empréstimo.
+     * @param id_utilizador ID do utilizador.
+     * @return nome do utilizador.
+     * @throws SQLException Exceção de SQL.*/
     public String obterNomeUtilizador(int id_utilizador) throws SQLException {
         String sql = "SELECT nome FROM utilizador WHERE id_utilizador = ?";
         PreparedStatement preparedStatement = conexao.prepareStatement(sql);
@@ -178,6 +186,10 @@ public class Emprestimo {
         }
     }
 
+    /**Obtém o nome do bibliocário associado a um empréstimo.
+     * @param id_bibliotecario ID do bibliotecário.
+     * @return nome do bibliocário.
+     * @throws SQLException Exceção de SQL.*/
     public String obterNomeBibliotecario(int id_bibliotecario) throws SQLException {
         String sql = "SELECT nome FROM bibliotecario WHERE id_bibliotecario = ?";
         PreparedStatement preparedStatement = conexao.prepareStatement(sql);

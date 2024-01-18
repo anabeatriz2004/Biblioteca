@@ -10,11 +10,9 @@ public class Bibliotecario {
     // Conexão à base de dados utilizando a classe Database
     Connection conexao = Database.getConexao();
 
-    // Instância da classe Livro para interação com a base de dados
     Livro livro = new Livro();
-
-    // Instância da classe Biblioteca para navegação entre telas
-    Biblioteca biblio = new Biblioteca();
+    Biblioteca b = new Biblioteca();
+    MostraEmprestimo emp = new MostraEmprestimo();
 
     // Componentes da interface gráfica
     JFrame frame;
@@ -26,6 +24,7 @@ public class Bibliotecario {
     JSplitPane splitPane = new JSplitPane();
 
     // Botões da interface
+    JButton mostarEmprestimoButton = new JButton("Mostrar dados do Empréstimo");
     JButton adicionarLivroButton = new JButton("Adicionar Livro");
     JButton alterarLivroButton = new JButton("Alterar Dados do Livro");
     JButton eliminarLivroButton = new JButton("Eliminar Livro");
@@ -41,15 +40,24 @@ public class Bibliotecario {
 
         frame = new JFrame("Bibliotecario");
 
-        // Adiciona o LoginButton à direita no topo
+        // Adiciona o mostarEmprestimoButton no centro
+        mostarEmprestimoButton.setSize(110, 30);
+        painelInicio.add(mostarEmprestimoButton, BorderLayout.CENTER);
+
+        // Adiciona o terminarSessaoButton à direita no topo
         painelInicio.add(terminarSessaoButton, BorderLayout.EAST);
 
-        // mostra a página do login
-        terminarSessaoButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(frame,
-                    "Falta acresentar o método para terminar sessão.");
+
+        // exibe a frame da página que mostra os empréstimos
+        mostarEmprestimoButton.addActionListener(e -> {
             frame.dispose(); // fecha a tela inicial
-            biblio.exibirFrame();
+            emp.exibirFrame();
+        });
+
+        // mostra a página inicial da biblioteca
+        terminarSessaoButton.addActionListener(e -> {
+            frame.dispose(); // fecha a tela inicial
+            b.exibirFrame();
         });
 
         // Adiciona o painelInicio ao início do JFrame

@@ -7,13 +7,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/** A classe Biblioteca representa a interface principal da aplicação de biblioteca. */
+/** A classe MostraEmprestimo representa a interface gráfica para visualizar os detalhes dos empréstimos na biblioteca. */
 public class MostraEmprestimo{
     // Conexão à base de dados utilizando a classe Database
     Connection conexao = Database.getConexao();
 
     // Instância da classe emprestimo para interação com a base de dados
     Emprestimo emp = new Emprestimo();
+    Bibliotecario b = new Bibliotecario();
     Biblioteca biblio = new Biblioteca();
 
     // Componentes da interface gráfica
@@ -26,9 +27,11 @@ public class MostraEmprestimo{
     JSplitPane splitPane = new JSplitPane();
 
     // componentes
+    JButton voltarButton = new JButton("<-- Voltar");
     JLabel nome = new JLabel("Dados do Empréstimo");
     JButton terminarSessaoButton = new JButton("Terminar Sessão");
 
+    /** Construtor padrão da classe MostraEmprestimo. */
     MostraEmprestimo() {}
 
     /** Método para exibir a frame da página inicial da biblioteca. */
@@ -42,13 +45,17 @@ public class MostraEmprestimo{
         // Adiciona a JLabel nome à esquerda no topo
         painelInicio.add(nome, BorderLayout.WEST);
 
+        // Adiciona o terminarSessaoButton à esquerda no topo
+        painelInicio.add(voltarButton, BorderLayout.WEST);
+
+        // exibe a frame da página que mostra os empréstimos
+        voltarButton.addActionListener(voltar());
+
         // Adiciona o LoginButton à direita no topo
         painelInicio.add(terminarSessaoButton, BorderLayout.EAST);
 
         // mostra a página inicial
         terminarSessaoButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(frame,
-                    "Falta acresentar o método para terminar sessão.");
             frame.dispose(); // fecha a tela inicial
             biblio.exibirFrame();
         });
@@ -68,8 +75,6 @@ public class MostraEmprestimo{
                 listaModelo.addElement(emp);
             }
         } catch (NullPointerException e) {
-            // chama o método para mostrar os ids dos empréstimos
-            lista.setCellRenderer(new MostraEmprestimo.EmprestimoRendererNulo());
             e.fillInStackTrace();
         }
 
@@ -103,8 +108,21 @@ public class MostraEmprestimo{
         frame.setVisible(true);
     }
 
+    /**
+     * Retorna um ActionListener que fecha a janela atual e exibe a frame anterior.
+     * Este ActionListener é utilizado pelo voltarButton.
+     * @return Um objeto ActionListener que executa as ações necessárias quando o voltarButton é pressionado.
+     */
+    private ActionListener voltar() {
+        return e -> {
+            frame.dispose();
+            b.exibirFrame();
+        };
+    }
+
     /** Método para exibir os detalhes de um emprestimo na interface gráfica.
-     * @param emp Objeto emprestimo para exibir detalhes. */
+     * @param emp Objeto emprestimo para exibir detalhes.
+     * @throws SQLException Exceção de SQL. */
     private void exibirDetalhesEmprestimo(Emprestimo emp) throws SQLException {
         textArea.setText("Id do empréstimo: " + emp.getId_emprestimo() +
                 "\nLivro: " + emp.getId_livro() + ": " + emp.obterTituloLivro(emp.getId_livro()) +
@@ -122,7 +140,7 @@ public class MostraEmprestimo{
         painel.repaint();
     }
 
-    /** Método para atualizar a lista de emprestimos na base de dados e recriar a lista de modelo. */
+    /** Método para atualizar a lista de empréstimos na base de dados e recriar a lista de modelo. */
     public void refreshEmprestimoBaseDados() {
         listaModelo.clear();
 
@@ -145,16 +163,6 @@ public class MostraEmprestimo{
         } catch (NullPointerException e) {
             System.out.println("errou");
             e.fillInStackTrace();
-        }
-    }
-
-    /** Renderer personalizado para a lista de emprestimos */
-    static class EmprestimoRendererNulo extends DefaultListCellRenderer {
-        @Override
-        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            setText("Não existem dados na base de dados");
-            return this;
         }
     }
 

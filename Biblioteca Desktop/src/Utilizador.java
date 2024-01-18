@@ -23,8 +23,6 @@ public class Utilizador {
     JPanel painel = new JPanel();
     JSplitPane splitPane = new JSplitPane();
     JLabel nome = new JLabel("Entrou como utilizador!");
-    JButton devolverButton = new JButton("Devolução");
-    JButton emprestimoButton = new JButton("Empréstimo");
     JButton terminarSessaoButton = new JButton("Terminar Sessão");
 
     public Utilizador() {}
@@ -41,7 +39,7 @@ public class Utilizador {
 
         painelInicio.add(terminarSessaoButton, BorderLayout.EAST);
 
-        // mostra a página do login
+        // mostra a página inicial
         terminarSessaoButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(frame,
                     "Falta acresentar o método para terminar sessão.");
@@ -132,7 +130,7 @@ public class Utilizador {
 
         if (opcao == JOptionPane.YES_OPTION) {
             System.out.println("Livro requisitado " + livroASerLido.get(0).getTitulo() + "!");
-            emp.emprestarLivro(idUtilizador, idLivro);
+            emp.emprestarLivro(idUtilizador, idLivro, 1);
             Utilizador u = new Utilizador();
             emp.atualizar_estado_livro(idLivro, disponibilidade);
             frame.dispose();

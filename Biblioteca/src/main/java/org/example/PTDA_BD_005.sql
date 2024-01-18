@@ -34,11 +34,13 @@ CREATE TABLE emprestimo (
     id_emprestimo INT AUTO_INCREMENT PRIMARY KEY,
     id_livro INT,
     id_utilizador INT,
+    id_bibliotecario INT,
     data_emprestimo DATETIME,
     data_devolucao DATETIME,
     date_devolvido DATETIME,
     FOREIGN KEY (id_livro) REFERENCES livro (id_livro),
-    FOREIGN KEY (id_utilizador) REFERENCES utilizador (id_utilizador));
+    FOREIGN KEY (id_utilizador) REFERENCES utilizador (id_utilizador),
+    FOREIGN KEY (id_bibliotecario) REFERENCES bibliotecario (id_bibliotecario));
 
 
 INSERT INTO utilizador

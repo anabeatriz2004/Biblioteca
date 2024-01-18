@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /** A classe Emprestimo representa um empréstimo de livro em uma biblioteca.
  * Ela possui métodos para realizar operações relacionadas a empréstimos e interação com a base de dados. */
@@ -14,8 +14,10 @@ public class Emprestimo {
     private int id_emprestimo;
     private int id_livro;
     private int id_utilizador;
+    private int id_bibliotecario;
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
+    private LocalDate dataDevolvido;
 
     // Métodos getters para os atributos
     public int getId_emprestimo() {
@@ -27,11 +29,17 @@ public class Emprestimo {
     public int getId_utilizador() {
         return id_utilizador;
     }
+    public int getId_bibliotecario() {
+        return id_bibliotecario;
+    }
     public LocalDate getdataEmprestimo() {
         return dataEmprestimo;
     }
     public LocalDate getdataDevolucao() {
         return dataDevolucao;
+    }
+    public LocalDate getdataDevolvido() {
+        return dataDevolvido;
     }
 
     // Métodos setters para os atributos
@@ -44,11 +52,17 @@ public class Emprestimo {
     public void setId_utilizador(int id_utilizador) {
         this.id_utilizador = id_utilizador;
     }
+    public void setId_bibliotecario(int id_bibliotecario) {
+        this.id_bibliotecario = id_bibliotecario;
+    }
     public void setdataEmprestimo(LocalDate dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
     public void setdataDevolucao(LocalDate dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
+    }
+    public void setdataDevolvido(LocalDate dataDevolvido) {
+        this.dataDevolvido = dataDevolvido;
     }
 
     /** Construtor padrão da classe Emprestimo */
@@ -75,6 +89,103 @@ public class Emprestimo {
         this.id_utilizador = id_utilizador;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
+    }
+
+    /** Construtor da classe Emprestimo com todos os atributos.
+     * @param id_emprestimo ID do empréstimo.
+     * @param id_livro ID do livro associado ao empréstimo.
+     * @param id_utilizador ID do utilizador associado ao empréstimo.
+     * @param id_bibliotecario ID do bibliotecário responsável pelo empréstimo.
+     * @param dataEmprestimo Data de empréstimo.
+     * @param dataDevolucao Data prevista para devolução.
+     * @param dataDevolvido Data prevista para devolução.*/
+    public Emprestimo(int id_emprestimo, int id_livro, int id_utilizador, int id_bibliotecario, LocalDate dataEmprestimo,
+                      LocalDate dataDevolucao, LocalDate dataDevolvido) {
+        this.id_emprestimo = id_emprestimo;
+        this.id_livro = id_livro;
+        this.id_utilizador = id_utilizador;
+        this.id_bibliotecario = id_bibliotecario;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucao = dataDevolucao;
+        this.dataDevolvido = dataDevolvido;
+    }
+
+    /**
+     * Consulta todos os livros na base de dados.
+     * @return ArrayList contendo todos os livros encontrados na base de dados.
+     */
+    public ArrayList<Emprestimo> consultarTodosEmprestimos() {
+        ArrayList<Emprestimo> todosOsEmprestimos = new ArrayList<>();
+
+        try {
+            // Define a consulta SQL para selecionar todos os livros
+            String sql = "SELECT * FROM emprestimo";
+
+            // Cria o objeto PreparedStatement
+            try (PreparedStatement pstmt = conexao.prepareStatement(sql)) {
+                // Executa a consulta
+                ResultSet resultado = pstmt.executeQuery();
+
+                // Processa os resultados
+                while (resultado.next()) {
+                    // Recupera os dados do emprestimo
+                    int id_emprestimo = resultado.getInt("id_emprestimo");
+                    int id_livro = resultado.getInt("id_livro");
+                    int id_utilizador = resultado.getInt("id_utilizador");
+                    int id_bibliotecario = resultado.getInt("id_bibliotecario");
+                    LocalDate data_emprestimo = (resultado.getDate("data_emprestimo") != null) ? resultado.getDate("data_emprestimo").toLocalDate() : null;
+                    LocalDate data_devolucao = (resultado.getDate("data_devolucao") != null) ? resultado.getDate("data_devolucao").toLocalDate() : null;
+                    LocalDate data_devolvido = (resultado.getDate("date_devolvido") != null) ? resultado.getDate("date_devolvido").toLocalDate() : null;
+
+                    // Cria uma instância da classe Livro
+                    Emprestimo livro = new Emprestimo(id_emprestimo, id_livro, id_utilizador, id_bibliotecario, data_emprestimo, data_devolucao, data_devolvido);
+
+                    // Adiciona o livro à lista
+                    todosOsEmprestimos.add(livro);
+                }
+                return todosOsEmprestimos;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String obterTituloLivro() throws SQLException {
+        String sql = "select titulo from livro inner join emprestimo on livro.id_livro = emprestimo.id_livro";
+        PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getString("titulo");
+            } else {
+                return "";
+            }
+        }
+    }
+
+    public String obterNomeUtilizador() throws SQLException {
+        String sql = "select nome from utilizador inner join emprestimo on utilizador.id_utilizador = emprestimo.id_utilizador";
+        PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getString("nome");
+            } else {
+                return "";
+            }
+        }
+    }
+
+    public String obterNomeBibliotecario() throws SQLException {
+        String sql = "select nome from bibliotecario inner join emprestimo on bibliotecario.id_bibliotecario = emprestimo.id_bibliotecario";
+        PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getString("nome");
+            } else {
+                return "";
+            }
+        }
     }
 
     /** Obtém o ID do empréstimo para um livro e utilizador específicos que ainda não foi devolvido.
@@ -126,18 +237,19 @@ public class Emprestimo {
     /** Realiza o empréstimo de um livro para um utilizador.
      * @param idUtilizador ID do utilizador.
      * @param idLivro ID do livro. */
-    public void emprestarLivro(int idUtilizador, int idLivro) {
+    public void emprestarLivro(int idUtilizador, int idLivro, int id_bibliotecario) {
         try {
             dataEmprestimo = LocalDate.now();
             dataDevolucao = LocalDate.now().plusDays(15);
 
             // Ajuste na ordem dos placeholders e remoção do id_emprestimo da lista de colunas
-            String sql = "INSERT INTO emprestimo (id_livro, id_utilizador, data_emprestimo, data_devolucao) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO emprestimo (id_livro, id_utilizador, id_bibliotecario, data_emprestimo, data_devolucao) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, idLivro);
             pstmt.setInt(2, idUtilizador);
-            pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(dataEmprestimo.atStartOfDay()));
-            pstmt.setTimestamp(4, java.sql.Timestamp.valueOf(dataDevolucao.atStartOfDay()));
+            pstmt.setInt(3, id_bibliotecario);
+            pstmt.setTimestamp(4, java.sql.Timestamp.valueOf(dataEmprestimo.atStartOfDay()));
+            pstmt.setTimestamp(5, java.sql.Timestamp.valueOf(dataDevolucao.atStartOfDay()));
 
             int affectedRows = pstmt.executeUpdate();
 

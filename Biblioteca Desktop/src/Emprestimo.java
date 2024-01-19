@@ -111,7 +111,7 @@ public class Emprestimo {
     }
 
     /**
-     * Consulta todos os livros na base de dados.
+     * Consulta todos os emprestimos na base de dados.
      * @return ArrayList contendo todos os livros encontrados na base de dados.
      */
     public ArrayList<Emprestimo> consultarTodosEmprestimos() {

@@ -37,7 +37,7 @@ CREATE TABLE emprestimo (
     id_bibliotecario INT,
     data_emprestimo DATETIME,
     data_devolucao DATETIME,
-    date_devolvido DATETIME,
+    data_devolvido DATETIME,
     FOREIGN KEY (id_livro) REFERENCES livro (id_livro),
     FOREIGN KEY (id_utilizador) REFERENCES utilizador (id_utilizador),
     FOREIGN KEY (id_bibliotecario) REFERENCES bibliotecario (id_bibliotecario));
@@ -84,7 +84,7 @@ VALUES (1, '9780061120084', 'To Kill a Mockingbird', 'Harper Lee', 'Harper Peren
 		'A dystopian novel that explores a futuristic society where advanced technology controls every aspect of life.'),
     (15, '9780061120084', 'The Lord of the Rings', 'J.R.R. Tolkien', 'Mariner Books', 1954, 'Fantasy', true,
 		'A fantasy trilogy that follows the quest to destroy the One Ring and defeat the Dark Lord Sauron.');
-        
+
 INSERT INTO emprestimo (id_livro, id_utilizador, id_bibliotecario, data_emprestimo, data_devolucao, data_devolvido)
 	VALUES(1, 1, 1, '2024-01-18 10:00:00', '2024-01-25 15:00:00', NULL),
 	(2, 2, 1, '2024-01-19 11:30:00', '2024-01-26 16:45:00', '2024-01-26 16:45:00'),

@@ -14,7 +14,7 @@ public class MostraEmprestimo{
     Connection conexao = Database.getConexao();
 
     // Instância da classe emprestimo para interação com a base de dados
-    Emprestimo emp;
+    Emprestimo emp = new Emprestimo();
     Bibliotecario b;
     Biblioteca biblio;
 
@@ -72,7 +72,6 @@ public class MostraEmprestimo{
             // o array todosOsEmprestimos, guarda todos os dados existentes na base de daos
             ArrayList<Emprestimo> todosOsEmprestimos = emp.consultarTodosEmprestimos();
 
-            
             for (Emprestimo emp : todosOsEmprestimos) {
                 listaModelo.addElement(emp);
             }

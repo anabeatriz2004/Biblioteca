@@ -13,6 +13,8 @@ public class Bibliotecario {
     Livro livro = new Livro();
     Biblioteca b = new Biblioteca();
     MostraEmprestimo emp = new MostraEmprestimo();
+    AdicionarLivroFormulario alf = new AdicionarLivroFormulario();
+    EditarLivroFormulario elf = new EditarLivroFormulario();
 
     // Componentes da interface gráfica
     JFrame frame;
@@ -47,7 +49,6 @@ public class Bibliotecario {
         // Adiciona o terminarSessaoButton à direita no topo
         painelInicio.add(terminarSessaoButton, BorderLayout.EAST);
 
-
         // exibe a frame da página que mostra os empréstimos
         mostarEmprestimoButton.addActionListener(e -> {
             frame.dispose(); // fecha a tela inicial
@@ -80,7 +81,6 @@ public class Bibliotecario {
         // Adiciona um ouvinte de ação para o botão "Adicionar Livro"
         adicionarLivroButton.addActionListener(e -> {
             frame.dispose();
-            AdicionarLivroFormulario alf = new AdicionarLivroFormulario();
             alf.exibirFrame();
         });
 
@@ -88,7 +88,6 @@ public class Bibliotecario {
         // NÃO FUNCIONA
         alterarLivroButton.addActionListener(e -> {
             int idLivroSelecionado = getIdComponenteSelecionado();
-            EditarLivroFormulario elf = new EditarLivroFormulario();
             elf.exibirFrame(idLivroSelecionado);
         });
 
@@ -211,7 +210,6 @@ public class Bibliotecario {
         ArrayList<Livro> todosOsLivros = livro.consultarTodosLivros();
         for (Livro livroAtual : todosOsLivros) {
             listaModelo.addElement(livroAtual);
-            //id_LivroSelecionado = i + 1;
         }
 
         lista.setCellRenderer(new LivroRenderer());

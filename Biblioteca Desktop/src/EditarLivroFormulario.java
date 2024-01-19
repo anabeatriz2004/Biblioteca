@@ -388,11 +388,11 @@ public class EditarLivroFormulario {
 
         // verifica se a descrição foi incerido corretamente
         if (descricao.isEmpty()) { // verifica se a descrição está vazia
-            descricaoErroLabel.setText("Gênero sem dados!"); // avisa que não tem dados
+            descricaoErroLabel.setText("Descrição sem dados!"); // avisa que não tem dados
             descricaoErroLabel.setForeground(Color.yellow); // coloca o texto a amarelo
             dadoValidoDescricao = true; // dado válido, pode ser inserido
         } else { // caso contrário...
-            descricaoErroLabel.setText("Gênero inserido corretamente!"); // descrição inserido corretamente
+            descricaoErroLabel.setText("Descrição inserido corretamente!"); // descrição inserido corretamente
             descricaoErroLabel.setForeground(Color.green); // coloca o texto a verde
             dadoValidoDescricao = true; // dado válido, pode ser inserido
         }

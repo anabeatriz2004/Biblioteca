@@ -85,6 +85,7 @@ public class Biblioteca {
         frame.add(splitPane, BorderLayout.CENTER); // Adiciona ao centro para ocupar o restante da página
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);
+        System.out.prntln(screenSize);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
@@ -127,7 +128,7 @@ public class Biblioteca {
                 exibirDetalhesLivro(livroSelecionado);
             });
         } catch (NullPointerException e) {
-            System.out.println("erroooooooooooooooooooooooooouuuuuuuuuuuuuuuuuuu");
+            System.out.println("erro");
             e.fillInStackTrace();
         }
     }

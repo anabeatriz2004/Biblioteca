@@ -41,8 +41,6 @@ public class Utilizador {
 
         // mostra a página inicial
         terminarSessaoButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(frame,
-                    "Falta acresentar o método para terminar sessão.");
             frame.dispose(); // fecha a tela inicial
             biblio.exibirFrame();
         });

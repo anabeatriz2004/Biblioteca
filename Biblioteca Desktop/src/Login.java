@@ -46,7 +46,7 @@ public class Login {
         frame.setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize);
-        frame.getColorModel();
+        frame.getContentPane().setBackground(Color.BLACK);
 
         // Código para personalizar o botão para voltar
         voltarBotao.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -65,12 +65,14 @@ public class Login {
         loginLabel.setFont(new Font("Arial", Font.BOLD, 15));
         loginLabel.setSize(100, 20);
         loginLabel.setLocation(700, 150);
+        loginLabel.setForeground(Color.white);
         frame.add(loginLabel); // adiciona há frame
 
         // Código para personalizar a label do email
         emailLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         emailLabel.setSize(100, 20);
         emailLabel.setLocation(600, 200);
+        emailLabel.setForeground(Color.white);
         frame.add(emailLabel); // adiciona há frame
 
         // Código para personalizar a caixa de texto do email
@@ -83,6 +85,7 @@ public class Login {
         passwordLabel.setFont(new Font("Arial", Font.PLAIN, 15));
         passwordLabel.setSize(100, 20);
         passwordLabel.setLocation(575, 250);
+        passwordLabel.setForeground(Color.WHITE);
         frame.add(passwordLabel); // adiciona há frame
 
         // Código para personalizar a caixa de texto da password
@@ -96,6 +99,9 @@ public class Login {
         logarBotao.setSize(110, 30);
         logarBotao.setLocation(650, 300);
         logarBotao.addActionListener(clicarBotaoLogin());
+        logarBotao.setForeground(Color.white);
+        logarBotao.setBorder(BorderFactory.createLineBorder(Color.white, 2));
+        logarBotao.setBackground(new Color(30, 30, 30));
         frame.add(logarBotao); // adiciona há frame
 
         frame.addWindowListener(fecharPrograma());

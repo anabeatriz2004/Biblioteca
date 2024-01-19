@@ -1,11 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.awt.event.*;
+import java.sql.*;
 
 /** A classe AdicionarLivroFormulario representa um formulário para adicionar um novo livro. */
 public class AdicionarLivroFormulario {
@@ -409,11 +405,11 @@ public class AdicionarLivroFormulario {
 
         // verifica se a descrição foi incerido corretamente
         if (descricao.isEmpty()) { // verifica se a descrição está vazia
-            descricaoErroLabel.setText("Gênero sem dados!"); // avisa que não tem dados
+            descricaoErroLabel.setText("Descrição sem dados!"); // avisa que não tem dados
             descricaoErroLabel.setForeground(Color.yellow); // coloca o texto a amarelo
             dadoValidoDescricao = true; // dado válido, pode ser inserido
         } else { // caso contrário...
-            descricaoErroLabel.setText("Gênero inserido corretamente!"); // descrição inserido corretamente
+            descricaoErroLabel.setText("Descrição inserido corretamente!"); // descrição inserido corretamente
             descricaoErroLabel.setForeground(Color.green); // coloca o texto a verde
             dadoValidoDescricao = true; // dado válido, pode ser inserido
         }
@@ -452,5 +448,4 @@ public class AdicionarLivroFormulario {
             }
         };
     }
-}
 }

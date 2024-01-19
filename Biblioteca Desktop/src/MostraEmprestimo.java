@@ -1,8 +1,9 @@
-import com.sun.java.accessibility.util.AWTEventMonitor;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,9 +14,9 @@ public class MostraEmprestimo{
     Connection conexao = Database.getConexao();
 
     // Instância da classe emprestimo para interação com a base de dados
-    Emprestimo emp = new Emprestimo();
-    Bibliotecario b = new Bibliotecario();
-    Biblioteca biblio = new Biblioteca();
+    Emprestimo emp;
+    Bibliotecario b;
+    Biblioteca biblio;
 
     // Componentes da interface gráfica
     JFrame frame;
@@ -66,16 +67,18 @@ public class MostraEmprestimo{
         // Restante do código para adicionar as listas e detalhes
         lista.setModel(listaModelo);
 
-        // o array todosOsEmprestimos, guarda todos os dados existentes na base de daos
-        ArrayList<Emprestimo> todosOsEmprestimos = emp.consultarTodosEmprestimos();
-
         // percorre o array todosOsEmprestimos e adicina há lista modelo
         try {
+            // o array todosOsEmprestimos, guarda todos os dados existentes na base de daos
+            ArrayList<Emprestimo> todosOsEmprestimos = emp.consultarTodosEmprestimos();
+
+            
             for (Emprestimo emp : todosOsEmprestimos) {
                 listaModelo.addElement(emp);
             }
         } catch (NullPointerException e) {
-            e.fillInStackTrace();
+            System.out.println("Não existem dados na tabela emprstimos");
+            // e.fillInStackTrace();
         }
 
         // chama o método para mostrar os ids dos empréstimos

@@ -67,6 +67,7 @@ public class Livro {
         }
     }
 
+    
     public void verificarGenero(String genero) {
         // verifica se o gênero é inserido corretamente
         if (genero.isEmpty()) { // verifica se o gênero está vazio
